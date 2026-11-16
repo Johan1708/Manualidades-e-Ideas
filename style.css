@@ -912,7 +912,7 @@ body.orbital-mode {
 }
 
 /* ================================================================
-   RESPONSIVE MÓVIL - PORTADA ORBITAL (PROPORCIÓN MEJORADA)
+   RESPONSIVE MÓVIL - PORTADA ORBITAL (PROPORCIÓN MEJORADA Y SIN TOQUES ACCIDENTALES)
    ================================================================ */
 @media (max-width: 768px) {
     #dither-canvas-container {
@@ -999,7 +999,7 @@ body.orbital-mode {
         border-radius: 20px;
     }
 
-    /* Cuadrícula de 2 columnas con espacio superior para el efecto Pop-Out */
+    /* Cuadrícula de 2 columnas: pointer-events: none en el contenedor y auto solo en tarjetas */
     .orbital-system {
         position: relative !important;
         width: 100% !important;
@@ -1011,7 +1011,7 @@ body.orbital-mode {
         padding: 34px 18px 60px !important;
         justify-items: center !important;
         align-items: center !important;
-        pointer-events: auto !important;
+        pointer-events: none !important;
     }
 
     .orbital-node,

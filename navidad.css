@@ -1,0 +1,1065 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #05101a;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+}
+
+#sweater-webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 1;
+}
+
+#snow-overlay-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* PORTADA DE ENTRADA */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background-color: #121110;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.1s;
+}
+
+.intro-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-brand {
+    position: absolute;
+    top: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.28em;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.intro-strip-container {
+    position: relative;
+    display: flex;
+    width: 620px;
+    max-width: 90vw;
+    height: 112px;
+    margin-bottom: 36px;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.strip-panel {
+    flex: 1;
+    height: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.strip-panel:hover {
+    transform: scale(1.06);
+    filter: brightness(1.15);
+}
+
+.strip-curve {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.animated-path {
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    animation: drawLine 2.4s ease forwards 0.3s;
+}
+
+@keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+}
+
+.intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+}
+
+.intro-subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.68);
+    margin-bottom: 28px;
+}
+
+.pill-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    padding: 10px 32px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.pill-btn:hover {
+    background: #ffffff;
+    color: #141413;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+.pill-btn.small {
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    margin-top: 14px;
+}
+
+.store-cta {
+    margin-top: 18px;
+    background: #d4af37;
+    color: #121110;
+    border-color: #d4af37;
+    font-weight: 600;
+}
+
+/* EXPERIENCIA PRINCIPAL */
+.experience-container {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.experience-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* BOTÓN VOLVER A INICIO */
+.home-return-btn {
+    position: fixed;
+    top: 26px;
+    left: 26px;
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: rgba(18, 10, 12, 0.65);
+    border: 1px solid rgba(255, 223, 128, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fffdf7;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    transition: all 0.3s ease;
+}
+
+.home-return-btn:hover {
+    background: rgba(255, 248, 231, 0.94);
+    color: #141413;
+    transform: translateY(-2px);
+}
+
+/* RADAR IA SUPERIOR DERECHO */
+.ai-radar-bar {
+    position: fixed;
+    top: 26px;
+    right: 26px;
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ai-status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(12, 18, 26, 0.72);
+    border: 1px solid rgba(72, 202, 228, 0.45);
+    backdrop-filter: blur(10px);
+    font-size: 0.78rem;
+    color: #e0fbfc;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.ai-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #38b000;
+    box-shadow: 0 0 10px #70e000;
+    animation: blinkRadar 1.4s infinite alternate;
+}
+
+@keyframes blinkRadar {
+    0% { opacity: 0.4; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1.25); }
+}
+
+.notif-toggle-btn {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.22);
+    border: 1px solid rgba(255, 223, 128, 0.65);
+    backdrop-filter: blur(10px);
+    color: #fff8d6;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.notif-toggle-btn:hover,
+.notif-toggle-btn.active {
+    background: #d4af37;
+    color: #121110;
+    font-weight: 600;
+}
+
+/* NOTIFICACIONES FLOTANTES (TOASTS DE OFERTAS DETECTADAS POR IA) */
+.ai-notifications-feed {
+    position: fixed;
+    top: 76px;
+    right: 26px;
+    z-index: 260;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 320px;
+    max-width: 88vw;
+    pointer-events: none;
+}
+
+.deal-toast {
+    pointer-events: auto;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: rgba(14, 18, 24, 0.86);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 223, 128, 0.5);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+    animation: slideInToast 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.deal-toast.hiding {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+@keyframes slideInToast {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.toast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #ffd166;
+    margin-bottom: 4px;
+}
+
+.toast-store-badge {
+    background: rgba(255, 255, 255, 0.14);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+.toast-title {
+    font-size: 0.86rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+.toast-price {
+    font-size: 0.82rem;
+    color: #80ed99;
+    font-weight: 600;
+}
+
+.toast-price span {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 300;
+    margin-left: 6px;
+}
+
+/* FILTROS DE TIENDAS (SECCIÓN OFERTAS) */
+.store-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    pointer-events: auto;
+}
+
+.store-filters.hidden {
+    display: none;
+}
+
+.filter-chip {
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(15, 12, 14, 0.62);
+    border: 1px solid rgba(255, 223, 128, 0.35);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.78rem;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+}
+
+.filter-chip.active,
+.filter-chip:hover {
+    background: #d4af37;
+    color: #121110;
+    font-weight: 600;
+}
+
+/* Partículas de Magia Dorada Flotantes */
+.magic-sparkles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 95;
+    overflow: hidden;
+}
+
+.sparkle-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff8d6 0%, #d4af37 60%, transparent 100%);
+    box-shadow: 0 0 12px #ffd166;
+    animation: floatSparkle linear infinite;
+}
+
+@keyframes floatSparkle {
+    0% { transform: translateY(0) scale(0.4); opacity: 0; }
+    25% { opacity: 0.95; }
+    75% { opacity: 0.8; }
+    100% { transform: translateY(-140px) scale(1.2); opacity: 0; }
+}
+
+.top-hero {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 62%;
+    pointer-events: none;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+    z-index: 110;
+}
+
+.top-hero h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.1vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    transition: opacity 0.25s ease;
+}
+
+.top-hero p {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.92);
+    transition: opacity 0.25s ease;
+}
+
+/* CONSTELACIÓN Y NODOS ANCLADOS A LOS OBJETOS 3D WEBGL */
+.hotspots-layer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.constellation-svg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 105;
+}
+
+.hotspot-node {
+    position: absolute;
+    z-index: 120;
+    opacity: 0;
+    transform: scale(0.5) translateY(15px);
+    transition: 
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+        top 0.7s ease,
+        left 0.7s ease;
+}
+
+.hotspot-node.revealed {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.hotspot-node.filtered-out {
+    opacity: 0.22 !important;
+    transform: scale(0.85) !important;
+}
+
+.hotspot-trigger {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0;
+}
+
+.webgl-anchor-ring {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 235, 175, 0.22) 0%, rgba(15, 10, 12, 0.35) 70%, transparent 100%);
+    border: 1px dashed rgba(255, 223, 128, 0.55);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.35);
+    transition: transform 0.35s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.webgl-anchor-ring::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 223, 128, 0.35);
+    animation: pulseHalo 2.6s infinite ease-out;
+    pointer-events: none;
+}
+
+@keyframes pulseHalo {
+    0% { transform: scale(0.92); opacity: 0.85; }
+    100% { transform: scale(1.36); opacity: 0; }
+}
+
+.hotspot-trigger:hover .webgl-anchor-ring,
+.hotspot-node.active .webgl-anchor-ring {
+    transform: scale(1.18);
+    border-style: solid;
+    border-color: #fff3cc;
+    box-shadow: 0 0 32px rgba(255, 225, 130, 0.85);
+}
+
+.hotspot-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #fffdf7;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    background: rgba(18, 10, 12, 0.68);
+    border: 1px solid rgba(255, 223, 128, 0.4);
+    padding: 6px 15px;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.hotspot-trigger:hover .hotspot-label,
+.hotspot-node.active .hotspot-label {
+    background: rgba(255, 248, 231, 0.95);
+    color: #141413;
+    text-shadow: none;
+}
+
+/* TARJETAS GLASSMORPHISM CON NIEVE */
+.glass-card {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 345px;
+    max-width: 84vw;
+    padding: 24px;
+    border-radius: 14px;
+    background: rgba(18, 10, 12, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 230, 160, 0.35);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.72);
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+}
+
+.hotspot-node.align-right .glass-card {
+    left: auto;
+    right: 0;
+}
+
+.hotspot-node.active .glass-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.card-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.card-tags span {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(255, 223, 128, 0.16);
+    border: 1px solid rgba(255, 223, 128, 0.3);
+    color: #fff3cc;
+}
+
+.glass-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.glass-card p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+/* MODAL DE MATERIALES O DETALLE DE OFERTA */
+.craft-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(5, 10, 15, 0.65);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.craft-modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-box {
+    position: relative;
+    width: 430px;
+    max-width: 90vw;
+    padding: 32px;
+    border-radius: 14px;
+    background: rgba(22, 12, 14, 0.9);
+    border: 1px solid rgba(255, 223, 128, 0.38);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.75);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.close-modal-btn:hover { color: #ffffff; }
+
+.modal-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 8px;
+}
+
+.modal-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.modal-box p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 16px;
+}
+
+.materials-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.materials-list li {
+    font-size: 0.88rem;
+    padding-left: 18px;
+    position: relative;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.materials-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: #d4af37;
+    font-size: 0.75rem;
+}
+
+/* DOCK INFERIOR */
+.bottom-dock {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+}
+
+.dock-nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 10px 28px;
+    border-radius: 999px;
+    background: rgba(15, 10, 12, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 223, 128, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dock-brand-left,
+.dock-brand-right {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.dock-dots {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.dot-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot-btn.deal-dot {
+    border-color: #d4af37;
+}
+
+.dot-btn.active {
+    background: #fff3cc;
+    border-color: #d4af37;
+    transform: scale(1.32);
+    box-shadow: 0 0 12px rgba(255, 223, 128, 0.9);
+}
+
+.dot-btn:hover { border-color: #d4af37; }
+/* ================================================================
+   RESPONSIVE MÓVIL - TALLER NAVIDEÑO 3D
+   ================================================================ */
+@media (max-width: 768px) {
+    .home-return-btn {
+        top: 12px;
+        left: 12px;
+        padding: 7px 13px;
+        font-size: 0.75rem;
+    }
+
+    .ai-radar-bar {
+        top: 12px;
+        right: 12px;
+        gap: 6px;
+    }
+
+    .ai-status-pill {
+        padding: 6px 10px;
+        font-size: 0.68rem;
+        max-width: 145px;
+    }
+
+    .ai-status-pill span:last-child {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .notif-toggle-btn {
+        padding: 6px 10px;
+        font-size: 0.68rem;
+    }
+
+    /* Baja el título hero debajo de los botones superiores para que no choquen */
+    .top-hero {
+        top: 56px;
+        width: 92%;
+    }
+
+    .top-hero h2 {
+        font-size: 1.35rem;
+        letter-spacing: 0.04em;
+    }
+
+    .top-hero p {
+        font-size: 0.78rem;
+    }
+
+    .store-filters {
+        gap: 5px;
+        margin-top: 8px;
+    }
+
+    .filter-chip {
+        padding: 4px 10px;
+        font-size: 0.68rem;
+    }
+
+    /* Notificaciones IA compactas en la parte inferior encima del dock */
+    .ai-notifications-feed {
+        top: auto;
+        bottom: 78px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 90vw;
+    }
+
+    /* Hotspots y tarjetas glass centradas en pantalla al abrirse */
+    .hotspot-trigger {
+        gap: 8px;
+    }
+
+    .webgl-anchor-ring {
+        width: 42px;
+        height: 42px;
+    }
+
+    .hotspot-label {
+        font-size: 0.74rem;
+        padding: 4px 10px;
+    }
+
+    .hotspot-node.active {
+        z-index: 280 !important;
+    }
+
+    .hotspot-node.active .glass-card {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 88vw !important;
+        max-width: 340px !important;
+        padding: 18px !important;
+        z-index: 290 !important;
+    }
+
+    .glass-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .glass-card p {
+        font-size: 0.82rem;
+    }
+
+    .bottom-dock {
+        bottom: 14px;
+        width: 92%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .dock-nav {
+        gap: 12px;
+        padding: 8px 16px;
+    }
+
+    .dock-brand-left,
+    .dock-brand-right {
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+    }
+
+    .dock-dots {
+        gap: 10px;
+    }
+}
+@media (max-width: 768px) {
+    /* Fila 1 superior: Inicio a la izquierda y Radar IA a la derecha sin taparse */
+    .home-return-btn {
+        top: 10px !important;
+        left: 10px !important;
+        padding: 6px 11px !important;
+        font-size: 0.72rem !important;
+        z-index: 260 !important;
+    }
+
+    .ai-radar-bar {
+        top: 10px !important;
+        right: 10px !important;
+        gap: 5px !important;
+        z-index: 260 !important;
+    }
+
+    .ai-status-pill {
+        padding: 6px 9px !important;
+        font-size: 0.65rem !important;
+        max-width: 132px !important;
+    }
+
+    .notif-toggle-btn {
+        padding: 6px 9px !important;
+        font-size: 0.65rem !important;
+    }
+
+    /* Fila 2: Título hero debajo de la barra superior */
+    .top-hero {
+        top: 50px !important;
+        width: 94% !important;
+        z-index: 150 !important;
+    }
+
+    .top-hero h2 {
+        font-size: 1.25rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .top-hero p {
+        font-size: 0.74rem !important;
+        line-height: 1.25 !important;
+    }
+
+    /* Notificación IA flotante abajo (encima del dock) para NO tapar el título ni los nodos */
+    .ai-notifications-feed {
+        top: auto !important;
+        bottom: 74px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: 92vw !important;
+        max-width: 360px !important;
+        z-index: 220 !important;
+    }
+
+    /* Tarjeta de producto centrada en pantalla con scroll interno si es alta */
+    .hotspot-node.active {
+        z-index: 300 !important;
+    }
+
+    .hotspot-node.active .glass-card {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 88vw !important;
+        max-width: 340px !important;
+        max-height: 68vh !important;
+        overflow-y: auto !important;
+        padding: 18px !important;
+        z-index: 310 !important;
+    }
+
+    .bottom-dock {
+        bottom: 12px !important;
+        width: 94% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .dock-nav {
+        padding: 8px 14px !important;
+        gap: 10px !important;
+    }
+}
+/* ================================================================
+   ADAPTACIÓN MÓVIL - NAVIDAD COMPLETA Y FUNCIONAL
+   ================================================================ */
+@media (max-width: 768px) {
+    html, body {
+        width: 100vw !important;
+        height: 100dvh !important;
+        overflow: hidden !important;
+    }
+
+    /* Barra superior limpia: Inicio a la izquierda, Radar IA a la derecha */
+    .home-return-btn {
+        top: 10px !important;
+        left: 10px !important;
+        padding: 6px 11px !important;
+        font-size: 0.72rem !important;
+        z-index: 260 !important;
+    }
+
+    .ai-radar-bar {
+        top: 10px !important;
+        right: 10px !important;
+        gap: 5px !important;
+        z-index: 260 !important;
+    }
+
+    .ai-status-pill {
+        padding: 6px 9px !important;
+        font-size: 0.64rem !important;
+        max-width: 130px !important;
+    }
+
+    .notif-toggle-btn {
+        padding: 6px 9px !important;
+        font-size: 0.64rem !important;
+    }
+
+    /* Título debajo de la barra superior */
+    .top-hero {
+        top: 48px !important;
+        width: 94% !important;
+        z-index: 150 !important;
+    }
+
+    .top-hero h2 {
+        font-size: 1.2rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .top-hero p {
+        font-size: 0.72rem !important;
+    }
+
+    .store-filters {
+        gap: 4px !important;
+        margin-top: 6px !important;
+    }
+
+    .filter-chip {
+        padding: 4px 8px !important;
+        font-size: 0.64rem !important;
+    }
+
+    /* Notificaciones IA abajo para que no tapen la escena ni los nodos */
+    .ai-notifications-feed {
+        top: auto !important;
+        bottom: 68px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: 92vw !important;
+        max-width: 350px !important;
+        z-index: 220 !important;
+    }
+
+    /* Hotspots compactos para que quepan todos en pantalla */
+    .webgl-anchor-ring {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .hotspot-label {
+        font-size: 0.68rem !important;
+        padding: 3px 8px !important;
+    }
+
+    /* Tarjeta abierta centrada y con scroll interno para que se vea COMPLETA */
+    .hotspot-node.active {
+        z-index: 300 !important;
+    }
+
+    .hotspot-node.active .glass-card {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 88vw !important;
+        max-width: 340px !important;
+        max-height: 68dvh !important;
+        overflow-y: auto !important;
+        padding: 16px !important;
+        z-index: 310 !important;
+    }
+
+    .bottom-dock {
+        bottom: 10px !important;
+        width: 94% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .dock-nav {
+        padding: 7px 14px !important;
+        gap: 10px !important;
+    }
+}

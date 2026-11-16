@@ -1,0 +1,772 @@
+:root {
+  --halloween-timer-accent: #ff8400;
+  --halloween-orange: #ff5500;
+  --halloween-timer-text: #e0e0e0c1;
+  --spider-line-height: 0;
+}
+
+/* OCULTACIÓN DEFINITIVA DEL CURSOR NATIVO MEDIANTE IMAGEN 1x1 TRANSPARENTE */
+html, body, *, *::before, *::after, a, button, input, select, textarea, label, div, span, img, svg, canvas, *:hover, *:active, *:focus {
+  cursor: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'), none !important;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  height: 100%;
+  background-color: #0b0810;
+}
+
+a {
+  appearance: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  background: transparent !important;
+  font-family: "Nunito", sans-serif;
+  color: var(--halloween-timer-text);
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  transition: filter 0.8s ease;
+}
+
+.page-opciones.power-off {
+  filter: brightness(0) contrast(2);
+  pointer-events: none;
+}
+
+/* CANVAS LIQUID CHROME FIJO CUBRIENDO EL 100% DE LA PANTALLA */
+#liquid-chrome-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none !important;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* CURSOR PERSONALIZADO GPU 1:1 */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background-color: #b9b0b0;
+  border-radius: 50%;
+  pointer-events: none !important;
+  z-index: 999999;
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px rgba(255, 255, 255, 0.8);
+  will-change: transform;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.cursor-follower {
+  position: fixed;
+  top: 0; left: 0;
+  width: 42px; height: 42px;
+  border: 1.5px solid rgba(239, 225, 225, 0.85);
+  border-radius: 50%;
+  pointer-events: none !important;
+  z-index: 999998;
+  will-change: transform;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 1;
+  transition: opacity 0.15s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.cursor-follower.active {
+  width: 58px;
+  height: 58px;
+  border-color: var(--halloween-timer-accent);
+  background-color: rgba(248, 67, 151, 0.15);
+  box-shadow: 0 0 25px var(--halloween-timer-accent);
+}
+
+body.cursor-out .cursor,
+body.cursor-out .cursor-follower {
+  opacity: 0 !important;
+}
+
+.container {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1320px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* ARAÑAS ANIMADAS */
+.spiders {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 150;
+}
+
+.spider {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: spider-jump 1.5s ease-in-out infinite alternate;
+}
+
+.spider::before {
+  content: "";
+  display: block;
+  width: 2px;
+  background-image: linear-gradient(to bottom, #ccc, rgba(242, 15, 185, 0.15));
+  height: var(--spider-line-height, 80px);
+}
+
+.spider img {
+  display: block;
+  width: 90px; height: auto;
+  margin-top: -0.625rem;
+}
+
+/* HEADER */
+.header {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 100;
+  background: transparent;
+}
+
+.header .container {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logotype {
+  font-family: "Jolly Lodger", sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.2;
+  color: var(--halloween-timer-accent);
+  text-shadow: 0 0 15px rgba(248, 67, 151, 0.6);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.button {
+  display: block;
+  padding: 0.75rem 1.4rem;
+  border-radius: 2.5rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  background-color: var(--halloween-timer-accent);
+  color: white;
+  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 15px rgba(248, 67, 151, 0.4);
+}
+
+.button:hover, .button:focus {
+  background-color: white;
+  color: var(--halloween-timer-accent);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+/* INTERRUPTOR CALAVERA APAGAR */
+.back-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(10, 8, 16, 0.5);
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1px solid rgb(245, 147, 1);
+  backdrop-filter: blur(12px);
+}
+
+.toggle-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--halloween-timer-accent);
+  font-weight: bold;
+}
+
+.toggle {
+  --sz: 12px;
+  --ttf: ease-in-out;
+  --bone: #888;
+  position: relative;
+  width: calc(var(--sz) * 5);
+  height: calc(var(--sz) * 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle input { display: none; }
+
+.toggle label[for=btn] {
+  position: absolute;
+  width: calc(var(--sz) * 4);
+  height: calc(var(--sz) * 2);
+  background: #141414;
+  border-radius: var(--sz);
+  overflow: hidden;
+  box-shadow: 0 0 calc(var(--sz) / 50) calc(var(--sz) / 50) #000000, 0 0 calc(var(--sz) / 10) calc(var(--sz) / 50) #0b0b10 inset;
+}
+
+.toggle .thumb {
+  position: absolute;
+  width: calc(var(--sz) * 1.75);
+  height: calc(var(--sz) * 1.75);
+  top: calc(var(--sz) * 0.12);
+  left: calc(100% - calc(var(--sz) * 1.87));
+  border-radius: var(--sz);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;	
+  animation: move-skull-left 0.5s var(--ttf) 0.5s forwards;
+}
+
+#btn:checked + label .thumb {
+  left: calc(var(--sz) * 0.12);
+  animation: move-skull-right 0.5s var(--ttf) 0.5s forwards;
+}
+
+@keyframes move-skull-right {
+  0% { left: calc(var(--sz) * 0.12); }
+  100% { left: calc(100% - calc(var(--sz) * 1.87)); }
+}
+
+@keyframes move-skull-left {
+  0% { left: calc(100% - calc(var(--sz) * 1.87)); }
+  100% { left: calc(var(--sz) * 0.12); }
+}
+
+.toggle .thumb > * {
+  position: absolute;
+  animation: unselected 1.5s var(--ttf) 0s reverse forwards;
+  filter: drop-shadow(0px 1px 1px #000);
+}
+
+#btn:checked + label .thumb * { animation: selected 1.5s var(--ttf) 0s forwards; }
+
+@keyframes selected {
+  0%, 50% { --bone: #888; }
+  50%, 100% { --bone: #fff; }
+}
+
+@keyframes unselected {
+  0%, 50% { --bone: #888; }
+  50%, 100% { --bone: #fff; }
+}
+
+.toggle .cranium {
+  background: linear-gradient(180deg, var(--bone) 0 54%, #fff0 0 94%, var(--bone) 0 100%), 
+              radial-gradient(circle at 75% 69%, #fff0 0 calc(var(--sz) * 0.175), var(--bone) calc(var(--sz) * 0.185) calc(var(--sz) * 0.485), #fff0 calc(var(--sz) * 0.495) 100%), 
+              radial-gradient(circle at 25% 69%, #fff0 0 calc(var(--sz) * 0.175), var(--bone) calc(var(--sz) * 0.185) calc(var(--sz) * 0.485), #fff0 calc(var(--sz) * 0.495) 100%);
+  width: 100%; height: calc(var(--sz) * 1.4);
+  left: 0; top: 0;
+  border-radius: var(--sz) var(--sz) calc(var(--sz) * 0.55) calc(var(--sz) * 0.55);
+}
+
+.toggle .cranium:before {
+  content: ""; position: absolute;
+  width: calc(var(--sz) * 0.125); height: calc(var(--sz) * 0.125);
+  bottom: calc(var(--sz) * -0.075); left: calc(var(--sz) * 0.75);
+  background: var(--bone); border-radius: 100%;
+  box-shadow: calc(var(--sz) * 0.125) 0 0 0 var(--bone);
+}
+
+.toggle .cranium:after {
+  content: ""; position: absolute;
+  width: calc(var(--sz) * 0.525); height: calc(var(--sz) * 0.15);
+  bottom: calc(var(--sz) * -0.095); left: calc(var(--sz) * 0.6);
+  background: radial-gradient(circle at 90% 10%, var(--bone) 0 calc(var(--sz) * 0.1), #fff0 calc(var(--sz) * 0.11) 100%), 
+              radial-gradient(circle at 10% 10%, var(--bone) 0 calc(var(--sz) * 0.1), #fff0 calc(var(--sz) * 0.11) 100%);
+  border-radius: calc(var(--sz) * 0.1);
+}
+
+.toggle .mouth {
+  border: calc(var(--sz) * 0.085) solid #fff0;
+  border-bottom-color: var(--bone);
+  width: calc(var(--sz) * 1.175); left: calc(var(--sz) * 0.285);
+  height: calc(var(--sz) * 0.6); top: calc(var(--sz) * 1.125);
+  background: radial-gradient(circle at 35% 98%, var(--bone) 0 calc(var(--sz) * 0.065), #fff0 calc(var(--sz) * 0.07) 100%), 
+              radial-gradient(circle at 45% 100%, var(--bone) 0 calc(var(--sz) * 0.065), #fff0 calc(var(--sz) * 0.07) 100%), 
+              radial-gradient(circle at 55% 100%, var(--bone) 0 calc(var(--sz) * 0.065), #fff0 calc(var(--sz) * 0.07) 100%), 
+              radial-gradient(circle at 65% 98%, var(--bone) 0 calc(var(--sz) * 0.065), #fff0 calc(var(--sz) * 0.07) 100%);
+  background-repeat: no-repeat; border-radius: 100%;
+}
+
+.toggle .mouth:before, .toggle .mouth:after {
+  content: ""; position: absolute; border-radius: 100%;
+  background: var(--bone); width: calc(var(--sz) * 0.07); height: calc(var(--sz) * 0.07);
+  left: calc(var(--sz) * 0.04); bottom: calc(var(--sz) * 0.025);
+}
+
+.toggle .mouth:after { left: calc(var(--sz) * 0.905); }
+
+.toggle .arm-wrapper {
+  position: absolute; width: 100%; height: 100%;
+  border-radius: var(--sz); overflow: hidden; right: -65%;
+  animation: check-off 1.5s var(--ttf) 0s reverse; --bone: #fff;
+}
+
+#btn:checked + label .arm-wrapper { animation: check-on 1.5s var(--ttf) 0s; }
+
+.toggle .arm {
+  position: absolute; width: calc(var(--sz) * 1.6); height: calc(var(--sz) * 0.5);
+  right: 2%; top: calc(50% - calc(var(--sz) * 0.25)); border-radius: calc(var(--sz) * 0.025);
+}
+
+.toggle .bone {
+  background: var(--bone); width: calc(var(--sz) * 0.8); height: calc(var(--sz) * 0.2);
+  position: absolute; transform: rotate(0deg); top: calc(var(--sz) * 0.15); right: calc(var(--sz) * -0.4);
+}
+
+.toggle .bone:before, .toggle .bone:after, .toggle .big:before, .toggle .big:after {
+  content: ""; background: var(--bone); width: calc(var(--sz) * 0.15); height: calc(var(--sz) * 0.15);
+  position: absolute; left: calc(var(--sz) * -0.05); top: calc(var(--sz) * -0.05);
+  border-radius: 100%; box-shadow: calc(var(--sz) * 0.8) 0 0 0 var(--bone);
+}
+
+.toggle .bone:after { top: calc(100% - calc(var(--sz) * 0.1)); }
+
+.toggle .arm > .bone + .bone {
+  top: calc(var(--sz) * 0.15); left: calc(var(--sz) * 0.05);
+  height: calc(var(--sz) * 0.085); width: calc(var(--sz) * 1.05);
+  box-shadow: 0 calc(var(--sz) * 0.115) 0 0 var(--bone);
+}
+
+.toggle .arm > .bone + .bone:before, .toggle .arm > .bone + .bone:after {
+  box-shadow: calc(var(--sz) * 1.015) 0 0 0 var(--bone);
+}
+
+.toggle .arm > .bone + .bone:after { top: 100%; }
+
+.toggle .hand {
+  position: absolute;
+  --balls: var(--bone) calc(var(--sz) * 0.05), #fff0 calc(calc(var(--sz) * 0.05) + 1px) 100%;
+  background: 
+      radial-gradient(circle at 91% 29%, var(--balls)), 
+      radial-gradient(circle at 92% 49%, var(--balls)), 
+      radial-gradient(circle at 91% 69%, var(--balls)), 
+      radial-gradient(circle at 76% 21%, var(--balls)), 
+      radial-gradient(circle at 78% 39%, var(--balls)), 
+      radial-gradient(circle at 79% 58%, var(--balls)), 
+      radial-gradient(circle at 78% 78%, var(--balls));
+  width: calc(var(--sz) * 0.7); height: calc(var(--sz) * 0.5);
+  left: calc(var(--sz) * -0.7); z-index: 0;
+}
+
+.toggle .hand .bone, .toggle .big {
+  width: calc(var(--sz) * 0.3); left: calc(var(--sz) * 0.135);
+  height: calc(var(--sz) * 0.075); border-radius: calc(var(--sz) * 0.05) 0 0 calc(var(--sz) * 0.05);
+}
+
+.toggle .hand .bone:before, .toggle .hand .bone:after, .toggle .big:before, .toggle .big:after {
+  width: calc(var(--sz) * 0.08); height: calc(var(--sz) * 0.08);
+  top: calc(var(--sz) * -0.025); left: calc(var(--sz) * 0.225); box-shadow: none;
+}
+
+.toggle .hand .bone:after, .toggle .big:after { top: calc(var(--sz) * 0.0125); }
+
+.toggle .hand .bone:nth-child(1) {
+  transform: rotate(5deg) translateY(calc(var(--sz) * -0.1)) translateX(calc(var(--sz) * 0.015));
+  filter: drop-shadow(calc(var(--sz) * -0.3) 0px 0px var(--bone));
+}
+
+.toggle .hand .bone:nth-child(2) {
+  transform: rotate(0deg) translateX(calc(var(--sz) * 0.05));
+  filter: drop-shadow(calc(var(--sz) * -0.3) 0px 0px var(--bone));
+}
+
+.toggle .hand .bone:nth-child(3) {
+  transform: rotate(-2deg) translateY(calc(var(--sz) * 0.115)) translateX(calc(var(--sz) * 0.05));
+  filter: drop-shadow(calc(var(--sz) * -0.3) 0px 0px var(--bone));
+}
+
+.toggle .hand .bone:nth-child(4) {
+  transform: rotate(-5deg) translateY(calc(var(--sz) * 0.23)) translateX(calc(var(--sz) * 0.05));
+  filter: drop-shadow(calc(var(--sz) * -0.3) 0px 0px var(--bone));
+}
+
+.toggle .big {
+  background: var(--bone); height: calc(var(--sz) * 0.1) !important;
+  position: absolute; left: calc(var(--sz) * -0.425) !important;
+  top: calc(var(--sz) * 0.115); z-index: 1;
+  filter: drop-shadow(calc(var(--sz) * -0.25) 0px 0px var(--bone)) drop-shadow(0 0 1px #000);
+}
+
+/* MAIN SECTION ELEVADA SIN FONDOS NEGROS OPACOS */
+.main {
+  position: relative;
+  width: 100%;
+  padding: 80px 0 40px;
+  overflow-x: clip;
+  background: transparent !important;
+}
+
+.main::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; aspect-ratio: 1440 / 512;
+  background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider-web.svg");
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  opacity: 0.25;
+}
+
+/* LAYOUT GRID DE 2 COLUMNAS PRINCIPALES */
+.main-layout-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
+  align-items: center;
+  background: transparent !important;
+}
+
+.content-left {
+  width: 100%;
+  background: rgba(10, 8, 16, 0.45);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(248, 67, 151, 0.2);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+  margin: 0 0 1.8rem;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Jolly Lodger", sans-serif;
+  font-size: 5.5rem;
+  font-weight: 400;
+  line-height: 0.95;
+  color: rgb(246, 242, 242);
+  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+h1 span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-20px) rotate(-10deg);
+  animation: letter-reveal 0.2s forwards;
+}
+
+h1 .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+h1 .word:last-child {
+  color: var(--halloween-timer-accent);
+  text-shadow: 0 0 15px var(--halloween-timer-accent);
+}
+
+p {
+  margin: 0;
+  max-width: 620px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  color: rgb(255, 253, 253);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+}
+
+p.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CONTADOR DE TIEMPO */
+.countdown {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 580px;
+  gap: 18px;
+  margin: 0;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.8rem;
+}
+
+.countdown-value {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  font-family: "Jolly Lodger", sans-serif;
+  font-size: 5.2rem;
+  line-height: 1;
+  color: rgb(255, 126, 5);
+  text-align: center;
+  background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/counter.svg");
+  background-size: 100% 100%;
+  filter: drop-shadow(0 0 10px rgba(248, 67, 151, 0.4));
+}
+
+.countdown-label {
+  font-size: 18px;
+  line-height: 1.2;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 0 8px #000;
+}
+
+/* CRÁNEO CENTRAL Y OPCIONES FLANQUEADAS */
+.illustration-right {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent !important;
+}
+
+.skull-hero-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  position: relative;
+}
+
+.illustration-image.desktop {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  flex-shrink: 0;
+  margin: 0;
+  filter: drop-shadow(0 0 35px rgba(255, 85, 0, 0.5));
+}
+
+.illustration-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.eyes {
+  position: absolute;
+  top: 54.72%; left: 50%;
+  width: 24.16%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.eye {
+  width: 14.48%;
+  aspect-ratio: 22 / 32;
+  border-radius: 50%;
+  background-color: rgba(239, 222, 222, 0.89);
+  filter: blur(2px);
+  box-shadow: 0 0 20px rgba(239, 222, 222, 0.89), 0 0 30px rgba(239, 222, 222, 0.89);
+}
+
+/* ETIQUETAS A LOS LADOS DEL CRÁNEO */
+.tags-orbit {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+}
+
+.tags-orbit-left {
+  align-items: flex-end;
+}
+
+.tags-orbit-right {
+  align-items: flex-start;
+}
+
+.tag {
+  position: relative;
+  padding: 0.8rem 1rem;
+  border: solid 1px rgba(248, 67, 151, 0.4);
+  border-radius: 0.625rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-align: center;
+  color: #ffffff;
+  background: rgba(18, 16, 22, 0.8);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.tag:hover, .tag.active {
+  color: #ffffff;
+  border-color: var(--halloween-timer-accent);
+  background: rgba(248, 67, 151, 0.35);
+  box-shadow: 0 0 20px var(--halloween-timer-accent);
+  transform: scale(1.06);
+}
+
+/* FILA INFERIOR CON TRANSPARENCIA */
+.categories-wide-row {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: 30px;
+  background: transparent !important;
+}
+
+.submenu-header-title {
+  margin-bottom: 15px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--halloween-timer-accent);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(247, 119, 0, 0.974);
+}
+
+.category-cards-wide {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+  background: transparent !important;
+}
+
+.card.cat-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 300 / 220;
+  background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/card.svg");
+  background-size: 100% 100%;
+  border-radius: 25px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+.card.cat-card img {
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  display: block;
+  transform: translateX(-50%);
+  width: auto;
+  height: 105%;
+  transition: top 0.4s ease, transform 0.4s ease;
+  object-fit: contain;
+}
+
+.card-label-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(18, 16, 22, 0.95);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 15px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  font-weight: bold;
+  border: 1px solid rgba(248, 67, 151, 0.5);
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.card.cat-card:hover, 
+.card.cat-card.active,
+.card.cat-card.highlight {
+  box-shadow: 0 0 30px var(--halloween-timer-accent);
+  border-color: var(--halloween-timer-accent);
+}
+
+.card.cat-card:hover img, 
+.card.cat-card.active img,
+.card.cat-card.highlight img {
+  top: -24%;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.card.cat-card:hover .card-label-badge, 
+.card.cat-card.active .card-label-badge,
+.card.cat-card.highlight .card-label-badge {
+  background: var(--halloween-timer-accent);
+  color: #0d0714;
+  box-shadow: 0 0 20px var(--halloween-timer-accent);
+}
+
+.scrollToTopBtn {
+  background: rgba(10, 8, 16, 0.85);
+  border: 1px solid var(--halloween-timer-accent);
+  color: var(--halloween-timer-accent);
+  position: fixed;
+  bottom: 20px; right: 20px;
+  z-index: 100;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.4s ease;
+}
+
+.scrollToTopBtn.showBtn { opacity: 1; transform: translateY(0); }
+
+@keyframes letter-reveal {
+  0% { opacity: 0; transform: translateY(-20px) rotate(-10deg); filter: blur(3px); }
+  60% { opacity: 1; transform: translateY(2px) rotate(5deg); filter: blur(1px); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg); filter: blur(0); }
+}
+
+@keyframes spider-jump {
+  0% { transform: translateY(0); } 50% { transform: translateY(-3vh); } 100% { transform: translateY(0); }
+}
+
+@media screen and (max-width: 1100px) {
+  .main-layout-grid { grid-template-columns: 1fr; }
+  .category-cards-wide { grid-template-columns: repeat(2, 1fr); }
+  .skull-hero-wrapper { flex-direction: column; }
+  .tags-orbit { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+}
+
+@media screen and (max-width: 650px) {
+  .category-cards-wide { grid-template-columns: 1fr; }
+  h1 { font-size: 3.8rem; }
+  .countdown-value { font-size: 4rem; }
+}

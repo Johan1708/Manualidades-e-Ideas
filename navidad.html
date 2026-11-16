@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Navideño 3D — Manualidades y Cazador de Ofertas IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="navidad.css">
+    <link rel="stylesheet" href="mobile-fix.css">
+</head>
+<body>
+
+    <!-- LIENZO WEBGL PRINCIPAL: SUÉTER TEJIDO + OBJETOS NAVIDEÑOS 3D -->
+    <canvas id="sweater-webgl-canvas"></canvas>
+
+    <!-- PANTALLA DE ENTRADA (INTRO GATE) -->
+    <section id="intro-gate" class="intro-overlay">
+        <header class="intro-brand">TALLER<br>NAVIDEÑO</header>
+
+        <div class="intro-strip-container">
+            <div class="strip-panel" style="background: linear-gradient(135deg, #780000, #ba181b);"></div>
+            <div class="strip-panel" style="background: linear-gradient(135deg, #1b4332, #2d6a4f);"></div>
+            <div class="strip-panel" style="background: linear-gradient(135deg, #b08968, #ddb892);"></div>
+            <div class="strip-panel" style="background: linear-gradient(135deg, #9e2a2b, #e09f3e);"></div>
+            <div class="strip-panel" style="background: linear-gradient(135deg, #2b2d42, #4a4e69);"></div>
+            <div class="strip-panel" style="background: linear-gradient(135deg, #003049, #d4af37);"></div>
+            
+            <svg class="strip-curve" viewBox="0 0 600 110" preserveAspectRatio="none">
+                <path class="animated-path" d="M 35,68 C 125,12 185,95 280,52 C 375,10 445,88 565,42" 
+                      fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" />
+                <circle cx="35" cy="68" r="3.5" fill="#d4af37" />
+                <circle cx="280" cy="52" r="4" fill="#ffffff" />
+                <circle cx="565" cy="42" r="3.5" fill="#d4af37" />
+            </svg>
+        </div>
+
+        <h1 class="intro-title">Crea y encuentra la magia</h1>
+        <p class="intro-subtitle">Manualidades hechas a mano y rastreador IA de ofertas navideñas.</p>
+        <button id="btn-enter" class="pill-btn">Entrar al taller</button>
+    </section>
+
+    <!-- EXPERIENCIA PRINCIPAL SOBRE TU SUÉTER TEJIDO -->
+    <main id="main-experience" class="experience-container hidden">
+        
+        <!-- BOTÓN VOLVER A INICIO -->
+        <button id="btn-back-home" class="home-return-btn" title="Volver a la portada">
+            <span class="arrow-icon">←</span>
+            <span>Inicio</span>
+        </button>
+
+        <!-- RADAR IA EN VIVO (ESQUINA SUPERIOR DERECHA) -->
+        <div class="ai-radar-bar">
+            <div class="ai-status-pill" id="ai-status-pill">
+                <span class="ai-pulse-dot"></span>
+                <span id="ai-status-text">IA Escaneando Ofertas...</span>
+            </div>
+            <button id="btn-enable-notif" class="notif-toggle-btn" title="Activar notificaciones del navegador">
+                🔔 Alertas Push
+            </button>
+        </div>
+
+        <!-- CONTENEDOR DE NOTIFICACIONES FLOTANTES DE OFERTAS IA -->
+        <div id="ai-notifications-feed" class="ai-notifications-feed"></div>
+
+        <!-- Polvo de estrellas / destellos mágicos ambientales -->
+        <div id="magic-sparkles" class="magic-sparkles"></div>
+
+        <!-- Título Superior Dinámico -->
+        <header class="top-hero">
+            <h2 id="section-title">EL ARTE DE CREAR NAVIDAD.</h2>
+            <p id="section-subtitle">Adornos hechos a mano que llenan el árbol de calidez.</p>
+            
+            <!-- Filtro rápido por tienda (Solo visible en la sección 5: Ofertas IA) -->
+            <div id="store-filters" class="store-filters hidden">
+                <button class="filter-chip active" data-store="all">Todas las tiendas</button>
+                <button class="filter-chip" data-store="Amazon">Amazon</button>
+                <button class="filter-chip" data-store="Mercado Libre">Mercado Libre</button>
+                <button class="filter-chip" data-store="Walmart">Walmart</button>
+                <button class="filter-chip" data-store="Chedraui">Chedraui</button>
+            </div>
+        </header>
+
+        <!-- CAPA DE HOTSPOTS NAVIDEÑOS PROGRESIVOS (SINCRONIZADOS CON OBJETOS 3D) -->
+        <div id="hotspots-layer" class="hotspots-layer">
+            
+            <!-- Línea mágica punteada que une los 4 nodos -->
+            <svg id="constellation-svg" class="constellation-svg">
+                <polyline id="constellation-line" points="" fill="none" stroke="rgba(255, 235, 180, 0.42)" stroke-width="1.5" stroke-dasharray="6 6" />
+            </svg>
+
+            <!-- Hotspot 1 -->
+            <div class="hotspot-node" style="top: 28%; left: 12%;" data-index="0">
+                <button class="hotspot-trigger">
+                    <span class="webgl-anchor-ring"></span>
+                    <span class="hotspot-label" id="label-0">Esferas de Tela</span>
+                </button>
+                <div class="glass-card con-nieve" id="card-0">
+                    <div class="card-tags">
+                        <span id="tag1-0">Reciclaje</span>
+                        <span id="tag2-0">20 min</span>
+                    </div>
+                    <h3 id="title-0">Esferas Tejidas y Retazos</h3>
+                    <p id="desc-0">Forra esferas de unicel o plástico viejo con retazos de suéteres tejidos, cuerda de yute y ramas de canela.</p>
+                    <button class="pill-btn small" id="action-btn-0" onclick="abrirDetalle(0)">Ver materiales</button>
+                </div>
+            </div>
+
+            <!-- Hotspot 2 -->
+            <div class="hotspot-node" style="top: 52%; left: 28%;" data-index="1">
+                <button class="hotspot-trigger">
+                    <span class="webgl-anchor-ring"></span>
+                    <span class="hotspot-label" id="label-1">Estrellas 3D</span>
+                </button>
+                <div class="glass-card con-nieve" id="card-1">
+                    <div class="card-tags">
+                        <span id="tag1-1">Origami</span>
+                        <span id="tag2-1">Papel Kraft</span>
+                    </div>
+                    <h3 id="title-1">Estrellas Nórdicas de Papel</h3>
+                    <p id="desc-1">Pega 7 bolsas de papel kraft entre sí, recorta los bordes en ángulo y ábrelas para formar estrellas tridimensionales.</p>
+                    <button class="pill-btn small" id="action-btn-1" onclick="abrirDetalle(1)">Ver paso a paso</button>
+                </div>
+            </div>
+
+            <!-- Hotspot 3 -->
+            <div class="hotspot-node" style="top: 60%; left: 55%;" data-index="2">
+                <button class="hotspot-trigger">
+                    <span class="webgl-anchor-ring"></span>
+                    <span class="hotspot-label" id="label-2">Corona Natural</span>
+                </button>
+                <div class="glass-card con-nieve" id="card-2">
+                    <div class="card-tags">
+                        <span id="tag1-2">Botánico</span>
+                        <span id="tag2-2">Aromático</span>
+                    </div>
+                    <h3 id="title-2">Corona de Eucalipto y Naranja</h3>
+                    <p id="desc-2">Entrelaza ramas de eucalipto sobre un aro de madera y decora con rodajas de naranja deshidratada.</p>
+                    <button class="pill-btn small" id="action-btn-2" onclick="abrirDetalle(2)">Ver guía</button>
+                </div>
+            </div>
+
+            <!-- Hotspot 4 -->
+            <div class="hotspot-node" style="top: 38%; left: 76%;" data-index="3">
+                <button class="hotspot-trigger">
+                    <span class="webgl-anchor-ring"></span>
+                    <span class="hotspot-label" id="label-3">Bastones Hilo</span>
+                </button>
+                <div class="glass-card con-nieve" id="card-3">
+                    <div class="card-tags">
+                        <span id="tag1-3">Clásico</span>
+                        <span id="tag2-3">Fácil</span>
+                    </div>
+                    <h3 id="title-3">Bastones de Caramelo en Lana</h3>
+                    <p id="desc-3">Enrolla estambre rojo y blanco alrededor de limpiapipas gruesos y dales la curva clásica de bastón navideño.</p>
+                    <button class="pill-btn small" id="action-btn-3" onclick="abrirDetalle(3)">Ver ideas</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MODAL DE LISTA DE MATERIALES O DETALLE DE OFERTA -->
+        <div id="craft-modal" class="craft-modal hidden">
+            <div class="modal-box con-nieve">
+                <button id="close-modal" class="close-modal-btn">✕</button>
+                <span class="modal-badge" id="modal-badge">Guía Rápida</span>
+                <h3 id="modal-title">Título</h3>
+                <p id="modal-intro">Detalles:</p>
+                <ul id="modal-materials" class="materials-list"></ul>
+                <a id="modal-store-link" href="#" target="_blank" rel="noopener noreferrer" class="pill-btn small store-cta hidden">
+                    Ir a la oferta en tienda ↗
+                </a>
+            </div>
+        </div>
+
+        <!-- DOCK INFERIOR DE NAVEGACIÓN (6 SECCIONES) -->
+        <footer class="bottom-dock">
+            <div class="dock-nav">
+                <span class="dock-brand-left">HECHO</span>
+                <div class="dock-dots">
+                    <button class="dot-btn active" data-section="0" title="Adornos para el Árbol"></button>
+                    <button class="dot-btn" data-section="1" title="Papel y Origami"></button>
+                    <button class="dot-btn" data-section="2" title="Velas y Centros de Mesa"></button>
+                    <button class="dot-btn" data-section="3" title="Envolturas y Tarjetas"></button>
+                    <button class="dot-btn" data-section="4" title="Regalos Comestibles"></button>
+                    <button class="dot-btn deal-dot" data-section="5" title="Cazador de Ofertas IA (Amazon, ML, Walmart, Chedraui)"></button>
+                </div>
+                <span class="dock-brand-right">A MANO</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="navidad.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="halloween">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween</title>
+    
+    <!-- Estilos Principales -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="opciones.css">
+    
+    <!-- Tipografías Spookify -->
+    <link href="https://fonts.googleapis.com/css2?family=Jolly+Lodger&family=Nunito:wght@400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="mobile-fix.css">
+  </head>
+<body class="page-opciones">
+
+    <!-- CANVAS DEL EFECTO LIQUID CHROME DE FONDO (WEBGL2) -->
+    <canvas id="liquid-chrome-canvas"></canvas>
+
+    <!-- CURSOR PERSONALIZADO DOBLE GPU 1:1 -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- ARAÑAS ANIMADAS -->
+    <div class="spiders">
+      <div class="spider"><img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider.png" alt="Spider" width="40" height="34" loading="lazy"></div>
+      <div class="spider"><img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider.png" alt="Spider" width="40" height="34" loading="lazy"></div>
+      <div class="spider"><img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider.png" alt="Spider" width="40" height="34" loading="lazy"></div>
+      <div class="spider"><img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider.png" alt="Spider" width="40" height="34" loading="lazy"></div>
+      <div class="spider"><img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider.png" alt="Spider" width="40" height="34" loading="lazy"></div>
+    
+    </div>
+
+    <!-- HEADER SPOOKIFY CON INTERRUPTOR DE CALAVERA -->
+    <header class="header">
+      <div class="container">
+        <a href="#" class="logotype">Halloween</a>
+
+        <div class="header-actions">
+          <div class="back-toggle-container">
+            <span class="toggle-label">SALIR</span>
+            <div class="toggle">
+                <input type="checkbox" id="btn" checked>
+                <label for="btn">
+                    <span class="thumb">
+                        <div class="cranium"></div>
+                        <div class="mouth"></div>
+                    </span>
+                    <span class="arm-wrapper">
+                        <span class="arm">
+                            <span class="bone"></span>
+                            <span class="bone"></span>
+                            <span class="hand">
+                                <span class="bone"></span>
+                                <span class="bone"></span>
+                                <span class="bone"></span>
+                                <span class="bone"></span>
+                            </span>
+                            <span class="big"></span>
+                        </span>
+                    </span>
+                </label>
+            </div>
+          </div>
+          <a href="#" class="button">SESION</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECCIÓN PRINCIPAL CON ESTRUCTURA VINCULADA -->
+    <main class="main">
+      <div class="container main-layout-grid">
+        
+        <!-- COLUMNA IZQUIERDA: TÍTULO Y CONTADOR -->
+        <div class="content-left">
+          <div class="heading">
+            <h1>Convierte el cartón, el papel y las ganas en el hechizo más bonito de la temporada</h1>
+            <p>
+              Porque aquí creemos que todo lo que imaginas puede cobrar vida. No necesitas materiales costosos ni trucos complejos, solo la chispa de tu creatividad para transformar lo cotidiano en decoraciones extraordinarias y recuerdos inolvidables.
+            </p>
+          </div>
+
+          <!-- CONTADOR REVERSIBLE -->
+          <div class="countdown">
+            <div class="countdown-item">
+              <div class="countdown-value" id="days">00</div>
+              <div class="countdown-label">Dias</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value" id="hours">00</div>
+              <div class="countdown-label">Horas</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value" id="minutes">00</div>
+              <div class="countdown-label">Minutos</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value" id="seconds">00</div>
+              <div class="countdown-label">Segundos</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: CRÁNEO CENTRAL FLANQUEADO POR OPCIONES -->
+        <div class="illustration-right">
+          <div class="skull-hero-wrapper">
+            
+            <!-- CRÁNEO CENTRAL GIGANTE -->
+            <div class="illustration-image desktop">
+              <img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/skull.png" alt="Skull" width="944" height="1500" loading="lazy">
+              <div class="eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FILA INFERIOR COMPLETA: SUBMENÚ DE LAS 4 CATEGORÍAS -->
+        <div class="categories-wide-row">
+          <div class="submenu-header-title">
+            <span>SELECCIONA UNA CATEGORÍA:</span>
+          </div>
+
+          <div class="cards category-cards-wide">
+            <div class="card cat-card active" data-category="decoracion">
+              <img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/card-1.png" alt="Decoración" loading="lazy">
+              <div class="card-label-badge">🎃 DECORACIÓN</div>
+            </div>
+
+            <div class="card cat-card" data-category="animatronicos">
+              <img src="https://bato-web-agency.github.io/bato-shared/img/halloween-timer/card-2.png" alt="Animatrónicos" loading="lazy">
+              <div class="card-label-badge">🤖 ANIMATRÓNICOS</div>
+            </div>
+
+            <div class="card cat-card" data-category="fiesta">
+              <img src="https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=400&auto=format&fit=crop" alt="Fiesta Halloween" loading="lazy">
+              <div class="card-label-badge">🦇 FIESTA HALLOWEEN</div>
+            </div>
+
+            <div class="card cat-card" data-category="disfraces">
+              <img src="https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=400&auto=format&fit=crop" alt="Disfraces" loading="lazy">
+              <div class="card-label-badge">🎭 DISFRACES</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- BOTÓN DE SCROLL UP -->
+    <button class="scrollToTopBtn" id="scrollToTopBtn">▲</button>
+
+    <!-- SCRIPT PRINCIPAL -->
+    <script src="opciones.js"></script>
+        <audio src="audio/Jack.mp3" autoplay loop></audio>
+
+</body>
+</html>

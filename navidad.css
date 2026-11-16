@@ -44,6 +44,7 @@ body, html {
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 20px;
     transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.1s;
 }
 
@@ -108,7 +109,7 @@ body, html {
 
 .intro-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
     font-weight: 400;
     margin-bottom: 10px;
     letter-spacing: 0.02em;
@@ -727,27 +728,53 @@ body, html {
 }
 
 .dot-btn:hover { border-color: #d4af37; }
+
 /* ================================================================
-   RESPONSIVE MÓVIL - TALLER NAVIDEÑO 3D
+   ADAPTACIÓN MÓVIL - TALLER NAVIDEÑO 3D (LIMPIA Y PROPORCIONADA)
    ================================================================ */
 @media (max-width: 768px) {
+    html, body {
+        width: 100vw !important;
+        height: 100dvh !important;
+        overflow: hidden !important;
+    }
+
+    .intro-brand {
+        top: 20px;
+        font-size: 0.8rem;
+    }
+
+    .intro-strip-container {
+        height: 86px;
+        margin-bottom: 24px;
+    }
+
+    .intro-subtitle {
+        font-size: 0.86rem;
+        max-width: 300px;
+        line-height: 1.45;
+    }
+
+    /* Barra superior: Inicio a la izquierda, Radar IA a la derecha */
     .home-return-btn {
-        top: 12px;
-        left: 12px;
-        padding: 7px 13px;
-        font-size: 0.75rem;
+        top: 12px !important;
+        left: 12px !important;
+        padding: 7px 12px !important;
+        font-size: 0.74rem !important;
+        z-index: 260 !important;
     }
 
     .ai-radar-bar {
-        top: 12px;
-        right: 12px;
-        gap: 6px;
+        top: 12px !important;
+        right: 12px !important;
+        gap: 6px !important;
+        z-index: 260 !important;
     }
 
     .ai-status-pill {
-        padding: 6px 10px;
-        font-size: 0.68rem;
-        max-width: 145px;
+        padding: 6px 10px !important;
+        font-size: 0.66rem !important;
+        max-width: 138px !important;
     }
 
     .ai-status-pill span:last-child {
@@ -757,255 +784,36 @@ body, html {
     }
 
     .notif-toggle-btn {
-        padding: 6px 10px;
-        font-size: 0.68rem;
-    }
-
-    /* Baja el título hero debajo de los botones superiores para que no choquen */
-    .top-hero {
-        top: 56px;
-        width: 92%;
-    }
-
-    .top-hero h2 {
-        font-size: 1.35rem;
-        letter-spacing: 0.04em;
-    }
-
-    .top-hero p {
-        font-size: 0.78rem;
-    }
-
-    .store-filters {
-        gap: 5px;
-        margin-top: 8px;
-    }
-
-    .filter-chip {
-        padding: 4px 10px;
-        font-size: 0.68rem;
-    }
-
-    /* Notificaciones IA compactas en la parte inferior encima del dock */
-    .ai-notifications-feed {
-        top: auto;
-        bottom: 78px;
-        right: 50%;
-        transform: translateX(50%);
-        width: 90vw;
-    }
-
-    /* Hotspots y tarjetas glass centradas en pantalla al abrirse */
-    .hotspot-trigger {
-        gap: 8px;
-    }
-
-    .webgl-anchor-ring {
-        width: 42px;
-        height: 42px;
-    }
-
-    .hotspot-label {
-        font-size: 0.74rem;
-        padding: 4px 10px;
-    }
-
-    .hotspot-node.active {
-        z-index: 280 !important;
-    }
-
-    .hotspot-node.active .glass-card {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translate(-50%, -50%) !important;
-        width: 88vw !important;
-        max-width: 340px !important;
-        padding: 18px !important;
-        z-index: 290 !important;
-    }
-
-    .glass-card h3 {
-        font-size: 1.25rem;
-    }
-
-    .glass-card p {
-        font-size: 0.82rem;
-    }
-
-    .bottom-dock {
-        bottom: 14px;
-        width: 92%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .dock-nav {
-        gap: 12px;
-        padding: 8px 16px;
-    }
-
-    .dock-brand-left,
-    .dock-brand-right {
-        font-size: 0.7rem;
-        letter-spacing: 0.14em;
-    }
-
-    .dock-dots {
-        gap: 10px;
-    }
-}
-@media (max-width: 768px) {
-    /* Fila 1 superior: Inicio a la izquierda y Radar IA a la derecha sin taparse */
-    .home-return-btn {
-        top: 10px !important;
-        left: 10px !important;
-        padding: 6px 11px !important;
-        font-size: 0.72rem !important;
-        z-index: 260 !important;
-    }
-
-    .ai-radar-bar {
-        top: 10px !important;
-        right: 10px !important;
-        gap: 5px !important;
-        z-index: 260 !important;
-    }
-
-    .ai-status-pill {
-        padding: 6px 9px !important;
-        font-size: 0.65rem !important;
-        max-width: 132px !important;
-    }
-
-    .notif-toggle-btn {
-        padding: 6px 9px !important;
-        font-size: 0.65rem !important;
-    }
-
-    /* Fila 2: Título hero debajo de la barra superior */
-    .top-hero {
-        top: 50px !important;
-        width: 94% !important;
-        z-index: 150 !important;
-    }
-
-    .top-hero h2 {
-        font-size: 1.25rem !important;
-        margin-bottom: 2px !important;
-    }
-
-    .top-hero p {
-        font-size: 0.74rem !important;
-        line-height: 1.25 !important;
-    }
-
-    /* Notificación IA flotante abajo (encima del dock) para NO tapar el título ni los nodos */
-    .ai-notifications-feed {
-        top: auto !important;
-        bottom: 74px !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
-        width: 92vw !important;
-        max-width: 360px !important;
-        z-index: 220 !important;
-    }
-
-    /* Tarjeta de producto centrada en pantalla con scroll interno si es alta */
-    .hotspot-node.active {
-        z-index: 300 !important;
-    }
-
-    .hotspot-node.active .glass-card {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        right: auto !important;
-        bottom: auto !important;
-        transform: translate(-50%, -50%) !important;
-        width: 88vw !important;
-        max-width: 340px !important;
-        max-height: 68vh !important;
-        overflow-y: auto !important;
-        padding: 18px !important;
-        z-index: 310 !important;
-    }
-
-    .bottom-dock {
-        bottom: 12px !important;
-        width: 94% !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    .dock-nav {
-        padding: 8px 14px !important;
-        gap: 10px !important;
-    }
-}
-/* ================================================================
-   ADAPTACIÓN MÓVIL - NAVIDAD COMPLETA Y FUNCIONAL
-   ================================================================ */
-@media (max-width: 768px) {
-    html, body {
-        width: 100vw !important;
-        height: 100dvh !important;
-        overflow: hidden !important;
-    }
-
-    /* Barra superior limpia: Inicio a la izquierda, Radar IA a la derecha */
-    .home-return-btn {
-        top: 10px !important;
-        left: 10px !important;
-        padding: 6px 11px !important;
-        font-size: 0.72rem !important;
-        z-index: 260 !important;
-    }
-
-    .ai-radar-bar {
-        top: 10px !important;
-        right: 10px !important;
-        gap: 5px !important;
-        z-index: 260 !important;
-    }
-
-    .ai-status-pill {
-        padding: 6px 9px !important;
-        font-size: 0.64rem !important;
-        max-width: 130px !important;
-    }
-
-    .notif-toggle-btn {
-        padding: 6px 9px !important;
-        font-size: 0.64rem !important;
+        padding: 6px 10px !important;
+        font-size: 0.66rem !important;
     }
 
     /* Título debajo de la barra superior */
     .top-hero {
-        top: 48px !important;
-        width: 94% !important;
+        top: 54px !important;
+        width: 92% !important;
         z-index: 150 !important;
     }
 
     .top-hero h2 {
-        font-size: 1.2rem !important;
-        margin-bottom: 2px !important;
+        font-size: 1.28rem !important;
+        letter-spacing: 0.05em !important;
+        margin-bottom: 3px !important;
     }
 
     .top-hero p {
-        font-size: 0.72rem !important;
+        font-size: 0.76rem !important;
+        line-height: 1.3 !important;
     }
 
     .store-filters {
-        gap: 4px !important;
-        margin-top: 6px !important;
+        gap: 5px !important;
+        margin-top: 8px !important;
     }
 
     .filter-chip {
-        padding: 4px 8px !important;
-        font-size: 0.64rem !important;
+        padding: 4px 9px !important;
+        font-size: 0.66rem !important;
     }
 
     /* Notificaciones IA abajo para que no tapen la escena ni los nodos */
@@ -1015,23 +823,27 @@ body, html {
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%) !important;
-        width: 92vw !important;
-        max-width: 350px !important;
+        width: 90vw !important;
+        max-width: 340px !important;
         z-index: 220 !important;
     }
 
-    /* Hotspots compactos para que quepan todos en pantalla */
+    /* Hotspots compactos para que no salgan de pantalla */
+    .hotspot-trigger {
+        gap: 7px !important;
+    }
+
     .webgl-anchor-ring {
-        width: 36px !important;
-        height: 36px !important;
+        width: 38px !important;
+        height: 38px !important;
     }
 
     .hotspot-label {
-        font-size: 0.68rem !important;
-        padding: 3px 8px !important;
+        font-size: 0.72rem !important;
+        padding: 4px 10px !important;
     }
 
-    /* Tarjeta abierta centrada y con scroll interno para que se vea COMPLETA */
+    /* Tarjeta abierta centrada y con scroll interno */
     .hotspot-node.active {
         z-index: 300 !important;
     }
@@ -1047,19 +859,47 @@ body, html {
         max-width: 340px !important;
         max-height: 68dvh !important;
         overflow-y: auto !important;
-        padding: 16px !important;
+        padding: 18px !important;
         z-index: 310 !important;
     }
 
+    .glass-card h3 {
+        font-size: 1.28rem !important;
+    }
+
+    .glass-card p {
+        font-size: 0.82rem !important;
+    }
+
+    .modal-box {
+        padding: 24px 18px !important;
+        max-height: 80dvh !important;
+        overflow-y: auto !important;
+    }
+
+    .modal-box h3 {
+        font-size: 1.45rem !important;
+    }
+
     .bottom-dock {
-        bottom: 10px !important;
+        bottom: 12px !important;
         width: 94% !important;
         display: flex !important;
         justify-content: center !important;
     }
 
     .dock-nav {
-        padding: 7px 14px !important;
-        gap: 10px !important;
+        padding: 8px 16px !important;
+        gap: 12px !important;
+    }
+
+    .dock-brand-left,
+    .dock-brand-right {
+        font-size: 0.7rem !important;
+        letter-spacing: 0.14em !important;
+    }
+
+    .dock-dots {
+        gap: 11px !important;
     }
 }

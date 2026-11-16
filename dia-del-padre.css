@@ -6,7 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
-    cursor: none !important; /* Oculta cursor nativo para usar el cursor galaxia */
+    cursor: none !important;
 }
 
 body, html {
@@ -499,7 +499,7 @@ body, html {
 }
 
 /* ==========================================================
-   7. RULETA 3D INTERACTIVA DENTRO DEL MODAL
+   7. RULETA 3D INTERACTIVA CON DISTORSIÓN Y EFECTOS
    ========================================================== */
 .ogl-gallery-wrapper {
     position: relative;
@@ -522,30 +522,6 @@ body, html {
     overflow: visible;
 }
 
-/* ==========================================================
-   7. RULETA 3D INTERACTIVA CON DISTORSIÓN Y EFECTOS
-   ========================================================== */
-.ogl-gallery-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex: 1;
-    overflow: visible;
-    perspective: 1200px; /* Sensación de profundidad 3D */
-}
-
-.ogl-gallery-container {
-    width: 100%;
-    height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: visible;
-}
-
 .ogl-gallery-track {
     position: relative;
     width: 100%;
@@ -556,7 +532,6 @@ body, html {
     transform-style: preserve-3d;
 }
 
-/* Tarjeta Base de la Ruleta 3D */
 .ogl-card.roulette-3d-card {
     position: absolute;
     min-width: 280px;
@@ -565,7 +540,6 @@ body, html {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     overflow: hidden;
-    /* Transición suave para el efecto de distorsión al girar */
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
                 opacity 0.6s ease, 
                 filter 0.5s ease, 
@@ -576,14 +550,12 @@ body, html {
     backdrop-filter: blur(12px);
 }
 
-/* Tarjeta Central Activa */
 .ogl-card.roulette-3d-card.active-card {
     border-color: #ffffff;
     box-shadow: 0 0 35px rgba(255, 255, 255, 0.45), 0 25px 50px rgba(0, 0, 0, 0.95);
     filter: brightness(1.08) contrast(1.02);
 }
 
-/* Distorsión y desenfoque suave en tarjetas laterales y traseras */
 .ogl-card.roulette-3d-card.side-card-left,
 .ogl-card.roulette-3d-card.side-card-right {
     filter: blur(1px) brightness(0.75);
@@ -724,6 +696,7 @@ body, html {
 .ai-msg {
     align-self: flex-start;
     color: #d4d4d8;
+    text-align: left;
 }
 
 .user-msg {
@@ -778,8 +751,9 @@ body, html {
     color: #ffffff;
     margin-bottom: 4px;
 }
+
 /* ==========================================================
-   RESPONSIVE MÓVIL - DÍA DEL PADRE
+   8. ADAPTACIÓN RESPONSIVA MÓVIL - DÍA DEL PADRE (CONSOLIDADA)
    ========================================================== */
 @media (max-width: 768px) {
     * {
@@ -792,309 +766,182 @@ body, html {
         display: none !important;
     }
 
+    /* Barra inferior con buen margen para barras del navegador móvil */
     .top-flyer {
-        bottom: 14px;
-        padding: 0 14px;
+        bottom: 20px !important;
+        padding: 0 16px !important;
     }
 
     .btn, .flyer-trigger {
-        padding: 8px 16px;
-        font-size: 0.75rem;
+        padding: 9px 18px !important;
+        font-size: 0.78rem !important;
     }
 
+    /* Menú lateral bien proporcionado */
     .menu-overlay-wrapper {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
     }
 
     .close-menu-trigger {
-        top: 16px;
-        right: 16px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
+        top: 18px !important;
+        right: 18px !important;
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 1.5rem !important;
     }
 
     #menu-items {
-        gap: 18px;
+        gap: 20px !important;
     }
 
     .menu-item {
-        font-size: 1.75rem;
-        line-height: 1.2;
+        font-size: 1.65rem !important;
+        line-height: 1.25 !important;
     }
 
+    /* Tarjeta inicial sobre la montaña */
     .glass-container {
-        bottom: 72px;
-        width: 92%;
-    }
-
-    .glass-card {
-        padding: 20px 16px;
-        border-radius: 18px;
-    }
-
-    .main-text {
-        font-size: 1.05rem;
-    }
-
-    .sub-text {
-        font-size: 0.82rem;
-        margin-bottom: 8px;
-    }
-
-    .modal-fullscreen {
-        width: 96vw;
-        height: 92vh;
-        padding: 16px 12px;
-        overflow-y: auto;
-    }
-
-    .close-modal {
-        top: 10px;
-        right: 10px;
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
-    }
-
-    .modal-nav-bar {
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 26px;
-        margin-bottom: 12px;
-    }
-
-    .modal-nav-center {
-        order: -1;
-        width: 100%;
-    }
-
-    .father-title, .modal-sec-title {
-        font-size: 1.35rem;
-    }
-
-    .filter-bar {
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 12px;
-    }
-
-    .filter-group {
-        justify-content: space-between;
-        font-size: 0.8rem;
-    }
-
-    .filter-group select {
-        padding: 6px 12px;
-        font-size: 0.78rem;
-    }
-
-    .ogl-gallery-container {
-        height: 390px;
-    }
-
-    .ogl-card.roulette-3d-card {
-        min-width: 235px;
-        max-width: 235px;
-    }
-
-    .ogl-card-img {
-        height: 135px;
-    }
-
-    .ogl-card-body {
-        padding: 14px;
-    }
-
-    .ogl-card-body h4 {
-        font-size: 0.98rem;
-    }
-
-    .ogl-details {
-        font-size: 0.78rem;
-        margin-bottom: 10px;
-    }
-
-    .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-
-    .carousel-btn.prev-btn { left: 2px; }
-    .carousel-btn.next-btn { right: 2px; }
-}
-/* ==========================================================
-   RESPONSIVE MÓVIL - DÍA DEL PADRE
-   ========================================================== */
-@media (max-width: 768px) {
-    * {
-        cursor: auto !important;
-    }
-
-    #galaxy-cursor-canvas,
-    .galaxy-cursor-dot,
-    .galaxy-cursor-ring {
-        display: none !important;
-    }
-
-    .top-flyer {
-        bottom: 14px;
-        padding: 0 14px;
-    }
-
-    .btn, .flyer-trigger {
-        padding: 8px 16px;
-        font-size: 0.75rem;
-    }
-
-    .menu-overlay-wrapper {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
-
-    .close-menu-trigger {
-        top: 16px;
-        right: 16px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
-    }
-
-    #menu-items {
-        gap: 18px;
-    }
-
-    .menu-item {
-        font-size: 1.75rem;
-        line-height: 1.2;
-    }
-
-    .glass-container {
-        bottom: 72px;
-        width: 92%;
-    }
-
-    .glass-card {
-        padding: 20px 16px;
-        border-radius: 18px;
-    }
-
-    .main-text {
-        font-size: 1.05rem;
-    }
-
-    .sub-text {
-        font-size: 0.82rem;
-        margin-bottom: 8px;
-    }
-
-    .modal-fullscreen {
-        width: 96vw;
-        height: 92vh;
-        padding: 16px 12px;
-        overflow-y: auto;
-    }
-
-    .close-modal {
-        top: 10px;
-        right: 10px;
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
-    }
-
-    .modal-nav-bar {
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 26px;
-        margin-bottom: 12px;
-    }
-
-    .modal-nav-center {
-        order: -1;
-        width: 100%;
-    }
-
-    .father-title, .modal-sec-title {
-        font-size: 1.35rem;
-    }
-
-    .filter-bar {
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 12px;
-    }
-
-    .filter-group {
-        justify-content: space-between;
-        font-size: 0.8rem;
-    }
-
-    .filter-group select {
-        padding: 6px 12px;
-        font-size: 0.78rem;
-    }
-
-    .ogl-gallery-container {
-        height: 390px;
-    }
-
-    .ogl-card.roulette-3d-card {
-        min-width: 235px;
-        max-width: 235px;
-    }
-
-    .ogl-card-img {
-        height: 135px;
-    }
-
-    .ogl-card-body {
-        padding: 14px;
-    }
-
-    .ogl-card-body h4 {
-        font-size: 0.98rem;
-    }
-
-    .ogl-details {
-        font-size: 0.78rem;
-        margin-bottom: 10px;
-    }
-
-    .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-
-    .carousel-btn.prev-btn { left: 2px; }
-    .carousel-btn.next-btn { right: 2px; }
-}
-@media (max-width: 768px) {
-    .top-flyer {
-        bottom: 54px !important;
-    }
-
-    .glass-container {
-        bottom: 108px !important;
+        bottom: 84px !important;
         width: 92% !important;
     }
 
     .glass-card {
         padding: 20px 16px !important;
+        border-radius: 18px !important;
     }
 
     .main-text {
-        font-size: 1.05rem !important;
+        font-size: 1.02rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 10px !important;
     }
 
     .sub-text {
         font-size: 0.82rem !important;
+        margin-bottom: 4px !important;
     }
 
-    .menu-item {
-        font-size: 1.7rem !important;
+    /* Modales y Galería Ruleta 3D */
+    .modal-fullscreen {
+        width: 95vw !important;
+        height: 90dvh !important;
+        padding: 16px 12px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
+    .modal-medium {
+        width: 92vw !important;
+        max-height: 85dvh !important;
+        overflow-y: auto !important;
+        padding: 22px 16px !important;
+    }
+
+    .close-modal {
+        top: 12px !important;
+        right: 12px !important;
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1.15rem !important;
+    }
+
+    .modal-nav-bar {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        margin-top: 24px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .modal-nav-center {
+        order: -1 !important;
+        width: 100% !important;
+    }
+
+    .father-title, .modal-sec-title {
+        font-size: 1.35rem !important;
+    }
+
+    .filter-bar {
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .filter-group {
+        justify-content: space-between !important;
+        font-size: 0.78rem !important;
+    }
+
+    .filter-group select {
+        padding: 6px 12px !important;
+        font-size: 0.76rem !important;
+        max-width: 58% !important;
+    }
+
+    .ogl-gallery-container {
+        height: 375px !important;
+    }
+
+    .ogl-card.roulette-3d-card {
+        min-width: 230px !important;
+        max-width: 230px !important;
+    }
+
+    .ogl-card-img {
+        height: 130px !important;
+    }
+
+    .ogl-card-body {
+        padding: 14px !important;
+    }
+
+    .ogl-card-body h4 {
+        font-size: 0.96rem !important;
+    }
+
+    .ogl-details {
+        font-size: 0.78rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .carousel-btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 0.95rem !important;
+    }
+
+    .carousel-btn.prev-btn { left: 2px !important; }
+    .carousel-btn.next-btn { right: 2px !important; }
+
+    /* Chat IA y Tutorial DIY */
+    .ia-subtitle {
+        font-size: 0.8rem !important;
+        margin-top: 6px !important;
+    }
+
+    .ia-chat-box {
+        height: 200px !important;
+        margin: 14px 0 !important;
+        padding: 12px !important;
+    }
+
+    .chat-msg {
+        font-size: 0.82rem !important;
+        max-width: 92% !important;
+    }
+
+    .ia-input-container input {
+        padding: 10px 14px !important;
+        font-size: 0.82rem !important;
+    }
+
+    .tut-main-img {
+        height: 150px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .tut-step-item {
+        font-size: 0.84rem !important;
     }
 }

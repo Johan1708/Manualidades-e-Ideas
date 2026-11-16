@@ -5,15 +5,12 @@
    VARIABLES DE COLOR SEGUROS PARA EL HUD (:root)
    ========================================== */
 :root {
-    /* --- COLORES DEL TÍTULO Y EFECTOS --- */
-    --titulo-borde: #ffffff;                       /* Color del contorno neón */
-    --titulo-resplandor: rgba(0, 229, 255, 0.9);   /* Brillo exterior neón */
-
-    /* --- COLORES PERSONALIZADOS DEL HUD --- */
-    --hud-color-texto: #ded0db;          /* Texto de las esquinas */
-    --hud-color-acento: #020431;         /* Acento destacado para 'MENU DE CATEGORIAS' */
-    --hud-color-pulso: #00ff66;          /* Verde Neón para el indicador LED */
-    --hud-color-anillos: rgba(0, 0, 0, 0.25); /* Tono tenue de los aros giratorios */
+    --titulo-borde: #ffffff;
+    --titulo-resplandor: rgba(0, 229, 255, 0.9);
+    --hud-color-texto: #ded0db;
+    --hud-color-acento: #00e5ff;
+    --hud-color-pulso: #00ff66;
+    --hud-color-anillos: rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -83,6 +80,7 @@ body.orbital-mode {
 .hud-corner span {
     color: var(--hud-color-acento) !important;
     font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
 }
 
 .hud-corner.top-left { top: 25px; left: 30px; }
@@ -192,15 +190,9 @@ body.orbital-mode {
    ANIMACIÓN Y SWEEP SVG DEL TÍTULO
    ========================================== */
 @keyframes sweepWide {
-    0% {
-        transform: rotate(-22deg);
-    }
-    50% {
-        transform: rotate(22deg);
-    }
-    100% {
-        transform: rotate(-22deg);
-    }
+    0% { transform: rotate(-22deg); }
+    50% { transform: rotate(22deg); }
+    100% { transform: rotate(-22deg); }
 }
 
 #reflector, .rotate {
@@ -235,7 +227,8 @@ body.orbital-mode {
     font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
     letter-spacing: 3px;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
     margin-top: 2px;
 }
 
@@ -291,22 +284,22 @@ body.orbital-mode {
     z-index: 15;
     width: 170px;
     height: 220px;
-    perspective: 1000px; /* Profundidad tridimensional */
+    perspective: 1000px;
 }
 
 .orbital-node:hover {
     z-index: 100;
 }
 
-/* Columna Izquierda (3 Nodos) */
-.node-1 { top: 18vh; left: 18vw; transform: translate(-50%, -50%); } /* Halloween */
-.node-6 { top: 50vh; left: 14vw; transform: translate(-50%, -50%); } /* Día del Padre */
-.node-5 { top: 82vh; left: 18vw; transform: translate(-50%, -50%); } /* Día de las Madres */
+/* Columna Izquierda */
+.node-1 { top: 18vh; left: 18vw; transform: translate(-50%, -50%); }
+.node-6 { top: 50vh; left: 14vw; transform: translate(-50%, -50%); }
+.node-5 { top: 82vh; left: 18vw; transform: translate(-50%, -50%); }
 
-/* Columna Derecha (3 Nodos) */
-.node-2 { top: 18vh; left: 82vw; transform: translate(-50%, -50%); } /* Día de Muertos */
-.node-3 { top: 50vh; left: 86vw; transform: translate(-50%, -50%); } /* Navidad */
-.node-4 { top: 82vh; left: 82vw; transform: translate(-50%, -50%); } /* Día de la Independencia */
+/* Columna Derecha */
+.node-2 { top: 18vh; left: 82vw; transform: translate(-50%, -50%); }
+.node-3 { top: 50vh; left: 86vw; transform: translate(-50%, -50%); }
+.node-4 { top: 82vh; left: 82vw; transform: translate(-50%, -50%); }
 
 .btn-hud-launch {
     position: fixed;
@@ -821,7 +814,6 @@ body.orbital-mode {
     src: url("https://assets.codepen.io/1480814/films.EXH_____.ttf");
 }
 
-/* 1. Estructura Base de la Tarjeta */
 .card-3d-pop {
     position: relative;
     width: 170px;
@@ -834,7 +826,7 @@ body.orbital-mode {
     background-position: center;
     border: 2px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    overflow: visible !important; /* Permite que el personaje sobresalga */
+    overflow: visible !important;
     transform-style: preserve-3d;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
                 box-shadow 0.4s ease, 
@@ -842,7 +834,6 @@ body.orbital-mode {
     cursor: pointer;
 }
 
-/* 2. Capa Oscura / Fondo */
 .card-3d-pop::before {
     content: "";
     position: absolute;
@@ -854,7 +845,6 @@ body.orbital-mode {
     transition: opacity 0.3s ease;
 }
 
-/* 3. Imagen del Personaje / Objeto (Capa que Sobresale) */
 .card-3d-pop img {
     position: absolute;
     bottom: 35px;
@@ -870,7 +860,6 @@ body.orbital-mode {
     filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.6));
 }
 
-/* 4. Etiqueta / Texto de Categoría */
 .card-3d-pop figcaption {
     position: absolute;
     bottom: 10px;
@@ -893,24 +882,22 @@ body.orbital-mode {
     pointer-events: none;
 }
 
-/* ==========================================
-   REGLAS HOVER: ANIMACIÓN POP-OUT Y ELEVACIÓN 3D
-   ========================================== */
-.orbital-node:hover .card-3d-pop {
+.orbital-node:hover .card-3d-pop,
+.orbital-node:active .card-3d-pop {
     transform: translateY(-10px) rotateX(10deg) rotateY(-5deg) scale(1.06);
     border-color: #00e5ff;
     box-shadow: 0 20px 45px rgba(0, 229, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
     z-index: 100;
 }
 
-/* El personaje salta hacia adelante sobre la tarjeta */
-.orbital-node:hover .card-3d-pop img {
+.orbital-node:hover .card-3d-pop img,
+.orbital-node:active .card-3d-pop img {
     transform: translateX(-50%) translateZ(50px) translateY(-18px) scale(1.18);
     filter: drop-shadow(0 18px 25px rgba(0, 0, 0, 0.85)) brightness(1.1);
 }
 
-/* La etiqueta se ilumina */
-.orbital-node:hover .card-3d-pop figcaption {
+.orbital-node:hover .card-3d-pop figcaption,
+.orbital-node:active .card-3d-pop figcaption {
     background: #ffffff !important;
     color: #000000 !important;
     border-color: #ffffff;
@@ -923,13 +910,14 @@ body.orbital-mode {
     .orbital-svg-ring, .hud-ring-bg { display: none; }
     body.orbital-mode { overflow-y: auto; flex-direction: column; justify-content: flex-start; padding-top: 120px; }
 }
+
 /* ================================================================
-   RESPONSIVE MÓVIL - PORTADA ORBITAL (NO AFECTA ESCRITORIO)
+   RESPONSIVE MÓVIL - PORTADA ORBITAL (PROPORCIÓN MEJORADA)
    ================================================================ */
 @media (max-width: 768px) {
     #dither-canvas-container {
         pointer-events: none !important;
-        opacity: 0.6 !important;
+        opacity: 0.72 !important;
     }
 
     html, body.orbital-mode {
@@ -938,7 +926,10 @@ body.orbital-mode {
         height: auto !important;
         overflow-x: hidden !important;
         overflow-y: auto !important;
-        display: block !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
         padding-top: 0 !important;
         cursor: auto !important;
     }
@@ -947,22 +938,30 @@ body.orbital-mode {
         display: none !important;
     }
 
-    /* HUD esquinas compactas y sin estorbar */
+    /* HUD superior fijo discreto */
     .hud-overlay {
-        padding: 10px !important;
-        z-index: 5 !important;
+        position: fixed !important;
+        inset: 0 !important;
+        padding: 0 !important;
+        z-index: 30 !important;
+        pointer-events: none !important;
     }
 
     .hud-corner {
         font-size: 9px !important;
         letter-spacing: 1px !important;
+        background: rgba(13, 10, 20, 0.65);
+        padding: 3px 8px;
+        border-radius: 6px;
+        backdrop-filter: blur(4px);
     }
-    .hud-corner.top-left { top: 10px !important; left: 12px !important; }
-    .hud-corner.top-right { top: 10px !important; right: 12px !important; }
-    .hud-corner.bottom-left { bottom: 10px !important; left: 12px !important; }
-    .hud-corner.bottom-right { bottom: 10px !important; right: 12px !important; }
 
-    /* Encabezado en flujo normal para que jamás tape las tarjetas */
+    .hud-corner.top-left { top: 8px !important; left: 10px !important; }
+    .hud-corner.top-right { top: 8px !important; right: 10px !important; }
+    .hud-corner.bottom-left { bottom: 8px !important; left: 10px !important; }
+    .hud-corner.bottom-right { bottom: 8px !important; right: 10px !important; }
+
+    /* Encabezado con arco SVG bien proporcionado */
     .landing-header-hud {
         position: relative !important;
         top: 0 !important;
@@ -970,36 +969,46 @@ body.orbital-mode {
         transform: none !important;
         width: 100% !important;
         max-width: 100% !important;
-        padding: 36px 10px 8px !important;
+        padding: 34px 6px 4px !important;
         z-index: 20 !important;
     }
 
     #wrapper {
         width: 100% !important;
-        overflow: hidden !important;
+        overflow: visible !important;
     }
 
     #wrapper svg {
-        width: 100% !important;
-        max-height: 115px !important;
+        width: 104% !important;
+        margin-left: -2% !important;
+        max-height: 130px !important;
+    }
+
+    .svg-main-title {
+        font-size: 62px !important;
+        letter-spacing: 3px !important;
     }
 
     .landing-subtitulo-hud {
         font-size: 10px !important;
-        letter-spacing: 1.5px !important;
-        padding: 0 12px !important;
-        margin-top: -6px !important;
+        letter-spacing: 1.8px !important;
+        padding: 4px 12px !important;
+        margin-top: -10px !important;
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.25);
+        border-radius: 20px;
     }
 
-    /* Cuadrícula limpia de 2 columnas para los nodos */
+    /* Cuadrícula de 2 columnas con espacio superior para el efecto Pop-Out */
     .orbital-system {
         position: relative !important;
         width: 100% !important;
+        max-width: 440px !important;
         height: auto !important;
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 28px 14px !important;
-        padding: 28px 16px 65px !important;
+        gap: 34px 16px !important;
+        padding: 34px 18px 60px !important;
         justify-items: center !important;
         align-items: center !important;
         pointer-events: auto !important;
@@ -1014,34 +1023,41 @@ body.orbital-mode {
         bottom: auto !important;
         transform: none !important;
         width: 100% !important;
-        max-width: 160px !important;
-        height: 195px !important;
+        max-width: 175px !important;
+        height: 205px !important;
         margin: 0 !important;
         pointer-events: auto !important;
     }
 
-    /* Centra la 5ta tarjeta en la última fila */
+    /* Centra la última tarjeta sola abajo con buen ancho */
     .orbital-node:last-child {
         grid-column: 1 / -1 !important;
+        max-width: 185px !important;
     }
 
     .card-3d-pop {
         width: 100% !important;
-        height: 195px !important;
+        height: 205px !important;
+        border-radius: 18px !important;
+        border-color: rgba(0, 229, 255, 0.35) !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75), 0 0 14px rgba(0, 229, 255, 0.15) !important;
     }
 
     .card-3d-pop img {
-        max-height: 155px !important;
-        bottom: 34px !important;
+        max-height: 168px !important;
+        bottom: 36px !important;
+        transform: translateX(-50%) translateY(-6px) scale(1.02) !important;
     }
 
     .card-3d-pop figcaption {
-        font-size: 0.68rem !important;
-        padding: 4px 10px !important;
+        font-size: 0.72rem !important;
+        padding: 5px 12px !important;
+        bottom: 10px !important;
+        border-color: rgba(0, 229, 255, 0.45) !important;
     }
 
     .rings-wrapper {
-        transform: scale(0.72);
+        transform: scale(0.75);
     }
 
     .preloader-welcome {

@@ -2,232 +2,498 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Manualidades Festivas - Menú Orbital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de Muertos </title>
     
-    <!-- Hoja de estilos unificada principal -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Estilos aislados del Preloader -->
-    <link rel="stylesheet" href="preloader.css">
-    
-    <!-- Fuentes tipográficas de Google Fonts (Audiowide) -->
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Exo:wght@600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- TIPOGRAFÍAS EDITORIALES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;600;700&family=Syne:wght@700;800&family=Share+Tech+Mono&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Sobrescritura para Animación de Barrido Ajustado (De -22° a +22°) -->
-    <style>
-        .wordsFill {
-            fill: url(#electricChromeGradient) !important;
-            filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.95));
+    <link rel="stylesheet" href="dia-de-muertos.css">
+
+    <!-- SHADERS WEBGL PARA LA OFRENDA 3D DE THREE.JS -->
+    <script type="x-shader/x-vertex" id="vertexshaderCandle">
+        void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
-        .wordsStroke {
-            fill: none !important;
-            stroke: #ffffff !important;
-            stroke-width: 2px !important;
-            filter: drop-shadow(0px 0px 8px rgba(0, 229, 255, 0.9)) drop-shadow(0px 0px 22px rgba(255, 255, 255, 0.95));
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshaderCandle">
+        uniform float time; 
+        uniform float colorSpeed;
+        uniform float delay; 
+        uniform vec3 baseColor;
+        varying vec2 vUv;
+        
+        void main() {
+            float animatedTime = time - delay;
+            animatedTime = mod(animatedTime, colorSpeed);
+            float mixFactor = animatedTime / colorSpeed;
+            vec3 finalColor = mix(baseColor, vec3(0.702,0.71,0.459), mixFactor);
+            gl_FragColor = vec4(finalColor, 1.0);
         }
+    </script>
 
-        /* Animación de giro acotada a la extensión del texto */
-        @keyframes sweepWide {
-            0% {
-                transform: rotate(-22deg);
-            }
-            50% {
-                transform: rotate(22deg);
-            }
-            100% {
-                transform: rotate(-22deg);
-            }
+    <script type="x-shader/x-vertex" id="vertexshaderBubble">
+        varying vec2 vUv;
+        uniform float time;
+
+        void main() {
+            vUv = uv;
+            vec3 newPosition = position;
+            newPosition.x += sin(time * 2.0) * 0.0075;
+            newPosition.y += cos(time * 2.0) * 0.0075;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
         }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshaderBubble">
+        varying vec2 vUv;
 
-        /* Aplicación del pivote exacto y velocidad de barrido */
-        #reflector, .rotate {
-            transform-origin: 640px 0px !important;
-            animation: sweepWide 4.5s ease-in-out infinite !important;
+        void main() {
+            gl_FragColor = vec4(0.765,0.965,0.733, 1.0);
         }
-    </style>
-    <link rel="stylesheet" href="mobile-fix.css">
-</head>
-<body class="page-landing orbital-mode">
+    </script>
 
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="rings-wrapper">
-                <div class="rings anim-pan">
-                    <div style="--delay:06" class="ring anim-zoomIn"></div>
-                    <div style="--delay:04" class="ring anim-zoomIn"></div>
-                    <div style="--delay:03" class="ring anim-zoomIn"></div>
-                    <div style="--delay:02" class="ring anim-zoomIn"></div>
-                    <div style="--delay:01" class="ring anim-zoomIn"></div>
-                    <div style="--delay:00" class="ring anim-zoomIn"></div>
-                </div>
-                <div class="preloader-welcome">BIENVENIDO A TU PAGINA</div>
-            </div>
+    <script type="x-shader/x-vertex" id="vertexshaderDoor">
+        uniform float time;
+        varying vec2 vUv;
+        
+        void main() {
+            vUv = uv;
+            vec2 center = vec2(0.0, 0.0);
+            float distance = length(uv - center);
+            vec3 newPosition = position + vec3(0.0, 0.0, 0.0);
 
-            <div class="preloader-bar-bg">
-                <div class="preloader-bar-fill"></div>
-            </div>
-            <div class="preloader-status">INICIANDO LA EXPERIENCIA...</div>
-        </div>
-    </div>
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+        }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshaderDoor">
+        uniform float time;
+        varying vec2 vUv;
+        
+        void main() {
+            vec3 waveColor = vec3(0.702,0.71,0.459);
+            vec2 center = vec2(0.5, 0.5);
+            float distance = length(vUv - center);
+            float waveIntensity = abs(sin(distance * 100.0 + time));
+            vec3 finalColor = mix(vec3(0.545,0.553,0.306), waveColor, waveIntensity);
+            gl_FragColor = vec4(finalColor, 1.0);
+        }
+    </script>
 
-    <!-- Cursor personalizado -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- Canvas principal 3D -->
-    <div id="dither-canvas-container"></div>
-
-    <!-- Telemetría HUD Cyberpunk -->
-    <div class="hud-overlay">
-        <div class="hud-corner top-left"><span>MENU DE IDEAS</span></div>
-        <div class="hud-corner top-right"><span>LO QUE TU MENTE </span></div>
-        <div class="hud-corner bottom-right"><span>PUEDA IMAGINAR</span></div>
-        <div class="hud-corner bottom-left"><div class="hud-pulse"></div>.<span> JOHAN GARCIA </span></div>
-        <div class="hud-ring-bg"></div>
-    </div>
-
-    <!-- Encabezado superior con Título Interactivo y Barrido Acotado -->
-    <header class="landing-header-hud">
-
-        <!-- Animación de reflector SVG centrada en la frase -->
-        <div id="wrapper" ontouchstart="">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 240">
-                <defs>
-                    <!-- Trazado de Curvatura Elevada Amplia -->
-                    <path id="textCurve" d="M 40 100 Q 640 -35 1240 100" fill="none" />
-
-                    <!-- Degradado Cromo con Matices Azul Eléctrico / Plata Neón -->
-                    <linearGradient id="electricChromeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#E0E0E0 "/>
-                        <stop offset="18%" stop-color="#b3f5ff"/>
-                        <stop offset="38%" stop-color="#E0E0E0 "/>
-                        <stop offset="42%" stop-color="#020d1a"/>
-                        <stop offset="46%" stop-color="#09283d"/>
-                        <stop offset="49%" stop-color="#00e5ff"/>
-                        <stop offset="52%" stop-color="#E0E0E0 "/>
-                        <stop offset="55%" stop-color="#00e5ff"/>
-                        <stop offset="78%" stop-color="#99ebff"/>
-                        <stop offset="92%" stop-color="#e6f9fc"/>
-                        <stop offset="100%" stop-color="#E0E0E0 "/>
-                    </linearGradient>
-
-                    <!-- Haz de luz amplio con resplandor cian y blanco brillante -->
-                    <linearGradient id="gradiantLight" x1="50%" y1="100%" x2="50%" y2="0%">
-                        <stop offset="40%" stop-color="rgba(200, 245, 255, 0.8)"/>
-                        <stop offset="85%" stop-color="rgba(255, 255, 255, 0)"/>
-                    </linearGradient>
-
-                    <filter id="blurFilter">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
-                    </filter>
-                    
-                    <!-- Máscaras extendidas -->
-                    <mask id="maskStrokeShow">
-                        <ellipse class="rotate" fill="url(#gradientMask)" cx="640" cy="0" rx="580" ry="220"/>
-                    </mask>
-
-                    <radialGradient id="gradientMask" cx="50%" cy="38%" r="68%" fx="50%" fy="50%">
-                        <stop offset="45%" stop-color="#fff" />
-                        <stop offset="70%" stop-color="rgba(255,255,255,0.4)" />
-                        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
-                    </radialGradient>
-
-                    <mask id="maskHideFill">
-                        <rect x="0" y="0" width="100%" height="100%" fill="white"/>
-                        <ellipse class="rotate" cx="640" cy="0" rx="580" ry="220" fill="black" />
-                    </mask>
-
-                    <!-- Texto Grande con Fuente Audiowide (52px) -->
-                    <g id="words">
-                        <text font-family="'Audiowide', 'Orbitron', sans-serif" 
-                              font-size="52" 
-                              letter-spacing="5">
-                            <textPath href="#textCurve" startOffset="50%" text-anchor="middle">
-                                MANUALIDADES & IDEAS
-                            </textPath>
-                        </text>
-                    </g>
-                </defs>
-
-                <use xlink:href="#words" class="wordsFill" mask="url(#maskHideFill)" />
-                <g id="reflector" class="rotate" filter="url(#blurFilter)">
-                </g>
-                <use xlink:href="#words" mask="url(#maskStrokeShow)" class="wordsStroke" />
-            </svg>
+    <script type="x-shader/x-vertex" id="vertexshader">
+        uniform float uPixelRatio;
+        uniform float uSize;
+        uniform float uTime;
+        attribute float aScale;
+        void main() {
+            vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+            modelPosition.y += sin(uTime + modelPosition.x * 100.0) * aScale * 0.2;
+            modelPosition.z += sin(uTime + modelPosition.x * 100.0) * aScale * 0.2;
+            modelPosition.x += cos(uTime + modelPosition.x * 100.0) * aScale * 0.2;
+            vec4 viewPosition = viewMatrix * modelPosition;
+            vec4 projectionPostion = projectionMatrix * viewPosition;
             
-            <div class="hideBtn">Hide Light</div>
-        </div>
+            gl_Position = projectionPostion;
+            gl_PointSize = uSize * aScale * uPixelRatio;
+            gl_PointSize += (1.0 / - viewPosition.z);
+        }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshader">
+        void main() {
+            float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
+            float strength = 0.05 / distanceToCenter - 0.1;
+            gl_FragColor = vec4(1.0, 1.0, 1.0, strength);
+        }
+    </script>
+</head>
+<body class="page-editorial">
 
-        <p class="landing-subtitulo-hud">SELECCIONA UN NODO DE LA ÓRBITA PARA EXPLORAR</p>
+    <!-- CANVAS WEBGL2 DE LIQUID ETHER EN EL FONDO GENERAL -->
+    <canvas id="liquid-ether-canvas" class="liquid-ether-canvas"></canvas>
+
+    <!-- CANVAS WEBGL DE FANTASMAS AZULES -->
+    <canvas id="spirits-webgl-canvas" class="spirits-webgl-canvas"></canvas>
+
+    <!-- FANTASMITA CURSOR CON AURA FLOTANTE -->
+    <div id="ghost-cursor" class="ghost-cursor">
+        <div class="ghost-aura"></div>
+        <svg viewBox="0 0 100 100" class="ghost-svg">
+            <path d="M50 12 C30 12 18 28 18 48 C18 72 12 85 24 85 C30 85 34 76 42 81 C48 85 52 85 58 81 C66 76 70 85 76 85 C88 85 82 72 82 48 C82 28 70 12 50 12 Z" fill="#fffcf0"/>
+            <ellipse cx="40" cy="42" rx="4.5" ry="6" fill="#12041d"/>
+            <ellipse cx="60" cy="42" rx="4.5" ry="6" fill="#12041d"/>
+            <path d="M44 56 Q50 64 56 56" stroke="#12041d" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="33" cy="49" r="3.5" fill="#ff7700" opacity="0.6"/>
+            <circle cx="67" cy="49" r="3.5" fill="#ff7700" opacity="0.6"/>
+        </svg>
+    </div>
+    <div id="ghost-trail-container"></div>
+
+    <!-- GUIRNALDAS DE PAPEL PICADO MULTICAPA -->
+    <div class="papel-picado-wrapper">
+        <div class="papel-picado-banner garland-row-1">
+            <div class="flag flag-1"><span>~~ 🏙 ~~</span></div>
+            <div class="flag flag-2"><span>¨༺ ♱✮♱༻¨</span></div>
+            <div class="flag flag-3"><span>༺ ♱✮♱༻</span></div>
+            <div class="flag flag-4"><span>⋆༺𓆩☠𓆪༻⋆</span></div>
+            <div class="flag flag-5"><span>༺ ♱✮♱༻</span></div>
+            <div class="flag flag-6"><span>¨༺ ♱✮♱༻¨</span></div>
+            <div class="flag flag-7"><span>~~ 🏙 ~~</span></div>
+            <div class="flag flag-8"><span>⋆⁺₊⋆ ☀︎ ⋆⁺₊⋆</span></div>
+            <div class="flag flag-9"><span>⋆༺𓆩☠𓆪༻⋆</span></div>
+            <div class="flag flag-10"><span>¨༺ ♱✮♱༻¨</span></div>
+            <div class="flag flag-11"><span>𓆝 𓆟 𓆞 𓆝 𓆟</span></div>
+            <div class="flag flag-12"><span>𓆝 𓆟 𓆞 𓆝 𓆟</span></div>
+        </div>
+    </div>
+
+    <!-- HEADER DE NAVEGACIÓN SUPERIOR -->
+    <header class="editorial-header">
+      <div class="brand">TRADICIÓN</div>
+      <div class="header-nav">
+        <button class="webgl-btn btn-sidebar-trigger" onclick="toggleSidebar()">
+            <canvas class="btn-canvas"></canvas>
+            <span>32 ESTADOS</span>
+        </button>
+        <a href="index.html" class="webgl-btn btn-gallery-exit" title="Volver a la Galería de Secciones">
+          <canvas class="btn-canvas"></canvas>
+          <span>Menu principal</span>
+        </a>
+        <a href="#mapa-section">Mapa Interactivo</a>
+        <a href="#ideas-altar-section">Ideas Altar</a>
+        <a href="#ofrenda-section">Ofrenda 3D</a>
+        <button class="webgl-btn btn-search-trigger" onclick="document.getElementById('searchInput').focus()">
+          <canvas class="btn-canvas"></canvas>
+          <span>+ BUSCAR ESTADO</span>
+        </button>
+      </div>
     </header>
 
-   <!-- Menú Orbital de Tarjetas 3D Pop-Out -->
-<div class="orbital-system" id="orbital-system">
-    <svg class="orbital-svg-ring" viewBox="0 0 1600 900" preserveAspectRatio="none">
-        <ellipse cx="800" cy="450" rx="700" ry="380" class="ring-line-main" />
-        <ellipse cx="800" cy="450" rx="700" ry="380" class="ring-line-dashed" />
-        <ellipse cx="800" cy="450" rx="740" ry="410" class="ring-line-outer" />
-    </svg>
+    <!-- MENÚ LATERAL PLEGABLE (SIDEBAR DRAWER) -->
+    <div id="sidebar-drawer" class="sidebar-drawer">
+        <div class="sidebar-header">
+            <div>
+                <h3>DIRECTORIO FEDERATIVO</h3>
+                <span class="sidebar-subtitle">32 Estados de la República</span>
+            </div>
+            <button class="sidebar-close-btn" onclick="toggleSidebar()">✕</button>
+        </div>
+        <div class="states-grid" id="statesContainer"></div>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-    <!-- SYS_01: Halloween -->
-    <a href="galeria.html?cat=0" class="orbital-node node-1">
-        <figure class="card-3d-pop" style="--bg-img: url('imagenes/hallowen1.jpeg');">
-            <img src="imagenes/hallowen2.png" alt="Halloween">
-            <figcaption>Halloween</figcaption>
-        </figure>
-    </a>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="watermark-bg">DÍA DE MUERTOS</div>
+        <div class="hero-content">
+            <div>
+                <h1 class="hero-title">Patrimonio, Memoria y Geo-Tradición</h1>
+                <div class="search-box-wrapper">
+                    <input type="text" id="searchInput" class="search-input" placeholder="BUSCAR ESTADO O TRADICIÓN (EJ: MIXQUIC, OAXACA, XANTOLO)..." autocomplete="off">
+                    <div id="searchResults" class="search-results-dropdown"></div>
+                </div>
+            </div>
+            <div>
+                <p class="hero-desc">Explora la geografía mística de las festividades del Día de Muertos en México. Al presionar cualquier estado en el mapa se desplegará su Carta Sacra y se iluminarán los estados que comparten su misma tradición o estilo regional.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- SYS_02: Día de Muertos -->
-    <a href="galeria.html?cat=1" class="orbital-node node-2">
-        <figure class="card-3d-pop" style="--bg-img: url('imagenes/diamuertos.jpeg');">
-            <img src="imagenes/diamuertos1.png" alt="Día de Muertos">
-            <figcaption>Día de Muertos</figcaption>
-        </figure>
-    </a>
+    <!-- BANNER DE INSTRUCCIONES -->
+    <div class="instruction-banner">
+        📍 SELECCIONA UN ESTADO EN EL MAPA PARA VER SU CARTA SACRA Y DESTACAR LOS ESTADOS QUE COMPARTEN ESE ESTILO
+    </div>
 
-    <!-- SYS_03: Navidad -->
-    <a href="galeria.html?cat=2" class="orbital-node node-3">
-        <figure class="card-3d-pop" style="--bg-img: url('imagenes/navidad.jpg');">
-            <img src="imagenes/navidad1.png" alt="Navidad">
-            <figcaption>Navidad</figcaption>
-        </figure>
-    </a>
+    <!-- SECCIÓN PRINCIPAL: MAPA INTERACTIVO SVG DE ANCHO COMPLETO -->
+    <section id="mapa-section" class="app-grid-section">
+        <div class="map-container">
+            <div class="map-mexico-container">
+                <!-- MAPA SVG DE LA REPÚBLICA MEXICANA -->
+                <svg viewBox="0 0 1000 680" class="mexico-svg-interactive">
+                    <g id="mexico-map-paths">
+                        <!-- NOROESTE -->
+                        <path d="M 95,50 L 145,115 L 125,190 L 100,185 L 80,110 Z" class="state-path" data-state="bc" id="bc" title="Baja California" />
+                        <path d="M 125,190 L 175,270 L 155,300 L 115,220 Z" class="state-path" data-state="bcs" id="bcs" title="Baja California Sur" />
+                        <path d="M 145,115 L 260,130 L 235,225 L 175,210 L 125,190 Z" class="state-path" data-state="sonora" id="sonora" title="Sonora" />
+                        <path d="M 260,130 L 370,140 L 345,245 L 235,225 Z" class="state-path" data-state="chihuahua" id="chihuahua" title="Chihuahua" />
+                        <path d="M 235,225 L 305,235 L 280,315 L 215,295 Z" class="state-path" data-state="sinaloa" id="sinaloa" title="Sinaloa" />
+                        
+                        <!-- NORTE / NORESTE -->
+                        <path d="M 370,140 L 475,165 L 440,270 L 345,245 Z" class="state-path" data-state="coahuila" id="coahuila" title="Coahuila" />
+                        <path d="M 475,165 L 535,185 L 510,260 L 440,270 Z" class="state-path" data-state="nuevoleon" id="nuevoleon" title="Nuevo León" />
+                        <path d="M 510,260 L 575,270 L 545,355 L 485,340 Z" class="state-path" data-state="tamaulipas" id="tamaulipas" title="Tamaulipas" />
+                        <path d="M 345,245 L 420,255 L 395,335 L 325,320 Z" class="state-path" data-state="durango" id="durango" title="Durango" />
 
-    <!-- SYS_04: Día de la Independencia -->
+                        <!-- CENTRO-NORTE / BAJÍO -->
+                        <path d="M 395,335 L 465,310 L 445,380 L 380,370 Z" class="state-path" data-state="zacatecas" id="zacatecas" title="Zacatecas" />
+                        <path d="M 465,310 L 530,295 L 505,370 L 445,360 Z" class="state-path" data-state="sanluispotosi" id="sanluispotosi" title="San Luis Potosí" />
+                        <path d="M 325,320 L 365,325 L 355,360 L 315,350 Z" class="state-path" data-state="nayarit" id="nayarit" title="Nayarit" />
+                        <path d="M 355,360 L 420,360 L 405,425 L 335,415 Z" class="state-path" data-state="jalisco" id="jalisco" title="Jalisco" />
+                        <path d="M 410,355 L 430,355 L 425,375 L 405,375 Z" class="state-path" data-state="aguascalientes" id="aguascalientes" title="Aguascalientes" />
+                        <path d="M 420,380 L 460,380 L 450,420 L 410,420 Z" class="state-path" data-state="guanajuato" id="guanajuato" title="Guanajuato" />
+                        <path d="M 460,380 L 490,380 L 485,415 L 455,415 Z" class="state-path" data-state="queretaro" id="queretaro" title="Querétaro" />
 
-    <!-- SYS_05: Día de las Madres -->
-    <a href="galeria.html?cat=3" class="orbital-node node-5">
-        <figure class="card-3d-pop" style="--bg-img: url('imagenes/diamadre.jpg');">
-            <img src="imagenes/diamadre1.png" alt="Día de las Madres">
-            <figcaption>Día de las Madres</figcaption>
-        </figure>
-    </a>
+                        <!-- PACÍFICO / SUR -->
+                        <path d="M 360,420 L 390,420 L 385,445 L 355,445 Z" class="state-path" data-state="colima" id="colima" title="Colima" />
+                        <path d="M 390,420 L 470,420 L 450,475 L 380,465 Z" class="state-path" data-state="michoacan" id="michoacan" title="Michoacán" />
+                        <path d="M 440,465 L 520,465 L 500,525 L 430,515 Z" class="state-path" data-state="guerrero" id="guerrero" title="Guerrero" />
 
-    <!-- SYS_06: Día del Padre -->
-    <a href="galeria.html?cat=4" class="orbital-node node-4">
-        <figure class="card-3d-pop" style="--bg-img: url('imagenes/diapadre.jpeg');">
-            <img src="imagenes/diapadre1.png" alt="Día del Padre">
-            <figcaption>Día del Padre</figcaption>
-        </figure>
-    </a>
-</div>
+                        <!-- ALTIPLANO CENTRAL -->
+                        <path d="M 470,415 L 510,410 L 500,450 L 460,450 Z" class="state-path" data-state="edomex" id="edomex" title="Estado de México" />
+                        <path d="M 485,430 L 505,430 L 500,445 L 480,445 Z" class="state-path" data-state="cdmx" id="cdmx" title="Ciudad de México" />
+                        <path d="M 480,445 L 500,445 L 495,465 L 475,465 Z" class="state-path" data-state="morelos" id="morelos" title="Morelos" />
+                        <path d="M 490,405 L 520,405 L 515,430 L 485,430 Z" class="state-path" data-state="hidalgo" id="hidalgo" title="Hidalgo" />
+                        <path d="M 515,425 L 535,425 L 530,440 L 510,440 Z" class="state-path" data-state="tlaxcala" id="tlaxcala" title="Tlaxcala" />
+                        <path d="M 510,430 L 560,430 L 540,490 L 490,480 Z" class="state-path" data-state="puebla" id="puebla" title="Puebla" />
 
-    <audio id="sonido-hover" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+                        <!-- GOLFO Y SURESTE -->
+                        <path d="M 530,355 L 590,365 L 640,475 L 550,455 Z" class="state-path" data-state="veracruz" id="veracruz" title="Veracruz" />
+                        <path d="M 520,485 L 620,485 L 600,555 L 500,545 Z" class="state-path" data-state="oaxaca" id="oaxaca" title="Oaxaca" />
+                        <path d="M 600,525 L 680,525 L 660,595 L 590,585 Z" class="state-path" data-state="chiapas" id="chiapas" title="Chiapas" />
+                        <path d="M 620,475 L 690,475 L 670,525 L 600,515 Z" class="state-path" data-state="tabasco" id="tabasco" title="Tabasco" />
 
-    <!-- Librerías y Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/ogl@0.0.102/dist/ogl.umd.js"></script>
-    <script src="preloader.js"></script>
-    <script src="landing.js"></script>
+                        <!-- PENÍNSULA DE YUCATÁN -->
+                        <path d="M 680,455 L 740,455 L 720,525 L 660,515 Z" class="state-path" data-state="campeche" id="campeche" title="Campeche" />
+                        <path d="M 730,415 L 840,405 L 820,475 L 720,465 Z" class="state-path" data-state="yucatan" id="yucatan" title="Yucatán" />
+                        <path d="M 780,445 L 850,445 L 830,525 L 760,515 Z" class="state-path" data-state="quintanaroo" id="quintanaroo" title="Quintana Roo" />
+                    </g>
+                </svg>
+
+                <!-- PINES INTERACTIVOS DE GEOLOCALIZACIÓN -->
+                <button class="map-pin-bg" data-state="michoacan" style="top: 64%; left: 43%;" title="Pátzcuaro, Michoacán">
+                    <span class="pin-pulse"></span>
+                    <span class="pin-badge">Michoacán & Jalisco </span>
+                </button>
+                <button class="map-pin-bg" data-state="cdmx" style="top: 63%; left: 49%;" title="Mixquic, CDMX">
+                    <span class="pin-pulse"></span>
+                    <span class="pin-badge">CDMX & Edomex </span>
+                </button>
+                <button class="map-pin-bg" data-state="oaxaca" style="top: 76%; left: 56%;" title="Oaxaca Centro">
+                    <span class="pin-pulse"></span>
+                    <span class="pin-badge">Oaxaca </span>
+                </button>
+                <button class="map-pin-bg" data-state="yucatan" style="top: 63%; left: 79%;" title="Mérida, Yucatán">
+                    <span class="pin-pulse"></span>
+                    <span class="pin-badge">Yucatán & Q. Roo </span>
+                </button>
+                <button class="map-pin-bg" data-state="puebla" style="top: 67%; left: 53%;" title="Huaquechula, Puebla">
+                    <span class="pin-pulse"></span>
+                    <span class="pin-badge">Puebla </span>
+                </button>
+                <button class="map-pin-bg" data-state="sanluispotosi" style="top: 50%; left: 47%;" title="Huasteca Potosina">
+                    <span class="pin-pulse"></span>
+                    <span class="pin-badge">Xantolo SLP </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CON MENÚ INFINITO 3D DE IDEAS PARA TU ALTAR -->
+    <section id="ideas-altar-section" class="altar-ideas-section">
+        <div class="ideas-header">
+            <h2 class="ideas-title">Ideas para tu altar </h2>
+            <p class="ideas-subtitle">Desliza la Esfera 3D o interactúa con los elementos para explorar el significado y preparar tu ofrenda en casa</p>
+        </div>
+
+        <!-- COMPONENTE MENÚ INFINITO 3D -->
+        <div class="infinite-menu-wrapper" id="infiniteMenuWrapper">
+            <canvas id="infiniteMenuCanvas" class="infinite-menu-canvas"></canvas>
+            
+            <!-- OVERLAY CON INFORMACIÓN DEL ELEMENTO SELECCIONADO -->
+            <div class="infinite-menu-overlay" id="infiniteMenuOverlay">
+                <div class="menu-info-left">
+                    <h3 id="menuActiveTitle" class="menu-active-title">Cargando...</h3>
+                </div>
+                <div class="menu-info-right">
+                    <p id="menuActiveDesc" class="menu-active-desc">Explora la esfera 3D deslizando con el cursor o tocando cada elemento.</p>
+                </div>
+                <button id="menuActiveBtn" class="menu-active-btn" aria-label="Ver detalles">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="altar-grid-container" style="margin-top: 50px;">
+            <!-- LOS 7 NIVELES TRADICIONALES -->
+            <div class="altar-card-box">
+                <h3 class="box-title">Estructura de los 7 Niveles</h3>
+                <p class="box-desc">Representan los 7 escalones que el alma debe recorrer para descansar en paz:</p>
+                <ul class="altar-levels-list">
+                    <li><strong>Nivel 1 (Cúspide):</strong> Imagen del Santo o Virgen devota de la familia.</li>
+                    <li><strong>Nivel 2:</strong> Fotografía del ser querido al que se le dedica la ofrenda.</li>
+                    <li><strong>Nivel 3:</strong> Sal y Purificación para evitar la corrupción de la esencia.</li>
+                    <li><strong>Nivel 4:</strong> Pan de Muerto y Nutrición Espiritual.</li>
+                    <li><strong>Nivel 5:</strong> Platillos favoritos, frutas de temporada y mole casero.</li>
+                    <li><strong>Nivel 6:</strong> Bebidas favoritas, atole, mezcal y golosinas.</li>
+                    <li><strong>Nivel 7 (Base):</strong> Cruz de Ceniza o Flor de Cempasúchil para perdón.</li>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 2: CHECKLIST INTERACTIVO DE ELEMENTOS -->
+            <div class="altar-card-box">
+                <h3 class="box-title">Checklist para tu Altar</h3>
+                <p class="box-desc">Marca los elementos que ya tienes listos para tu altar:</p>
+                <div class="checklist-items" id="altarChecklist">
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>📷 Fotografías de tus difuntos</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🕯️ Veladoras / Velas de cera virgen</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🌼 Flores de Cempasúchil y Mano de León</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🍞 Pan de Muerto tradicional</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💨 Copal e Incienso natural</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💧 Vaso con Agua purificada y plato de Sal</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🎨 Papel Picado de colores</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💀 Calaveritas de azúcar o chocolate</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🍲 Platillo y bebida favorita del difunto</span></label>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-text" id="progressText">Altar preparado: 0%</div>
+                    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARJETA DESPLEGABLE EN PERGAMINO SACRO (#fdf8eb) -->
+    <div id="card-modal-wrapper" class="card-modal-wrapper modal-hidden">
+        <div class="card-flipper-container">
+            <div class="ghoul-card-flipper" id="ghoulCardFlipper">
+                
+                <!-- CARA TRASERA -->
+                <div class="card-face card-back">
+                    <div class="card-back-logo">
+                        <span class="back-skull">💀</span>
+                        <span class="back-text">TRADICIÓN</span>
+                        <span class="back-sub">DÍA DE MUERTOS MÉXICO</span>
+                    </div>
+                </div>
+
+                <!-- CARA FRONTAL EN FORMATO CARTA SAGRADA DE PERGAMINO -->
+                <div class="card-face card-front sacred-letter-style">
+                    <div class="letter-flower-stamp">🌸</div>
+                    
+                    <div class="card-badge-top" id="modal-tag">MEMORIA Y TRADICIÓN FEDERATIVA</div>
+                    
+                    <h2 id="modal-title" class="letter-main-title">Nombre Tradición</h2>
+                    <span id="modal-state-name" class="letter-sub-state">ENTIDAD FEDERATIVA</span>
+
+                    <div class="letter-gold-divider">❖ ─── 💀 ─── ❖</div>
+
+                    <div class="shared-states-box">
+                        <span class="shared-label">🗺️ ESTADOS QUE COMPARTEN ESTA TRADICIÓN:</span>
+                        <div id="shared-states-list" class="shared-chips"></div>
+                    </div>
+
+                    <!-- SLIDER DE IMÁGENES -->
+                    <div class="slider-container">
+                        <button class="slider-btn prev-btn" onclick="moveSlider(-1)">‹</button>
+                        <div id="modal-gallery" class="slider-track"></div>
+                        <button class="slider-btn next-btn" onclick="moveSlider(1)">›</button>
+                    </div>
+
+                    <p id="modal-description" class="letter-desc-body">Descripción cultural de la festividad.</p>
+
+                    <div class="modal-chips" id="modal-chips-list"></div>
+
+                    <div class="letter-dashed-divider"></div>
+
+                    <div class="modal-actions-row">
+                        <button id="btn-calc-location" class="webgl-btn btn-action btn-gps">
+                            <canvas class="btn-canvas"></canvas>
+                            <span> Calcular tiempo GPS</span>
+                        </button>
+                        <a id="modal-maps-link" href="#" target="_blank" rel="noopener" class="webgl-btn btn-action btn-maps">
+                            <canvas class="btn-canvas"></canvas>
+                            <span>Como llegar</span>
+                        </a>
+                    </div>
+
+                    <div id="location-result" class="location-feedback-box location-hidden">
+                        <span id="location-text">Obteniendo tu posición GPS...</span>
+                    </div>
+
+                    <button class="webgl-btn letter-bottom-close-btn" onclick="cerrarCartaAnimada()">
+                        <canvas class="btn-canvas"></canvas>
+                        <span>Salir</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN OFRENDA DIGITAL 3D CENTRADA -->
+    <section id="ofrenda-section" class="ofrenda-3d-section">
+        <div class="ofrenda-header">
+            <h2 class="ofrenda-title">Ofrenda Digital 3D</h2>
+            <p class="ofrenda-subtitle">Toca la Cruz de Cempasúchil en el Piso, el Pan de Muerto, las Velas, la Foto, el Papel Picado, la Comida o el Copal para ver su Carta Sagrada</p>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas class="webgl"></canvas>
+        </div>
+
+        <!-- CARTA RITUAL FLOTANTE PARA CADA ELEMENTO -->
+        <div id="ofrenda-letter-modal" class="letter-modal-overlay">
+            <div class="letter-card">
+                <div class="letter-stamp">🌸</div>
+                <div class="letter-header">
+                    <span class="letter-subtitle">MEMORIA Y OFRENDA SAGRADA</span>
+                    <h3 id="letterTitle" class="letter-title">Pan de Muerto</h3>
+                </div>
+                <div class="letter-divider">❖ ─── 💀 ─── ❖</div>
+                <p id="letterBody" class="letter-body">
+                    Texto sagrado sobre el significado y propósito del elemento en el altar.
+                </p>
+                <div class="letter-footer">
+                    <span>OFRÉNDESE CON RESPETO A LAS ÁNIMAS</span>
+                </div>
+                <button class="webgl-btn letter-close-btn" onclick="closeLetterModal()">
+                    <canvas class="btn-canvas"></canvas>
+                    <span>✕ CERRAR LECTURA</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="editorial-footer">
+        <div>TRADICIÓN © 2026 — DÍA DE MUERTOS MÉXICO</div>
+        <div>CULTURA VIVA & PATRIMONIO INMATERIAL</div>
+    </footer>
+
+    <!-- LIBRERÍAS THREE.JS Y SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script src="dia-de-muertos.js"></script>
+    <audio src="audio/Humbe.mp3" autoplay loop></audio>
+
+    <!-- OCULTAR MENÚ AL BAJAR EN MÓVIL -->
     <script>
-        var hideBtn = document.querySelector(".hideBtn");
-        if (hideBtn) {
-            hideBtn.addEventListener('click', function() {
-                var reflector = document.querySelector("#reflector");
-                if (reflector) reflector.style.display = "none";
-                hideBtn.style.display = "none";
-            }, false);
-        }
+      (function () {
+        let ultimoScroll = 0;
+        const header = document.querySelector('.editorial-header');
+
+        window.addEventListener('scroll', () => {
+          if (!header || window.innerWidth > 768) return;
+          const scrollActual = window.pageYOffset || document.documentElement.scrollTop;
+
+          if (scrollActual > ultimoScroll && scrollActual > 70) {
+            header.classList.add('menu-oculto');
+          } else {
+            header.classList.remove('menu-oculto');
+          }
+          ultimoScroll = scrollActual <= 0 ? 0 : scrollActual;
+        }, { passive: true });
+      })();
     </script>
 </body>
 </html>

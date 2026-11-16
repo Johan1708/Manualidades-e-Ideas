@@ -106,7 +106,6 @@
             gl_FragColor = vec4(1.0, 1.0, 1.0, strength);
         }
     </script>
-    <link rel="stylesheet" href="mobile-fix.css">
 </head>
 <body class="page-editorial">
 
@@ -136,16 +135,17 @@
             <div class="flag flag-1"><span>~~ 🏙 ~~</span></div>
             <div class="flag flag-2"><span>¨༺ ♱✮♱༻¨</span></div>
             <div class="flag flag-3"><span>༺ ♱✮♱༻</span></div>
-            <div class="flag flag-4"><span>⋆༺𓆩☠︎︎𓆪༻⋆</span></div>
+            <div class="flag flag-4"><span>⋆༺𓆩☠𓆪༻⋆</span></div>
             <div class="flag flag-5"><span>༺ ♱✮♱༻</span></div>
             <div class="flag flag-6"><span>¨༺ ♱✮♱༻¨</span></div>
             <div class="flag flag-7"><span>~~ 🏙 ~~</span></div>
             <div class="flag flag-8"><span>⋆⁺₊⋆ ☀︎ ⋆⁺₊⋆</span></div>
-            <div class="flag flag-9"><span>⋆༺𓆩☠︎︎𓆪༻⋆</span></div>
+            <div class="flag flag-9"><span>⋆༺𓆩☠𓆪༻⋆</span></div>
             <div class="flag flag-10"><span>¨༺ ♱✮♱༻¨</span></div>
             <div class="flag flag-11"><span>𓆝 𓆟 𓆞 𓆝 𓆟</span></div>
             <div class="flag flag-12"><span>𓆝 𓆟 𓆞 𓆝 𓆟</span></div>
         </div>
+    </div>
 
     <!-- HEADER DE NAVEGACIÓN SUPERIOR -->
     <header class="editorial-header">
@@ -475,5 +475,25 @@
 
     <script src="dia-de-muertos.js"></script>
     <audio src="audio/Humbe.mp3" autoplay loop></audio>
+
+    <!-- OCULTAR MENÚ AL BAJAR EN MÓVIL -->
+    <script>
+      (function () {
+        let ultimoScroll = 0;
+        const header = document.querySelector('.editorial-header');
+
+        window.addEventListener('scroll', () => {
+          if (!header || window.innerWidth > 768) return;
+          const scrollActual = window.pageYOffset || document.documentElement.scrollTop;
+
+          if (scrollActual > ultimoScroll && scrollActual > 70) {
+            header.classList.add('menu-oculto');
+          } else {
+            header.classList.remove('menu-oculto');
+          }
+          ultimoScroll = scrollActual <= 0 ? 0 : scrollActual;
+        }, { passive: true });
+      })();
+    </script>
 </body>
 </html>

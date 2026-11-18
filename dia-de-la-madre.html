@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de las Madres</title>
+    <link rel="stylesheet" href="dia-de-la-madre.css">
+</head>
+<body>
+
+    <!-- Contenedor del video de fondo -->
+    <div class="video-container">
+        <!-- AQUÍ VA TU VIDEO. Cambia "tu-video.mp4" por tu archivo real -->
+        <video autoplay loop muted playsinline id="bg-video">
+            <source src="tu-video.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div> <!-- Capa oscura para que el texto resalte -->
+    </div>
+
+    <!-- Botón para regresar a tu menú orbital -->
+    <a href="index.html" class="btn-regresar">Volver al inicio</a>
+
+    <!-- Contenido principal -->
+    <div class="contenido">
+        <h1 class="titulo">El camino de una madre</h1>
+        <p class="mensaje" id="mensaje-animado"></p>
+    </div>
+
+    <script src="dia-de-la-madre.js"></script>
+</body>
+</html>

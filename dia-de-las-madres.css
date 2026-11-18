@@ -24,17 +24,20 @@ body, html {
 #bg-video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Obliga al video a llenar la pantalla del celular sin deformarse */
+    object-fit: cover;
+    /* Esto hace que el sol brille más y los colores sean más vivos */
+    filter: contrast(1.15) brightness(1.05) saturate(1.2); 
 }
 
-/* Capa semitransparente sobre el video */
+/* Capa de luz mágica sobre el video */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Ajusta el 0.6 si quieres el video más claro u oscuro */
+    /* Crea un centro iluminado (dorado) que se desvanece a negro en las orillas */
+    background: radial-gradient(circle at center, rgba(255, 215, 100, 0.15) 0%, rgba(0, 0, 0, 0.75) 85%);
     z-index: -1;
 }
 

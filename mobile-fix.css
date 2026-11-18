@@ -1,53 +1,234 @@
-/* ==========================================================================
-   MOBILE-FIX.CSS — DESBLOQUEO TÁCTIL, RENDIMIENTO Y AJUSTE EN CELULAR
-   ========================================================================== */
-@media (max-width: 768px) {
-    /* 1. Desbloqueo táctil total y scroll fluido en iOS/Android */
-    * {
-        -webkit-tap-highlight-color: transparent;
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Manualidades Festivas - Menú Orbital</title>
+    
+    <!-- Hoja de estilos unificada principal -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Estilos aislados del Preloader -->
+    <link rel="stylesheet" href="preloader.css">
+    
+    <!-- Fuentes tipográficas de Google Fonts (Audiowide) -->
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Exo:wght@600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
-    html, body {
-        touch-action: manipulation !important;
-        -webkit-overflow-scrolling: touch !important;
-        overflow-x: hidden !important;
-    }
+    <!-- Sobrescritura para Animación de Barrido Ajustado (De -22° a +22°) -->
+    <style>
+        .wordsFill {
+            fill: url(#electricChromeGradient) !important;
+            filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.95));
+        }
+        .wordsStroke {
+            fill: none !important;
+            stroke: #ffffff !important;
+            stroke-width: 2px !important;
+            filter: drop-shadow(0px 0px 8px rgba(0, 229, 255, 0.9)) drop-shadow(0px 0px 22px rgba(255, 255, 255, 0.95));
+        }
 
-    /* 2. Apaga cursores custom, anillos decorativos y capas que interceptan toques */
-    .cursor,
-    .cursor-follower,
-    #galaxy-cursor-canvas,
-    .galaxy-cursor-dot,
-    .galaxy-cursor-ring,
-    .orbital-svg-ring,
-    .hud-ring-bg,
-    .hud-overlay {
-        display: none !important;
-        pointer-events: none !important;
-    }
+        /* Animación de giro acotada a la extensión del texto */
+        @keyframes sweepWide {
+            0% {
+                transform: rotate(-22deg);
+            }
+            50% {
+                transform: rotate(22deg);
+            }
+            100% {
+                transform: rotate(-22deg);
+            }
+        }
 
-    /* 3. Reduce carga de GPU (blur pesado + animaciones infinitas) para evitar que se trabe */
-    .glass-card,
-    .dock-nav,
-    .ai-status-pill,
-    .notif-toggle-btn,
-    .home-return-btn,
-    .btn-home-nav {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background: rgba(12, 16, 28, 0.92) !important;
-    }
+        /* Aplicación del pivote exacto y velocidad de barrido */
+        #reflector, .rotate {
+            transform-origin: 640px 0px !important;
+            animation: sweepWide 4.5s ease-in-out infinite !important;
+        }
+    </style>
+    <link rel="stylesheet" href="mobile-fix.css">
+</head>
+<body class="page-landing orbital-mode">
 
-    /* 4. Asegura que todos los enlaces, botones y nodos reciban el toque al instante */
-    a, button, select, .orbital-node, .card-3d-pop, .hotspot-trigger, .flecha-nav, .glowing-btn, .menu-item {
-        pointer-events: auto !important;
-        touch-action: manipulation !important;
-        cursor: pointer !important;
-    }
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="rings-wrapper">
+                <div class="rings anim-pan">
+                    <div style="--delay:06" class="ring anim-zoomIn"></div>
+                    <div style="--delay:04" class="ring anim-zoomIn"></div>
+                    <div style="--delay:03" class="ring anim-zoomIn"></div>
+                    <div style="--delay:02" class="ring anim-zoomIn"></div>
+                    <div style="--delay:01" class="ring anim-zoomIn"></div>
+                    <div style="--delay:00" class="ring anim-zoomIn"></div>
+                </div>
+                <div class="preloader-welcome">BIENVENIDO A TU PAGINA</div>
+            </div>
 
-    /* 5. Evita que el canvas 3D de fondo tape botones */
-    canvas {
-        pointer-events: auto;
-        max-width: 100vw !important;
-    }
-}
+            <div class="preloader-bar-bg">
+                <div class="preloader-bar-fill"></div>
+            </div>
+            <div class="preloader-status">INICIANDO LA EXPERIENCIA...</div>
+        </div>
+    </div>
+
+    <!-- Cursor personalizado -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Canvas principal 3D -->
+    <div id="dither-canvas-container"></div>
+
+    <!-- Telemetría HUD Cyberpunk -->
+    <div class="hud-overlay">
+        <div class="hud-corner top-left"><span>MENU DE IDEAS</span></div>
+        <div class="hud-corner top-right"><span>LO QUE TU MENTE </span></div>
+        <div class="hud-corner bottom-right"><span>PUEDA IMAGINAR</span></div>
+        <div class="hud-corner bottom-left"><div class="hud-pulse"></div>.<span> JOHAN GARCIA </span></div>
+        <div class="hud-ring-bg"></div>
+    </div>
+
+    <!-- Encabezado superior con Título Interactivo y Barrido Acotado -->
+    <header class="landing-header-hud">
+
+        <!-- Animación de reflector SVG centrada en la frase -->
+        <div id="wrapper" ontouchstart="">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 240">
+                <defs>
+                    <!-- Trazado de Curvatura Elevada Amplia -->
+                    <path id="textCurve" d="M 40 100 Q 640 -35 1240 100" fill="none" />
+
+                    <!-- Degradado Cromo con Matices Azul Eléctrico / Plata Neón -->
+                    <linearGradient id="electricChromeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#E0E0E0 "/>
+                        <stop offset="18%" stop-color="#b3f5ff"/>
+                        <stop offset="38%" stop-color="#E0E0E0 "/>
+                        <stop offset="42%" stop-color="#020d1a"/>
+                        <stop offset="46%" stop-color="#09283d"/>
+                        <stop offset="49%" stop-color="#00e5ff"/>
+                        <stop offset="52%" stop-color="#E0E0E0 "/>
+                        <stop offset="55%" stop-color="#00e5ff"/>
+                        <stop offset="78%" stop-color="#99ebff"/>
+                        <stop offset="92%" stop-color="#e6f9fc"/>
+                        <stop offset="100%" stop-color="#E0E0E0 "/>
+                    </linearGradient>
+
+                    <!-- Haz de luz amplio con resplandor cian y blanco brillante -->
+                    <linearGradient id="gradiantLight" x1="50%" y1="100%" x2="50%" y2="0%">
+                        <stop offset="40%" stop-color="rgba(200, 245, 255, 0.8)"/>
+                        <stop offset="85%" stop-color="rgba(255, 255, 255, 0)"/>
+                    </linearGradient>
+
+                    <filter id="blurFilter">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                    </filter>
+                    
+                    <!-- Máscaras extendidas -->
+                    <mask id="maskStrokeShow">
+                        <ellipse class="rotate" fill="url(#gradientMask)" cx="640" cy="0" rx="580" ry="220"/>
+                    </mask>
+
+                    <radialGradient id="gradientMask" cx="50%" cy="38%" r="68%" fx="50%" fy="50%">
+                        <stop offset="45%" stop-color="#fff" />
+                        <stop offset="70%" stop-color="rgba(255,255,255,0.4)" />
+                        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+                    </radialGradient>
+
+                    <mask id="maskHideFill">
+                        <rect x="0" y="0" width="100%" height="100%" fill="white"/>
+                        <ellipse class="rotate" cx="640" cy="0" rx="580" ry="220" fill="black" />
+                    </mask>
+
+                    <!-- Texto Grande con Fuente Audiowide (52px) -->
+                    <g id="words">
+                        <text class="svg-main-title"
+                              font-family="'Audiowide', 'Orbitron', sans-serif" 
+                              font-size="52" 
+                              letter-spacing="5">
+                            <textPath href="#textCurve" startOffset="50%" text-anchor="middle">
+                                MANUALIDADES & IDEAS
+                            </textPath>
+                        </text>
+                    </g>
+                </defs>
+
+                <use xlink:href="#words" class="wordsFill" mask="url(#maskHideFill)" />
+                <g id="reflector" class="rotate" filter="url(#blurFilter)">
+                </g>
+                <use xlink:href="#words" mask="url(#maskStrokeShow)" class="wordsStroke" />
+            </svg>
+            
+            <div class="hideBtn">Hide Light</div>
+        </div>
+
+        <p class="landing-subtitulo-hud">SELECCIONA UN NODO DE LA ÓRBITA PARA EXPLORAR</p>
+    </header>
+
+   <!-- Menú Orbital de Tarjetas 3D Pop-Out -->
+<div class="orbital-system" id="orbital-system">
+    <svg class="orbital-svg-ring" viewBox="0 0 1600 900" preserveAspectRatio="none">
+        <ellipse cx="800" cy="450" rx="700" ry="380" class="ring-line-main" />
+        <ellipse cx="800" cy="450" rx="700" ry="380" class="ring-line-dashed" />
+        <ellipse cx="800" cy="450" rx="740" ry="410" class="ring-line-outer" />
+    </svg>
+
+    <!-- SYS_01: Halloween -->
+    <a href="galeria.html?cat=0" class="orbital-node node-1">
+        <figure class="card-3d-pop" style="--bg-img: url('imagenes/hallowen1.jpeg');">
+            <img src="imagenes/hallowen2.png" alt="Halloween">
+            <figcaption>Halloween</figcaption>
+        </figure>
+    </a>
+
+    <!-- SYS_02: Día de Muertos -->
+    <a href="galeria.html?cat=1" class="orbital-node node-2">
+        <figure class="card-3d-pop" style="--bg-img: url('imagenes/diamuertos.jpeg');">
+            <img src="imagenes/diamuertos1.png" alt="Día de Muertos">
+            <figcaption>Día de Muertos</figcaption>
+        </figure>
+    </a>
+
+    <!-- SYS_03: Navidad -->
+    <a href="galeria.html?cat=2" class="orbital-node node-3">
+        <figure class="card-3d-pop" style="--bg-img: url('imagenes/navidad.jpg');">
+            <img src="imagenes/navidad1.png" alt="Navidad">
+            <figcaption>Navidad</figcaption>
+        </figure>
+    </a>
+
+    <!-- SYS_04: Día de la Independencia -->
+
+    <!-- SYS_05: Día de las Madres -->
+    <a href="galeria.html?cat=3" class="orbital-node node-5">
+        <figure class="card-3d-pop" style="--bg-img: url('imagenes/diamadre.jpg');">
+            <img src="imagenes/diamadre1.png" alt="Día de las Madres">
+            <figcaption>Día de las Madres</figcaption>
+        </figure>
+    </a>
+
+    <!-- SYS_06: Día del Padre -->
+    <a href="galeria.html?cat=4" class="orbital-node node-4">
+        <figure class="card-3d-pop" style="--bg-img: url('imagenes/diapadre.jpeg');">
+            <img src="imagenes/diapadre1.png" alt="Día del Padre">
+            <figcaption>Día del Padre</figcaption>
+        </figure>
+    </a>
+</div>
+
+    <audio id="sonido-hover" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+
+    <!-- Librerías y Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/ogl@0.0.102/dist/ogl.umd.js"></script>
+    <script src="preloader.js"></script>
+    <script src="landing.js"></script>
+    <script>
+        var hideBtn = document.querySelector(".hideBtn");
+        if (hideBtn) {
+            hideBtn.addEventListener('click', function() {
+                var reflector = document.querySelector("#reflector");
+                if (reflector) reflector.style.display = "none";
+                hideBtn.style.display = "none";
+            }, false);
+        }
+    </script>
+</body>
+</html>

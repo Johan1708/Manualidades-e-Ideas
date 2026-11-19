@@ -636,7 +636,7 @@ function setupShutdownToggle() {
     btnShutdown.addEventListener("change", function () {
       if (!this.checked) {
         document.querySelector(".page-opciones").classList.add("power-off");
-        setTimeout(() => { window.location.href = "galeria.html"; }, 900);
+        setTimeout(() => { window.location.href = "index.html"; }, 900);
       }
     });
   }

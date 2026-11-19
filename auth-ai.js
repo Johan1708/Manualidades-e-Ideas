@@ -415,10 +415,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     aiMessages.appendChild(botBubble);
     aiMessages.scrollTop = aiMessages.scrollHeight;
 
+    const frontController = new AbortController();
+    const frontTimeout = setTimeout(() => frontController.abort(), 22000);
+
     try {
       const res = await fetch("/api/ai-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: frontController.signal,
         body: JSON.stringify({
           mode: "chat",
           message: text,
@@ -426,12 +430,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         })
       });
 
+      clearTimeout(frontTimeout);
       const rawText = await res.text();
       let data = {};
       try {
         data = JSON.parse(rawText);
       } catch {
-        throw new Error(`Respuesta inválida del servidor (${res.status}).`);
+        throw new Error(`El servidor tardó demasiado (${res.status}). Intenta de nuevo.`);
       }
 
       if (!res.ok) {
@@ -440,7 +445,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         botBubble.textContent = data.reply || "No recibí respuesta.";
       }
     } catch (err) {
-      botBubble.textContent = err.message || "No pude conectarme con Chispa IA en este momento.";
+      clearTimeout(frontTimeout);
+      if (err.name === "AbortError") {
+        botBubble.textContent = "⏳ La respuesta tardó demasiado. Intenta enviar tu mensaje de nuevo.";
+      } else {
+        botBubble.textContent = err.message || "No pude conectarme con Chispa IA en este momento.";
+      }
     } finally {
       setChatLocked(false);
       aiInput.focus();

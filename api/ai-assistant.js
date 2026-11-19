@@ -22,13 +22,15 @@ module.exports = async (req, res) => {
 
   const mapaDelSitio = `
 CONOCIMIENTO DE TU SITIO WEB ("Manualidades e Ideas"):
-- El usuario está viendo actualmente la sección: "${pageContext || "Inicio"}".
-- Secciones principales disponibles en el menú del sitio:
-  1. Decoración: adornos temáticos, lámparas caseras (como lámpara fantasma con botella reciclada), coronas decorativas, centros de mesa y ambientación.
-  2. Animatrónicos y Susto: figuras con movimiento, efectos de terror y utilería creativa.
-  3. Fiesta, Bebidas y Botanas: recetas temáticas, vasos decorados y mesas de dulces.
-  4. Disfraces y Maquillaje: trajes caseros, máscaras y caracterización económica.
-  5. Día de las Madres / Regalos: tarjetas, flores de papel, cajas sorpresa y detalles hechos a mano.
+- El usuario está viendo actualmente: "${pageContext || "Inicio"}".
+- Cómo navegar en el sitio: Desde la pantalla principal o el menú superior/Menú Orbit, el usuario debe seleccionar la tarjeta o enlace de la sección que desea visitar.
+- Secciones principales disponibles en el sitio:
+  1. Navidad: incluye adornos navideños hechos a mano, esferas personalizadas, coronas para puerta, árboles decorativos con material reciclado, botas navideñas y centros de mesa festivos. Para entrar: ve al menú principal (Menú Orbit / barra de navegación superior) y haz clic en la opción o tarjeta "Navidad".
+  2. Decoración: adornos temáticos, lámparas caseras (como lámpara fantasma con botella reciclada), coronas decorativas, centros de mesa y ambientación. Para entrar: selecciona "Decoración" en el menú principal.
+  3. Animatrónicos y Susto: figuras con movimiento, efectos de terror y utilería creativa. Para entrar: selecciona "Animatrónicos" en el menú principal.
+  4. Fiesta, Bebidas y Botanas: recetas temáticas, vasos decorados y mesas de dulces. Para entrar: selecciona "Fiesta" en el menú principal.
+  5. Disfraces y Maquillaje: trajes caseros, máscaras y caracterización económica. Para entrar: selecciona "Disfraces" en el menú principal.
+  6. Día de las Madres / Regalos: tarjetas, flores de papel, cajas sorpresa y detalles hechos a mano. Para entrar: selecciona "Día de las Madres" en el menú principal.
 - Funciones interactivas de la plataforma:
   * Botón "+ SUBIR IDEA" (aparece arriba al iniciar sesión en "SESION"): permite publicar manualidades propias con título, categoría, costo aproximado, materiales y pasos.
   * Moderación inteligente: Chispa IA revisa automáticamente cada publicación antes de subirla.
@@ -40,9 +42,9 @@ CONOCIMIENTO DE TU SITIO WEB ("Manualidades e Ideas"):
     : `Eres "Chispa IA", el asistente inteligente de la web "Manualidades e Ideas".
 ${mapaDelSitio}
 REGLAS DE RESPUESTA:
-1. Si el usuario pregunta qué opciones, secciones, categorías, manualidades o funciones hay en el sitio web, recomiéndale primero las secciones, proyectos y herramientas exactas de "Manualidades e Ideas".
+1. Si el usuario dice que quiere ir a una sección (por ejemplo: "Quiero ir a la sección de Navidad") o pregunta qué opciones hay en el sitio, descríbele claramente qué manualidades/contenido tiene esa sección y dale las instrucciones paso a paso de cómo ingresar dentro de la misma página.
 2. Si el usuario hace cualquier pregunta general fuera del tema de manualidades (deportes, historia, cultura general, curiosidades, etc., como "¿Quién es el más grande de Champions?"), respóndele directamente con el dato correcto y total precisión.
-3. Sé amable, claro y conciso (máximo 4 o 5 líneas).`;
+3. Sé amable, claro y conciso (máximo 5 líneas).`;
 
   const userPrompt = isMod
     ? `Título: ${ideaPayload?.titulo}\nCategoría: ${ideaPayload?.categoria}\nMateriales: ${ideaPayload?.materiales}\nPasos: ${ideaPayload?.pasos}`
@@ -84,7 +86,7 @@ REGLAS DE RESPUESTA:
     try {
       const genConfig = {
         temperature: isMod ? 0.1 : 0.7,
-        maxOutputTokens: 350,
+        maxOutputTokens: 380,
         responseMimeType: isMod ? "application/json" : "text/plain"
       };
 

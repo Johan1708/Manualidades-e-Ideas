@@ -16,34 +16,23 @@ module.exports = async (req, res) => {
   const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
   const { mode, message, pageContext, ideaPayload } = body;
 
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 20000);
+  const isMod = mode === "moderate_idea";
+  const systemPrompt = isMod
+    ? `Eres el moderador de "Manualidades e Ideas". Evalúa si es una manualidad respetuosa y clara. Responde SOLO JSON: {"aprobado": true/false, "motivo": "breve", "sugerencia_ia": "consejo corto"}`
+    : `Eres "Chispa IA", asistente creativo de "Manualidades e Ideas" en "${pageContext || "Inicio"}". Responde amable, práctico y breve (máximo 4 líneas).`;
 
-  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+  const userPrompt = isMod
+    ? `Título: ${ideaPayload?.titulo}\nCategoría: ${ideaPayload?.categoria}\nMateriales: ${ideaPayload?.materiales}\nPasos: ${ideaPayload?.pasos}`
+    : (message || "Hola");
 
-  try {
-    const isMod = mode === "moderate_idea";
-    const systemPrompt = isMod
-      ? `Eres el moderador de "Manualidades e Ideas". Evalúa si es una manualidad respetuosa y clara. Responde SOLO JSON: {"aprobado": true/false, "motivo": "breve", "sugerencia_ia": "consejo corto"}`
-      : `Eres "Chispa IA", asistente creativo de "Manualidades e Ideas" en "${pageContext || "Inicio"}". Responde amable, práctico y breve (máximo 4 líneas).`;
+  // Priorizar flash-lite (más rápido y menos saturado) con respaldo de flash
+  const modelos = ["gemini-3.8-flash-lite", "gemini-3.8-flash"];
 
-    const userPrompt = isMod
-      ? `Título: ${ideaPayload?.titulo}\nCategoría: ${ideaPayload?.categoria}\nMateriales: ${ideaPayload?.materiales}\nPasos: ${ideaPayload?.pasos}`
-      : (message || "Hola");
+  for (const modelo of modelos) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 7000);
 
-    // Lista de intentos: reintenta gemini-3.8-flash y prueba alternativas si hay alta demanda (503)
-    const intentos = [
-      { modelo: "gemini-3.8-flash", thinking: "low" },
-      { modelo: "gemini-3.8-flash-lite", thinking: "low" },
-      { modelo: "gemini-3-flash-preview", thinking: "low" },
-      { modelo: "gemini-3.8-flash", thinking: "low" }
-    ];
-
-    let lastError = "";
-
-    for (let i = 0; i < intentos.length; i++) {
-      const { modelo, thinking } = intentos[i];
-
+    try {
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent?key=${apiKey}`,
         {
@@ -55,40 +44,34 @@ module.exports = async (req, res) => {
             contents: [{ parts: [{ text: userPrompt }] }],
             generationConfig: {
               temperature: isMod ? 0.1 : 0.7,
-              maxOutputTokens: 350,
-              thinkingConfig: { thinkingLevel: thinking },
+              maxOutputTokens: 300,
+              thinkingConfig: { thinkingLevel: "low" },
               responseMimeType: isMod ? "application/json" : "text/plain"
             }
           })
         }
       );
 
+      clearTimeout(timer);
       const data = await response.json();
 
       if (response.ok) {
-        clearTimeout(timer);
         const replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sin respuesta.";
         return res.status(200).json(isMod ? JSON.parse(replyText) : { reply: replyText });
       }
 
-      lastError = `${modelo} (${response.status}): ${data?.error?.message || "Error"}`;
-
-      // Si es error de autenticación (400/401/403), detenerse; si es 404, 429 o 503, probar el siguiente
-      if ([400, 401, 403].includes(response.status)) break;
-
-      if (response.status === 503 || response.status === 429) {
-        await esperar(900);
+      if ([400, 401, 403].includes(response.status)) {
+        return res.status(500).json({
+          error: `Error de configuración (${response.status}): ${data?.error?.message || "Revisa tu API Key"}`
+        });
       }
+    } catch {
+      clearTimeout(timer);
+      // Si el primer modelo tardó más de 7s o dio 503/404, pasa inmediatamente al siguiente
     }
-
-    clearTimeout(timer);
-    return res.status(503).json({
-      error: "Chispa IA tiene mucha demanda en este momento. Intenta enviar tu mensaje en unos segundos ✨"
-    });
-  } catch (err) {
-    clearTimeout(timer);
-    return res.status(500).json({
-      error: err.name === "AbortError" ? "Tiempo agotado (20s)" : `Error: ${err.message}`
-    });
   }
+
+  return res.status(503).json({
+    error: "Chispa IA tiene mucha demanda en este momento. Intenta enviar tu mensaje en unos segundos ✨"
+  });
 };

@@ -50,7 +50,7 @@ Ayúdalo con ideas de manualidades, materiales económicos, sustituciones casera
           generationConfig: {
             temperature: mode === "moderate_idea" ? 0.1 : 0.7,
             maxOutputTokens: 450,
-            thinkingConfig: { thinkingLevel: "minimal" },
+            thinkingConfig: { thinkingLevel: "low" },
             responseMimeType: mode === "moderate_idea" ? "application/json" : "text/plain"
           }
         })

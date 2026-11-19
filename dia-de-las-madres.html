@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardín para Mamá | Experiencia Floral Premium</title>
+    <title>Inspiración para Mamá | Manualidades, Lugares e Ideas</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dia-de-las-madres.css">
 </head>
@@ -12,7 +12,7 @@
     <!-- PRELOADER -->
     <div id="preloader">
         <div class="flor-loader">🌸</div>
-        <p>Cultivando la experiencia...</p>
+        <p>Preparando ideas...</p>
     </div>
 
     <!-- CURSOR PERSONALIZADO -->
@@ -22,12 +22,13 @@
     <!-- NAVEGACIÓN FLOTANTE -->
     <nav class="glass-nav">
         <a href="index.html" class="btn-volver-float" title="Volver al Menú">← Volver</a>
-        <div class="nav-text">El Jardín de Mamá 🌸</div>
+        <div class="nav-text">Guía para Mamá 🌸</div>
     </nav>
 
     <!-- FONDO DE VIDEO Y PÉTALOS -->
     <div class="video-background">
         <video autoplay loop muted playsinline id="bg-video">
+            <!-- Puedes poner un video de naturaleza, manualidades o un fondo tranquilo -->
             <source src="imagenes/diamadre.mp4" type="video/mp4">
         </video>
         <div class="overlay-cinematografico"></div>
@@ -40,182 +41,184 @@
         <!-- HERO CON PARALLAX -->
         <header class="hero-bento">
             <div class="hero-text-container parallax-element" data-speed="0.5">
-                <h1 class="titulo-editorial">Mujer en<br><span>Floración</span></h1>
+                <h1 class="titulo-editorial">Inspiración para<br><span>Mamá</span></h1>
                 <p id="mensaje-animado" class="subtitulo-editorial"></p>
             </div>
         </header>
 
-        <!-- SECCIÓN 1: SELECCIÓN FLORAL -->
+        <!-- SECCIÓN 1: MANUALIDADES E IDEAS (PASO A PASO) -->
         <section class="mega-section">
             <div class="section-header animate-on-scroll">
-                <h2 class="titulo-seccion">Selección Floral 💐</h2>
-                <div class="filtros" id="filtros-flores">
+                <h2 class="titulo-seccion">Manualidades e Ideas DIY 🎨</h2>
+                <div class="filtros" id="filtros-manualidades">
                     <button class="btn-filtro active" data-filter="all">Todas</button>
-                    <button class="btn-filtro" data-filter="clasicas">Clásicas</button>
-                    <button class="btn-filtro" data-filter="exoticas">Exóticas</button>
+                    <button class="btn-filtro" data-filter="plantas">Con Plantas</button>
+                    <button class="btn-filtro" data-filter="papel">Con Papel</button>
                 </div>
             </div>
 
-            <div class="bento-gallery" id="grid-flores">
-                <article class="bento-card bento-grande filter-item tilt-effect" data-price="clasicas">
+            <div class="bento-gallery" id="grid-manualidades">
+                <!-- Manualidad 1 -->
+                <article class="bento-card bento-grande filter-item tilt-effect" data-price="plantas">
                     <div class="bento-content">
-                        <h3 class="bento-title card-titulo-gradient">Rosas Ecuatorianas Rojas</h3>
-                        <p class="bento-desc">El símbolo universal del amor puro. Cultivadas en las alturas para lograr pétalos más grandes y colores más intensos y duraderos.</p>
-                        <span class="etiqueta">Significado: Amor Profundo y Respeto</span>
+                        <h3 class="bento-title card-titulo-gradient">Terrario Eterno en Frasco</h3>
+                        <p class="bento-desc">Un ecosistema miniatura que requiere muy pocos cuidados. Una manualidad terapéutica perfecta para hacer en casa.</p>
+                        <span class="etiqueta">Dificultad: Fácil</span>
                         <button class="btn-editorial btn-abrir-pasos" 
-                                data-modal-titulo="Cuidado de las Rosas"
-                                data-modal-pasos='[{"img": "imagenes/corte-tallo.jpg", "texto": "Corta los tallos en diagonal 2 cm antes de ponerlas en agua."}, {"img": "imagenes/agua-fresca.jpg", "texto": "Cambia el agua del florero cada 2 días para evitar bacterias."}, {"img": "imagenes/luz-indirecta.jpg", "texto": "Mantenlas alejadas del sol directo y corrientes de aire caliente."}]'>Guía de Cuidados ✨</button>
+                                data-modal-titulo="Cómo hacer un Terrario"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/paso-grava.jpg", "texto": "Paso 1: Coloca 3 cm de grava en el fondo del frasco para que el agua drene."}, 
+                                    {"img": "imagenes/paso-carbon.jpg", "texto": "Paso 2: Añade una capa fina de carbón activado para evitar malos olores."}, 
+                                    {"img": "imagenes/paso-tierra.jpg", "texto": "Paso 3: Agrega tierra para macetas y haz pequeños hoyos."},
+                                    {"img": "imagenes/paso-decorar.jpg", "texto": "Paso 4: Planta tus suculentas con cuidado, decora con musgo y rocía un poco de agua."}
+                                ]'>Ver Paso a Paso 🛠️</button>
                     </div>
-                    <img src="imagenes/rosas-3d.png" alt="Rosas" class="bento-img tilt-img" style="background: #ffd6e0;">
+                    <img src="imagenes/terrario.png" alt="Terrario" class="bento-img tilt-img" style="background: #e0fbfc;">
                 </article>
 
-                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="exoticas">
-                    <img src="imagenes/orquidea-3d.png" alt="Orquídea" class="bento-img tilt-img" style="background: #e0c3fc;">
+                <!-- Manualidad 2 -->
+                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="papel">
+                    <img src="imagenes/ramo-papel.png" alt="Flores de Papel" class="bento-img tilt-img" style="background: #ffccd5;">
                     <div class="bento-content">
-                        <h3 class="bento-title card-titulo-gradient">Orquídea Phalaenopsis</h3>
-                        <p class="bento-desc">Elegancia pura. Una flor exótica de larga duración que aporta sofisticación a cualquier rincón de su hogar.</p>
-                        <span class="etiqueta">Significado: Belleza y Fuerza</span>
+                        <h3 class="bento-title card-titulo-gradient">Flores de Papel Crepé</h3>
+                        <p class="bento-desc">Crea un ramo que nunca se marchitará usando papel crepé y alambre.</p>
+                        <span class="etiqueta">Dificultad: Media</span>
                         <button class="btn-editorial btn-abrir-pasos"
-                                data-modal-titulo="El Secreto de las Orquídeas"
-                                data-modal-pasos='[{"img": "imagenes/riego-orquidea.jpg", "texto": "Riega por inmersión solo una vez a la semana."}, {"img": "imagenes/drenaje.jpg", "texto": "Asegúrate de escurrir bien; las raíces no deben quedar encharcadas."}, {"img": "imagenes/luz-filtrada.jpg", "texto": "Colócala cerca de una ventana con luz filtrada o cortina clara."}]'>Ver Pasos 💧</button>
+                                data-modal-titulo="Flores de Papel Crepé"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/paso-corte.jpg", "texto": "Paso 1: Corta tiras de papel crepé en forma de pétalos anchos."}, 
+                                    {"img": "imagenes/paso-alambre.jpg", "texto": "Paso 2: Forra un trozo de alambre con cinta verde floral para hacer el tallo."}, 
+                                    {"img": "imagenes/paso-armado.jpg", "texto": "Paso 3: Pega los pétalos uno por uno alrededor del alambre usando silicón."}
+                                ]'>Ver Paso a Paso ✂️</button>
                     </div>
                 </article>
                 
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="clasicas">
-                    <img src="imagenes/tulipanes-3d.png" alt="Tulipanes" class="bento-img tilt-img" style="background: #ffdfba;">
+                <!-- Manualidad 3 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="papel">
+                    <img src="imagenes/album-fotos.png" alt="Álbum" class="bento-img tilt-img" style="background: #fcf6bd;">
                     <div class="bento-content centered">
-                        <h3 class="bento-title">Tulipanes Holandeses</h3>
-                        <p class="bento-desc">Sencillez y alegría en tonos pastel que anuncian la primavera.</p>
-                        <span class="etiqueta">Amor incondicional</span>
-                    </div>
-                </article>
-
-                <article class="bento-card filter-item tilt-effect" data-price="clasicas" style="grid-column: span 1;">
-                    <img src="imagenes/girasol-3d.png" alt="Girasol" class="bento-img tilt-img circular-img" style="background: #ffffba;">
-                    <div class="bento-content centered">
-                        <h3 class="bento-title">Girasoles Sol</h3>
-                        <p class="bento-desc">Para la mujer que ilumina nuestros días.</p>
+                        <h3 class="bento-title">Álbum de Recuerdos</h3>
+                        <p class="bento-desc">Libreta decorada a mano con recortes, fotos vintage y notas escritas.</p>
+                        <span class="etiqueta">Scrapbook</span>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: EXPERIENCIAS -->
+        <!-- SECCIÓN 2: LUGARES PARA VISITAR (CON MAPAS) -->
         <section class="mega-section glass-container animate-on-scroll" style="margin: 40px auto;">
             <div class="section-header">
-                <h2 class="titulo-seccion text-white">Experiencias y Naturaleza 🌿</h2>
-                <div class="filtros" id="filtros-experiencias">
-                    <button class="btn-filtro active" data-filter="all">Todas</button>
-                    <button class="btn-filtro" data-filter="salida">Paseos</button>
-                    <button class="btn-filtro" data-filter="taller">Aprender</button>
-                </div>
-            </div>
-
-            <div class="carrusel" id="carrusel-experiencias">
-                <div class="card-rosa filter-item tilt-effect" data-price="salida">
-                    <img src="imagenes/jardin-3d.png" alt="Jardín Botánico" class="card-img" style="background: #caffbf;">
-                    <div class="card-info">
-                        <h3 class="card-titulo-gradient">Paseo por el Jardín Botánico</h3>
-                        <p class="card-desc">Caminen juntas rodeadas de la flora más espectacular de la ciudad en un día soleado.</p>
-                        <a href="https://www.google.com/maps/search/jardin+botanico" target="_blank" class="btn-accion">Buscar cercanos 📍</a>
-                    </div>
-                </div>
-
-                <div class="card-rosa filter-item tilt-effect" data-price="taller">
-                    <img src="imagenes/taller-floral-3d.png" alt="Taller Floral" class="card-img" style="background: #ffc6ff;">
-                    <div class="card-info">
-                        <h3 class="card-titulo-gradient">Taller de Arreglos Florales</h3>
-                        <p class="card-desc">Tomen una clase juntas para aprender diseño floral con copas de vino rosado.</p>
-                        <button class="btn-accion">Reservar Lugar 🎟️</button>
-                    </div>
-                </div>
-
-                <div class="card-rosa filter-item tilt-effect" data-price="taller">
-                    <img src="imagenes/huerto-3d.png" alt="Huerto" class="card-img" style="background: #fdffb6;">
-                    <div class="card-info">
-                        <h3 class="card-titulo-gradient">Kit de Huerto en Casa</h3>
-                        <p class="card-desc">Semillas de hierbas aromáticas y macetas para que ella cultive su propia magia.</p>
-                        <a href="#" class="btn-accion">Ver Tiendas 🌱</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 3: DETALLES CON ESENCIA -->
-        <section class="mega-section">
-            <div class="section-header animate-on-scroll">
-                <h2 class="titulo-seccion">Detalles con Esencia 🎀</h2>
-                <div class="filtros" id="filtros-detalles">
+                <h2 class="titulo-seccion text-white">Lugares Increíbles para Visitar 📍</h2>
+                <div class="filtros" id="filtros-lugares">
                     <button class="btn-filtro active" data-filter="all">Todos</button>
-                    <button class="btn-filtro" data-filter="perfume">Aromas</button>
-                    <button class="btn-filtro" data-filter="joya">Joyería</button>
+                    <button class="btn-filtro" data-filter="naturaleza">Naturaleza</button>
+                    <button class="btn-filtro" data-filter="talleres">Talleres</button>
                 </div>
             </div>
 
-            <div class="bento-gallery" id="grid-detalles">
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="perfume" style="background: rgba(255, 204, 221, 0.9);">
-                    <img src="imagenes/perfume-jazmin.png" alt="Perfume Floral" class="bento-img">
-                    <div class="bento-content centered">
-                        <h3 class="bento-title">Perfume de Jazmín y Peonía</h3>
-                        <p class="bento-desc">Un aroma suave y primaveral que encapsula un jardín floreciendo.</p>
-                        <p class="precio-bento">$1,850 MXN</p>
-                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Adquirir Aroma 🌸</a>
+            <div class="carrusel" id="carrusel-lugares">
+                <!-- Lugar 1 -->
+                <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
+                    <img src="imagenes/jardin-botanico-foto.jpg" alt="Jardín Botánico" class="card-img">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Jardín Botánico Regional</h3>
+                        <p class="card-desc">Un oasis en medio de la ciudad. Perfecto para una caminata relajante rodeadas de especies endémicas y cascadas.</p>
+                        <!-- Mapa ilustrativo -->
+                        <img src="imagenes/mapa-jardin.jpg" alt="Mapa del Jardín Botánico" class="mini-mapa">
+                        <!-- Botón hacia Google Maps -->
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico" target="_blank" class="btn-accion">Cómo llegar (Maps) 🗺️</a>
                     </div>
-                </article>
+                </div>
 
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="joya" style="background: rgba(224, 195, 252, 0.9);">
-                    <img src="imagenes/collar-flores.png" alt="Joyería Botánica" class="bento-img">
-                    <div class="bento-content centered">
-                        <h3 class="bento-title">Collar Botánico</h3>
-                        <p class="bento-desc">Auténticas flores de nomeolvides encapsuladas en resina y plata.</p>
-                        <p class="precio-bento">$950 MXN</p>
-                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Adquirir Joya 💍</a>
+                <!-- Lugar 2 -->
+                <div class="card-rosa filter-item tilt-effect" data-price="talleres">
+                    <img src="imagenes/taller-ceramica-foto.jpg" alt="Taller de Cerámica" class="card-img">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Taller de Cerámica "Barro Mágico"</h3>
+                        <p class="card-desc">Un espacio donde podrán tomar una clase de 2 horas para moldear sus propias tazas y macetas.</p>
+                        <!-- Mapa ilustrativo -->
+                        <img src="imagenes/mapa-taller.jpg" alt="Mapa del Taller" class="mini-mapa">
+                        <!-- Botón hacia Google Maps -->
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica" target="_blank" class="btn-accion">Cómo llegar (Maps) 🗺️</a>
                     </div>
-                </article>
+                </div>
+
+                <!-- Lugar 3 -->
+                <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
+                    <img src="imagenes/vivero-coyoacan.jpg" alt="Viveros" class="card-img">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Mercado de Plantas / Vivero</h3>
+                        <p class="card-desc">Pasillos llenos de flores, macetas y tierra. El lugar ideal para comprar lo necesario para las manualidades.</p>
+                        <!-- Mapa ilustrativo -->
+                        <img src="imagenes/mapa-vivero.jpg" alt="Mapa del Vivero" class="mini-mapa">
+                        <!-- Botón hacia Google Maps -->
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Mercado+de+Plantas" target="_blank" class="btn-accion">Cómo llegar (Maps) 🗺️</a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 4: OFERTAS FLORALES EN VIVO -->
-        <section class="mega-section live-deals-section animate-on-scroll">
+        <!-- SECCIÓN 3: GUÍA DE PRODUCTOS (DÓNDE ENCONTRARLOS) -->
+        <section class="mega-section animate-on-scroll">
             <div class="live-deals-header">
-                <h2>🔥 FLORES DE TEMPORADA</h2>
-                <span class="live-badge pulse-anim">Solo quedan pocos ramos...</span>
+                <h2>🔍 GUÍA DE PRODUCTOS Y MATERIALES</h2>
+                <span class="live-badge pulse-anim">Información de tiendas</span>
             </div>
-            <div class="carrusel">
-                <div class="card-rosa deal-card tilt-effect">
-                    <h3 class="card-titulo-gradient">Ramo Buchón (100 Rosas)</h3>
-                    <p class="precio-viejo">$3,500 MXN</p>
-                    <p class="precio-promocion">$1,999 MXN</p>
-                    <p class="card-desc">Impacto absoluto. Envuelto en papel coreano con corona brillante.</p>
-                    <button class="btn-comprar w-100">Reservar Ramo 🌹</button>
-                </div>
-                <div class="card-rosa deal-card tilt-effect">
-                    <h3 class="card-titulo-gradient">Caja Premium de Peonías</h3>
-                    <p class="precio-viejo">$2,800 MXN</p>
-                    <p class="precio-promocion">$1,650 MXN</p>
-                    <p class="card-desc">Flor ultra exclusiva que abre lentamente durante la semana.</p>
-                    <button class="btn-comprar w-100">Reservar Caja 🌸</button>
-                </div>
-                <div class="card-rosa deal-card tilt-effect">
-                    <h3 class="card-titulo-gradient">Suscripción Floral (3 Meses)</h3>
-                    <p class="precio-viejo">$4,200 MXN</p>
-                    <p class="precio-promocion">$3,100 MXN</p>
-                    <p class="card-desc">Recibirá un arreglo fresco diferente cada mes directo en su puerta.</p>
-                    <button class="btn-comprar w-100">Regalar Suscripción 📅</button>
-                </div>
+            
+            <div class="bento-gallery" id="grid-productos" style="grid-template-columns: repeat(3, 1fr); grid-auto-rows: auto;">
+                
+                <!-- Producto Informativo 1 -->
+                <article class="bento-card filter-item tilt-effect" style="background: rgba(202, 255, 191, 0.9);">
+                    <img src="imagenes/kit-herramientas.png" alt="Kit Herramientas" class="bento-img circular-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Set de Mini Herramientas</h3>
+                        <p class="bento-desc">Palas y rastrillos pequeños, ideales para los terrarios y plantas de interior.</p>
+                        <div class="info-tienda">
+                            <strong>📍 Dónde encontrarlo:</strong>
+                            <p>Home Depot, Viveros locales o tiendas de manualidades (Lumen/Fantasías Miguel).</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Producto Informativo 2 -->
+                <article class="bento-card filter-item tilt-effect" style="background: rgba(253, 255, 182, 0.9);">
+                    <img src="imagenes/papel-crepe.png" alt="Papel Crepé" class="bento-img circular-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Papel Crepé Italiano</h3>
+                        <p class="bento-desc">Papel de alto gramaje para hacer flores realistas que mantienen su forma.</p>
+                        <div class="info-tienda">
+                            <strong>📍 Dónde encontrarlo:</strong>
+                            <p>Papelerías grandes, mercerías especializadas o tiendas online (Amazon/Mercado Libre).</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Producto Informativo 3 -->
+                <article class="bento-card filter-item tilt-effect" style="background: rgba(255, 198, 255, 0.9);">
+                    <img src="imagenes/frascos-cristal.png" alt="Frascos" class="bento-img circular-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Frascos de Cristal (Boca Ancha)</h3>
+                        <p class="bento-desc">Recipientes transparentes y gruesos perfectos para hacer el ecosistema del terrario.</p>
+                        <div class="info-tienda">
+                            <strong>📍 Dónde encontrarlo:</strong>
+                            <p>Tiendas de cristalería, supermercados grandes o reciclando frascos de mermelada.</p>
+                        </div>
+                    </div>
+                </article>
+
             </div>
         </section>
 
         <footer class="espacio-final">
-            <p>Plantado y cultivado con ❤️ para la mujer que nos dio la vida.</p>
+            <p>Una guía creada para inspirar, crear y compartir con mamá. ❤️</p>
         </footer>
     </main>
 
-    <!-- VENTANA EMERGENTE PARA CUIDADOS FLORALES -->
+    <!-- VENTANA EMERGENTE PARA PASO A PASO (MANUALIDADES) -->
     <div id="modal-pasos" class="modal-pro">
         <div class="modal-content-pro animate-expand-in">
             <div class="modal-header-pro">
-                <h2 id="modal-titulo-pro">Cuidados Florales</h2>
+                <h2 id="modal-titulo-pro">Paso a Paso</h2>
                 <span class="cerrar-modal-pro" id="btn-cerrar-pro">×</span>
             </div>
             <div class="lista-pasos-pro" id="modal-lista-pro">
@@ -224,7 +227,6 @@
         </div>
     </div>
 
-    <!-- EL ENLACE CORRECTO A TU SCRIPT -->
     <script src="dia-de-las-madres.js"></script>
 </body>
 </html>

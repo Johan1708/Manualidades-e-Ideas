@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1. GENERADOR MÁGICO DE PÉTALOS
+    // 1. GENERADOR DE PÉTALOS (AMBIENTE)
     function crearLluviaDePetalos() {
         const contenedor = document.getElementById('petalos-container');
         if (!contenedor) return;
-        const cantidadPetalos = 50; 
+        const cantidadPetalos = 35; 
 
         for (let i = 0; i < cantidadPetalos; i++) {
             let petalo = document.createElement('div');
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     crearLluviaDePetalos();
 
-    // 2. EFECTO MÁQUINA DE ESCRIBIR 
-    const textoEmotivo = "Para la mujer que plantó las semillas de nuestros sueños, cuidó nuestras raíces y nos enseñó a florecer sin importar la estación. Su jardín es nuestro hogar.";
+    // 2. EFECTO MÁQUINA DE ESCRIBIR (TEXTO GUÍA/MANUALIDADES)
+    const textoEmotivo = "Descubre manualidades paso a paso, lugares mágicos para visitar juntos y las mejores ideas para celebrar su día creando recuerdos inolvidables.";
     const elementoMensaje = document.getElementById("mensaje-animado");
     let indice = 0;
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(escribirTexto, 40); 
         }
     }
-    setTimeout(escribirTexto, 1500); // Se retrasa un poco por el preloader
+    setTimeout(escribirTexto, 1500); 
 
     // 3. LÓGICA DE FILTROS UNIVERSAL
     function inicializarFiltros(contenedorFiltrosId, contenedorTarjetasId) {
@@ -86,11 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Activar los 3 grupos de filtros originales
-    inicializarFiltros('filtros-flores', 'grid-flores');
-    inicializarFiltros('filtros-experiencias', 'carrusel-experiencias');
-    inicializarFiltros('filtros-detalles', 'grid-detalles');
-
+    // Activar los grupos de filtros nuevos
+    inicializarFiltros('filtros-manualidades', 'grid-manualidades');
+    inicializarFiltros('filtros-lugares', 'carrusel-lugares');
 
     // 4. ANIMACIÓN AL HACER SCROLL
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
@@ -105,8 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
 
-
-    // 5. VENTANA EMERGENTE PRO (MODAL DE CUIDADOS FLORALES)
+    // 5. VENTANA EMERGENTE PRO (MODAL PARA PASO A PASO)
     const modalPro = document.getElementById('modal-pasos');
     const btnCerrarPro = document.getElementById('btn-cerrar-pro');
     const modalTituloPro = document.getElementById('modal-titulo-pro');

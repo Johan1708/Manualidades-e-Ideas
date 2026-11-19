@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspiración para Mamá | Manualidades, Lugares e Ideas</title>
+    <title>Inspiración para Mamá | Manualidades y Lugares</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dia-de-las-madres.css">
 </head>
@@ -28,7 +28,6 @@
     <!-- FONDO DE VIDEO Y PÉTALOS -->
     <div class="video-background">
         <video autoplay loop muted playsinline id="bg-video">
-            <!-- Puedes poner un video de naturaleza, manualidades o un fondo tranquilo -->
             <source src="imagenes/diamadre.mp4" type="video/mp4">
         </video>
         <div class="overlay-cinematografico"></div>
@@ -46,10 +45,10 @@
             </div>
         </header>
 
-        <!-- SECCIÓN 1: MANUALIDADES E IDEAS (PASO A PASO) -->
+        <!-- SECCIÓN 1: MANUALIDADES (Mismo diseño de Selección Floral) -->
         <section class="mega-section">
             <div class="section-header animate-on-scroll">
-                <h2 class="titulo-seccion">Manualidades e Ideas DIY 🎨</h2>
+                <h2 class="titulo-seccion">Manualidades e Ideas 🎨</h2>
                 <div class="filtros" id="filtros-manualidades">
                     <button class="btn-filtro active" data-filter="all">Todas</button>
                     <button class="btn-filtro" data-filter="plantas">Con Plantas</button>
@@ -58,57 +57,53 @@
             </div>
 
             <div class="bento-gallery" id="grid-manualidades">
-                <!-- Manualidad 1 -->
                 <article class="bento-card bento-grande filter-item tilt-effect" data-price="plantas">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Terrario Eterno en Frasco</h3>
-                        <p class="bento-desc">Un ecosistema miniatura que requiere muy pocos cuidados. Una manualidad terapéutica perfecta para hacer en casa.</p>
-                        <span class="etiqueta">Dificultad: Fácil</span>
+                        <p class="bento-desc">Construye un ecosistema en miniatura. Una manualidad terapéutica, hermosa y que requiere muy pocos cuidados en casa.</p>
+                        <span class="etiqueta">Nivel: Fácil</span>
                         <button class="btn-editorial btn-abrir-pasos" 
                                 data-modal-titulo="Cómo hacer un Terrario"
-                                data-modal-pasos='[
-                                    {"img": "imagenes/paso-grava.jpg", "texto": "Paso 1: Coloca 3 cm de grava en el fondo del frasco para que el agua drene."}, 
-                                    {"img": "imagenes/paso-carbon.jpg", "texto": "Paso 2: Añade una capa fina de carbón activado para evitar malos olores."}, 
-                                    {"img": "imagenes/paso-tierra.jpg", "texto": "Paso 3: Agrega tierra para macetas y haz pequeños hoyos."},
-                                    {"img": "imagenes/paso-decorar.jpg", "texto": "Paso 4: Planta tus suculentas con cuidado, decora con musgo y rocía un poco de agua."}
-                                ]'>Ver Paso a Paso 🛠️</button>
+                                data-modal-pasos='[{"img": "imagenes/paso-grava.jpg", "texto": "Paso 1: Coloca 3 cm de grava en el fondo para el drenaje."}, {"img": "imagenes/paso-carbon.jpg", "texto": "Paso 2: Añade carbón activado para evitar bacterias."}, {"img": "imagenes/paso-tierra.jpg", "texto": "Paso 3: Pon tierra para macetas y haz pequeños hoyos para tus suculentas."}]'>Ver Paso a Paso 🛠️</button>
                     </div>
-                    <img src="imagenes/terrario.png" alt="Terrario" class="bento-img tilt-img" style="background: #e0fbfc;">
+                    <img src="imagenes/terrario.png" alt="Terrario" class="bento-img tilt-img" style="background: #ffd6e0;">
                 </article>
 
-                <!-- Manualidad 2 -->
                 <article class="bento-card bento-ancha filter-item tilt-effect" data-price="papel">
-                    <img src="imagenes/ramo-papel.png" alt="Flores de Papel" class="bento-img tilt-img" style="background: #ffccd5;">
+                    <img src="imagenes/ramo-papel.png" alt="Flores de Papel" class="bento-img tilt-img" style="background: #e0c3fc;">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Flores de Papel Crepé</h3>
-                        <p class="bento-desc">Crea un ramo que nunca se marchitará usando papel crepé y alambre.</p>
-                        <span class="etiqueta">Dificultad: Media</span>
+                        <p class="bento-desc">Crea un ramo vibrante que nunca se marchitará usando papel italiano de alto gramaje.</p>
+                        <span class="etiqueta">Nivel: Medio</span>
                         <button class="btn-editorial btn-abrir-pasos"
-                                data-modal-titulo="Flores de Papel Crepé"
-                                data-modal-pasos='[
-                                    {"img": "imagenes/paso-corte.jpg", "texto": "Paso 1: Corta tiras de papel crepé en forma de pétalos anchos."}, 
-                                    {"img": "imagenes/paso-alambre.jpg", "texto": "Paso 2: Forra un trozo de alambre con cinta verde floral para hacer el tallo."}, 
-                                    {"img": "imagenes/paso-armado.jpg", "texto": "Paso 3: Pega los pétalos uno por uno alrededor del alambre usando silicón."}
-                                ]'>Ver Paso a Paso ✂️</button>
+                                data-modal-titulo="Flores de Papel"
+                                data-modal-pasos='[{"img": "imagenes/paso-corte.jpg", "texto": "Paso 1: Corta el papel en forma de pétalos."}, {"img": "imagenes/paso-alambre.jpg", "texto": "Paso 2: Forra alambre con cinta floral para el tallo."}, {"img": "imagenes/paso-armado.jpg", "texto": "Paso 3: Pega los pétalos uno a uno alrededor del tallo."}]'>Ver Pasos ✂️</button>
                     </div>
                 </article>
                 
-                <!-- Manualidad 3 -->
                 <article class="bento-card bento-alta filter-item tilt-effect" data-price="papel">
-                    <img src="imagenes/album-fotos.png" alt="Álbum" class="bento-img tilt-img" style="background: #fcf6bd;">
+                    <img src="imagenes/album-fotos.png" alt="Álbum" class="bento-img tilt-img" style="background: #ffdfba;">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Álbum de Recuerdos</h3>
-                        <p class="bento-desc">Libreta decorada a mano con recortes, fotos vintage y notas escritas.</p>
+                        <p class="bento-desc">Libreta decorada a mano con recortes y fotos vintage.</p>
                         <span class="etiqueta">Scrapbook</span>
+                    </div>
+                </article>
+
+                <article class="bento-card filter-item tilt-effect" data-price="plantas" style="grid-column: span 1;">
+                    <img src="imagenes/maceta-pintada.png" alt="Maceta" class="bento-img tilt-img circular-img" style="background: #ffffba;">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Macetas Pintadas</h3>
+                        <p class="bento-desc">Decora con acrílicos los hogares de tus plantas.</p>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: LUGARES PARA VISITAR (CON MAPAS) -->
+        <!-- SECCIÓN 2: LUGARES PARA VISITAR (Mismo diseño de Experiencias) -->
         <section class="mega-section glass-container animate-on-scroll" style="margin: 40px auto;">
             <div class="section-header">
-                <h2 class="titulo-seccion text-white">Lugares Increíbles para Visitar 📍</h2>
+                <h2 class="titulo-seccion text-white">Lugares para Visitar 📍</h2>
                 <div class="filtros" id="filtros-lugares">
                     <button class="btn-filtro active" data-filter="all">Todos</button>
                     <button class="btn-filtro" data-filter="naturaleza">Naturaleza</button>
@@ -117,95 +112,100 @@
             </div>
 
             <div class="carrusel" id="carrusel-lugares">
-                <!-- Lugar 1 -->
                 <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
-                    <img src="imagenes/jardin-botanico-foto.jpg" alt="Jardín Botánico" class="card-img">
+                    <img src="imagenes/jardin-botanico-foto.jpg" alt="Jardín Botánico" class="card-img" style="background: #caffbf;">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Jardín Botánico Regional</h3>
-                        <p class="card-desc">Un oasis en medio de la ciudad. Perfecto para una caminata relajante rodeadas de especies endémicas y cascadas.</p>
-                        <!-- Mapa ilustrativo -->
-                        <img src="imagenes/mapa-jardin.jpg" alt="Mapa del Jardín Botánico" class="mini-mapa">
-                        <!-- Botón hacia Google Maps -->
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico" target="_blank" class="btn-accion">Cómo llegar (Maps) 🗺️</a>
+                        <p class="card-desc">Un oasis perfecto para caminar juntas rodeadas de especies endémicas y tomar fotos hermosas.</p>
+                        <img src="imagenes/mapa-jardin.jpg" alt="Mapa" class="mini-mapa">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
                     </div>
                 </div>
 
-                <!-- Lugar 2 -->
                 <div class="card-rosa filter-item tilt-effect" data-price="talleres">
-                    <img src="imagenes/taller-ceramica-foto.jpg" alt="Taller de Cerámica" class="card-img">
+                    <img src="imagenes/taller-ceramica-foto.jpg" alt="Taller de Cerámica" class="card-img" style="background: #ffc6ff;">
                     <div class="card-info">
-                        <h3 class="card-titulo-gradient">Taller de Cerámica "Barro Mágico"</h3>
-                        <p class="card-desc">Un espacio donde podrán tomar una clase de 2 horas para moldear sus propias tazas y macetas.</p>
-                        <!-- Mapa ilustrativo -->
-                        <img src="imagenes/mapa-taller.jpg" alt="Mapa del Taller" class="mini-mapa">
-                        <!-- Botón hacia Google Maps -->
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica" target="_blank" class="btn-accion">Cómo llegar (Maps) 🗺️</a>
+                        <h3 class="card-titulo-gradient">Taller "Barro Mágico"</h3>
+                        <p class="card-desc">Un espacio donde podrán tomar una clase de 2 horas para moldear y pintar sus propias macetas.</p>
+                        <img src="imagenes/mapa-taller.jpg" alt="Mapa" class="mini-mapa">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
                     </div>
                 </div>
 
-                <!-- Lugar 3 -->
                 <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
-                    <img src="imagenes/vivero-coyoacan.jpg" alt="Viveros" class="card-img">
+                    <img src="imagenes/vivero-coyoacan.jpg" alt="Mercado Plantas" class="card-img" style="background: #fdffb6;">
                     <div class="card-info">
-                        <h3 class="card-titulo-gradient">Mercado de Plantas / Vivero</h3>
-                        <p class="card-desc">Pasillos llenos de flores, macetas y tierra. El lugar ideal para comprar lo necesario para las manualidades.</p>
-                        <!-- Mapa ilustrativo -->
-                        <img src="imagenes/mapa-vivero.jpg" alt="Mapa del Vivero" class="mini-mapa">
-                        <!-- Botón hacia Google Maps -->
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Mercado+de+Plantas" target="_blank" class="btn-accion">Cómo llegar (Maps) 🗺️</a>
+                        <h3 class="card-titulo-gradient">Mercado de Plantas</h3>
+                        <p class="card-desc">Pasillos llenos de flores. El lugar ideal para conseguir los insumos para sus manualidades.</p>
+                        <img src="imagenes/mapa-vivero.jpg" alt="Mapa" class="mini-mapa">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Mercado+de+Plantas" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: GUÍA DE PRODUCTOS (DÓNDE ENCONTRARLOS) -->
-        <section class="mega-section animate-on-scroll">
-            <div class="live-deals-header">
-                <h2>🔍 GUÍA DE PRODUCTOS Y MATERIALES</h2>
-                <span class="live-badge pulse-anim">Información de tiendas</span>
+        <!-- SECCIÓN 3: DÓNDE ENCONTRAR PRODUCTOS (Mismo diseño de Detalles con Esencia) -->
+        <section class="mega-section">
+            <div class="section-header animate-on-scroll">
+                <h2 class="titulo-seccion">Dónde encontrar materiales 🛍️</h2>
+                <div class="filtros" id="filtros-productos">
+                    <button class="btn-filtro active" data-filter="all">Todos</button>
+                    <button class="btn-filtro" data-filter="herramientas">Herramientas</button>
+                    <button class="btn-filtro" data-filter="insumos">Insumos</button>
+                </div>
             </div>
-            
-            <div class="bento-gallery" id="grid-productos" style="grid-template-columns: repeat(3, 1fr); grid-auto-rows: auto;">
-                
-                <!-- Producto Informativo 1 -->
-                <article class="bento-card filter-item tilt-effect" style="background: rgba(202, 255, 191, 0.9);">
-                    <img src="imagenes/kit-herramientas.png" alt="Kit Herramientas" class="bento-img circular-img">
+
+            <div class="bento-gallery" id="grid-productos">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="herramientas" style="background: rgba(255, 204, 221, 0.9);">
+                    <img src="imagenes/kit-herramientas.png" alt="Herramientas" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Set de Mini Herramientas</h3>
-                        <p class="bento-desc">Palas y rastrillos pequeños, ideales para los terrarios y plantas de interior.</p>
-                        <div class="info-tienda">
-                            <strong>📍 Dónde encontrarlo:</strong>
-                            <p>Home Depot, Viveros locales o tiendas de manualidades (Lumen/Fantasías Miguel).</p>
-                        </div>
+                        <p class="bento-desc">Palas y rastrillos ideales para terrarios. <strong>📍 Encuéntralo en: Home Depot o Viveros locales.</strong></p>
+                        <p class="precio-bento">Aprox $250 MXN</p>
+                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Ver ejemplo online 🔎</a>
                     </div>
                 </article>
 
-                <!-- Producto Informativo 2 -->
-                <article class="bento-card filter-item tilt-effect" style="background: rgba(253, 255, 182, 0.9);">
-                    <img src="imagenes/papel-crepe.png" alt="Papel Crepé" class="bento-img circular-img">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="insumos" style="background: rgba(224, 195, 252, 0.9);">
+                    <img src="imagenes/papel-crepe.png" alt="Papel Crepé" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Papel Crepé Italiano</h3>
-                        <p class="bento-desc">Papel de alto gramaje para hacer flores realistas que mantienen su forma.</p>
-                        <div class="info-tienda">
-                            <strong>📍 Dónde encontrarlo:</strong>
-                            <p>Papelerías grandes, mercerías especializadas o tiendas online (Amazon/Mercado Libre).</p>
-                        </div>
+                        <p class="bento-desc">Papel de alto gramaje para flores realistas. <strong>📍 Encuéntralo en: Fantasías Miguel o Lumen.</strong></p>
+                        <p class="precio-bento">Aprox $80 MXN</p>
+                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Ver ejemplo online 🔎</a>
                     </div>
                 </article>
+            </div>
+        </section>
 
-                <!-- Producto Informativo 3 -->
-                <article class="bento-card filter-item tilt-effect" style="background: rgba(255, 198, 255, 0.9);">
-                    <img src="imagenes/frascos-cristal.png" alt="Frascos" class="bento-img circular-img">
-                    <div class="bento-content centered">
-                        <h3 class="bento-title">Frascos de Cristal (Boca Ancha)</h3>
-                        <p class="bento-desc">Recipientes transparentes y gruesos perfectos para hacer el ecosistema del terrario.</p>
-                        <div class="info-tienda">
-                            <strong>📍 Dónde encontrarlo:</strong>
-                            <p>Tiendas de cristalería, supermercados grandes o reciclando frascos de mermelada.</p>
-                        </div>
-                    </div>
-                </article>
-
+        <!-- SECCIÓN 4: KITS DESTACADOS (Mismo diseño de Ofertas en Vivo) -->
+        <section class="mega-section live-deals-section animate-on-scroll">
+            <div class="live-deals-header">
+                <h2>🔥 KITS DE MANUALIDADES</h2>
+                <span class="live-badge pulse-anim">Recomendados para empezar</span>
+            </div>
+            <div class="carrusel">
+                <div class="card-rosa deal-card tilt-effect">
+                    <h3 class="card-titulo-gradient">Kit Botánico Premium</h3>
+                    <p class="precio-viejo">$1,200 MXN</p>
+                    <p class="precio-promocion">$850 MXN</p>
+                    <p class="card-desc">Herramientas de acero inoxidable, guantes de lino y delantal.</p>
+                    <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100" style="text-decoration:none;">Ver en Tienda 🛒</a>
+                </div>
+                <div class="card-rosa deal-card tilt-effect">
+                    <h3 class="card-titulo-gradient">Set de Frascos de Cristal</h3>
+                    <p class="precio-viejo">$450 MXN</p>
+                    <p class="precio-promocion">$299 MXN</p>
+                    <p class="card-desc">3 frascos de boca ancha perfectos para terrarios o velas.</p>
+                    <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100" style="text-decoration:none;">Ver en Tienda 🛒</a>
+                </div>
+                <div class="card-rosa deal-card tilt-effect">
+                    <h3 class="card-titulo-gradient">Maletín de Scrapbook</h3>
+                    <p class="precio-viejo">$900 MXN</p>
+                    <p class="precio-promocion">$650 MXN</p>
+                    <p class="card-desc">Incluye libreta, estampas vintage, cintas y plumones metálicos.</p>
+                    <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100" style="text-decoration:none;">Ver en Tienda 🛒</a>
+                </div>
             </div>
         </section>
 
@@ -214,7 +214,7 @@
         </footer>
     </main>
 
-    <!-- VENTANA EMERGENTE PARA PASO A PASO (MANUALIDADES) -->
+    <!-- VENTANA EMERGENTE PARA PASOS DE MANUALIDADES -->
     <div id="modal-pasos" class="modal-pro">
         <div class="modal-content-pro animate-expand-in">
             <div class="modal-header-pro">

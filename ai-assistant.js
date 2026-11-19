@@ -1,14 +1,14 @@
 // api/ai-assistant.js
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const { mode, message, pageContext, ideaPayload } = req.body;
+  const { mode, message, pageContext, ideaPayload } = req.body || {};
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ error: "Falta configurar GEMINI_API_KEY en Vercel." });
+    return res.status(500).json({ error: "Falta configurar GEMINI_API_KEY en Vercel y redesplegar." });
   }
 
   try {
@@ -31,7 +31,7 @@ Pasos: ${ideaPayload.pasos}`;
     } else {
       systemPrompt = `Eres "Chispa IA", el asistente creativo oficial de "Manualidades e Ideas".
 El usuario está actualmente en la sección: "${pageContext || "Inicio"}".
-Ayúdalo de principio a fin con ideas de manualidades, listas de materiales económicos, sustituciones caseras, pasos detallados y consejos de decoración. Sé cálido, práctico, breve y estructurado.`;
+Ayúdalo con ideas de manualidades, listas de materiales económicos, sustituciones caseras, pasos detallados y consejos de decoración. Sé cálido, práctico, breve y estructurado.`;
 
       userPrompt = message;
     }
@@ -53,6 +53,13 @@ Ayúdalo de principio a fin con ideas de manualidades, listas de materiales econ
     );
 
     const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(500).json({
+        error: `Error de Gemini (${response.status}): ${data?.error?.message || "Revisa tu API Key"}`
+      });
+    }
+
     const replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No pude procesar la respuesta.";
 
     if (mode === "moderate_idea") {
@@ -61,6 +68,6 @@ Ayúdalo de principio a fin con ideas de manualidades, listas de materiales econ
 
     return res.status(200).json({ reply: replyText });
   } catch (error) {
-    return res.status(500).json({ error: "Error conectando con la IA", details: error.message });
+    return res.status(500).json({ error: "Error conectando con la IA: " + error.message });
   }
-}
+};

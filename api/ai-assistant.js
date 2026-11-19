@@ -19,9 +19,30 @@ module.exports = async (req, res) => {
   const { mode, message, pageContext, ideaPayload } = body;
 
   const isMod = mode === "moderate_idea";
+
+  const mapaDelSitio = `
+CONOCIMIENTO DE TU SITIO WEB ("Manualidades e Ideas"):
+- El usuario está viendo actualmente la sección: "${pageContext || "Inicio"}".
+- Secciones principales disponibles en el menú del sitio:
+  1. Decoración: adornos temáticos, lámparas caseras (como lámpara fantasma con botella reciclada), coronas decorativas, centros de mesa y ambientación.
+  2. Animatrónicos y Susto: figuras con movimiento, efectos de terror y utilería creativa.
+  3. Fiesta, Bebidas y Botanas: recetas temáticas, vasos decorados y mesas de dulces.
+  4. Disfraces y Maquillaje: trajes caseros, máscaras y caracterización económica.
+  5. Día de las Madres / Regalos: tarjetas, flores de papel, cajas sorpresa y detalles hechos a mano.
+- Funciones interactivas de la plataforma:
+  * Botón "+ SUBIR IDEA" (aparece arriba al iniciar sesión en "SESION"): permite publicar manualidades propias con título, categoría, costo aproximado, materiales y pasos.
+  * Moderación inteligente: Chispa IA revisa automáticamente cada publicación antes de subirla.
+  * Accesos rápidos en el chat: "Ideas con cartón", "Ahorrar materiales" y "Redactar mi idea".
+`;
+
   const systemPrompt = isMod
     ? `Eres el moderador de "Manualidades e Ideas". Evalúa si es una manualidad respetuosa y clara. Responde SOLO JSON: {"aprobado": true/false, "motivo": "breve", "sugerencia_ia": "consejo corto"}`
-    : `Eres "Chispa IA", asistente creativo de "Manualidades e Ideas" en "${pageContext || "Inicio"}". Responde amable, práctico y breve (máximo 4 líneas).`;
+    : `Eres "Chispa IA", el asistente inteligente de la web "Manualidades e Ideas".
+${mapaDelSitio}
+REGLAS DE RESPUESTA:
+1. Si el usuario pregunta qué opciones, secciones, categorías, manualidades o funciones hay en el sitio web, recomiéndale primero las secciones, proyectos y herramientas exactas de "Manualidades e Ideas".
+2. Si el usuario hace cualquier pregunta general fuera del tema de manualidades (deportes, historia, cultura general, curiosidades, etc., como "¿Quién es el más grande de Champions?"), respóndele directamente con el dato correcto y total precisión.
+3. Sé amable, claro y conciso (máximo 4 o 5 líneas).`;
 
   const userPrompt = isMod
     ? `Título: ${ideaPayload?.titulo}\nCategoría: ${ideaPayload?.categoria}\nMateriales: ${ideaPayload?.materiales}\nPasos: ${ideaPayload?.pasos}`
@@ -41,7 +62,6 @@ module.exports = async (req, res) => {
           .filter((name) => name.includes("flash") || name.includes("lite") || name.includes("hydrogen"));
 
         if (disponibles.length > 0) {
-          // Ordenar priorizando lite/flash más rápidos
           disponibles.sort((a, b) => {
             const score = (n) => (n.includes("lite") ? 1 : n.includes("flash") ? 2 : 3);
             return score(a) - score(b);

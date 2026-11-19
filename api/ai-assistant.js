@@ -19,6 +19,8 @@ module.exports = async (req, res) => {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 20000);
 
+  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+
   try {
     const isMod = mode === "moderate_idea";
     const systemPrompt = isMod
@@ -29,10 +31,19 @@ module.exports = async (req, res) => {
       ? `Título: ${ideaPayload?.titulo}\nCategoría: ${ideaPayload?.categoria}\nMateriales: ${ideaPayload?.materiales}\nPasos: ${ideaPayload?.pasos}`
       : (message || "Hola");
 
-    const modelos = ["gemini-3.8-flash-lite", "gemini-3.8-flash"];
+    // Lista de intentos: reintenta gemini-3.8-flash y prueba alternativas si hay alta demanda (503)
+    const intentos = [
+      { modelo: "gemini-3.8-flash", thinking: "low" },
+      { modelo: "gemini-3.8-flash-lite", thinking: "low" },
+      { modelo: "gemini-3-flash-preview", thinking: "low" },
+      { modelo: "gemini-3.8-flash", thinking: "low" }
+    ];
+
     let lastError = "";
 
-    for (const modelo of modelos) {
+    for (let i = 0; i < intentos.length; i++) {
+      const { modelo, thinking } = intentos[i];
+
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent?key=${apiKey}`,
         {
@@ -45,7 +56,7 @@ module.exports = async (req, res) => {
             generationConfig: {
               temperature: isMod ? 0.1 : 0.7,
               maxOutputTokens: 350,
-              thinkingConfig: { thinkingLevel: "low" },
+              thinkingConfig: { thinkingLevel: thinking },
               responseMimeType: isMod ? "application/json" : "text/plain"
             }
           })
@@ -61,12 +72,19 @@ module.exports = async (req, res) => {
       }
 
       lastError = `${modelo} (${response.status}): ${data?.error?.message || "Error"}`;
-      // Si el error no es 404 (modelo no encontrado), no tiene caso reintentar otro
-      if (response.status !== 404) break;
+
+      // Si es error de autenticación (400/401/403), detenerse; si es 404, 429 o 503, probar el siguiente
+      if ([400, 401, 403].includes(response.status)) break;
+
+      if (response.status === 503 || response.status === 429) {
+        await esperar(900);
+      }
     }
 
     clearTimeout(timer);
-    return res.status(500).json({ error: `Gemini -> ${lastError}` });
+    return res.status(503).json({
+      error: "Chispa IA tiene mucha demanda en este momento. Intenta enviar tu mensaje en unos segundos ✨"
+    });
   } catch (err) {
     clearTimeout(timer);
     return res.status(500).json({

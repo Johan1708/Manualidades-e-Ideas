@@ -1,7 +1,7 @@
 :root {
   --halloween-timer-accent: #ff7b00;
   --halloween-orange: #ff4500;
-  --halloween-blood: #b80d1e;
+  --halloween-blood: #9e0014;
   --halloween-void: #07050b;
   --halloween-timer-text: #e6dfd8;
   --spider-line-height: 0;
@@ -165,7 +165,7 @@ body.cursor-out .cursor-follower {
   padding: 0 20px;
 }
 
-/* ARAÑAS ANIMADAS */
+/* ARAÑAS ANIMADAS DEL TECHO */
 .spiders {
   position: absolute;
   top: 0; left: 0;
@@ -686,6 +686,174 @@ p.visible {
 }
 
 /* ==========================================================================
+   SISTEMA INFESTADO: SANGRE GOTEANDO, ARAÑAS EN BORDES Y GUSANOS
+   ========================================================================== */
+.creepy-infested {
+  position: relative;
+  overflow: visible !important;
+}
+
+.creepy-infestation-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  overflow: visible;
+}
+
+/* SANGRE EN EL BORDE SUPERIOR Y GOTAS CAYENDO */
+.blood-edge-bar {
+  position: absolute;
+  top: -1px;
+  left: 16px;
+  right: 22px;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, #8b0000 18%, #d4001a 50%, #7a000c 85%, transparent);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 3px 10px rgba(180, 0, 20, 0.85);
+  pointer-events: none;
+}
+
+.blood-drip {
+  position: absolute;
+  top: 1px;
+  width: 5px;
+  background: linear-gradient(180deg, #75000b 0%, #c70019 65%, #ff1e38 100%);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 0 8px rgba(210, 0, 25, 0.8);
+  transform-origin: top center;
+  animation: dripStretch ease-in-out infinite;
+}
+
+.blood-falling-drop {
+  position: absolute;
+  top: 10px;
+  width: 5px;
+  height: 7px;
+  background: radial-gradient(circle at 35% 35%, #ff4d63, #a80014);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 0 8px rgba(255, 0, 30, 0.9);
+  opacity: 0;
+  animation: bloodFall linear infinite;
+}
+
+@keyframes dripStretch {
+  0%, 100% { height: 8px; transform: scaleX(1); }
+  50% { height: var(--drip-max, 26px); transform: scaleX(0.85); }
+}
+
+@keyframes bloodFall {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.95; transform: translateY(6px) scale(1); }
+  85% { opacity: 0.85; }
+  100% { transform: translateY(85px) scale(0.7); opacity: 0; }
+}
+
+/* ARAÑAS CAMINANDO SOBRE EL BORDE DE LAS TARJETAS */
+.edge-crawler-spider {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 30;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.95));
+}
+
+.edge-crawler-spider svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: spiderLegsWiggle 0.22s infinite alternate ease-in-out;
+}
+
+@keyframes spiderLegsWiggle {
+  0% { transform: rotate(-6deg) scale(0.96); }
+  100% { transform: rotate(6deg) scale(1.04); }
+}
+
+/* Ruta superior horizontal (va y viene por el filo de arriba) */
+.crawler-top {
+  top: -11px;
+  left: 10%;
+  animation: crawlTopEdge var(--crawl-speed, 9s) linear infinite;
+}
+
+@keyframes crawlTopEdge {
+  0% { left: 8%; transform: rotate(90deg); }
+  45% { left: 84%; transform: rotate(90deg); }
+  50% { left: 84%; transform: rotate(-90deg); }
+  95% { left: 8%; transform: rotate(-90deg); }
+  100% { left: 8%; transform: rotate(90deg); }
+}
+
+/* Ruta lateral derecha (sube y baja por el borde derecho) */
+.crawler-side {
+  right: -11px;
+  top: 15%;
+  animation: crawlSideEdge var(--crawl-speed, 11s) linear infinite;
+}
+
+@keyframes crawlSideEdge {
+  0% { top: 14%; transform: rotate(180deg); }
+  45% { top: 78%; transform: rotate(180deg); }
+  50% { top: 78%; transform: rotate(0deg); }
+  95% { top: 14%; transform: rotate(0deg); }
+  100% { top: 14%; transform: rotate(180deg); }
+}
+
+/* GUSANOS / LARVAS RETORCIÉNDOSE EN LOS BORDES */
+.creepy-worm {
+  position: absolute;
+  width: 24px;
+  height: 8px;
+  background: linear-gradient(90deg, #5a6e3a 0%, #9cb86c 45%, #73874c 80%, #3d4a26 100%);
+  border-radius: 10px 14px 10px 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+  z-index: 28;
+  animation: wormSquirm var(--worm-speed, 3.2s) ease-in-out infinite;
+}
+
+/* Anillos segmentados del gusano */
+.creepy-worm::after {
+  content: "";
+  position: absolute;
+  inset: 1px 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(25, 32, 12, 0.55) 3px,
+    rgba(25, 32, 12, 0.55) 4.5px
+  );
+  border-radius: inherit;
+}
+
+.worm-bottom-left {
+  bottom: -4px;
+  left: 18px;
+}
+
+.worm-top-right {
+  top: -4px;
+  right: 26px;
+  transform: rotate(-18deg);
+  animation-name: wormSquirmAlt;
+}
+
+@keyframes wormSquirm {
+  0%, 100% { transform: translateX(0) scaleX(1) scaleY(1) rotate(2deg); }
+  25% { transform: translateX(6px) scaleX(0.75) scaleY(1.25) rotate(-5deg); }
+  50% { transform: translateX(14px) scaleX(1.12) scaleY(0.9) rotate(4deg); }
+  75% { transform: translateX(7px) scaleX(0.78) scaleY(1.2) rotate(-3deg); }
+}
+
+@keyframes wormSquirmAlt {
+  0%, 100% { transform: translateY(0) scaleX(1) rotate(78deg); }
+  30% { transform: translateY(6px) scaleX(0.72) scaleY(1.25) rotate(86deg); }
+  60% { transform: translateY(13px) scaleX(1.1) rotate(72deg); }
+  85% { transform: translateY(5px) scaleX(0.8) rotate(82deg); }
+}
+
+/* ==========================================================================
    FILA DE LAS 4 CATEGORÍAS (ESTILO DARK-HORROR / CRIPTA NEÓN)
    ========================================================================== */
 .categories-wide-row {
@@ -734,37 +902,40 @@ p.visible {
   position: relative;
   width: 100%;
   aspect-ratio: 300 / 235;
-  background: linear-gradient(160deg, rgba(26, 10, 20, 0.92) 0%, rgba(6, 4, 11, 0.98) 100%);
+  background: linear-gradient(160deg, rgba(26, 10, 20, 0.94) 0%, rgba(6, 4, 11, 0.99) 100%);
   border-radius: 18px 34px 18px 34px;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.4s ease;
   backdrop-filter: blur(18px);
-  overflow: hidden;
-  border: 1px solid rgba(255, 94, 0, 0.28);
+  border: 1.5px solid rgba(190, 15, 30, 0.45);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.92), inset 0 0 35px rgba(0, 0, 0, 0.95);
 }
 
+/* Telaraña en esquina */
 .card.cat-card::before {
   content: "";
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: 0;
+  right: 0;
   width: 95px;
   height: 95px;
   background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider-web.svg");
   background-size: cover;
-  opacity: 0.22;
+  border-radius: 0 34px 0 0;
+  opacity: 0.32;
   mix-blend-mode: screen;
   pointer-events: none;
   z-index: 3;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.35s ease;
 }
 
+/* Spotlight y viñeta interna recortados al borde de la tarjeta */
 .card.cat-card::after {
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   background:
-    radial-gradient(240px circle at var(--mx, 50%) var(--my, 35%), rgba(255, 94, 0, 0.26), transparent 70%),
+    radial-gradient(240px circle at var(--mx, 50%) var(--my, 35%), rgba(220, 30, 15, 0.28), transparent 70%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(5, 3, 10, 0.45) 55%, rgba(4, 2, 8, 0.98) 100%);
   box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.95);
   pointer-events: none;
@@ -779,9 +950,9 @@ p.visible {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 68, 0, 0.45) 0%, rgba(184, 13, 30, 0.2) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(220, 20, 35, 0.45) 0%, rgba(255, 68, 0, 0.2) 55%, transparent 75%);
   filter: blur(20px);
-  opacity: 0.45;
+  opacity: 0.5;
   transition: opacity 0.4s ease, transform 0.4s ease;
   pointer-events: none;
   z-index: 1;
@@ -806,6 +977,7 @@ p.visible {
   inset: 0;
   width: 100%;
   height: 100%;
+  border-radius: inherit;
   object-fit: cover;
   z-index: 1;
   filter: contrast(1.25) saturate(1.1) brightness(0.68);
@@ -818,7 +990,7 @@ p.visible {
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
-  background: rgba(8, 5, 13, 0.92);
+  background: rgba(8, 5, 13, 0.94);
   color: #f7efe8;
   padding: 8px 18px;
   border-radius: 10px 20px 10px 20px;
@@ -826,8 +998,8 @@ p.visible {
   font-size: 12px;
   letter-spacing: 1.4px;
   font-weight: bold;
-  border: 1px solid rgba(255, 102, 0, 0.45);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.95), inset 0 0 12px rgba(255, 69, 0, 0.15);
+  border: 1px solid rgba(220, 35, 35, 0.55);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.95), inset 0 0 12px rgba(200, 0, 20, 0.25);
   white-space: nowrap;
   transition: all 0.35s ease;
 }
@@ -835,16 +1007,15 @@ p.visible {
 .card.cat-card:hover, 
 .card.cat-card.active {
   transform: translateY(-9px) scale(1.015);
-  border-color: #ff5500;
+  border-color: #ff2a2a;
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.96), 
-              0 0 35px rgba(255, 68, 0, 0.55), 
-              inset 0 0 25px rgba(255, 51, 0, 0.25);
+              0 0 35px rgba(210, 15, 25, 0.6), 
+              inset 0 0 25px rgba(200, 15, 20, 0.3);
 }
 
 .card.cat-card:hover::before,
 .card.cat-card.active::before {
-  opacity: 0.55;
-  transform: scale(1.08);
+  opacity: 0.65;
 }
 
 .card.cat-card:hover .cat-card-glow,
@@ -857,36 +1028,35 @@ p.visible {
 .card.cat-card:not(.cat-photo-mode).active img {
   top: -19%;
   transform: translateX(-50%) scale(1.08);
-  filter: contrast(1.28) brightness(1.08) drop-shadow(0 0 22px rgba(255, 85, 0, 0.75));
+  filter: contrast(1.28) brightness(1.08) drop-shadow(0 0 22px rgba(220, 30, 30, 0.75));
 }
 
 .card.cat-card.cat-photo-mode:hover img,
 .card.cat-card.cat-photo-mode.active img {
-  transform: scale(1.12);
   filter: contrast(1.32) saturate(1.25) brightness(0.92);
 }
 
 .card.cat-card:hover .card-label-badge, 
 .card.cat-card.active .card-label-badge {
-  background: linear-gradient(135deg, #ff4500 0%, #9e0818 100%);
+  background: linear-gradient(135deg, #b80014 0%, #ff4500 100%);
   border-color: #ffbe55;
   color: #ffffff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 25px rgba(255, 69, 0, 0.85);
+  box-shadow: 0 0 25px rgba(220, 20, 30, 0.85);
 }
 
 /* ==========================================================================
-   PANEL Y TARJETAS DE PROYECTOS / PRODUCTOS (ESTILO GRIMORIO DARK-UI)
+   PANEL Y TARJETAS DE PROYECTOS / PRODUCTOS (INFESTADAS DE TERROR)
    ========================================================================== */
 .category-showcase {
   margin-top: 34px;
   background: linear-gradient(180deg, rgba(15, 8, 20, 0.88) 0%, rgba(5, 3, 10, 0.96) 100%);
   backdrop-filter: blur(22px);
   border: 1px solid rgba(255, 94, 0, 0.32);
-  border-top: 2px solid rgba(255, 115, 0, 0.75);
+  border-top: 2px solid rgba(210, 15, 30, 0.8);
   border-radius: 26px;
   padding: 32px;
-  box-shadow: 0 28px 65px rgba(0, 0, 0, 0.94), inset 0 0 40px rgba(255, 51, 0, 0.08);
+  box-shadow: 0 28px 65px rgba(0, 0, 0, 0.94), inset 0 0 40px rgba(200, 15, 25, 0.1);
   position: relative;
   z-index: 20;
 }
@@ -917,7 +1087,7 @@ p.visible {
   font-size: 3.3rem;
   letter-spacing: 2.5px;
   color: #ffffff;
-  text-shadow: 0 0 22px rgba(255, 85, 0, 0.8), 0 4px 12px #000;
+  text-shadow: 0 0 22px rgba(220, 30, 30, 0.85), 0 4px 12px #000;
   line-height: 1;
 }
 
@@ -941,31 +1111,30 @@ p.visible {
 }
 
 .spooky-tab:hover {
-  background: rgba(255, 85, 0, 0.22);
-  border-color: #ff7b00;
+  background: rgba(200, 20, 30, 0.25);
+  border-color: #ff3b3b;
   color: #ffffff;
-  box-shadow: 0 0 18px rgba(255, 85, 0, 0.45);
+  box-shadow: 0 0 18px rgba(220, 20, 30, 0.45);
 }
 
 .spooky-tab.active {
-  background: linear-gradient(135deg, #ff4500 0%, #9e0818 100%);
+  background: linear-gradient(135deg, #b80014 0%, #ff4500 100%);
   border-color: #ffbe55;
   color: #ffffff;
-  box-shadow: 0 0 24px rgba(255, 69, 0, 0.75), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 24px rgba(220, 25, 30, 0.75), inset 0 1px 2px rgba(255, 255, 255, 0.35);
 }
 
 .showcase-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
+  gap: 28px;
 }
 
 .spooky-item-card {
   position: relative;
-  background: linear-gradient(170deg, rgba(22, 11, 26, 0.94) 0%, rgba(7, 4, 12, 0.99) 100%);
-  border: 1px solid rgba(255, 94, 0, 0.22);
+  background: linear-gradient(170deg, rgba(22, 11, 26, 0.95) 0%, rgba(7, 4, 12, 0.99) 100%);
+  border: 1.5px solid rgba(190, 20, 35, 0.32);
   border-radius: 18px 28px 18px 28px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -978,7 +1147,8 @@ p.visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 20%), rgba(255, 85, 0, 0.16), transparent 70%);
+  border-radius: inherit;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 20%), rgba(220, 25, 25, 0.2), transparent 70%);
   pointer-events: none;
   z-index: 3;
 }
@@ -990,10 +1160,10 @@ p.visible {
 
 .spooky-item-card:hover {
   transform: translateY(-9px);
-  border-color: #ff5500;
+  border-color: #ff2e2e;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.96), 
-              0 0 32px rgba(255, 68, 0, 0.42),
-              inset 0 0 20px rgba(255, 68, 0, 0.12);
+              0 0 32px rgba(210, 20, 25, 0.48),
+              inset 0 0 20px rgba(200, 15, 20, 0.16);
 }
 
 .spooky-card-media {
@@ -1001,6 +1171,7 @@ p.visible {
   height: 195px;
   width: 100%;
   overflow: hidden;
+  border-radius: 16px 26px 0 0;
   background: #06040a;
 }
 
@@ -1036,8 +1207,8 @@ p.visible {
   left: 12px;
   z-index: 4;
   background: rgba(6, 4, 11, 0.92);
-  border: 1px solid #ff6600;
-  color: #ffa64d;
+  border: 1px solid #d41424;
+  color: #ff9d80;
   font-family: 'Share Tech Mono', monospace;
   font-size: 10.5px;
   letter-spacing: 0.8px;
@@ -1052,7 +1223,7 @@ p.visible {
   top: 12px;
   right: 12px;
   z-index: 4;
-  background: linear-gradient(135deg, #ff4500, #9e0818);
+  background: linear-gradient(135deg, #b80014, #ff4500);
   border: 1px solid rgba(255, 190, 85, 0.45);
   color: #ffffff;
   font-family: 'Share Tech Mono', monospace;
@@ -1085,7 +1256,7 @@ p.visible {
 }
 
 .spooky-item-card:hover .spooky-card-title {
-  color: #ffae42;
+  color: #ff7b5c;
 }
 
 .spooky-card-desc {
@@ -1102,9 +1273,9 @@ p.visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 69, 0, 0.08);
-  border: 1px solid rgba(255, 94, 0, 0.25);
-  border-left: 3px solid #ff5500;
+  background: rgba(190, 15, 25, 0.12);
+  border: 1px solid rgba(210, 25, 35, 0.32);
+  border-left: 3px solid #d41424;
   padding: 8px 12px;
   border-radius: 10px;
   font-family: 'Share Tech Mono', monospace;
@@ -1126,18 +1297,18 @@ p.visible {
   padding: 11px 14px;
   border-radius: 12px 18px 12px 18px;
   border: 1px solid rgba(255, 190, 85, 0.45);
-  background: linear-gradient(135deg, #ff4500 0%, #9e0818 100%);
+  background: linear-gradient(135deg, #b80014 0%, #ff4500 100%);
   color: #ffffff;
   font-weight: 800;
   font-size: 0.9rem;
   letter-spacing: 0.4px;
-  box-shadow: 0 6px 20px rgba(255, 51, 0, 0.38);
+  box-shadow: 0 6px 20px rgba(210, 20, 25, 0.42);
   transition: all 0.28s ease;
 }
 
 .btn-spooky-primary:hover {
   filter: brightness(1.18);
-  box-shadow: 0 0 26px rgba(255, 85, 0, 0.8);
+  box-shadow: 0 0 26px rgba(230, 30, 30, 0.85);
   transform: translateY(-2px);
 }
 
@@ -1147,8 +1318,8 @@ p.visible {
   text-align: center;
   padding: 9px 14px;
   border-radius: 12px 18px 12px 18px;
-  border: 1px solid rgba(255, 102, 0, 0.4);
-  background: rgba(255, 85, 0, 0.07);
+  border: 1px solid rgba(210, 35, 35, 0.45);
+  background: rgba(190, 20, 25, 0.08);
   color: #ffad5c;
   font-weight: 700;
   font-size: 0.88rem;
@@ -1156,8 +1327,8 @@ p.visible {
 }
 
 .btn-spooky-secondary:hover {
-  background: rgba(255, 85, 0, 0.22);
-  border-color: #ff8c1a;
+  background: rgba(210, 25, 25, 0.24);
+  border-color: #ff4545;
   color: #ffffff;
 }
 

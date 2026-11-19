@@ -502,6 +502,67 @@ function setupHorrorAtmosphere() {
   }
 }
 
+/* INYECTOR DE BICHOS, GUSANOS, ARAÑAS Y SANGRE GOTEANDO SOBRE LAS TARJETAS */
+const SPIDER_SVG = `
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#080408" stroke-width="3.2" stroke-linecap="round">
+    <path d="M26 26 L12 12 L4 18"/>
+    <path d="M25 31 L8 26 L2 34"/>
+    <path d="M25 36 L9 42 L3 50"/>
+    <path d="M27 40 L14 54 L9 61"/>
+    <path d="M38 26 L52 12 L60 18"/>
+    <path d="M39 31 L56 26 L62 34"/>
+    <path d="M39 36 L55 42 L61 50"/>
+    <path d="M37 40 L50 54 L55 61"/>
+  </g>
+  <ellipse cx="32" cy="40" rx="9" ry="11" fill="#12080d" stroke="#2d0810" stroke-width="1.5"/>
+  <circle cx="32" cy="25" r="6" fill="#0d0508"/>
+  <path d="M29 38 L32 34 L35 38 L32 42 Z" fill="#e60019"/>
+  <circle cx="30" cy="21" r="1.3" fill="#ff2a00"/>
+  <circle cx="34" cy="21" r="1.3" fill="#ff2a00"/>
+</svg>`;
+
+function infestCard(cardElement, index = 0) {
+  if (!cardElement || cardElement.querySelector(".creepy-infestation-layer")) return;
+
+  const layer = document.createElement("div");
+  layer.className = "creepy-infestation-layer";
+
+  // 1. Barra de sangre superior y gotas estirándose/cayendo
+  const drip1Pos = 16 + ((index * 17) % 25);
+  const drip2Pos = 55 + ((index * 13) % 28);
+  const fallPos = 32 + ((index * 19) % 40);
+
+  layer.innerHTML = `
+    <div class="blood-edge-bar"></div>
+    <span class="blood-drip" style="left:${drip1Pos}%; --drip-max:${22 + (index % 4) * 5}px; animation-duration:${3.4 + (index % 3)}s;"></span>
+    <span class="blood-drip" style="left:${drip2Pos}%; --drip-max:${18 + (index % 3) * 6}px; animation-duration:${4.1 + (index % 2)}s; animation-delay:1.1s;"></span>
+    <span class="blood-falling-drop" style="left:${fallPos}%; animation-duration:${3.6 + (index % 3) * 0.8}s; animation-delay:${(index % 4) * 0.7}s;"></span>
+
+    <!-- Araña caminando por el filo superior -->
+    <div class="edge-crawler-spider crawler-top" style="--crawl-speed:${8 + (index % 4) * 1.5}s; animation-delay:-${index * 1.4}s;">
+      ${SPIDER_SVG}
+    </div>
+
+    <!-- Araña caminando por el borde derecho -->
+    <div class="edge-crawler-spider crawler-side" style="--crawl-speed:${10 + (index % 3) * 2}s; animation-delay:-${index * 2.1}s;">
+      ${SPIDER_SVG}
+    </div>
+
+    <!-- Gusanos retorciéndose en las esquinas -->
+    <div class="creepy-worm worm-bottom-left" style="--worm-speed:${2.8 + (index % 3) * 0.6}s; animation-delay:-${index * 0.5}s;"></div>
+    <div class="creepy-worm worm-top-right" style="--worm-speed:${3.3 + (index % 2) * 0.7}s; animation-delay:-${index * 0.9}s;"></div>
+  `;
+
+  cardElement.appendChild(layer);
+}
+
+function setupCardInfestation() {
+  document.querySelectorAll(".cat-card.creepy-infested").forEach((card, idx) => {
+    infestCard(card, idx);
+  });
+}
+
 /* EFECTO SPOTLIGHT INTERACTIVO EN TARJETAS DE CATEGORÍA Y PROYECTOS */
 function setupCardSpotlight() {
   document.addEventListener("mousemove", (e) => {
@@ -1617,9 +1678,9 @@ function setupCategoryMapping() {
     if (kickerEl) kickerEl.textContent = `MOSTRANDO ${filtered.length} OPCIONES DISPONIBLES`;
 
     grid.innerHTML = "";
-    filtered.forEach((item) => {
+    filtered.forEach((item, index) => {
       const card = document.createElement("article");
-      card.className = "spooky-item-card";
+      card.className = "spooky-item-card creepy-infested";
 
       const buttonsHTML = item.tipo === "diy"
         ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>`
@@ -1647,6 +1708,9 @@ function setupCategoryMapping() {
           </div>
         </div>
       `;
+
+      // Infestar cada tarjeta desplegada con sangre, arañas en los bordes y gusanos
+      infestCard(card, index + 4);
 
       const detailBtn = card.querySelector(".btn-open-detail");
       if (detailBtn) {
@@ -1708,6 +1772,7 @@ function setupScrollToTop() {
 document.addEventListener("DOMContentLoaded", () => {
   setupLiquidChrome();
   setupHorrorAtmosphere();
+  setupCardInfestation();
   setupCardSpotlight();
   setupCursor();
   setupCountdown();

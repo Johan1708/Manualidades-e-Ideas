@@ -2,9 +2,9 @@
    AUTH + MODERACIÓN DE IDEAS + ASISTENTE IA GLOBAL (TODAS LAS PÁGINAS)
    ========================================================================== */
 
-// 1. PEGA AQUÍ TUS CREDENCIALES DE SUPABASE
-const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
-const SUPABASE_ANON_KEY = "TU_SUPABASE_ANON_KEY";
+// CREDENCIALES DE SUPABASE CONFIGURADAS
+const SUPABASE_URL = "https://fwbcltconkufmjkonwnd.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_QDnoZtA8QdX3pSLL9hqPGw_S9TjBTvd";
 
 // Filtro rápido local de groserías antes de gastar tokens de IA
 const PALABRAS_PROHIBIDAS = [

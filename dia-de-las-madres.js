@@ -1,17 +1,49 @@
-// Texto que representa la escena (puedes cambiarlo por el mensaje que prefieras)
-const textoEmotivo = "Caminando hacia lo desconocido, con la única certeza de que cada paso, cada sacrificio y cada esfuerzo, construirá un horizonte brillante para aquellos que más ama. Gracias por todo, mamá.";
-
+// 1. ANIMACIÓN DEL TEXTO EMOTIVO SOBRE EL VIDEO
+const textoEmotivo = "Caminando hacia lo desconocido, con la única certeza de que cada esfuerzo construirá un horizonte brillante para quienes más ama.";
 const elementoMensaje = document.getElementById("mensaje-animado");
 let indice = 0;
 
-// Efecto de máquina de escribir
 function escribirTexto() {
     if (indice < textoEmotivo.length) {
         elementoMensaje.innerHTML += textoEmotivo.charAt(indice);
         indice++;
-        setTimeout(escribirTexto, 50); // Cambia el 50 para que escriba más rápido o más lento
+        setTimeout(escribirTexto, 40);
     }
 }
+setTimeout(escribirTexto, 1500);
 
-// Inicia la escritura del texto 2 segundos después de abrir la página, dando tiempo a que cargue el video y el título
-setTimeout(escribirTexto, 2000);
+// 2. LÓGICA DE LOS FILTROS
+function inicializarFiltros(contenedorFiltrosId, contenedorCarruselId) {
+    const contenedorFiltros = document.getElementById(contenedorFiltrosId);
+    const carrusel = document.getElementById(contenedorCarruselId);
+    
+    if (!contenedorFiltros || !carrusel) return;
+
+    const botones = contenedorFiltros.querySelectorAll('button');
+    const tarjetas = carrusel.querySelectorAll('.brutal-card');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            // Quitar clase active de todos los botones de este grupo
+            botones.forEach(b => b.classList.remove('active'));
+            // Agregar active al clickeado
+            boton.classList.add('active');
+
+            const filtro = boton.getAttribute('data-filter');
+
+            // Filtrar las tarjetas
+            tarjetas.forEach(tarjeta => {
+                if (filtro === 'all' || tarjeta.getAttribute('data-price') === filtro) {
+                    tarjeta.style.display = 'flex';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// Activar los 3 grupos de filtros
+inicializarFiltros('filtros-manualidades', 'carrusel-manualidades');
+inicializarFiltros('filtros-lugares', 'carrusel-lugares');
+inicializarFiltros('filtros-regalos', 'carrusel-regalos');

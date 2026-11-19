@@ -1,122 +1,185 @@
+/* RESET & VARIABLES BRUTALISTAS */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
-body, html {
-    width: 100%;
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; /* Evita que la pantalla baje, lo mantiene como postal fija */
+:root {
+    --bg-color: #f4f4f0;
+    --border-color: #111;
+    --brutal-shadow: 4px 4px 0px var(--border-color);
 }
 
-/* --- VIDEO DE FONDO --- */
-.video-container {
-    position: fixed;
-    top: 0;
-    left: 0;
+body {
+    background-color: var(--bg-color);
+    color: var(--border-color);
+    overflow-x: hidden;
+}
+
+/* NAV */
+.brutal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 3px solid var(--border-color);
+    background: #fff;
+}
+
+/* BOTONES BRUTALISTAS */
+.brutal-btn {
+    background: #fff;
+    border: 2px solid var(--border-color);
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--border-color);
+    transition: all 0.1s ease;
+    text-decoration: none;
+    color: var(--border-color);
+    display: inline-block;
+    text-align: center;
+}
+
+.brutal-btn:active, .brutal-btn.active {
+    box-shadow: 0px 0px 0px var(--border-color);
+    transform: translate(2px, 2px);
+    background: #e0e0e0;
+}
+
+.w-100 { width: 100%; margin-top: 10px; }
+
+/* HERO SECCIÓN EMOTIVA */
+.brutal-hero {
+    padding: 20px;
+    border-bottom: 3px solid var(--border-color);
+}
+
+.video-wrapper {
+    position: relative;
     width: 100%;
-    height: 100%;
-    z-index: -2;
+    height: 60vh;
+    border: 3px solid var(--border-color);
+    box-shadow: var(--brutal-shadow);
+    overflow: hidden;
+    background: #000;
 }
 
 #bg-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Esto hace que el sol brille más y los colores sean más vivos */
-    filter: contrast(1.15) brightness(1.05) saturate(1.2); 
+    filter: contrast(1.15) brightness(1.05) saturate(1.2);
 }
 
-/* Capa de luz mágica sobre el video */
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Crea un centro iluminado (dorado) que se desvanece a negro en las orillas */
-    background: radial-gradient(circle at center, rgba(255, 215, 100, 0.15) 0%, rgba(0, 0, 0, 0.75) 85%);
-    z-index: -1;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(255,215,100,0.15) 0%, rgba(0,0,0,0.75) 85%);
 }
 
-/* --- BOTÓN PARA REGRESAR --- */
-.btn-regresar {
+.hero-text {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(5px); /* Efecto cristal / glassmorphism */
-    font-size: 14px;
-    z-index: 10;
-    transition: 0.3s ease;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    color: #fff;
 }
 
-.btn-regresar:hover {
-    background: rgba(255, 255, 255, 0.3);
+.titulo-emotivo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.5rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 35px rgba(255,215,0,0.7), 3px 5px 15px rgba(0,0,0,0.95);
 }
 
-/* --- TEXTOS --- */
-.contenido {
+#mensaje-animado {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #fffaf0;
+    text-shadow: 0 0 10px rgba(255,215,0,0.4), 2px 3px 12px rgba(0,0,0,1);
+    min-height: 80px;
+}
+
+/* SECCIONES Y CARRUSEL */
+.brutal-section {
+    padding: 30px 20px;
+    border-bottom: 3px solid var(--border-color);
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.section-header h2 { font-size: 1.8rem; text-transform: uppercase; }
+
+.filtros { display: flex; gap: 10px; }
+
+/* CARRUSEL HORIZONTAL PARA CELULARES */
+.carrusel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    scroll-snap-type: x mandatory;
+}
+
+.carrusel::-webkit-scrollbar { height: 8px; }
+.carrusel::-webkit-scrollbar-thumb { background: var(--border-color); }
+
+/* TARJETAS DE PRODUCTO/LUGAR */
+.brutal-card {
+    min-width: 260px;
+    background: #fff;
+    border: 3px solid var(--border-color);
+    box-shadow: var(--brutal-shadow);
+    padding: 15px;
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 10px;
+}
+
+.card-img {
+    width: 100%;
+    height: 150px;
+    border: 2px solid var(--border-color);
+    display: flex;
     align-items: center;
-    height: 100%;
-    text-align: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+/* OFERTAS EN VIVO */
+.live-deals { background-color: #ffe600; }
+.live-badge {
+    background: red;
     color: white;
-    padding: 0 20px;
-    z-index: 1;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 2px solid var(--border-color);
+    animation: parpadeo 1.5s infinite;
 }
 
-.titulo {
-    font-family: 'Dancing Script', cursive;
-    font-size: 5rem;
-    margin-bottom: 20px;
-    color: #ffffff;
-    /* Efecto 3D de luz: Brillo blanco + Brillo dorado amplio + Sombra negra profunda */
-    text-shadow: 
-        0 0 15px rgba(255, 255, 255, 0.9),
-        0 0 35px rgba(255, 215, 0, 0.7),
-        3px 5px 15px rgba(0, 0, 0, 0.95);
-    opacity: 0;
-    animation: aparecer 2s ease forwards 0.5s;
+@keyframes parpadeo {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
-.mensaje {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.2rem;
-    max-width: 700px;
-    line-height: 1.6;
-    color: #fffaf0; /* Un blanco ligeramente crema para dar calidez */
-    /* Resplandor sutil para lectura perfecta */
-    text-shadow: 
-        0 0 10px rgba(255, 215, 0, 0.4),
-        2px 3px 12px rgba(0, 0, 0, 1);
-    min-height: 100px;
-}
+.precio-viejo { text-decoration: line-through; color: #555; }
+.precio-nuevo { font-size: 1.5rem; font-weight: bold; color: red; }
 
-/* Animación del título */
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- ADAPTACIÓN A CELULARES --- */
+/* ADAPTACIÓN MÓVIL */
 @media (max-width: 768px) {
-    .titulo { font-size: 2.2rem; }
-    .mensaje { font-size: 1.1rem; }
-    .btn-regresar { top: 15px; left: 15px; padding: 8px 16px; }
-}
-/* --- ADAPTACIÓN A CELULARES --- */
-@media (max-width: 768px) {
-    .titulo { font-size: 3.2rem; }
-    .mensaje { font-size: 1.6rem; }
-    .btn-regresar { top: 15px; left: 15px; padding: 8px 16px; }
+    .titulo-emotivo { font-size: 3rem; }
+    #mensaje-animado { font-size: 1.4rem; }
+    .section-header { flex-direction: column; align-items: flex-start; }
 }

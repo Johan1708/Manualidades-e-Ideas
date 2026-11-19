@@ -1,11 +1,13 @@
 :root {
-  --halloween-timer-accent: #ff8400;
-  --halloween-orange: #ff5500;
-  --halloween-timer-text: #e0e0e0c1;
+  --halloween-timer-accent: #ff7b00;
+  --halloween-orange: #ff4500;
+  --halloween-blood: #b80d1e;
+  --halloween-void: #07050b;
+  --halloween-timer-text: #e6dfd8;
   --spider-line-height: 0;
 }
 
-/* OCULTACIÓN DEFINITIVA DEL CURSOR NATIVO MEDIANTE IMAGEN 1x1 TRANSPARENTE */
+/* OCULTACIÓN DEFINITIVA DEL CURSOR NATIVO */
 html, body, *, *::before, *::after, a, button, input, select, textarea, label, div, span, img, svg, canvas, *:hover, *:active, *:focus {
   cursor: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'), none !important;
 }
@@ -14,7 +16,7 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   height: 100%;
-  background-color: #0b0810;
+  background-color: var(--halloween-void);
 }
 
 a {
@@ -49,8 +51,66 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none !important;
+  z-index: -3;
+  opacity: 0.92;
+}
+
+/* CAPAS DE ATMÓSFERA DE TERROR: VIÑETA, RELÁMPAGOS Y BRASAS */
+.horror-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background: radial-gradient(circle at 50% 40%, rgba(10, 5, 14, 0.25) 0%, rgba(5, 3, 9, 0.88) 78%, rgba(2, 1, 5, 0.98) 100%);
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
+}
+
+.horror-lightning {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
   z-index: -1;
+  background: radial-gradient(circle at 65% 25%, rgba(255, 120, 30, 0.28), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.12s ease-out;
+}
+
+.horror-lightning.flash {
   opacity: 1;
+}
+
+.horror-embers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.ember-particle {
+  position: absolute;
+  bottom: -15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffae42 0%, #ff4500 60%, transparent 100%);
+  box-shadow: 0 0 10px #ff5500, 0 0 18px #ff2200;
+  animation: floatEmber linear infinite;
+}
+
+@keyframes floatEmber {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-105vh) translateX(var(--drift, 40px)) scale(0.3);
+    opacity: 0;
+  }
 }
 
 /* CURSOR PERSONALIZADO GPU 1:1 */
@@ -58,11 +118,11 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 8px; height: 8px;
-  background-color: #b9b0b0;
+  background-color: #ff9d3b;
   border-radius: 50%;
   pointer-events: none !important;
   z-index: 999999;
-  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px #ff7b00, 0 0 22px #ff4500, 0 0 32px rgba(255, 69, 0, 0.9);
   will-change: transform;
   transform: translate3d(-50%, -50%, 0);
   opacity: 1;
@@ -73,7 +133,7 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 42px; height: 42px;
-  border: 1.5px solid rgba(239, 225, 225, 0.85);
+  border: 1.5px solid rgba(255, 132, 0, 0.75);
   border-radius: 50%;
   pointer-events: none !important;
   z-index: 999998;
@@ -81,15 +141,15 @@ body {
   transform: translate3d(-50%, -50%, 0);
   opacity: 1;
   transition: opacity 0.15s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 15px rgba(255, 85, 0, 0.35), inset 0 0 10px rgba(255, 85, 0, 0.2);
 }
 
 .cursor-follower.active {
-  width: 58px;
-  height: 58px;
-  border-color: var(--halloween-timer-accent);
-  background-color: rgba(248, 67, 151, 0.15);
-  box-shadow: 0 0 25px var(--halloween-timer-accent);
+  width: 60px;
+  height: 60px;
+  border-color: #ff4500;
+  background-color: rgba(255, 69, 0, 0.18);
+  box-shadow: 0 0 28px #ff5500;
 }
 
 body.cursor-out .cursor,
@@ -119,14 +179,15 @@ body.cursor-out .cursor-follower {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: spider-jump 1.5s ease-in-out infinite alternate;
+  animation: spider-jump 1.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.95));
 }
 
 .spider::before {
   content: "";
   display: block;
-  width: 2px;
-  background-image: linear-gradient(to bottom, #ccc, rgba(242, 15, 185, 0.15));
+  width: 1.5px;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 102, 0, 0.2));
   height: var(--spider-line-height, 80px);
 }
 
@@ -143,7 +204,7 @@ body.cursor-out .cursor-follower {
   width: 100%;
   padding: 20px 0;
   z-index: 100;
-  background: transparent;
+  background: linear-gradient(180deg, rgba(5, 3, 9, 0.85) 0%, transparent 100%);
 }
 
 .header .container {
@@ -152,11 +213,12 @@ body.cursor-out .cursor-follower {
 }
 
 .logotype {
-  font-family: "Jolly Lodger", sans-serif;
-  font-size: 2.8rem;
-  line-height: 1.2;
+  font-family: "Creepster", "Jolly Lodger", sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  line-height: 1.1;
   color: var(--halloween-timer-accent);
-  text-shadow: 0 0 15px rgba(248, 67, 151, 0.6);
+  text-shadow: 0 0 18px rgba(255, 85, 0, 0.8), 0 4px 10px #000;
 }
 
 .header-actions {
@@ -170,19 +232,21 @@ body.cursor-out .cursor-follower {
   padding: 0.75rem 1.4rem;
   border-radius: 2.5rem;
   font-family: "Nunito", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   line-height: 1;
-  background-color: var(--halloween-timer-accent);
+  background: linear-gradient(135deg, #ff5500 0%, #a80d1e 100%);
+  border: 1px solid rgba(255, 153, 0, 0.5);
   color: white;
-  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 0 15px rgba(248, 67, 151, 0.4);
+  transition: all 0.35s ease;
+  box-shadow: 0 0 18px rgba(255, 69, 0, 0.5);
 }
 
 .button:hover, .button:focus {
-  background-color: white;
-  color: var(--halloween-timer-accent);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+  background: #ffffff;
+  color: #14080e;
+  box-shadow: 0 0 28px rgba(255, 132, 0, 0.9);
+  transform: translateY(-2px);
 }
 
 /* INTERRUPTOR CALAVERA APAGAR */
@@ -190,10 +254,11 @@ body.cursor-out .cursor-follower {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(10, 8, 16, 0.5);
+  background: rgba(12, 7, 16, 0.75);
   padding: 6px 14px;
   border-radius: 30px;
-  border: 1px solid rgb(245, 147, 1);
+  border: 1px solid rgba(255, 119, 0, 0.6);
+  box-shadow: 0 0 15px rgba(255, 85, 0, 0.25);
   backdrop-filter: blur(12px);
 }
 
@@ -414,11 +479,11 @@ body.cursor-out .cursor-follower {
   filter: drop-shadow(calc(var(--sz) * -0.25) 0px 0px var(--bone)) drop-shadow(0 0 1px #000);
 }
 
-/* MAIN SECTION ELEVADA SIN FONDOS NEGROS OPACOS */
+/* MAIN SECTION ELEVADA */
 .main {
   position: relative;
   width: 100%;
-  padding: 80px 0 40px;
+  padding: 95px 0 50px;
   overflow-x: clip;
   background: transparent !important;
 }
@@ -426,33 +491,35 @@ body.cursor-out .cursor-follower {
 .main::after {
   content: "";
   position: absolute;
-  bottom: 0; left: 0;
+  top: 0; left: 0;
   width: 100%; aspect-ratio: 1440 / 512;
   background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/spider-web.svg");
   background-size: 100% 100%;
   pointer-events: none;
   z-index: 0;
   mix-blend-mode: screen;
-  opacity: 0.25;
+  opacity: 0.35;
 }
 
 /* LAYOUT GRID DE 2 COLUMNAS PRINCIPALES */
 .main-layout-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 0.92fr 1.08fr;
   gap: 30px;
   align-items: center;
   background: transparent !important;
+  position: relative;
+  z-index: 5;
 }
 
 .content-left {
   width: 100%;
-  background: rgba(10, 8, 16, 0.45);
-  padding: 25px;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(248, 67, 151, 0.2);
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  background: radial-gradient(circle at top left, rgba(28, 12, 22, 0.72) 0%, rgba(8, 5, 14, 0.85) 100%);
+  padding: 30px;
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 102, 0, 0.32);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), inset 0 0 30px rgba(255, 69, 0, 0.08);
 }
 
 .heading {
@@ -465,11 +532,11 @@ body.cursor-out .cursor-follower {
 h1 {
   margin: 0;
   font-family: "Jolly Lodger", sans-serif;
-  font-size: 5.5rem;
+  font-size: 5.2rem;
   font-weight: 400;
-  line-height: 0.95;
-  color: rgb(246, 242, 242);
-  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+  line-height: 0.96;
+  color: #f9f3ee;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95);
 }
 
 h1 span {
@@ -486,19 +553,20 @@ h1 .word {
 
 h1 .word:last-child {
   color: var(--halloween-timer-accent);
-  text-shadow: 0 0 15px var(--halloween-timer-accent);
+  text-shadow: 0 0 20px rgba(255, 102, 0, 0.85), 0 0 40px rgba(255, 34, 0, 0.5);
 }
 
 p {
   margin: 0;
   max-width: 620px;
   font-family: "Nunito", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-  color: rgb(255, 253, 253);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  color: #e9e2dc;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
 }
 
 p.visible {
@@ -512,14 +580,14 @@ p.visible {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   max-width: 580px;
-  gap: 18px;
+  gap: 16px;
   margin: 0;
 }
 
 .countdown-item {
   display: flex;
   flex-direction: column;
-  row-gap: 0.8rem;
+  row-gap: 0.7rem;
 }
 
 .countdown-value {
@@ -530,25 +598,28 @@ p.visible {
   width: 100%;
   aspect-ratio: 1;
   font-family: "Jolly Lodger", sans-serif;
-  font-size: 5.2rem;
+  font-size: 5rem;
   line-height: 1;
-  color: rgb(255, 126, 5);
+  color: #ff8c1a;
   text-align: center;
   background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/counter.svg");
   background-size: 100% 100%;
-  filter: drop-shadow(0 0 10px rgba(248, 67, 151, 0.4));
+  filter: drop-shadow(0 0 15px rgba(255, 85, 0, 0.55));
+  text-shadow: 0 0 15px rgba(255, 102, 0, 0.7);
 }
 
 .countdown-label {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.2;
   text-align: center;
-  color: #fff;
+  color: #f3ece6;
   font-weight: 700;
-  text-shadow: 0 0 8px #000;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px #000;
 }
 
-/* CRÁNEO CENTRAL Y OPCIONES FLANQUEADAS */
+/* CRÁNEO CENTRAL CON AURA ESPECTRAL */
 .illustration-right {
   width: 100%;
   display: flex;
@@ -561,9 +632,24 @@ p.visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
   width: 100%;
   position: relative;
+}
+
+.skull-aura {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.42) 0%, rgba(168, 13, 30, 0.2) 45%, transparent 72%);
+  filter: blur(28px);
+  animation: pulseAura 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes pulseAura {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  100% { transform: scale(1.12); opacity: 1; }
 }
 
 .illustration-image.desktop {
@@ -572,7 +658,7 @@ p.visible {
   max-width: 420px;
   flex-shrink: 0;
   margin: 0;
-  filter: drop-shadow(0 0 35px rgba(255, 85, 0, 0.5));
+  filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(255, 85, 0, 0.55));
 }
 
 .illustration-image img {
@@ -594,74 +680,52 @@ p.visible {
   width: 14.48%;
   aspect-ratio: 22 / 32;
   border-radius: 50%;
-  background-color: rgba(239, 222, 222, 0.89);
-  filter: blur(2px);
-  box-shadow: 0 0 20px rgba(239, 222, 222, 0.89), 0 0 30px rgba(239, 222, 222, 0.89);
+  background-color: #ffae42;
+  filter: blur(1.5px);
+  box-shadow: 0 0 18px #ff7b00, 0 0 32px #ff3300, 0 0 45px rgba(255, 69, 0, 0.9);
 }
 
-/* ETIQUETAS A LOS LADOS DEL CRÁNEO */
-.tags-orbit {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  z-index: 10;
-}
-
-.tags-orbit-left {
-  align-items: flex-end;
-}
-
-.tags-orbit-right {
-  align-items: flex-start;
-}
-
-.tag {
-  position: relative;
-  padding: 0.8rem 1rem;
-  border: solid 1px rgba(248, 67, 151, 0.4);
-  border-radius: 0.625rem;
-  font-weight: 700;
-  font-size: 0.88rem;
-  text-align: center;
-  color: #ffffff;
-  background: rgba(18, 16, 22, 0.8);
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-}
-
-.tag:hover, .tag.active {
-  color: #ffffff;
-  border-color: var(--halloween-timer-accent);
-  background: rgba(248, 67, 151, 0.35);
-  box-shadow: 0 0 20px var(--halloween-timer-accent);
-  transform: scale(1.06);
-}
-
-/* FILA INFERIOR CON TRANSPARENCIA */
+/* ==========================================================================
+   FILA DE LAS 4 CATEGORÍAS (ESTILO GÓTICO OSCURO Y CINEMATOGRÁFICO)
+   ========================================================================== */
 .categories-wide-row {
   grid-column: 1 / -1;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 25px;
   background: transparent !important;
 }
 
 .submenu-header-title {
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
   font-family: 'Share Tech Mono', monospace;
   font-size: 13px;
-  letter-spacing: 2px;
-  color: var(--halloween-timer-accent);
+  letter-spacing: 2.5px;
+  color: #ff9d3b;
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(247, 119, 0, 0.974);
+  text-shadow: 0 0 12px rgba(255, 102, 0, 0.9);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5500;
+  box-shadow: 0 0 12px #ff5500;
+  animation: pulseDot 1.5s infinite alternate;
+}
+
+@keyframes pulseDot {
+  from { transform: scale(0.8); opacity: 0.5; }
+  to { transform: scale(1.3); opacity: 1; }
 }
 
 .category-cards-wide {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 18px;
   width: 100%;
   background: transparent !important;
 }
@@ -669,119 +733,142 @@ p.visible {
 .card.cat-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 300 / 220;
-  background-image: url("https://bato-web-agency.github.io/bato-shared/img/halloween-timer/card.svg");
-  background-size: 100% 100%;
-  border-radius: 25px;
-  transition: all 0.4s ease;
-  backdrop-filter: blur(20px);
+  aspect-ratio: 300 / 225;
+  background: radial-gradient(circle at top, rgba(38, 14, 24, 0.88) 0%, rgba(9, 6, 15, 0.97) 100%);
+  border-radius: 24px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(18px);
   overflow: hidden;
-  border: 2px solid transparent;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  border: 1.5px solid rgba(255, 102, 0, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(0, 0, 0, 0.9);
 }
 
-.card.cat-card img {
+/* Viñeta interna oscura para dar profundidad de terror a cada tarjeta */
+.card.cat-card::after {
+  content: "";
   position: absolute;
-  top: -15%;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(5,3,10,0.4) 55%, rgba(5,3,10,0.95) 100%);
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.95);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cat-card-glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.35), transparent 70%);
+  filter: blur(18px);
+  opacity: 0.4;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Imágenes 3D transparentes (Decoración y Animatrónicos) */
+.card.cat-card:not(.cat-photo-mode) img {
+  position: absolute;
+  top: -12%;
   left: 50%;
   display: block;
   transform: translateX(-50%);
   width: auto;
-  height: 105%;
-  transition: top 0.4s ease, transform 0.4s ease;
+  height: 102%;
+  z-index: 2;
+  filter: contrast(1.15) brightness(0.88) drop-shadow(0 12px 18px rgba(0, 0, 0, 0.95));
+  transition: top 0.4s ease, transform 0.4s ease, filter 0.4s ease;
   object-fit: contain;
+}
+
+/* Imágenes fotográficas (Fiesta y Disfraces) integradas con atmósfera oscura */
+.card.cat-card.cat-photo-mode img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  filter: contrast(1.2) saturate(1.15) brightness(0.72);
+  transition: transform 0.5s ease, filter 0.4s ease;
 }
 
 .card-label-badge {
   position: absolute;
-  bottom: 12px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(18, 16, 22, 0.95);
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 15px;
+  z-index: 4;
+  background: rgba(10, 6, 15, 0.92);
+  color: #f7efe8;
+  padding: 7px 16px;
+  border-radius: 20px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
+  font-size: 11.5px;
+  letter-spacing: 1px;
   font-weight: bold;
-  border: 1px solid rgba(248, 67, 151, 0.5);
-  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  border: 1px solid rgba(255, 119, 0, 0.45);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.95);
   white-space: nowrap;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
 }
 
+/* Estados Hover y Activo de las 4 tarjetas */
 .card.cat-card:hover, 
 .card.cat-card.active,
 .card.cat-card.highlight {
-  box-shadow: 0 0 30px var(--halloween-timer-accent);
-  border-color: var(--halloween-timer-accent);
+  transform: translateY(-7px);
+  border-color: #ff6600;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 
+              0 0 32px rgba(255, 85, 0, 0.5), 
+              inset 0 0 25px rgba(255, 85, 0, 0.25);
 }
 
-.card.cat-card:hover img, 
-.card.cat-card.active img,
-.card.cat-card.highlight img {
-  top: -24%;
-  transform: translateX(-50%) scale(1.05);
+.card.cat-card:hover .cat-card-glow,
+.card.cat-card.active .cat-card-glow {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.25);
+}
+
+.card.cat-card:not(.cat-photo-mode):hover img, 
+.card.cat-card:not(.cat-photo-mode).active img {
+  top: -20%;
+  transform: translateX(-50%) scale(1.06);
+  filter: contrast(1.25) brightness(1.05) drop-shadow(0 0 20px rgba(255, 102, 0, 0.65));
+}
+
+.card.cat-card.cat-photo-mode:hover img,
+.card.cat-card.cat-photo-mode.active img {
+  transform: scale(1.09);
+  filter: contrast(1.28) saturate(1.25) brightness(0.92);
 }
 
 .card.cat-card:hover .card-label-badge, 
 .card.cat-card.active .card-label-badge,
 .card.cat-card.highlight .card-label-badge {
-  background: var(--halloween-timer-accent);
-  color: #0d0714;
-  box-shadow: 0 0 20px var(--halloween-timer-accent);
+  background: linear-gradient(135deg, #ff6600 0%, #c91422 100%);
+  border-color: #ffae42;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 22px rgba(255, 85, 0, 0.8);
 }
 
-.scrollToTopBtn {
-  background: rgba(10, 8, 16, 0.85);
-  border: 1px solid var(--halloween-timer-accent);
-  color: var(--halloween-timer-accent);
-  position: fixed;
-  bottom: 20px; right: 20px;
-  z-index: 100;
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.4s ease;
-}
-
-.scrollToTopBtn.showBtn { opacity: 1; transform: translateY(0); }
-
-@keyframes letter-reveal {
-  0% { opacity: 0; transform: translateY(-20px) rotate(-10deg); filter: blur(3px); }
-  60% { opacity: 1; transform: translateY(2px) rotate(5deg); filter: blur(1px); }
-  100% { opacity: 1; transform: translateY(0) rotate(0deg); filter: blur(0); }
-}
-
-@keyframes spider-jump {
-  0% { transform: translateY(0); } 50% { transform: translateY(-3vh); } 100% { transform: translateY(0); }
-}
-
-@media screen and (max-width: 1100px) {
-  .main-layout-grid { grid-template-columns: 1fr; }
-  .category-cards-wide { grid-template-columns: repeat(2, 1fr); }
-  .skull-hero-wrapper { flex-direction: column; }
-  .tags-orbit { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-}
-
-@media screen and (max-width: 650px) {
-  .category-cards-wide { grid-template-columns: 1fr; }
-  h1 { font-size: 3.8rem; }
-  .countdown-value { font-size: 4rem; }
-}
 /* ==========================================================================
    PANEL DESPLEGABLE DE CATEGORÍAS, PRODUCTOS Y MODAL PASO A PASO
    ========================================================================== */
-
 .category-showcase {
   margin-top: 32px;
-  background: rgba(10, 8, 16, 0.65);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 132, 0, 0.35);
-  border-radius: 26px;
-  padding: 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), inset 0 0 25px rgba(255, 85, 0, 0.08);
+  background: linear-gradient(180deg, rgba(16, 9, 20, 0.85) 0%, rgba(7, 4, 12, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 102, 0, 0.35);
+  border-top: 2px solid rgba(255, 123, 0, 0.65);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 35px rgba(255, 69, 0, 0.08);
   position: relative;
   z-index: 20;
 }
@@ -792,27 +879,27 @@ p.visible {
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  padding-bottom: 20px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid rgba(255, 132, 0, 0.25);
+  padding-bottom: 22px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid rgba(255, 119, 0, 0.25);
 }
 
 .showcase-kicker {
   display: block;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #ff8400;
-  margin-bottom: 4px;
+  font-size: 11.5px;
+  letter-spacing: 2.5px;
+  color: #ff9d3b;
+  margin-bottom: 5px;
 }
 
 .showcase-title {
   margin: 0;
   font-family: 'Jolly Lodger', sans-serif;
-  font-size: 3rem;
-  letter-spacing: 1.5px;
+  font-size: 3.2rem;
+  letter-spacing: 2px;
   color: #ffffff;
-  text-shadow: 0 0 18px rgba(255, 132, 0, 0.65);
+  text-shadow: 0 0 20px rgba(255, 102, 0, 0.75), 0 4px 12px #000;
   line-height: 1;
 }
 
@@ -823,43 +910,47 @@ p.visible {
 }
 
 .spooky-tab {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 132, 0, 0.35);
-  color: #e0e0e0;
-  padding: 9px 18px;
+  background: rgba(18, 11, 24, 0.85);
+  border: 1px solid rgba(255, 119, 0, 0.35);
+  color: #dfd6cf;
+  padding: 10px 20px;
   border-radius: 25px;
   font-family: 'Nunito', sans-serif;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
   transition: all 0.3s ease;
 }
 
 .spooky-tab:hover {
-  background: rgba(255, 132, 0, 0.2);
-  color: #fff;
+  background: rgba(255, 102, 0, 0.2);
+  border-color: #ff7b00;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 102, 0, 0.4);
 }
 
 .spooky-tab.active {
-  background: linear-gradient(135deg, #ff5500, #ff8400);
-  border-color: #ff8400;
-  color: #0b0810;
-  box-shadow: 0 0 18px rgba(255, 132, 0, 0.6);
+  background: linear-gradient(135deg, #ff5500 0%, #b80d1e 100%);
+  border-color: #ffae42;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(255, 85, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.35);
 }
 
 .showcase-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 24px;
 }
 
 .spooky-item-card {
-  background: rgba(18, 14, 26, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  background: linear-gradient(165deg, rgba(22, 13, 28, 0.9) 0%, rgba(9, 6, 14, 0.98) 100%);
+  border: 1px solid rgba(255, 102, 0, 0.2);
+  border-radius: 22px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.85);
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   animation: fadeUpCard 0.4s ease forwards;
 }
@@ -870,59 +961,74 @@ p.visible {
 }
 
 .spooky-item-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--halloween-timer-accent);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 22px rgba(255, 132, 0, 0.25);
+  transform: translateY(-7px);
+  border-color: #ff6600;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 28px rgba(255, 85, 0, 0.35);
 }
 
 .spooky-card-media {
   position: relative;
-  height: 175px;
+  height: 185px;
   width: 100%;
   overflow: hidden;
-  background: #08060c;
+  background: #07050b;
+}
+
+/* Degradado oscuro inferior para fundir la foto con la tarjeta */
+.spooky-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 6, 14, 1) 4%, rgba(9, 6, 14, 0.2) 50%, transparent 100%);
+  pointer-events: none;
 }
 
 .spooky-card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  filter: contrast(1.12) brightness(0.9);
+  transition: transform 0.5s ease, filter 0.4s ease;
 }
 
 .spooky-item-card:hover .spooky-card-media img {
-  transform: scale(1.07);
+  transform: scale(1.08);
+  filter: contrast(1.2) brightness(1);
 }
 
 .spooky-badge-type {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(11, 8, 16, 0.9);
-  border: 1px solid #ff8400;
-  color: #ff8400;
+  z-index: 2;
+  background: rgba(8, 5, 14, 0.92);
+  border: 1px solid #ff7b00;
+  color: #ff9d3b;
   font-family: 'Share Tech Mono', monospace;
   font-size: 11px;
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }
 
 .spooky-badge-top {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: #ff5500;
-  color: #0b0810;
+  z-index: 2;
+  background: linear-gradient(135deg, #ff5500, #b80d1e);
+  color: #ffffff;
   font-family: 'Share Tech Mono', monospace;
   font-size: 10px;
-  padding: 4px 9px;
+  padding: 4px 10px;
   border-radius: 12px;
   font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }
 
 .spooky-card-body {
-  padding: 18px;
+  padding: 16px 20px 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -931,7 +1037,7 @@ p.visible {
 
 .spooky-card-title {
   margin: 0;
-  font-size: 1.18rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #ffffff;
   line-height: 1.25;
@@ -940,10 +1046,10 @@ p.visible {
 .spooky-card-desc {
   margin: 0;
   font-size: 0.9rem;
-  color: #cfcfcf;
+  color: #cfc6be;
   opacity: 1 !important;
   transform: none !important;
-  line-height: 1.45;
+  line-height: 1.48;
   flex: 1;
 }
 
@@ -951,9 +1057,9 @@ p.visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 132, 0, 0.1);
-  border: 1px solid rgba(255, 132, 0, 0.25);
-  padding: 6px 12px;
+  background: rgba(255, 102, 0, 0.1);
+  border: 1px solid rgba(255, 102, 0, 0.28);
+  padding: 7px 12px;
   border-radius: 12px;
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.85rem;
@@ -971,19 +1077,22 @@ p.visible {
   display: block;
   width: 100%;
   text-align: center;
-  padding: 10px 14px;
+  padding: 11px 14px;
   border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #ff5500, #ff8400);
-  color: #0b0810;
+  border: 1px solid rgba(255, 174, 66, 0.4);
+  background: linear-gradient(135deg, #ff5500 0%, #b80d1e 100%);
+  color: #ffffff;
   font-weight: 800;
   font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 18px rgba(255, 69, 0, 0.35);
   transition: all 0.25s ease;
 }
 
 .btn-spooky-primary:hover {
-  filter: brightness(1.12);
-  box-shadow: 0 0 18px rgba(255, 132, 0, 0.6);
+  filter: brightness(1.15);
+  box-shadow: 0 0 22px rgba(255, 102, 0, 0.75);
+  transform: translateY(-1px);
 }
 
 .btn-spooky-secondary {
@@ -992,16 +1101,17 @@ p.visible {
   text-align: center;
   padding: 9px 14px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 132, 0, 0.55);
-  background: rgba(255, 132, 0, 0.08);
-  color: #ff9d3b;
+  border: 1px solid rgba(255, 119, 0, 0.45);
+  background: rgba(255, 102, 0, 0.08);
+  color: #ffad5c;
   font-weight: 700;
   font-size: 0.88rem;
   transition: all 0.25s ease;
 }
 
 .btn-spooky-secondary:hover {
-  background: rgba(255, 132, 0, 0.22);
+  background: rgba(255, 102, 0, 0.22);
+  border-color: #ff8c1a;
   color: #ffffff;
 }
 
@@ -1011,8 +1121,8 @@ p.visible {
   position: fixed;
   inset: 0;
   z-index: 99990;
-  background: rgba(5, 4, 10, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(4, 2, 8, 0.88);
+  backdrop-filter: blur(14px);
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -1023,15 +1133,15 @@ p.visible {
 }
 
 .spooky-modal-box {
-  background: #120e1a;
-  border: 1.5px solid #ff8400;
+  background: radial-gradient(circle at top, #1d1024 0%, #0b0712 100%);
+  border: 1.5px solid #ff6600;
   border-radius: 26px;
   width: 100%;
   max-width: 660px;
   max-height: 85vh;
   overflow-y: auto;
   padding: 28px;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 132, 0, 0.3);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 85, 0, 0.35);
   animation: fadeUpCard 0.35s ease;
 }
 
@@ -1040,7 +1150,7 @@ p.visible {
   justify-content: space-between;
   align-items: flex-start;
   gap: 15px;
-  border-bottom: 1px solid rgba(255, 132, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 119, 0, 0.28);
   padding-bottom: 16px;
   margin-bottom: 20px;
 }
@@ -1048,33 +1158,35 @@ p.visible {
 .modal-badge {
   font-family: 'Share Tech Mono', monospace;
   font-size: 11px;
-  color: #ff8400;
+  color: #ff9d3b;
   letter-spacing: 1.5px;
 }
 
 .spooky-modal-header h3 {
   margin: 4px 0 0;
   font-family: 'Jolly Lodger', sans-serif;
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   color: #fff;
+  text-shadow: 0 0 15px rgba(255, 102, 0, 0.6);
   line-height: 1.05;
 }
 
 .close-spooky-modal {
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 132, 0, 0.4);
-  color: #ff8400;
+  border: 1px solid rgba(255, 119, 0, 0.45);
+  color: #ff9d3b;
   width: 38px;
   height: 38px;
   border-radius: 50%;
   font-size: 1.1rem;
   font-weight: bold;
   flex-shrink: 0;
+  transition: all 0.25s ease;
 }
 
 .close-spooky-modal:hover {
-  background: #ff8400;
-  color: #0b0810;
+  background: #ff5500;
+  color: #ffffff;
 }
 
 .spooky-modal-body {
@@ -1084,15 +1196,15 @@ p.visible {
 }
 
 .modal-materials-box {
-  background: rgba(255, 132, 0, 0.09);
-  border: 1px dashed rgba(255, 132, 0, 0.45);
+  background: rgba(255, 102, 0, 0.09);
+  border: 1px dashed rgba(255, 119, 0, 0.5);
   border-radius: 16px;
   padding: 14px 18px;
 }
 
 .modal-materials-box h4 {
   margin: 0 0 8px;
-  color: #ff8400;
+  color: #ff9d3b;
   font-size: 0.95rem;
   text-transform: uppercase;
   font-family: 'Share Tech Mono', monospace;
@@ -1101,9 +1213,9 @@ p.visible {
 .modal-materials-box ul {
   margin: 0;
   padding-left: 18px;
-  color: #e6e6e6;
+  color: #e6dfd8;
   font-size: 0.92rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .modal-step-item {
@@ -1117,8 +1229,8 @@ p.visible {
 }
 
 .step-num {
-  background: #ff8400;
-  color: #0b0810;
+  background: linear-gradient(135deg, #ff5500, #b80d1e);
+  color: #ffffff;
   font-weight: 800;
   font-family: 'Share Tech Mono', monospace;
   min-width: 30px;
@@ -1128,22 +1240,56 @@ p.visible {
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
+  box-shadow: 0 0 12px rgba(255, 85, 0, 0.5);
 }
 
 .step-text {
   margin: 0;
   font-size: 0.95rem;
-  color: #f0f0f0;
+  color: #f0ebe6;
   opacity: 1 !important;
   transform: none !important;
   line-height: 1.5;
 }
 
-@media screen and (max-width: 1050px) {
+.scrollToTopBtn {
+  background: rgba(12, 7, 16, 0.9);
+  border: 1.5px solid #ff6600;
+  color: #ff9d3b;
+  position: fixed;
+  bottom: 20px; right: 20px;
+  z-index: 100;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateY(50px);
+  box-shadow: 0 0 18px rgba(255, 85, 0, 0.45);
+  transition: all 0.4s ease;
+}
+
+.scrollToTopBtn.showBtn { opacity: 1; transform: translateY(0); }
+.scrollToTopBtn:hover { background: #ff5500; color: #fff; }
+
+@keyframes letter-reveal {
+  0% { opacity: 0; transform: translateY(-20px) rotate(-10deg); filter: blur(3px); }
+  60% { opacity: 1; transform: translateY(2px) rotate(5deg); filter: blur(1px); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg); filter: blur(0); }
+}
+
+@keyframes spider-jump {
+  0% { transform: translateY(0); } 50% { transform: translateY(-3vh); } 100% { transform: translateY(0); }
+}
+
+@media screen and (max-width: 1100px) {
+  .main-layout-grid { grid-template-columns: 1fr; }
+  .category-cards-wide { grid-template-columns: repeat(2, 1fr); }
   .showcase-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media screen and (max-width: 680px) {
+  .category-cards-wide { grid-template-columns: 1fr; }
   .showcase-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 3.8rem; }
+  .countdown-value { font-size: 4rem; }
   .showcase-title { font-size: 2.3rem; }
 }

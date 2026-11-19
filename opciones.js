@@ -468,6 +468,40 @@ void main() {
   requestAnimationFrame(frame);
 }
 
+/* GENERADOR DE ATMÓSFERA DE TERROR: BRASAS FLOTANTES Y RELÁMPAGOS */
+function setupHorrorAtmosphere() {
+  const embersContainer = document.getElementById("horror-embers");
+  const lightning = document.getElementById("horror-lightning");
+
+  if (embersContainer) {
+    for (let i = 0; i < 24; i++) {
+      const ember = document.createElement("span");
+      ember.className = "ember-particle";
+      const size = Math.random() * 4 + 2;
+      ember.style.width = `${size}px`;
+      ember.style.height = `${size}px`;
+      ember.style.left = `${Math.random() * 100}%`;
+      ember.style.animationDuration = `${Math.random() * 7 + 6}s`;
+      ember.style.animationDelay = `${Math.random() * 8}s`;
+      ember.style.setProperty("--drift", `${(Math.random() - 0.5) * 140}px`);
+      embersContainer.appendChild(ember);
+    }
+  }
+
+  if (lightning) {
+    setInterval(() => {
+      if (Math.random() > 0.55) {
+        lightning.classList.add("flash");
+        setTimeout(() => lightning.classList.remove("flash"), 110);
+        setTimeout(() => {
+          lightning.classList.add("flash");
+          setTimeout(() => lightning.classList.remove("flash"), 70);
+        }, 180);
+      }
+    }, 6500);
+  }
+}
+
 /* CURSOR DOBLE GPU 1:1 */
 function setupCursor() {
   const cursorDot = document.querySelector(".cursor");
@@ -643,8 +677,10 @@ function setupShutdownToggle() {
 }
 
 /* ==========================================================================
-   BASE DE DATOS COMPLETA DE LAS 4 CATEGORÍAS (DIY PASO A PASO + TOP COMPRAS)
+   BASE DE DATOS COMPLETA DE LAS 4 CATEGORÍAS (IMÁGENES VERIFICADAS + PASO A PASO)
    ========================================================================== */
+const FALLBACK_SPOOKY_IMG = "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop";
+
 const HALLOWEEN_DATA = {
   decoracion: {
     titulo: "🎃 DECORACIÓN Y AMBIENTACIÓN DE TERROR",
@@ -678,7 +714,7 @@ const HALLOWEEN_DATA = {
         titulo: "Velas Flotantes Estilo Hogwarts",
         desc: "Tubos de cartón reciclados convertidos en velas suspendidas del techo con luz LED cálida.",
         meta: "Costo aprox: $85 MXN",
-        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "10 a 15 tubos de papel higiénico o servitoallas",
           "Pistola de silicón caliente y pintura blanca",
@@ -699,7 +735,7 @@ const HALLOWEEN_DATA = {
         titulo: "Fantasmas Iluminados de Gasa y Globo",
         desc: "Espectros translúcidos que brillan en la oscuridad para colgar en árboles, balcones o entradas.",
         meta: "Costo aprox: $90 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Tela de gasa blanca (manta de cielo)",
           "Pegamento blanco escolar mezclado con agua (50/50)",
@@ -720,7 +756,7 @@ const HALLOWEEN_DATA = {
         titulo: "Siluetas Gigantes de Brujas y Murciélagos",
         desc: "Sombras dramáticas retroiluminadas para ventanas y paredes usando cartulina negra.",
         meta: "Costo aprox: $45 MXN",
-        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Pliegos de cartulina negra mate",
           "Plantillas impresas de murciélagos y gatos",
@@ -739,7 +775,7 @@ const HALLOWEEN_DATA = {
         titulo: "Frascos de Boticario y Pociones Antiguas",
         desc: "Botellas de vidrio recicladas con etiquetas envejecidas con café y contenido misterioso.",
         meta: "Costo aprox: $50 MXN",
-        img: "https://images.unsplash.com/photo-1541697367348-dfc31a1611dc?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Frascos y botellas de vidrio vacías",
           "Hojas de papel envejecidas con café soluble",
@@ -758,7 +794,7 @@ const HALLOWEEN_DATA = {
         titulo: "Corona de Puerta con Serpientes y Flores Negras",
         desc: "Aro decorativo gótico para recibir a tus invitados en la puerta principal.",
         meta: "Costo aprox: $140 MXN",
-        img: "https://images.unsplash.com/photo-1635321593217-40050ad13c74?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Aro de unicel o ramas secas entrelazadas",
           "Serpientes de juguete de plástico",
@@ -857,7 +893,7 @@ const HALLOWEEN_DATA = {
         titulo: "Cortina Metálica Negra y Naranja + Banderines",
         desc: "Set completo de fondo para fotos con flecos brillantes y guirnalda de 'Happy Halloween'.",
         meta: "$150 – $290 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
         especificaciones: [
           "Medidas cortina: 1m x 2m cada panel",
           "Incluye: Banderín de cartulina, globos confeti y cinta",
@@ -937,7 +973,7 @@ const HALLOWEEN_DATA = {
         titulo: "Segador Gigante de 2 Metros con Escoba",
         desc: "Figura de tamaño real hecha con tubos de PVC, bola de unicel y tela negra desgarrada.",
         meta: "Costo aprox: $220 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Tubos de PVC de 1/2 pulgada y conectores T",
           "Calavera de plástico y túnica o tela negra grande",
@@ -956,7 +992,7 @@ const HALLOWEEN_DATA = {
         titulo: "Proyección Holográfica de Fantasmas en Cortina",
         desc: "Convierte una cortina traslúcida en un portal de apariciones usando un proyector o TV.",
         meta: "Costo aprox: $50 MXN",
-        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Cortina de baño semi-translúcida o tela mosquitera gris",
           "Proyector portátil o monitor viejo",
@@ -975,7 +1011,7 @@ const HALLOWEEN_DATA = {
         titulo: "Tazón de Dulces con Mano Trampa",
         desc: "Un guante relleno oculto en el fondo de un recipiente hondo que salta cuando meten la mano.",
         meta: "Costo aprox: $60 MXN",
-        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Caldero o tazón grande de plástico",
           "Guante de látex o esqueleto relleno de algodón",
@@ -1042,7 +1078,7 @@ const HALLOWEEN_DATA = {
         titulo: "Timbre Embrujado con Ojo Móvil y Risa Macabra",
         desc: "Al presionar el botón, se abre un ojo verde brillante que gira y reproduce sonidos de terror.",
         meta: "$240 – $450 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
         especificaciones: [
           "Dimensiones: 18 cm x 11 cm con gancho trasero",
           "Efectos: Ojo giratorio iluminado + 3 audios distintos",
@@ -1074,7 +1110,7 @@ const HALLOWEEN_DATA = {
         titulo: "Prisionero en Jaula con Movimiento y Gritos",
         desc: "Esqueleto atrapado que asoma la cabeza entre los barrotes gritando '¡Sáquenme de aquí!'.",
         meta: "$550 – $980 MXN",
-        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
         especificaciones: [
           "Medidas: 28 cm x 23 cm con cadena para colgar",
           "Activación: Sensor de luz y sonido",
@@ -1096,7 +1132,7 @@ const HALLOWEEN_DATA = {
         titulo: "Poción Sangrienta con Hielo Seco y Frutos Rojos",
         desc: "Ponche humeante sin alcohol (o con vodka) servido en caldero con efecto de niebla.",
         meta: "Rinde: 12 vasos",
-        img: "https://images.unsplash.com/photo-1541697367348-dfc31a1611dc?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "1 L de jugo de arándano + 1 L de refresco de limón",
           "1 taza de fresas y zarzamoras congeladas",
@@ -1172,7 +1208,7 @@ const HALLOWEEN_DATA = {
         titulo: "Jeringas de Gelatina Roja Sangrienta",
         desc: "Jeringas grandes sin aguja rellenas de gelatina de fresa o cereza para repartir en la fiesta.",
         meta: "Rinde: 15 jeringas",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "15 jeringas de plástico nuevas de 20 ml (sin aguja)",
           "1 sobre de gelatina sabor cereza o fresa",
@@ -1207,7 +1243,7 @@ const HALLOWEEN_DATA = {
         titulo: "Pack 24 Bolsas de Sangre para Bebidas + Jeringas",
         desc: "Bolsas médicas grado alimenticio con popote, clip anti-derrame y etiquetas de tipo de sangre.",
         meta: "$190 – $340 MXN",
-        img: "https://images.unsplash.com/photo-1541697367348-dfc31a1611dc?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
         especificaciones: [
           "Capacidad: 350 ml por bolsa (reutilizables y lavables)",
           "Incluye: 24 bolsas + embudo de llenado + etiquetas",
@@ -1269,7 +1305,7 @@ const HALLOWEEN_DATA = {
         titulo: "Piñata Temática Halloween (Calabaza o Fantasma)",
         desc: "Piñata tradicional plegable o de cartón reforzado para rellenar con dulces y premios.",
         meta: "$220 – $450 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
         especificaciones: [
           "Capacidad: Hasta 2.5 kg de dulces",
           "Incluye: Cinta resistente para colgar"
@@ -1305,7 +1341,7 @@ const HALLOWEEN_DATA = {
         titulo: "Fantasma Clásico Aesthetic con Lentes Oscuros",
         desc: "El disfraz más icónico y fotogénico usando una sábana blanca y gafas retro.",
         meta: "Costo aprox: $50 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "1 sábana blanca lisa (matrimonial o queen)",
           "Lentes de sol negros",
@@ -1397,7 +1433,7 @@ const HALLOWEEN_DATA = {
         titulo: "Merlina Addams (Wednesday) con Trenzas",
         desc: "Vestido negro con cuello blanco desmontable de cartulina o camisa, trenzas y labial oscuro.",
         meta: "Costo aprox: $60 MXN",
-        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
         materiales: [
           "Vestido o suéter negro + camisa blanca debajo",
           "Labial morado oscuro / ciruela y sombra gris",
@@ -1477,7 +1513,7 @@ const HALLOWEEN_DATA = {
         titulo: "Capa Reversible de Vampiro / Bruja con Cuello Alto",
         desc: "Capa larga de 150 cm en satín negro por fuera y rojo sangre por dentro con cuello rígido.",
         meta: "$190 – $360 MXN",
-        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        img: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
         especificaciones: [
           "Largo: 140 cm a 150 cm (unisex adulto)",
           "Diseño: Reversible (2 estilos en 1 sola prenda)"
@@ -1582,7 +1618,7 @@ function setupCategoryMapping() {
 
       card.innerHTML = `
         <div class="spooky-card-media">
-          <img src="${item.img}" alt="${item.titulo}" loading="lazy">
+          <img src="${item.img}" alt="${item.titulo}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_SPOOKY_IMG}';">
           <span class="spooky-badge-type">${item.badge}</span>
           <span class="spooky-badge-top">${item.tagExtra}</span>
         </div>
@@ -1658,6 +1694,7 @@ function setupScrollToTop() {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupLiquidChrome();
+  setupHorrorAtmosphere();
   setupCursor();
   setupCountdown();
   setupContent();

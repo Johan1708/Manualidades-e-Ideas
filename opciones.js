@@ -747,22 +747,22 @@ function setupShutdownToggle() {
 }
 
 /* ==========================================================================
-   BASE DE DATOS COMPLETA DE LAS 4 CATEGORÍAS (CON IMÁGENES EN CADA PASO DIY)
+   BASE DE DATOS COMPLETA DE LAS 4 CATEGORÍAS (CON IMÁGENES LOCALES EN CARPETA imagenes/)
    ========================================================================== */
-const FALLBACK_SPOOKY_IMG = "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop";
+const FALLBACK_SPOOKY_IMG = "imagenes/paso-lapida.jpg";
 
 const IMG_STEP = {
-  carton: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=600&auto=format&fit=crop",
-  pintura: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=600&auto=format&fit=crop",
-  velas: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
-  fantasma: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
-  murcielago: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
-  frascos: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
-  lapida: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
-  calabaza: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
-  bebida: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=600&auto=format&fit=crop",
-  postre: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=600&auto=format&fit=crop",
-  maquillaje: "https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=600&auto=format&fit=crop"
+  carton: "imagenes/paso-carton.jpg",
+  pintura: "imagenes/paso-pintura.jpg",
+  velas: "imagenes/paso-velas.jpg",
+  fantasma: "imagenes/paso-fantasma.jpg",
+  murcielago: "imagenes/paso-murcielago.webp",
+  frascos: "imagenes/paso-frascos.jpg",
+  lapida: "imagenes/paso-lapida.jpg",
+  calabaza: "imagenes/paso-calabaza.jpg",
+  bebida: "imagenes/paso-bebida.jpg",
+  postre: "imagenes/paso-postre.jpg",
+  maquillaje: "imagenes/paso-maquillaje.jpg"
 };
 
 const HALLOWEEN_DATA = {
@@ -776,7 +776,7 @@ const HALLOWEEN_DATA = {
         titulo: "Lápidas de Cementerio Realistas en Cartón",
         desc: "Crea lápidas envejecidas con textura de piedra usando cajas de cartón recicladas y pintura acrílica.",
         meta: "Costo aprox: $60 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/deco-lapidas.jpg",
         materiales: [
           "Cajas de cartón grueso (de electrodomésticos o mudanza)",
           "Silicón caliente y cúter",
@@ -809,7 +809,7 @@ const HALLOWEEN_DATA = {
         titulo: "Velas Flotantes Estilo Hogwarts",
         desc: "Tubos de cartón reciclados convertidos en velas suspendidas del techo con luz LED cálida.",
         meta: "Costo aprox: $85 MXN",
-        img: IMG_STEP.velas,
+        img: "imagenes/deco-velas.jpg",
         materiales: [
           "10 a 15 tubos de papel higiénico o servitoallas",
           "Pistola de silicón caliente y pintura blanca",
@@ -842,7 +842,7 @@ const HALLOWEEN_DATA = {
         titulo: "Fantasmas Iluminados de Gasa y Globo",
         desc: "Espectros translúcidos que brillan en la oscuridad para colgar en árboles, balcones o entradas.",
         meta: "Costo aprox: $90 MXN",
-        img: IMG_STEP.fantasma,
+        img: "imagenes/deco-fantasmas.jpg",
         materiales: [
           "Tela de gasa blanca (manta de cielo)",
           "Pegamento blanco escolar mezclado con agua (50/50)",
@@ -871,7 +871,7 @@ const HALLOWEEN_DATA = {
         titulo: "Siluetas Gigantes de Brujas y Murciélagos",
         desc: "Sombras dramáticas retroiluminadas para ventanas y paredes usando cartulina negra.",
         meta: "Costo aprox: $45 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/deco-murcielagos.jpg",
         materiales: [
           "Pliegos de cartulina negra mate",
           "Plantillas impresas de murciélagos y gatos",
@@ -899,7 +899,7 @@ const HALLOWEEN_DATA = {
         titulo: "Frascos de Boticario y Pociones Antiguas",
         desc: "Botellas de vidrio recicladas con etiquetas envejecidas con café y contenido misterioso.",
         meta: "Costo aprox: $50 MXN",
-        img: IMG_STEP.frascos,
+        img: "imagenes/deco-frascos.jpg",
         materiales: [
           "Frascos y botellas de vidrio vacías",
           "Hojas de papel envejecidas con café soluble",
@@ -927,7 +927,7 @@ const HALLOWEEN_DATA = {
         titulo: "Corona de Puerta con Serpientes y Flores Negras",
         desc: "Aro decorativo gótico para recibir a tus invitados en la puerta principal.",
         meta: "Costo aprox: $140 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/deco-corona.jpg",
         materiales: [
           "Aro de unicel o ramas secas entrelazadas",
           "Serpientes de juguete de plástico",
@@ -955,7 +955,7 @@ const HALLOWEEN_DATA = {
         titulo: "Telaraña Elástica Gigante + 60 Arañas",
         desc: "Algodón sintético ultra elástico que cubre hasta 30 m² de paredes, muebles y arbustos.",
         meta: "$130 – $240 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/prod-telarana.jpg",
         especificaciones: [
           "Peso: 200g a 300g de fibra blanca de alta elasticidad",
           "Incluye: 30 a 60 arañas negras de plástico realista",
@@ -971,7 +971,7 @@ const HALLOWEEN_DATA = {
         titulo: "Máquina de Humo 500W con Luces LED RGB",
         desc: "Genera niebla densa en segundos con control remoto inalámbrico para efecto de cementerio.",
         meta: "$690 – $1,250 MXN",
-        img: IMG_STEP.fantasma,
+        img: "imagenes/prod-humo.jpg",
         especificaciones: [
           "Potencia: 500W con tanque de 300 ml (requiere líquido para humo)",
           "Iluminación: 3 LEDs RGB integrados en la boquilla",
@@ -987,7 +987,7 @@ const HALLOWEEN_DATA = {
         titulo: "Serie LED 3D Calabazas, Fantasmas y Murciélagos",
         desc: "Guirnalda de 3 a 6 metros con 20-40 figuras iluminadas, funciona con pilas o USB.",
         meta: "$140 – $280 MXN",
-        img: IMG_STEP.velas,
+        img: "imagenes/prod-serie-led.jpg",
         especificaciones: [
           "Longitud: 3 metros con 20 luces LED cálidas",
           "Modos: Luz fija y parpadeo intermitente",
@@ -1003,7 +1003,7 @@ const HALLOWEEN_DATA = {
         titulo: "Calabaza Inflable Gigante 1.8m con Luz Interna",
         desc: "Inflable auto-hinchable con turbina silenciosa, estacas para suelo y LEDs internos.",
         meta: "$650 – $1,390 MXN",
-        img: IMG_STEP.calabaza,
+        img: "imagenes/prod-inflable.jpg",
         especificaciones: [
           "Material: Poliéster impermeable resistente a intemperie",
           "Inflado: Automático en 60 segundos al conectarlo",
@@ -1019,7 +1019,7 @@ const HALLOWEEN_DATA = {
         titulo: "Set 60 Murciélagos 3D de PVC Adhesivos",
         desc: "Diferentes tamaños con alas plegables para decorar paredes, espejos y escaleras.",
         meta: "$95 – $180 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/prod-murcielagos3d.jpg",
         especificaciones: [
           "Material: PVC negro resistente al agua (reutilizables)",
           "Tamaños: 4 tamaños distintos (de 8 cm hasta 16 cm)",
@@ -1035,7 +1035,7 @@ const HALLOWEEN_DATA = {
         titulo: "Cortina Metálica Negra y Naranja + Banderines",
         desc: "Set completo de fondo para fotos con flecos brillantes y guirnalda de 'Happy Halloween'.",
         meta: "$150 – $290 MXN",
-        img: IMG_STEP.frascos,
+        img: "imagenes/prod-cortina.jpg",
         especificaciones: [
           "Medidas cortina: 1m x 2m cada panel",
           "Incluye: Banderín de cartulina, globos confeti y cinta",
@@ -1057,7 +1057,7 @@ const HALLOWEEN_DATA = {
         titulo: "Cuadro Embrujado con Ojos que Te Siguen",
         desc: "Retrato antiguo con cuencas huecas donde unos ojos iluminados se mueven al pasar.",
         meta: "Costo aprox: $120 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/anim-cuadro.jpg",
         materiales: [
           "Marco viejo y fotografía impresa en blanco y negro",
           "2 pelotas de ping-pong pintadas como ojos",
@@ -1085,7 +1085,7 @@ const HALLOWEEN_DATA = {
         titulo: "Esqueleto Saliendo de la Tierra con Luz Interna",
         desc: "Cráneo y brazos articulados emergiendo de una tumba recién excavada con brillo espectral.",
         meta: "Costo aprox: $180 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/anim-esqueleto-tierra.jpg",
         materiales: [
           "Cráneo y manos de esqueleto de plástico",
           "Tierra suelta o corteza de jardín",
@@ -1113,7 +1113,7 @@ const HALLOWEEN_DATA = {
         titulo: "Aldaba de Puerta Parlante con Sensor",
         desc: "Usa una bocina Bluetooth oculta detrás de una aldaba de león o calavera para asustar al tocar.",
         meta: "Costo aprox: $70 MXN",
-        img: IMG_STEP.frascos,
+        img: "imagenes/anim-aldaba.jpg",
         materiales: [
           "Calavera de unicel pintada en bronce envejecido",
           "Argolla gruesa de plástico o cartón pintado",
@@ -1141,7 +1141,7 @@ const HALLOWEEN_DATA = {
         titulo: "Segador Gigante de 2 Metros con Escoba",
         desc: "Figura de tamaño real hecha con tubos de PVC, bola de unicel y tela negra desgarrada.",
         meta: "Costo aprox: $220 MXN",
-        img: IMG_STEP.fantasma,
+        img: "imagenes/anim-segador.jpg",
         materiales: [
           "Tubos de PVC de 1/2 pulgada y conectores T",
           "Calavera de plástico y túnica o tela negra grande",
@@ -1169,7 +1169,7 @@ const HALLOWEEN_DATA = {
         titulo: "Proyección Holográfica de Fantasmas en Cortina",
         desc: "Convierte una cortina traslúcida en un portal de apariciones usando un proyector o TV.",
         meta: "Costo aprox: $50 MXN",
-        img: IMG_STEP.velas,
+        img: "imagenes/anim-holograma.jpg",
         materiales: [
           "Cortina de baño semi-translúcida o tela mosquitera gris",
           "Proyector portátil o monitor viejo",
@@ -1197,7 +1197,7 @@ const HALLOWEEN_DATA = {
         titulo: "Tazón de Dulces con Mano Trampa",
         desc: "Un guante relleno oculto en el fondo de un recipiente hondo que salta cuando meten la mano.",
         meta: "Costo aprox: $60 MXN",
-        img: IMG_STEP.calabaza,
+        img: "imagenes/anim-tazon-mano.jpg",
         materiales: [
           "Caldero o tazón grande de plástico",
           "Guante de látex o esqueleto relleno de algodón",
@@ -1225,7 +1225,7 @@ const HALLOWEEN_DATA = {
         titulo: "Bruja o Payaso Colgante 1.7m con Sensor de Sonido",
         desc: "Se activa con aplausos o pasos: enciende ojos LED rojos, mueve brazos y emite gritos.",
         meta: "$580 – $1,290 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/prod-bruja-colgante.jpg",
         especificaciones: [
           "Altura: 170 cm con cuerda superior para colgar",
           "Activación: Sensor acústico y táctil integrado",
@@ -1241,7 +1241,7 @@ const HALLOWEEN_DATA = {
         titulo: "Mano Caminante 'Dedos' (Thing) Articulada con Sensor",
         desc: "Réplica de látex realista que camina sola sobre mesas y pisos al detectar movimiento.",
         meta: "$320 – $680 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/prod-mano-dedos.jpg",
         especificaciones: [
           "Material: Látex suave con detalles de costuras realistas",
           "Función: Desplazamiento motorizado al detectar sonido/tacto",
@@ -1257,7 +1257,7 @@ const HALLOWEEN_DATA = {
         titulo: "Esqueleto Posable Articulado 165 cm (5.4 Pies)",
         desc: "Esqueleto completo con mandíbula móvil y articulaciones bloqueables para sentar o colgar.",
         meta: "$790 – $1,450 MXN",
-        img: IMG_STEP.frascos,
+        img: "imagenes/prod-esqueleto-real.jpg",
         especificaciones: [
           "Altura: 165 cm (tamaño adulto real)",
           "Articulaciones: Hombros, codos, muñecas, rodillas y mandíbula",
@@ -1265,54 +1265,6 @@ const HALLOWEEN_DATA = {
         ],
         amazonUrl: "https://www.amazon.com.mx/s?k=esqueleto+halloween+tamano+real+articulado+165cm",
         mlUrl: "https://listado.mercadolibre.com.mx/esqueleto-halloween-tamano-real-articulado"
-      },
-      {
-        tipo: "productos",
-        badge: "TOP ANIMATRÓNICO #4",
-        tagExtra: "TIMBRE SUSTO",
-        titulo: "Timbre Embrujado con Ojo Móvil y Risa Macabra",
-        desc: "Al presionar el botón, se abre un ojo verde brillante que gira y reproduce sonidos de terror.",
-        meta: "$240 – $450 MXN",
-        img: IMG_STEP.fantasma,
-        especificaciones: [
-          "Dimensiones: 18 cm x 11 cm con gancho trasero",
-          "Efectos: Ojo giratorio iluminado + 3 audios distintos",
-          "Batería: 3 pilas AAA"
-        ],
-        amazonUrl: "https://www.amazon.com.mx/s?k=timbre+halloween+ojo+animado+sonido",
-        mlUrl: "https://listado.mercadolibre.com.mx/timbre-halloween-ojo-sonido"
-      },
-      {
-        tipo: "productos",
-        badge: "TOP ANIMATRÓNICO #5",
-        tagExtra: "DULCERO",
-        titulo: "Tazón de Dulces Animado con Mano Esquelética",
-        desc: "Cuando alguien acerca la mano por dulces, un esqueleto salta con ojos rojos y grito.",
-        meta: "$490 – $890 MXN",
-        img: IMG_STEP.velas,
-        especificaciones: [
-          "Sensor: Infrarrojo de proximidad en el borde del tazón",
-          "Capacidad: Hasta 1.5 kg de dulces",
-          "Incluye: Efecto de sonido y luz en ojos"
-        ],
-        amazonUrl: "https://www.amazon.com.mx/s?k=tazon+dulces+halloween+animatronico+mano",
-        mlUrl: "https://listado.mercadolibre.com.mx/tazon-dulces-halloween-animado"
-      },
-      {
-        tipo: "productos",
-        badge: "TOP ANIMATRÓNICO #6",
-        tagExtra: "JAULA",
-        titulo: "Prisionero en Jaula con Movimiento y Gritos",
-        desc: "Esqueleto atrapado que asoma la cabeza entre los barrotes gritando '¡Sáquenme de aquí!'.",
-        meta: "$550 – $980 MXN",
-        img: IMG_STEP.lapida,
-        especificaciones: [
-          "Medidas: 28 cm x 23 cm con cadena para colgar",
-          "Activación: Sensor de luz y sonido",
-          "Movimiento: Cabeza y manos sobresalen de la jaula"
-        ],
-        amazonUrl: "https://www.amazon.com.mx/s?k=jaula+prisionero+halloween+animatronico+sensor",
-        mlUrl: "https://listado.mercadolibre.com.mx/jaula-prisionero-halloween-movimiento"
       }
     ]
   },
@@ -1327,7 +1279,7 @@ const HALLOWEEN_DATA = {
         titulo: "Poción Sangrienta con Hielo Seco y Frutos Rojos",
         desc: "Ponche humeante sin alcohol (o con vodka) servido en caldero con efecto de niebla.",
         meta: "Rinde: 12 vasos",
-        img: IMG_STEP.bebida,
+        img: "imagenes/fiesta-pocion.jpg",
         materiales: [
           "1 L de jugo de arándano + 1 L de refresco de limón",
           "1 taza de fresas y zarzamoras congeladas",
@@ -1355,7 +1307,7 @@ const HALLOWEEN_DATA = {
         titulo: "Dedos de Bruja Crujientes con Almendras",
         desc: "Salchichas cocteleras o masa de hojaldre horneadas con uña de almendra y salsa roja.",
         meta: "Rinde: 24 piezas",
-        img: IMG_STEP.postre,
+        img: "imagenes/fiesta-dedos.jpg",
         materiales: [
           "1 paquete de salchichas o masa hojaldre",
           "Almendras fileteadas o enteras peladas",
@@ -1383,7 +1335,7 @@ const HALLOWEEN_DATA = {
         titulo: "Caja Misteriosa del Tacto (Sensaciones)",
         desc: "Cajas cerradas donde los invitados meten la mano para adivinar 'ojos' y 'cerebros'.",
         meta: "Costo aprox: $80 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/fiesta-caja-tacto.jpg",
         materiales: [
           "3 cajas de zapatos forradas de negro",
           "Uvas peladas en aceite (ojos), espagueti cocido frío (gusanos)",
@@ -1411,7 +1363,7 @@ const HALLOWEEN_DATA = {
         titulo: "Tumbas de Mousse de Chocolate y Galleta",
         desc: "Vasitos individuales de postre con tierra de galleta triturada y lápida de galleta rectangular.",
         meta: "Rinde: 8 vasitos",
-        img: IMG_STEP.postre,
+        img: "imagenes/fiesta-tumbas-mousse.jpg",
         materiales: [
           "2 paquetes de galletas de chocolate oscuras",
           "Pudín o mousse de chocolate frío",
@@ -1439,7 +1391,7 @@ const HALLOWEEN_DATA = {
         titulo: "Jeringas de Gelatina Roja Sangrienta",
         desc: "Jeringas grandes sin aguja rellenas de gelatina de fresa o cereza para repartir en la fiesta.",
         meta: "Rinde: 15 jeringas",
-        img: IMG_STEP.bebida,
+        img: "imagenes/fiesta-jeringas.jpg",
         materiales: [
           "15 jeringas de plástico nuevas de 20 ml (sin aguja)",
           "1 sobre de gelatina sabor cereza o fresa",
@@ -1463,7 +1415,7 @@ const HALLOWEEN_DATA = {
         titulo: "Espejo con Mensaje Sangriento Lavable",
         desc: "Escribe mensajes de advertencia en el espejo del baño que aparecen al empañarse.",
         meta: "Costo aprox: $35 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/fiesta-espejo.jpg",
         materiales: [
           "Jabón líquido transparente o pintura lavable roja",
           "Pincel fino o hisopo"
@@ -1486,7 +1438,7 @@ const HALLOWEEN_DATA = {
         titulo: "Pack 24 Bolsas de Sangre para Bebidas + Jeringas",
         desc: "Bolsas médicas grado alimenticio con popote, clip anti-derrame y etiquetas de tipo de sangre.",
         meta: "$190 – $340 MXN",
-        img: IMG_STEP.bebida,
+        img: "imagenes/prod-bolsas-sangre.jpg",
         especificaciones: [
           "Capacidad: 350 ml por bolsa (reutilizables y lavables)",
           "Incluye: 24 bolsas + embudo de llenado + etiquetas",
@@ -1502,7 +1454,7 @@ const HALLOWEEN_DATA = {
         titulo: "Kit 35 Accesorios Photo Booth Halloween (Props)",
         desc: "Lentes, sombreros de bruja, labios de vampiro y carteles en palitos de bambú para fotos.",
         meta: "$130 – $230 MXN",
-        img: IMG_STEP.velas,
+        img: "imagenes/prod-photobooth.jpg",
         especificaciones: [
           "Cantidad: 35 piezas de cartulina gruesa impresa",
           "Incluye: Palitos de madera y puntos de pegamento",
@@ -1518,7 +1470,7 @@ const HALLOWEEN_DATA = {
         titulo: "Vajilla Desechable Halloween 80 Pzas (Platos y Vasos)",
         desc: "Set completo para 20 invitados con diseño de esqueletos, calabazas y servilletas temáticas.",
         meta: "$250 – $420 MXN",
-        img: IMG_STEP.frascos,
+        img: "imagenes/prod-vajilla.jpg",
         especificaciones: [
           "Incluye: 20 platos grandes, 20 platos pastel, 20 vasos y 20 servilletas",
           "Material: Cartón laminado resistente a alimentos calientes/fríos"
@@ -1533,7 +1485,7 @@ const HALLOWEEN_DATA = {
         titulo: "Moldes de Silicona 3D Cráneos, Calabazas y Murciélagos",
         desc: "Moldes antiadherentes aptos para horno y congelador (hielos gigantes, chocolates y gomitas).",
         meta: "$140 – $260 MXN",
-        img: IMG_STEP.postre,
+        img: "imagenes/prod-moldes.jpg",
         especificaciones: [
           "Temperatura: Resiste de -40°C hasta 230°C",
           "Uso: Hielos 3D para cocteles, chocolates o gelatinas"
@@ -1548,7 +1500,7 @@ const HALLOWEEN_DATA = {
         titulo: "Piñata Temática Halloween (Calabaza o Fantasma)",
         desc: "Piñata tradicional plegable o de cartón reforzado para rellenar con dulces y premios.",
         meta: "$220 – $450 MXN",
-        img: IMG_STEP.calabaza,
+        img: "imagenes/prod-pinata.jpg",
         especificaciones: [
           "Capacidad: Hasta 2.5 kg de dulces",
           "Incluye: Cinta resistente para colgar"
@@ -1563,7 +1515,7 @@ const HALLOWEEN_DATA = {
         titulo: "Bolsa Surtida 100 Dulces Temáticos (Ojos, Gusanos y Calaveras)",
         desc: "Gomitas rellenas en forma de ojos sangrientos, dentaduras de vampiro y huesos ácidos.",
         meta: "$180 – $320 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/prod-dulces.jpg",
         especificaciones: [
           "Presentación: Empaque individual higiénico ideal para repartir",
           "Contenido: 80 a 100 piezas surtidas"
@@ -1584,7 +1536,7 @@ const HALLOWEEN_DATA = {
         titulo: "Fantasma Clásico Aesthetic con Lentes Oscuros",
         desc: "El disfraz más icónico y fotogénico usando una sábana blanca y gafas retro.",
         meta: "Costo aprox: $50 MXN",
-        img: IMG_STEP.fantasma,
+        img: "imagenes/disfraz-fantasma.jpg",
         materiales: [
           "1 sábana blanca lisa (matrimonial o queen)",
           "Lentes de sol negros",
@@ -1612,7 +1564,7 @@ const HALLOWEEN_DATA = {
         titulo: "Cicatrices y Heridas Realistas con Papel y Pegamento",
         desc: "Efecto especial de cine usando solo servilletas, látex líquido (o pegamento blanco) y sombra.",
         meta: "Costo aprox: $75 MXN",
-        img: IMG_STEP.maquillaje,
+        img: "imagenes/disfraz-cicatrices.png",
         materiales: [
           "Servilletas de papel separadas en capas finas",
           "Látex líquido cosmético o pegamento escolar no tóxico",
@@ -1640,7 +1592,7 @@ const HALLOWEEN_DATA = {
         titulo: "Disfraz de Espantapájaros con Ropa de Mezclilla",
         desc: "Camisa de cuadros, overol, sombrero de paja y maquillaje de costuras en las mejillas.",
         meta: "Costo aprox: $90 MXN",
-        img: IMG_STEP.velas,
+        img: "imagenes/disfraz-espantapajaros.jpg",
         materiales: [
           "Camisa de franela a cuadros y pantalón u overol de mezclilla",
           "Rafia natural o tiras de papel kraft para simular paja",
@@ -1664,7 +1616,7 @@ const HALLOWEEN_DATA = {
         titulo: "Momia Vendada con Efecto Envejecido",
         desc: "Prenda base blanca envuelta con tiras de tela teñidas en té negro para aspecto antiguo.",
         meta: "Costo aprox: $110 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/disfraz-momia.jpg",
         materiales: [
           "Playera y leggings blancos",
           "6 rollos de venda elástica o tiras de sábana vieja",
@@ -1688,7 +1640,7 @@ const HALLOWEEN_DATA = {
         titulo: "Catrina / Calavera Glam con Pedrería",
         desc: "Maquillaje clásico mexicano con cuencas oscuras, pétalos alrededor de los ojos y brillos.",
         meta: "Costo aprox: $120 MXN",
-        img: IMG_STEP.maquillaje,
+        img: "imagenes/disfraz-catrina.jpg",
         materiales: [
           "Delineador negro en gel, sombra negra y roja",
           "Piedritas autoadhesivas (gemas faciales)",
@@ -1712,7 +1664,7 @@ const HALLOWEEN_DATA = {
         titulo: "Merlina Addams (Wednesday) con Trenzas",
         desc: "Vestido negro con cuello blanco desmontable de cartulina o camisa, trenzas y labial oscuro.",
         meta: "Costo aprox: $60 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/disfraz-merlina.jpg",
         materiales: [
           "Vestido o suéter negro + camisa blanca debajo",
           "Labial morado oscuro / ciruela y sombra gris",
@@ -1736,7 +1688,7 @@ const HALLOWEEN_DATA = {
         titulo: "Disfraz Inflable de Dinosaurio T-Rex Adulto",
         desc: "Traje inflable completo con ventilador portátil a pilas y ventana transparente para ver.",
         meta: "$590 – $1,150 MXN",
-        img: IMG_STEP.lapida,
+        img: "imagenes/prod-trex.jpg",
         especificaciones: [
           "Talla: Unitalla adulto (1.50 m a 1.90 m)",
           "Incluye: Traje poliéster + turbina ventiladora (usa 4 pilas AA)",
@@ -1752,7 +1704,7 @@ const HALLOWEEN_DATA = {
         titulo: "Máscara Scream Ghostface Oficial + Túnica Negra",
         desc: "Máscara clásica con capucha integrada de tela negra y túnica con mangas de murciélago.",
         meta: "$260 – $580 MXN",
-        img: IMG_STEP.murcielago,
+        img: "imagenes/prod-ghostface.jpg",
         especificaciones: [
           "Material máscara: Vinilo ligero con malla negra en ojos",
           "Incluye: Máscara con capucha (opción con túnica y cuchillo)"
@@ -1767,7 +1719,7 @@ const HALLOWEEN_DATA = {
         titulo: "Máscara LED La Purga (3 Modos de Luz)",
         desc: "Máscara con cable electroluminiscente neón, control de parpadeo y espuma interior cómoda.",
         meta: "$160 – $320 MXN",
-        img: IMG_STEP.fantasma,
+        img: "imagenes/prod-mascara-led.jpg",
         especificaciones: [
           "Modos de luz: Luz fija, parpadeo lento y parpadeo rápido",
           "Alimentación: Control de bolsillo con 2 pilas AA",
@@ -1783,7 +1735,7 @@ const HALLOWEEN_DATA = {
         titulo: "Kit Profesional Maquillaje FX (Sangre, Látex y Cera)",
         desc: "Set completo para crear heridas, quemaduras, cicatrices y efecto zombie realista.",
         meta: "$220 – $440 MXN",
-        img: IMG_STEP.maquillaje,
+        img: "imagenes/prod-kit-fx.jpg",
         especificaciones: [
           "Incluye: Sangre artificial coagulada, cera moldeable, espátula y paleta de 6 colores",
           "Fórmula: Hipoalergénica y lavable con agua tibia y jabón"
@@ -1798,7 +1750,7 @@ const HALLOWEEN_DATA = {
         titulo: "Capa Reversible de Vampiro / Bruja con Cuello Alto",
         desc: "Capa larga de 150 cm en satín negro por fuera y rojo sangre por dentro con cuello rígido.",
         meta: "$190 – $360 MXN",
-        img: IMG_STEP.calabaza,
+        img: "imagenes/prod-capa.jpg",
         especificaciones: [
           "Largo: 140 cm a 150 cm (unisex adulto)",
           "Diseño: Reversible (2 estilos en 1 sola prenda)"
@@ -1813,7 +1765,7 @@ const HALLOWEEN_DATA = {
         titulo: "Colmillos de Vampiro Retráctiles + Adhesivo Dental",
         desc: "Set de 4 tamaños de colmillos de resina natural con perlas termoplásticas para ajuste fijo.",
         meta: "$99 – $190 MXN",
-        img: IMG_STEP.velas,
+        img: "imagenes/prod-colmillos.jpg",
         especificaciones: [
           "Incluye: 4 pares (13mm, 15mm, 17mm, 19mm) + adhesivo reutilizable",
           "Material: Resina médica no tóxica"

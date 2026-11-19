@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     crearLluviaDePetalos();
 
     // 2. EFECTO MÁQUINA DE ESCRIBIR 
-    const textoEmotivo = "Explora manualidades paso a paso, lugares inolvidables para visitar juntos y opciones directas en el mercado para sorprender a mamá.";
+    const textoEmotivo = "Explora ideas para picnic, manualidades paso a paso, lugares inolvidables y opciones directas en Amazon y Mercado Libre para sorprender a mamá.";
     const elementoMensaje = document.getElementById("mensaje-animado");
     let indice = 0;
 

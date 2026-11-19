@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1. GENERADOR MÁGICO DE PÉTALOS
+    // 1. GENERADOR DE PÉTALOS (AMBIENTE)
     function crearLluviaDePetalos() {
         const contenedor = document.getElementById('petalos-container');
         if (!contenedor) return;
-        const cantidadPetalos = 50; 
+        const cantidadPetalos = 35; 
 
         for (let i = 0; i < cantidadPetalos; i++) {
             let petalo = document.createElement('div');
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(escribirTexto, 40); 
         }
     }
-    setTimeout(escribirTexto, 1500);
+    setTimeout(escribirTexto, 1500); 
 
     // 3. LÓGICA DE FILTROS UNIVERSAL
     function inicializarFiltros(contenedorFiltrosId, contenedorTarjetasId) {
@@ -86,11 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Activar los 3 grupos de filtros adaptados a la nueva info
+    // Activar los grupos de filtros
     inicializarFiltros('filtros-manualidades', 'grid-manualidades');
     inicializarFiltros('filtros-lugares', 'carrusel-lugares');
     inicializarFiltros('filtros-productos', 'grid-productos');
-
 
     // 4. ANIMACIÓN AL HACER SCROLL
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
@@ -105,8 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
 
-
-    // 5. VENTANA EMERGENTE PRO (MODAL PASO A PASO)
+    // 5. VENTANA EMERGENTE PRO (MODAL PARA PASO A PASO)
     const modalPro = document.getElementById('modal-pasos');
     const btnCerrarPro = document.getElementById('btn-cerrar-pro');
     const modalTituloPro = document.getElementById('modal-titulo-pro');

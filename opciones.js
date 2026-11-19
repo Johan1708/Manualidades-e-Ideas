@@ -223,9 +223,8 @@ void main() {
     return [0, 2, 4].map(i => parseInt(full.slice(i, i + 2), 16) / 255);
   };
 
-  // CONFIGURACIÓN DE COLORES Y PARÁMETROS PARA HALLOWEEN (PUMPKIN ORANGE NEON)
   const config = {
-    color: "#cb5808", // NARANJA HALLOWEEN LÍQUIDO
+    color: "#cb5808",
     speed: 0.2,
     amplitude: 0.44,
     frequencyX: 3,
@@ -492,13 +491,12 @@ function setupCursor() {
     }
   });
 
-  document.querySelectorAll("a, button, input, label, .card, .tag, .toggle").forEach((el) => {
-    el.addEventListener("mouseenter", () => {
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest("a, button, input, label, .card, .tag, .toggle, .spooky-item-card")) {
       if (cursorFollower) cursorFollower.classList.add("active");
-    });
-    el.addEventListener("mouseleave", () => {
+    } else {
       if (cursorFollower) cursorFollower.classList.remove("active");
-    });
+    }
   });
 
   function animateFollower() {
@@ -644,39 +642,1003 @@ function setupShutdownToggle() {
   }
 }
 
-/* MAPEADO E ILUMINACIÓN BIDIRECCIONAL DE CATEGORÍAS */
+/* ==========================================================================
+   BASE DE DATOS COMPLETA DE LAS 4 CATEGORÍAS (DIY PASO A PASO + TOP COMPRAS)
+   ========================================================================== */
+const HALLOWEEN_DATA = {
+  decoracion: {
+    titulo: "🎃 DECORACIÓN Y AMBIENTACIÓN DE TERROR",
+    items: [
+      {
+        tipo: "diy",
+        badge: "DIY • FÁCIL",
+        tagExtra: "45 MIN",
+        titulo: "Lápidas de Cementerio Realistas en Cartón",
+        desc: "Crea lápidas envejecidas con textura de piedra usando cajas de cartón recicladas y pintura acrílica.",
+        meta: "Costo aprox: $60 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Cajas de cartón grueso (de electrodomésticos o mudanza)",
+          "Silicón caliente y cúter",
+          "Pintura acrílica gris, negra y blanca + esponja",
+          "2 palitos de madera o varillas para clavar en el pasto"
+        ],
+        pasos: [
+          "Dibuja la silueta de una lápida clásica (arco superior o cruz) sobre dos piezas iguales de cartón y recórtalas.",
+          "Pega tiras de cartón de 4 cm de ancho en todo el borde entre ambas caras para darle grosor real en 3D.",
+          "Recorta letras con fomi o cartón delgado que digan 'R.I.P.' y pégalas al frente antes de pintar.",
+          "Pinta toda la lápida de gris oscuro; luego da toques secos con una esponja usando gris claro y blanco para simular piedra.",
+          "Sella con barniz transparente en aerosol si irá en jardín y pega los palitos por detrás para clavarla."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • VIRAL",
+        tagExtra: "30 MIN",
+        titulo: "Velas Flotantes Estilo Hogwarts",
+        desc: "Tubos de cartón reciclados convertidos en velas suspendidas del techo con luz LED cálida.",
+        meta: "Costo aprox: $85 MXN",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "10 a 15 tubos de papel higiénico o servitoallas",
+          "Pistola de silicón caliente y pintura blanca",
+          "Velas LED pequeñas de batería",
+          "Hilo transparente (de pescar) y cinta adhesiva"
+        ],
+        pasos: [
+          "Aplica gotas gruesas de silicón caliente alrededor del borde superior de cada tubo dejando que escurra como cera derretida.",
+          "Pinta todo el tubo (incluyendo el silicón seco) con dos capas de pintura acrílica blanca o marfil.",
+          "Amarra un trozo de hilo de pescar cruzando la boca superior del tubo para crear un soporte interno.",
+          "Coloca la vela LED encendida apoyada sobre ese cruce de hilo y cuelga el otro extremo del hilo al techo."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • EXTERIOR",
+        tagExtra: "1 HORA",
+        titulo: "Fantasmas Iluminados de Gasa y Globo",
+        desc: "Espectros translúcidos que brillan en la oscuridad para colgar en árboles, balcones o entradas.",
+        meta: "Costo aprox: $90 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Tela de gasa blanca (manta de cielo)",
+          "Pegamento blanco escolar mezclado con agua (50/50)",
+          "1 globo inflado, 1 botella de plástico y alambre",
+          "Fieltro negro y serie de luces LED"
+        ],
+        pasos: [
+          "Coloca el globo inflado sobre la boca de la botella y forma dos brazos extendidos con alambre hacia los lados.",
+          "Sumerge la gasa en la mezcla de pegamento con agua, exprime el exceso y colócala sobre la estructura.",
+          "Deja secar durante toda la noche hasta que la tela quede rígida y mantenga la forma fantasmagórica.",
+          "Revienta el globo por debajo, pega ojos de fieltro negro y mete una serie de luces LED en el interior."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • VENTANAS",
+        tagExtra: "25 MIN",
+        titulo: "Siluetas Gigantes de Brujas y Murciélagos",
+        desc: "Sombras dramáticas retroiluminadas para ventanas y paredes usando cartulina negra.",
+        meta: "Costo aprox: $45 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Pliegos de cartulina negra mate",
+          "Plantillas impresas de murciélagos y gatos",
+          "Tijeras y cinta doble cara removible"
+        ],
+        pasos: [
+          "Dobla la cartulina a la mitad, dibuja medio murciélago en el doblez y recorta para obtener alas simétricas.",
+          "Dobla ligeramente las alas hacia afuera para dar efecto 3D de vuelo.",
+          "Pégalos en formación ascendente desde una esquina de la pared o ventana hasta el techo."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • MESA",
+        tagExtra: "40 MIN",
+        titulo: "Frascos de Boticario y Pociones Antiguas",
+        desc: "Botellas de vidrio recicladas con etiquetas envejecidas con café y contenido misterioso.",
+        meta: "Costo aprox: $50 MXN",
+        img: "https://images.unsplash.com/photo-1541697367348-dfc31a1611dc?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Frascos y botellas de vidrio vacías",
+          "Hojas de papel envejecidas con café soluble",
+          "Colorante vegetal, aceite de bebé y hierbas secas"
+        ],
+        pasos: [
+          "Humedece hojas blancas con café cargado, déjalas secar y quema ligeramente las orillas con cuidado.",
+          "Escribe nombres como 'Veneno de Araña' o 'Elixir Lunar' y pégalas en los frascos limpiados sin etiquetas.",
+          "Llena los frascos con agua teñida de morado o verde y añade ramas secas o arañas de plástico."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • ENTRADA",
+        tagExtra: "50 MIN",
+        titulo: "Corona de Puerta con Serpientes y Flores Negras",
+        desc: "Aro decorativo gótico para recibir a tus invitados en la puerta principal.",
+        meta: "Costo aprox: $140 MXN",
+        img: "https://images.unsplash.com/photo-1635321593217-40050ad13c74?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Aro de unicel o ramas secas entrelazadas",
+          "Serpientes de juguete de plástico",
+          "Pintura en aerosol negro mate y rosas artificiales oscuras"
+        ],
+        pasos: [
+          "Enreda las serpientes de plástico alrededor del aro asegurándolas con silicón caliente.",
+          "Rocía toda la estructura con pintura en aerosol negro mate para unificar la textura.",
+          "Inserta rosas artificiales color vino o negro en un costado y cuelga con listón de terciopelo."
+        ]
+      },
+      {
+        tipo: "productos",
+        badge: "TOP VENTAS #1",
+        tagExtra: "MÁS COMPRADO",
+        titulo: "Telaraña Elástica Gigante + 60 Arañas",
+        desc: "Algodón sintético ultra elástico que cubre hasta 30 m² de paredes, muebles y arbustos.",
+        meta: "$130 – $240 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Peso: 200g a 300g de fibra blanca de alta elasticidad",
+          "Incluye: 30 a 60 arañas negras de plástico realista",
+          "Uso: Interior y exterior (se estira entre más la jalas)"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=telarana+gigante+halloween+con+aranas",
+        mlUrl: "https://listado.mercadolibre.com.mx/telarana-gigante-halloween-aranas"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP VENTAS #2",
+        tagExtra: "AMBIENTE",
+        titulo: "Máquina de Humo 500W con Luces LED RGB",
+        desc: "Genera niebla densa en segundos con control remoto inalámbrico para efecto de cementerio.",
+        meta: "$690 – $1,250 MXN",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Potencia: 500W con tanque de 300 ml (requiere líquido para humo)",
+          "Iluminación: 3 LEDs RGB integrados en la boquilla",
+          "Control: Mando inalámbrico a distancia incluido"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=maquina+de+humo+500w+halloween+luces+led",
+        mlUrl: "https://listado.mercadolibre.com.mx/maquina-de-humo-500w-led"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP VENTAS #3",
+        tagExtra: "ILUMINACIÓN",
+        titulo: "Serie LED 3D Calabazas, Fantasmas y Murciélagos",
+        desc: "Guirnalda de 3 a 6 metros con 20-40 figuras iluminadas, funciona con pilas o USB.",
+        meta: "$140 – $280 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Longitud: 3 metros con 20 luces LED cálidas",
+          "Modos: Luz fija y parpadeo intermitente",
+          "Alimentación: 3 pilas AA (portátil para cualquier rincón)"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=serie+luces+led+halloween+calabazas+fantasmas",
+        mlUrl: "https://listado.mercadolibre.com.mx/serie-luces-led-halloween-calabazas"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP VENTAS #4",
+        tagExtra: "EXTERIOR",
+        titulo: "Calabaza Inflable Gigante 1.8m con Luz Interna",
+        desc: "Inflable auto-hinchable con turbina silenciosa, estacas para suelo y LEDs internos.",
+        meta: "$650 – $1,390 MXN",
+        img: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Material: Poliéster impermeable resistente a intemperie",
+          "Inflado: Automático en 60 segundos al conectarlo",
+          "Accesorios: 4 estacas y cuerdas de sujeción"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=inflable+halloween+gigante+calabaza+luz+led",
+        mlUrl: "https://listado.mercadolibre.com.mx/inflable-halloween-gigante-calabaza"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP VENTAS #5",
+        tagExtra: "EFECTO 3D",
+        titulo: "Set 60 Murciélagos 3D de PVC Adhesivos",
+        desc: "Diferentes tamaños con alas plegables para decorar paredes, espejos y escaleras.",
+        meta: "$95 – $180 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Material: PVC negro resistente al agua (reutilizables)",
+          "Tamaños: 4 tamaños distintos (de 8 cm hasta 16 cm)",
+          "Adhesivo: Cuadros de espuma doble cara que no dañan pintura"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=murcielagos+3d+halloween+decoracion+pared",
+        mlUrl: "https://listado.mercadolibre.com.mx/murcielagos-3d-halloween-pared"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP VENTAS #6",
+        tagExtra: "PARED",
+        titulo: "Cortina Metálica Negra y Naranja + Banderines",
+        desc: "Set completo de fondo para fotos con flecos brillantes y guirnalda de 'Happy Halloween'.",
+        meta: "$150 – $290 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Medidas cortina: 1m x 2m cada panel",
+          "Incluye: Banderín de cartulina, globos confeti y cinta",
+          "Ideal para: Cabina de fotos o mesa de dulces"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=set+decoracion+halloween+cortina+metalica+globos",
+        mlUrl: "https://listado.mercadolibre.com.mx/kit-decoracion-halloween-cortina-globos"
+      }
+    ]
+  },
+
+  animatronicos: {
+    titulo: "🤖 ANIMATRÓNICOS Y MECANISMOS DE SUSTO",
+    items: [
+      {
+        tipo: "diy",
+        badge: "DIY MECÁNICO",
+        tagExtra: "1.5 HRS",
+        titulo: "Cuadro Embrujado con Ojos que Te Siguen",
+        desc: "Retrato antiguo con cuencas huecas donde unos ojos iluminados se mueven al pasar.",
+        meta: "Costo aprox: $120 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Marco viejo y fotografía impresa en blanco y negro",
+          "2 pelotas de ping-pong pintadas como ojos",
+          "Cartón, varilla de madera y luz LED roja pequeña"
+        ],
+        pasos: [
+          "Recorta cuidadosamente los ojos de la fotografía impresa y pégala sobre un cartón rígido con los mismos huecos.",
+          "Pega las dos pelotas de ping-pong sobre una tira de cartón separadas a la distancia exacta de los ojos.",
+          "Sujeta la tira por detrás dejando holgura para que se deslice de izquierda a derecha o con un pequeño motor.",
+          "Ilumina los ojos por detrás con un LED tenue para crear el efecto de mirada viva."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • JARDÍN",
+        tagExtra: "1 HORA",
+        titulo: "Esqueleto Saliendo de la Tierra con Luz Interna",
+        desc: "Cráneo y brazos articulados emergiendo de una tumba recién excavada con brillo espectral.",
+        meta: "Costo aprox: $180 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Cráneo y manos de esqueleto de plástico",
+          "Tierra suelta o corteza de jardín",
+          "Reflector LED verde o naranja pequeño"
+        ],
+        pasos: [
+          "Entierra parcialmente la base del cráneo inclinado mirando hacia arriba y clava las muñecas a ambos lados.",
+          "Apila tierra suelta alrededor de los huesos para simular que acaba de romper el suelo.",
+          "Esconde el reflector LED verde frente al cráneo apuntando hacia su mandíbula."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • PUERTA",
+        tagExtra: "45 MIN",
+        titulo: "Aldaba de Puerta Parlante con Sensor",
+        desc: "Usa una bocina Bluetooth oculta detrás de una aldaba de león o calavera para asustar al tocar.",
+        meta: "Costo aprox: $70 MXN",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Calavera de unicel pintada en bronce envejecido",
+          "Argolla gruesa de plástico o cartón pintado",
+          "Bocina mini Bluetooth y celular con efectos de sonido"
+        ],
+        pasos: [
+          "Pinta la calavera de negro y cepilla en seco con pintura metálica bronce o plata.",
+          "Coloca la argolla en la mandíbula y fíjala en la puerta principal.",
+          "Oculta la mini bocina detrás de la puerta y reproduce risas macabras o gruñidos cuando alguien se acerque."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • ESQUINA",
+        tagExtra: "1.5 HRS",
+        titulo: "Segador Gigante de 2 Metros con Escoba",
+        desc: "Figura de tamaño real hecha con tubos de PVC, bola de unicel y tela negra desgarrada.",
+        meta: "Costo aprox: $220 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Tubos de PVC de 1/2 pulgada y conectores T",
+          "Calavera de plástico y túnica o tela negra grande",
+          "2 luces LED rojas de botón para los ojos"
+        ],
+        pasos: [
+          "Arma una cruz de PVC de 1.90 m de alto con base firme en el suelo y brazos de 80 cm.",
+          "Inserta la calavera en la punta superior con dos LEDs rojos pegados dentro de las cuencas.",
+          "Viste la estructura con tela negra desflecada en las puntas para que se mueva con el viento."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • VENTANA",
+        tagExtra: "40 MIN",
+        titulo: "Proyección Holográfica de Fantasmas en Cortina",
+        desc: "Convierte una cortina traslúcida en un portal de apariciones usando un proyector o TV.",
+        meta: "Costo aprox: $50 MXN",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Cortina de baño semi-translúcida o tela mosquitera gris",
+          "Proyector portátil o monitor viejo",
+          "Videos de fantasmas con fondo negro (gratis en YouTube)"
+        ],
+        pasos: [
+          "Tensa la tela traslúcida cubriendo todo el marco interior de la ventana que da a la calle.",
+          "Coloca el proyector a 1.5 metros detrás de la ventana apuntando directo a la tela.",
+          "Reproduce en bucle un video de apariciones con fondo negro total; desde afuera parecerá un fantasma flotando."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • DULCES",
+        tagExtra: "30 MIN",
+        titulo: "Tazón de Dulces con Mano Trampa",
+        desc: "Un guante relleno oculto en el fondo de un recipiente hondo que salta cuando meten la mano.",
+        meta: "Costo aprox: $60 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Caldero o tazón grande de plástico",
+          "Guante de látex o esqueleto relleno de algodón",
+          "Falso fondo de cartón recortado"
+        ],
+        pasos: [
+          "Haz un agujero en la base del caldero lo suficientemente ancho para que pase tu brazo.",
+          "Coloca un disco de cartón negro dentro con abertura oculta y acomoda dulces alrededor del borde.",
+          "Mete la mano con el guante desde abajo y muévela justo cuando alguien tome un dulce."
+        ]
+      },
+      {
+        tipo: "productos",
+        badge: "TOP ANIMATRÓNICO #1",
+        tagExtra: "SENSOR DE VOZ",
+        titulo: "Bruja o Payaso Colgante 1.7m con Sensor de Sonido",
+        desc: "Se activa con aplausos o pasos: enciende ojos LED rojos, mueve brazos y emite gritos.",
+        meta: "$580 – $1,290 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Altura: 170 cm con cuerda superior para colgar",
+          "Activación: Sensor acústico y táctil integrado",
+          "Alimentación: 3 pilas AAA (incluye movimiento y audio)"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=animatronico+halloween+colgante+sensor+sonido+luces",
+        mlUrl: "https://listado.mercadolibre.com.mx/animatronico-halloween-sensor-sonido"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP ANIMATRÓNICO #2",
+        tagExtra: "VIRAL TIKTOK",
+        titulo: "Mano Caminante 'Dedos' (Thing) Articulada con Sensor",
+        desc: "Réplica de látex realista que camina sola sobre mesas y pisos al detectar movimiento.",
+        meta: "$320 – $680 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Material: Látex suave con detalles de costuras realistas",
+          "Función: Desplazamiento motorizado al detectar sonido/tacto",
+          "Ideal para: Centros de mesa y entradas"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=mano+caminante+halloween+animatronica+dedos",
+        mlUrl: "https://listado.mercadolibre.com.mx/mano-caminante-halloween-sensor"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP ANIMATRÓNICO #3",
+        tagExtra: "TAMAÑO REAL",
+        titulo: "Esqueleto Posable Articulado 165 cm (5.4 Pies)",
+        desc: "Esqueleto completo con mandíbula móvil y articulaciones bloqueables para sentar o colgar.",
+        meta: "$790 – $1,450 MXN",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Altura: 165 cm (tamaño adulto real)",
+          "Articulaciones: Hombros, codos, muñecas, rodillas y mandíbula",
+          "Material: Plástico ABS resistente para interior y jardín"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=esqueleto+halloween+tamano+real+articulado+165cm",
+        mlUrl: "https://listado.mercadolibre.com.mx/esqueleto-halloween-tamano-real-articulado"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP ANIMATRÓNICO #4",
+        tagExtra: "TIMBRE SUSTO",
+        titulo: "Timbre Embrujado con Ojo Móvil y Risa Macabra",
+        desc: "Al presionar el botón, se abre un ojo verde brillante que gira y reproduce sonidos de terror.",
+        meta: "$240 – $450 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Dimensiones: 18 cm x 11 cm con gancho trasero",
+          "Efectos: Ojo giratorio iluminado + 3 audios distintos",
+          "Batería: 3 pilas AAA"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=timbre+halloween+ojo+animado+sonido",
+        mlUrl: "https://listado.mercadolibre.com.mx/timbre-halloween-ojo-sonido"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP ANIMATRÓNICO #5",
+        tagExtra: "DULCERO",
+        titulo: "Tazón de Dulces Animado con Mano Esquelética",
+        desc: "Cuando alguien acerca la mano por dulces, un esqueleto salta con ojos rojos y grito.",
+        meta: "$490 – $890 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Sensor: Infrarrojo de proximidad en el borde del tazón",
+          "Capacidad: Hasta 1.5 kg de dulces",
+          "Incluye: Efecto de sonido y luz en ojos"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=tazon+dulces+halloween+animatronico+mano",
+        mlUrl: "https://listado.mercadolibre.com.mx/tazon-dulces-halloween-animado"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP ANIMATRÓNICO #6",
+        tagExtra: "JAULA",
+        titulo: "Prisionero en Jaula con Movimiento y Gritos",
+        desc: "Esqueleto atrapado que asoma la cabeza entre los barrotes gritando '¡Sáquenme de aquí!'.",
+        meta: "$550 – $980 MXN",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Medidas: 28 cm x 23 cm con cadena para colgar",
+          "Activación: Sensor de luz y sonido",
+          "Movimiento: Cabeza y manos sobresalen de la jaula"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=jaula+prisionero+halloween+animatronico+sensor",
+        mlUrl: "https://listado.mercadolibre.com.mx/jaula-prisionero-halloween-movimiento"
+      }
+    ]
+  },
+
+  fiesta: {
+    titulo: "🦇 FIESTA HALLOWEEN, BEBIDAS Y BOTANAS",
+    items: [
+      {
+        tipo: "diy",
+        badge: "RECETA • VIRAL",
+        tagExtra: "20 MIN",
+        titulo: "Poción Sangrienta con Hielo Seco y Frutos Rojos",
+        desc: "Ponche humeante sin alcohol (o con vodka) servido en caldero con efecto de niebla.",
+        meta: "Rinde: 12 vasos",
+        img: "https://images.unsplash.com/photo-1541697367348-dfc31a1611dc?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "1 L de jugo de arándano + 1 L de refresco de limón",
+          "1 taza de fresas y zarzamoras congeladas",
+          "Hielo seco grado alimenticio (manipular solo con pinzas)"
+        ],
+        pasos: [
+          "Mezcla el jugo de arándano bien frío con el refresco de limón y las frutas congeladas en un tazón grande.",
+          "Antes de servir, coloca un trozo pequeño de hielo seco en el fondo usando pinzas metálicas.",
+          "Sirve únicamente el líquido evitando que caigan trozos sólidos de hielo seco en los vasos."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "RECETA • SALADA",
+        tagExtra: "25 MIN",
+        titulo: "Dedos de Bruja Crujientes con Almendras",
+        desc: "Salchichas cocteleras o masa de hojaldre horneadas con uña de almendra y salsa roja.",
+        meta: "Rinde: 24 piezas",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "1 paquete de salchichas o masa hojaldre",
+          "Almendras fileteadas o enteras peladas",
+          "Salsa catsup o salsa BBQ para decorar"
+        ],
+        pasos: [
+          "Haz tres cortes superficiales en el centro de cada salchicha para simular los nudillos de un dedo.",
+          "Haz un pequeño corte en la punta e inserta una almendra como uña.",
+          "Hornea 12 minutos a 180°C y sirve bañando la base con salsa roja."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "JUEGO • FIESTA",
+        tagExtra: "30 MIN",
+        titulo: "Caja Misteriosa del Tacto (Sensaciones)",
+        desc: "Cajas cerradas donde los invitados meten la mano para adivinar 'ojos' y 'cerebros'.",
+        meta: "Costo aprox: $80 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "3 cajas de zapatos forradas de negro",
+          "Uvas peladas en aceite (ojos), espagueti cocido frío (gusanos)",
+          "Gelatina sin cuajar completamente (cerebro)"
+        ],
+        pasos: [
+          "Corta un círculo en un costado de cada caja y pega tiras de bolsa negra por dentro como cortina.",
+          "Coloca un tazón con cada ingrediente dentro de las cajas sin que nadie vea.",
+          "Haz que tus invitados metan la mano con los ojos vendados y adivinen qué tocan."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "RECETA • DULCE",
+        tagExtra: "30 MIN",
+        titulo: "Tumbas de Mousse de Chocolate y Galleta",
+        desc: "Vasitos individuales de postre con tierra de galleta triturada y lápida de galleta rectangular.",
+        meta: "Rinde: 8 vasitos",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "2 paquetes de galletas de chocolate oscuras",
+          "Pudín o mousse de chocolate frío",
+          "8 galletas rectangulares tipo María o lengua de gato + betún"
+        ],
+        pasos: [
+          "Tritura las galletas oscuras hasta que parezcan tierra fina.",
+          "Llena vasitos transparentes con mousse de chocolate y cubre la superficie con la tierra de galleta.",
+          "Escribe 'RIP' con betún en cada galleta rectangular y clávala verticalmente en cada vaso."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "BEBIDA • SHOTS",
+        tagExtra: "15 MIN",
+        titulo: "Jeringas de Gelatina Roja Sangrienta",
+        desc: "Jeringas grandes sin aguja rellenas de gelatina de fresa o cereza para repartir en la fiesta.",
+        meta: "Rinde: 15 jeringas",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "15 jeringas de plástico nuevas de 20 ml (sin aguja)",
+          "1 sobre de gelatina sabor cereza o fresa",
+          "1 taza de agua caliente + 1 taza de agua fría"
+        ],
+        pasos: [
+          "Disuelve la gelatina en el agua caliente, añade el agua fría y deja entibiar 10 minutos.",
+          "Absorbe la gelatina líquida con cada jeringa, ponles su tapón y refrigera acostadas por 3 horas."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "AMBIENTE • BAÑO",
+        tagExtra: "10 MIN",
+        titulo: "Espejo con Mensaje Sangriento Lavable",
+        desc: "Escribe mensajes de advertencia en el espejo del baño que aparecen al empañarse.",
+        meta: "Costo aprox: $35 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Jabón líquido transparente o pintura lavable roja",
+          "Pincel fino o hisopo"
+        ],
+        pasos: [
+          "Limpia perfectamente el espejo con alcohol.",
+          "Escribe 'TE ESTOY VIENDO' con jabón líquido; cuando el baño se llene de vapor, aparecerá el mensaje."
+        ]
+      },
+      {
+        tipo: "productos",
+        badge: "TOP FIESTA #1",
+        tagExtra: "VIRAL BEBIDAS",
+        titulo: "Pack 24 Bolsas de Sangre para Bebidas + Jeringas",
+        desc: "Bolsas médicas grado alimenticio con popote, clip anti-derrame y etiquetas de tipo de sangre.",
+        meta: "$190 – $340 MXN",
+        img: "https://images.unsplash.com/photo-1541697367348-dfc31a1611dc?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Capacidad: 350 ml por bolsa (reutilizables y lavables)",
+          "Incluye: 24 bolsas + embudo de llenado + etiquetas",
+          "Material: PVC grado alimenticio libre de BPA"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=bolsas+de+sangre+para+bebidas+halloween",
+        mlUrl: "https://listado.mercadolibre.com.mx/bolsas-sangre-bebidas-halloween"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP FIESTA #2",
+        tagExtra: "CABINA FOTOS",
+        titulo: "Kit 35 Accesorios Photo Booth Halloween (Props)",
+        desc: "Lentes, sombreros de bruja, labios de vampiro y carteles en palitos de bambú para fotos.",
+        meta: "$130 – $230 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Cantidad: 35 piezas de cartulina gruesa impresa",
+          "Incluye: Palitos de madera y puntos de pegamento",
+          "Ideal para: Selfies grupales y recuerdos"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=photo+booth+props+halloween+accesorios+fotos",
+        mlUrl: "https://listado.mercadolibre.com.mx/photo-booth-halloween-accesorios"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP FIESTA #3",
+        tagExtra: "MESA",
+        titulo: "Vajilla Desechable Halloween 80 Pzas (Platos y Vasos)",
+        desc: "Set completo para 20 invitados con diseño de esqueletos, calabazas y servilletas temáticas.",
+        meta: "$250 – $420 MXN",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Incluye: 20 platos grandes, 20 platos pastel, 20 vasos y 20 servilletas",
+          "Material: Cartón laminado resistente a alimentos calientes/fríos"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=vajilla+desechable+halloween+platos+vasos+fiesta",
+        mlUrl: "https://listado.mercadolibre.com.mx/vajilla-desechable-fiesta-halloween"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP FIESTA #4",
+        tagExtra: "REPOSTERÍA",
+        titulo: "Moldes de Silicona 3D Cráneos, Calabazas y Murciélagos",
+        desc: "Moldes antiadherentes aptos para horno y congelador (hielos gigantes, chocolates y gomitas).",
+        meta: "$140 – $260 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Temperatura: Resiste de -40°C hasta 230°C",
+          "Uso: Hielos 3D para cocteles, chocolates o gelatinas"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=moldes+silicona+halloween+calaveras+hielo+chocolate",
+        mlUrl: "https://listado.mercadolibre.com.mx/moldes-silicona-halloween-calaveras"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP FIESTA #5",
+        tagExtra: "JUEGO",
+        titulo: "Piñata Temática Halloween (Calabaza o Fantasma)",
+        desc: "Piñata tradicional plegable o de cartón reforzado para rellenar con dulces y premios.",
+        meta: "$220 – $450 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Capacidad: Hasta 2.5 kg de dulces",
+          "Incluye: Cinta resistente para colgar"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=pinata+halloween+calabaza+fantasma",
+        mlUrl: "https://listado.mercadolibre.com.mx/pinata-halloween"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP FIESTA #6",
+        tagExtra: "DULCES",
+        titulo: "Bolsa Surtida 100 Dulces Temáticos (Ojos, Gusanos y Calaveras)",
+        desc: "Gomitas rellenas en forma de ojos sangrientos, dentaduras de vampiro y huesos ácidos.",
+        meta: "$180 – $320 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Presentación: Empaque individual higiénico ideal para repartir",
+          "Contenido: 80 a 100 piezas surtidas"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=dulces+halloween+gomitas+ojos+surtido",
+        mlUrl: "https://listado.mercadolibre.com.mx/dulces-halloween-gomitas-ojos"
+      }
+    ]
+  },
+
+  disfraces: {
+    titulo: "🎭 DISFRACES, MÁSCARAS Y MAQUILLAJE FX",
+    items: [
+      {
+        tipo: "diy",
+        badge: "DIY • CASERO",
+        tagExtra: "30 MIN",
+        titulo: "Fantasma Clásico Aesthetic con Lentes Oscuros",
+        desc: "El disfraz más icónico y fotogénico usando una sábana blanca y gafas retro.",
+        meta: "Costo aprox: $50 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "1 sábana blanca lisa (matrimonial o queen)",
+          "Lentes de sol negros",
+          "Tijeras y marcador lavable"
+        ],
+        pasos: [
+          "Colócate la sábana encima y pide a alguien que marque con puntos suaves dónde quedan tus ojos.",
+          "Quítate la sábana, recorta dos círculos limpios y refuerza el borde por dentro con cinta adhesiva.",
+          "Ponte la sábana y coloca los lentes oscuros por encima de los agujeros para fijar la tela."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "MAQUILLAJE FX",
+        tagExtra: "25 MIN",
+        titulo: "Cicatrices y Heridas Realistas con Papel y Pegamento",
+        desc: "Efecto especial de cine usando solo servilletas, látex líquido (o pegamento blanco) y sombra.",
+        meta: "Costo aprox: $75 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Servilletas de papel separadas en capas finas",
+          "Látex líquido cosmético o pegamento escolar no tóxico",
+          "Base de maquillaje, sombra roja/morada y sangre falsa"
+        ],
+        pasos: [
+          "Aplica una capa delgada de látex en la piel y pega encima una tira rasgada de servilleta.",
+          "Cubre con otra capa de látex, deja secar 5 minutos y abre un corte justo por el centro con pinzas.",
+          "Maquilla los bordes con tu base habitual y rellena el interior con sombra morada y sangre falsa."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • PAREJA",
+        tagExtra: "45 MIN",
+        titulo: "Disfraz de Espantapájaros con Ropa de Mezclilla",
+        desc: "Camisa de cuadros, overol, sombrero de paja y maquillaje de costuras en las mejillas.",
+        meta: "Costo aprox: $90 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Camisa de franela a cuadros y pantalón u overol de mezclilla",
+          "Rafia natural o tiras de papel kraft para simular paja",
+          "Delineador negro y rubor naranja intenso"
+        ],
+        pasos: [
+          "Mete manojos de rafia dentro de los puños de la camisa, los bolsillos y los tobillos del pantalón.",
+          "Dibuja un triángulo naranja en la punta de la nariz con borde negro y líneas de costura en la boca."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • RÁPIDO",
+        tagExtra: "20 MIN",
+        titulo: "Momia Vendada con Efecto Envejecido",
+        desc: "Prenda base blanca envuelta con tiras de tela teñidas en té negro para aspecto antiguo.",
+        meta: "Costo aprox: $110 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Playera y leggings blancos",
+          "6 rollos de venda elástica o tiras de sábana vieja",
+          "4 bolsitas de té negro en agua caliente"
+        ],
+        pasos: [
+          "Sumerge las vendas en infusión concentrada de té negro durante 15 minutos y déjalas secar.",
+          "Envuelve las vendas alrededor de la ropa sujetándolas con puntadas rápidas o seguros ocultos."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "MAQUILLAJE",
+        tagExtra: "30 MIN",
+        titulo: "Catrina / Calavera Glam con Pedrería",
+        desc: "Maquillaje clásico mexicano con cuencas oscuras, pétalos alrededor de los ojos y brillos.",
+        meta: "Costo aprox: $120 MXN",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Delineador negro en gel, sombra negra y roja",
+          "Piedritas autoadhesivas (gemas faciales)",
+          "Diadema de flores grandes"
+        ],
+        pasos: [
+          "Traza dos círculos grandes alrededor de los ojos, rellena con sombra negra y rodea con pétalos rojos.",
+          "Pega las gemas siguiendo el contorno de los pétalos y traza líneas finas cruzando los labios."
+        ]
+      },
+      {
+        tipo: "diy",
+        badge: "DIY • CINE",
+        tagExtra: "35 MIN",
+        titulo: "Merlina Addams (Wednesday) con Trenzas",
+        desc: "Vestido negro con cuello blanco desmontable de cartulina o camisa, trenzas y labial oscuro.",
+        meta: "Costo aprox: $60 MXN",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        materiales: [
+          "Vestido o suéter negro + camisa blanca debajo",
+          "Labial morado oscuro / ciruela y sombra gris",
+          "Ligas para dos trenzas largas"
+        ],
+        pasos: [
+          "Coloca una camisa blanca de cuello picudo debajo de un suéter o vestido negro.",
+          "Haz dos trenzas simétricas con raya en medio y aplica sombra oscura difuminada en párpados."
+        ]
+      },
+      {
+        tipo: "productos",
+        badge: "TOP DISFRAZ #1",
+        tagExtra: "MÁS VENDIDO",
+        titulo: "Disfraz Inflable de Dinosaurio T-Rex Adulto",
+        desc: "Traje inflable completo con ventilador portátil a pilas y ventana transparente para ver.",
+        meta: "$590 – $1,150 MXN",
+        img: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Talla: Unitalla adulto (1.50 m a 1.90 m)",
+          "Incluye: Traje poliéster + turbina ventiladora (usa 4 pilas AA)",
+          "Inflado: En menos de 1 minuto"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=disfraz+inflable+dinosaurio+t+rex+adulto",
+        mlUrl: "https://listado.mercadolibre.com.mx/disfraz-inflable-dinosaurio-adulto"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP DISFRAZ #2",
+        tagExtra: "CLÁSICO TERROR",
+        titulo: "Máscara Scream Ghostface Oficial + Túnica Negra",
+        desc: "Máscara clásica con capucha integrada de tela negra y túnica con mangas de murciélago.",
+        meta: "$260 – $580 MXN",
+        img: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Material máscara: Vinilo ligero con malla negra en ojos",
+          "Incluye: Máscara con capucha (opción con túnica y cuchillo)"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=mascara+scream+ghostface+disfraz+tunica",
+        mlUrl: "https://listado.mercadolibre.com.mx/mascara-scream-ghostface-disfraz"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP DISFRAZ #3",
+        tagExtra: "LUZ NEÓN",
+        titulo: "Máscara LED La Purga (3 Modos de Luz)",
+        desc: "Máscara con cable electroluminiscente neón, control de parpadeo y espuma interior cómoda.",
+        meta: "$160 – $320 MXN",
+        img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Modos de luz: Luz fija, parpadeo lento y parpadeo rápido",
+          "Alimentación: Control de bolsillo con 2 pilas AA",
+          "Colores: Naranja, rojo, azul, morado o verde neón"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=mascara+led+la+purga+halloween+neon",
+        mlUrl: "https://listado.mercadolibre.com.mx/mascara-led-la-purga-halloween"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP DISFRAZ #4",
+        tagExtra: "MAQUILLAJE FX",
+        titulo: "Kit Profesional Maquillaje FX (Sangre, Látex y Cera)",
+        desc: "Set completo para crear heridas, quemaduras, cicatrices y efecto zombie realista.",
+        meta: "$220 – $440 MXN",
+        img: "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Incluye: Sangre artificial coagulada, cera moldeable, espátula y paleta de 6 colores",
+          "Fórmula: Hipoalergénica y lavable con agua tibia y jabón"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=kit+maquillaje+fx+halloween+sangre+falsa+heridas",
+        mlUrl: "https://listado.mercadolibre.com.mx/kit-maquillaje-fx-halloween-sangre"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP DISFRAZ #5",
+        tagExtra: "CAPA",
+        titulo: "Capa Reversible de Vampiro / Bruja con Cuello Alto",
+        desc: "Capa larga de 150 cm en satín negro por fuera y rojo sangre por dentro con cuello rígido.",
+        meta: "$190 – $360 MXN",
+        img: "https://images.unsplash.com/photo-1604005950576-8745a5d40584?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Largo: 140 cm a 150 cm (unisex adulto)",
+          "Diseño: Reversible (2 estilos en 1 sola prenda)"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=capa+vampiro+reversible+negra+roja+cuello+alto",
+        mlUrl: "https://listado.mercadolibre.com.mx/capa-vampiro-reversible-negra-roja"
+      },
+      {
+        tipo: "productos",
+        badge: "TOP DISFRAZ #6",
+        tagExtra: "VAMPIRO",
+        titulo: "Colmillos de Vampiro Retráctiles + Adhesivo Dental",
+        desc: "Set de 4 tamaños de colmillos de resina natural con perlas termoplásticas para ajuste fijo.",
+        meta: "$99 – $190 MXN",
+        img: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop",
+        especificaciones: [
+          "Incluye: 4 pares (13mm, 15mm, 17mm, 19mm) + adhesivo reutilizable",
+          "Material: Resina médica no tóxica"
+        ],
+        amazonUrl: "https://www.amazon.com.mx/s?k=colmillos+de+vampiro+realistas+con+adhesivo+halloween",
+        mlUrl: "https://listado.mercadolibre.com.mx/colmillos-vampiro-realistas-adhesivo"
+      }
+    ]
+  }
+};
+
+/* RENDERIZADO DINÁMICO DE OPCIONES Y MODAL */
 function setupCategoryMapping() {
-  const tags = document.querySelectorAll(".tag[data-target-category]");
   const cards = document.querySelectorAll(".cat-card[data-category]");
+  const tabs = document.querySelectorAll(".spooky-tab[data-tab]");
+  const grid = document.getElementById("showcase-grid");
+  const titleEl = document.getElementById("showcase-title");
+  const kickerEl = document.getElementById("showcase-kicker");
 
-  tags.forEach((tag) => {
-    const targetCat = tag.getAttribute("data-target-category");
+  const modal = document.getElementById("spooky-modal");
+  const closeModalBtn = document.getElementById("close-spooky-modal");
+  const modalBadge = document.getElementById("modal-badge");
+  const modalTitle = document.getElementById("modal-title");
+  const modalBody = document.getElementById("modal-body");
 
-    tag.addEventListener("mouseenter", () => {
-      cards.forEach((card) => {
-        if (card.getAttribute("data-category") === targetCat) {
-          card.classList.add("highlight");
-        }
-      });
+  let currentCategory = "decoracion";
+  let currentTab = "all";
+
+  function openModal(item) {
+    if (!modal) return;
+    modalTitle.textContent = item.titulo;
+    modalBody.innerHTML = "";
+
+    if (item.tipo === "diy") {
+      modalBadge.textContent = "🛠️ MANUALIDAD / RECETA PASO A PASO";
+      const matHTML = `
+        <div class="modal-materials-box">
+          <h4>📦 Materiales Necesarios (${item.meta})</h4>
+          <ul>${item.materiales.map(m => `<li>${m}</li>`).join("")}</ul>
+        </div>
+      `;
+      const stepsHTML = item.pasos.map((p, idx) => `
+        <div class="modal-step-item">
+          <div class="step-num">${idx + 1}</div>
+          <p class="step-text">${p}</p>
+        </div>
+      `).join("");
+      modalBody.innerHTML = matHTML + stepsHTML;
+    } else {
+      modalBadge.textContent = "🛒 ESPECIFICACIONES DEL PRODUCTO";
+      const specHTML = `
+        <div class="modal-materials-box">
+          <h4>📋 Ficha Técnica y Precio Estimado: ${item.meta}</h4>
+          <ul>${item.especificaciones.map(s => `<li>${s}</li>`).join("")}</ul>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+          <a href="${item.amazonUrl}" target="_blank" class="btn-spooky-primary" style="flex:1;">Buscar en Amazon México 🔎</a>
+          <a href="${item.mlUrl}" target="_blank" class="btn-spooky-secondary" style="flex:1;">Buscar en Mercado Libre 🔎</a>
+        </div>
+      `;
+      modalBody.innerHTML = specHTML;
+    }
+
+    modal.classList.add("open");
+  }
+
+  function renderCategory() {
+    if (!grid || !HALLOWEEN_DATA[currentCategory]) return;
+    const catData = HALLOWEEN_DATA[currentCategory];
+    if (titleEl) titleEl.textContent = catData.titulo;
+
+    const filtered = catData.items.filter(item => currentTab === "all" || item.tipo === currentTab);
+    if (kickerEl) kickerEl.textContent = `MOSTRANDO ${filtered.length} OPCIONES DISPONIBLES`;
+
+    grid.innerHTML = "";
+    filtered.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "spooky-item-card";
+
+      const buttonsHTML = item.tipo === "diy"
+        ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>`
+        : `
+          <a href="${item.amazonUrl}" target="_blank" class="btn-spooky-primary">Ver en Amazon 🔎</a>
+          <a href="${item.mlUrl}" target="_blank" class="btn-spooky-secondary">Ver en Mercado Libre 🔎</a>
+          <button class="btn-spooky-secondary btn-open-detail" style="border-style:dashed;">Ficha Técnica 📋</button>
+        `;
+
+      card.innerHTML = `
+        <div class="spooky-card-media">
+          <img src="${item.img}" alt="${item.titulo}" loading="lazy">
+          <span class="spooky-badge-type">${item.badge}</span>
+          <span class="spooky-badge-top">${item.tagExtra}</span>
+        </div>
+        <div class="spooky-card-body">
+          <h3 class="spooky-card-title">${item.titulo}</h3>
+          <p class="spooky-card-desc">${item.desc}</p>
+          <div class="spooky-meta-row">
+            <span>${item.tipo === "diy" ? "Inversión:" : "Precio Web:"}</span>
+            <strong>${item.meta}</strong>
+          </div>
+          <div class="spooky-actions">
+            ${buttonsHTML}
+          </div>
+        </div>
+      `;
+
+      const detailBtn = card.querySelector(".btn-open-detail");
+      if (detailBtn) {
+        detailBtn.addEventListener("click", () => openModal(item));
+      }
+
+      grid.appendChild(card);
     });
-
-    tag.addEventListener("mouseleave", () => {
-      cards.forEach((card) => card.classList.remove("highlight"));
-    });
-
-    tag.addEventListener("click", () => {
-      cards.forEach((card) => card.classList.remove("active"));
-      const activeCard = document.querySelector(`.cat-card[data-category="${targetCat}"]`);
-      if (activeCard) activeCard.classList.add("active");
-    });
-  });
+  }
 
   cards.forEach((card) => {
     card.addEventListener("click", function () {
       cards.forEach((c) => c.classList.remove("active"));
       this.classList.add("active");
+      currentCategory = this.getAttribute("data-category");
+      renderCategory();
+      const showcase = document.getElementById("category-showcase");
+      if (showcase) showcase.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
   });
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", function () {
+      tabs.forEach((t) => t.classList.remove("active"));
+      this.classList.add("active");
+      currentTab = this.getAttribute("data-tab");
+      renderCategory();
+    });
+  });
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", () => modal.classList.remove("open"));
+  }
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+  }
+
+  // Cargar por defecto la primera categoría al abrir
+  renderCategory();
 }
 
 /* BOTÓN DE RETORNO ARRIBA */

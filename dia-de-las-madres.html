@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Especial Día de las Madres</title>
-    <!-- Fuentes suaves y elegantes -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dia-de-las-madres.css">
 </head>
 <body>
 
-    <!-- MENÚ FLOTANTE -->
     <nav class="glass-nav">
         <a href="index.html" class="btn-volver">← Volver al Menú</a>
-        <h2>Para ti, Mamá 🌸</h2>
+        <h2>Para ti, Mamá 🌹</h2>
     </nav>
 
-    <!-- HERO CON VIDEO EMOTIVO -->
     <header class="hero-section">
         <video autoplay loop muted playsinline id="bg-video">
             <source src="imagenes/diamadre.mp4" type="video/mp4">
         </video>
-        <div class="overlay-calido"></div>
+        <!-- Capa oscura neutral sin tono rosa para que resalte el video y las letras -->
+        <div class="overlay-elegante"></div>
+        
+        <!-- Contenedor donde JavaScript generará los pétalos cayendo -->
+        <div id="petalos-container"></div>
+
         <div class="hero-text">
             <h1 class="titulo-emotivo">El camino de una madre</h1>
             <p id="mensaje-animado"></p>
         </div>
     </header>
 
-    <!-- SECCIÓN 1: MANUALIDADES 3D -->
     <section class="content-section">
         <div class="section-header">
             <h2>Manualidades con Amor 🎨</h2>
@@ -40,35 +41,25 @@
         </div>
         
         <div class="carrusel" id="carrusel-manualidades">
-            <!-- AQUÍ PUEDES PONER TUS IMÁGENES 3D CAMBIANDO EL SRC -->
-            <div class="mom-card" data-price="gratis">
-                <img src="imagenes/ramo-3d.gif" alt="Ramo 3D" class="card-img-placeholder" style="background: #ffd6e0;">
+            <!-- Nota cómo la tarjeta ahora tiene la clase 'card-rosa' -->
+            <div class="card-rosa" data-price="gratis">
+                <img src="imagenes/ramo-3d.gif" alt="Ramo" class="card-img-placeholder" style="background: #ffd6e0;">
                 <h3>Ramo de Rosas Eternas</h3>
                 <p>Cinta de seda y papel. ¡Fácil de hacer!</p>
                 <span class="etiqueta">Gratis | 1 hr</span>
-                <!-- Enlace real a un tutorial -->
-                <a href="https://www.youtube.com/results?search_query=como+hacer+rosas+eternas" target="_blank" class="btn-accion">Ver Tutorial en YouTube 🎥</a>
+                <a href="https://www.youtube.com/results?search_query=como+hacer+rosas+eternas" target="_blank" class="btn-accion">Ver Tutorial 🎥</a>
             </div>
 
-            <div class="mom-card" data-price="bajo">
-                <img src="imagenes/caja-3d.png" alt="Caja Sorpresa" class="card-img-placeholder" style="background: #caffbf;">
-                <h3>Caja Explosiva con Fotos</h3>
+            <div class="card-rosa" data-price="bajo">
+                <img src="imagenes/caja-3d.png" alt="Caja" class="card-img-placeholder" style="background: #caffbf;">
+                <h3>Caja Explosiva</h3>
                 <p>Cartulina, fotos y mucho amor.</p>
                 <span class="etiqueta">$ Bajo | 2 hrs</span>
-                <a href="https://www.youtube.com/results?search_query=caja+explosiva+manualidad" target="_blank" class="btn-accion">Ver Paso a Paso ✂️</a>
-            </div>
-
-            <div class="mom-card" data-price="bajo">
-                <img src="imagenes/vela-3d.png" alt="Vela" class="card-img-placeholder" style="background: #fdffb6;">
-                <h3>Vela Aromática de Lavanda</h3>
-                <p>Relajante y decorativa para su cuarto.</p>
-                <span class="etiqueta">$ Bajo | 1.5 hrs</span>
-                <a href="https://www.youtube.com/results?search_query=como+hacer+velas+aromaticas" target="_blank" class="btn-accion">Ver Tutorial 🕯️</a>
+                <a href="https://www.youtube.com/results?search_query=caja+explosiva" target="_blank" class="btn-accion">Ver Paso a Paso ✂️</a>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 2: LUGARES PARA LLEVARLA -->
     <section class="content-section" style="background: #fff9fa;">
         <div class="section-header">
             <h2>Paseos Inolvidables 🗺️</h2>
@@ -80,65 +71,38 @@
         </div>
         
         <div class="carrusel" id="carrusel-lugares">
-            <div class="mom-card" data-price="gratis">
+            <div class="card-rosa" data-price="gratis">
                 <img src="imagenes/parque-3d.png" alt="Picnic" class="card-img-placeholder" style="background: #a0c4ff;">
-                <h3>Picnic en el Parque Central</h3>
+                <h3>Picnic en el Parque</h3>
                 <p>Prepara su comida favorita al aire libre.</p>
-                <!-- Enlace real a Google Maps (cambia la búsqueda por el parque de tu ciudad) -->
-                <a href="https://www.google.com/maps/search/Parque+mas+cercano" target="_blank" class="btn-accion">Cómo llegar 📍</a>
+                <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Cómo llegar 📍</a>
             </div>
 
-            <div class="mom-card" data-price="alto">
+            <div class="card-rosa" data-price="alto">
                 <img src="imagenes/cafe-3d.png" alt="Cafetería" class="card-img-placeholder" style="background: #ffc6ff;">
                 <h3>Desayuno en Terraza</h3>
                 <p>Café de especialidad con vista a la ciudad.</p>
-                <a href="https://www.google.com/maps/search/Mejores+cafeterias+terraza" target="_blank" class="btn-accion">Buscar Restaurantes 📍</a>
-            </div>
-
-            <div class="mom-card" data-price="alto">
-                <img src="imagenes/spa-3d.png" alt="Spa" class="card-img-placeholder" style="background: #bdb2ff;">
-                <h3>Día de Spa y Relajación</h3>
-                <p>Masajes y alberca termal para consentirla.</p>
-                <a href="https://www.google.com/maps/search/Spa+y+masajes" target="_blank" class="btn-accion">Ver Spas Cercanos 📍</a>
+                <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Buscar Restaurantes 📍</a>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 3: REGALOS EN TENDENCIA -->
     <section class="content-section">
         <div class="section-header">
             <h2>Regalos Sorpresa 🎁</h2>
             <div class="filtros" id="filtros-regalos">
                 <button class="btn-filtro active" data-filter="all">Todos</button>
                 <button class="btn-filtro" data-filter="belleza">Belleza</button>
-                <button class="btn-filtro" data-filter="tecnologia">Tecnología</button>
             </div>
         </div>
         
         <div class="carrusel" id="carrusel-regalos">
-            <div class="mom-card" data-price="belleza">
+            <div class="card-rosa" data-price="belleza">
                 <img src="imagenes/skincare-3d.png" alt="Skincare" class="card-img-placeholder" style="background: #ffadad;">
                 <h3>Set de Skincare Coreano</h3>
                 <p>Piel radiante con mascarillas y serums.</p>
-                <h4 class="precio-promocion">$650 MXN <span class="precio-viejo">$890</span></h4>
-                <!-- Enlace para comprar en Amazon -->
-                <a href="https://www.amazon.com.mx/s?k=set+skincare+coreano" target="_blank" class="btn-comprar">Comprar en Amazon 🛒</a>
-            </div>
-
-            <div class="mom-card" data-price="tecnologia">
-                <img src="imagenes/kindle-3d.png" alt="Lector" class="card-img-placeholder" style="background: #9bf6ff;">
-                <h3>Lector de Libros Kindle</h3>
-                <p>Miles de historias en su bolso.</p>
-                <h4 class="precio-promocion">$2,099 MXN</h4>
-                <a href="https://www.amazon.com.mx/s?k=kindle" target="_blank" class="btn-comprar">Comprar en Amazon 🛒</a>
-            </div>
-            
-            <div class="mom-card" data-price="belleza">
-                <img src="imagenes/perfume-3d.png" alt="Perfume" class="card-img-placeholder" style="background: #e4c1f9;">
-                <h3>Perfume Floral Elegante</h3>
-                <p>Fragancia duradera y suave.</p>
-                <h4 class="precio-promocion">$1,450 MXN</h4>
-                <a href="https://www.amazon.com.mx/s?k=perfume+mujer" target="_blank" class="btn-comprar">Comprar en Amazon 🛒</a>
+                <h4 class="precio-promocion">$650 MXN</h4>
+                <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar">Comprar en Amazon 🛒</a>
             </div>
         </div>
     </section>

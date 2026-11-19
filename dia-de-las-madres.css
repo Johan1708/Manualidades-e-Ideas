@@ -1,55 +1,70 @@
+/* --- VARIABLES MEJORADAS --- */
+:root {
+    --rosa-neon: #ff0066; /* Rosa más intenso y vibrante */
+    --rosa-pastel: #ffccdd;
+    --crema-suave: #fff5f7;
+    --texto-intenso: #590d22;
+    --sombra-pro: 0 15px 30px rgba(0, 0, 0, 0.15);
+    --easing-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
-}
-
-:root {
-    --rosa-principal: #ff4d6d;
-    --rosa-claro: #ffb3c6;
-    --fondo-crema: #fff5f7;
-    --texto-oscuro: #590d22;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: var(--fondo-crema);
-    color: var(--texto-oscuro);
+    background-color: var(--crema-suave);
+    color: var(--texto-intenso);
     overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    padding-top: 70px; /* Espacio para el nav */
 }
+
+/* --- NAV FLOTANTE --- */
+.btn-volver-float {
+    position: fixed;
+    top: 15px; left: 15px;
+    z-index: 150;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--rosa-neon);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center; align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem; font-weight: 800;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all var(--easing-smooth) 0.3s;
+}
+.btn-volver-float:hover { transform: scale(1.1) rotate(-5deg); }
 
 .glass-nav {
     position: fixed;
-    top: 0; width: 100%;
+    top: 0; width: 100%; height: 70px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.85);
+    justify-content: center; align-items: center;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     z-index: 100;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.glass-nav h2 {
+    color: var(--texto-intenso); font-size: 1.3rem; font-weight: 800;
+    margin-left: 50px; /* Para que no choque con el botón de volver */
 }
 
-.btn-volver {
-    color: var(--rosa-principal);
-    text-decoration: none;
-    font-weight: 900;
-    background: #fff;
-    padding: 8px 15px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: 0.3s;
-}
-
+/* --- HERO CINEMATOGRÁFICO --- */
 .hero-section {
     position: relative;
-    width: 100%;
-    height: 70vh;
+    width: 100%; height: 60vh; /* Un poco más compacto para móvil */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; align-items: center;
     overflow: hidden;
+    background: #000;
 }
 
 #bg-video {
@@ -57,129 +72,201 @@ body {
     width: 100%; height: 100%;
     object-fit: cover;
     z-index: 1;
+    opacity: 0;
+    animation: fundidoVideo 1.5s forwards 0.5s;
 }
 
-/* Filtro neutral, solo oscurece el video sin teñirlo de rosa */
-.overlay-elegante {
+@keyframes fundidoVideo { to { opacity: 1; } }
+
+.overlay-cinematografico {
     position: absolute; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
     z-index: 2;
 }
 
-/* CONTENEDOR Y ANIMACIÓN DE PÉTALOS */
-#petalos-container {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 3;
-    pointer-events: none; /* Permite hacer clic a través de los pétalos */
-}
-
-.petalo-cae {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    /* Da la forma de un pétalo usando CSS */
-    background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
-    border-radius: 15px 0 15px 0;
-    opacity: 0.8;
-    box-shadow: 0 0 8px rgba(255, 77, 109, 0.4);
-    animation: caer linear infinite;
-}
-
-@keyframes caer {
-    0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(80vh) rotate(360deg) scale(1.2) translateX(30px); opacity: 0; }
-}
-
 .hero-text {
-    position: relative;
-    z-index: 4;
+    position: relative; z-index: 4;
     text-align: center;
     color: #fff;
     padding: 20px;
 }
 
-.titulo-emotivo {
+.titulo-hero {
     font-family: 'Dancing Script', cursive;
-    font-size: 4rem;
-    margin-bottom: 10px;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    font-size: 4.5rem;
+    margin-bottom: 15px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 #mensaje-animado {
-    font-size: 1.3rem;
-    font-weight: 700;
-    max-width: 600px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    font-size: 1.4rem;
+    font-weight: 600;
+    max-width: 650px;
     min-height: 80px;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.5);
 }
 
-/* SECCIONES Y FILTROS */
-.content-section { padding: 60px 20px 40px; }
-.section-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; }
-.filtros { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Animaciones de entrada */
+.animate-pop-in { opacity: 0; transform: scale(0.9); animation: popIn 1s var(--easing-smooth) forwards 1.2s; }
+@keyframes popIn { to { opacity: 1; transform: scale(1); } }
 
+.animate-fade-in { opacity: 0; animation: fadeIn 1s var(--easing-smooth) forwards 1.8s; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* --- PÉTALOS (Mismo CSS de antes, solo ajustado el z-index) --- */
+#petalos-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+.petalo-cae { position: absolute; width: 18px; height: 18px; background: linear-gradient(135deg, #ff80aa 0%, #ff4d94 100%); border-radius: 15px 0 15px 0; opacity: 0.7; animation: caer linear infinite; }
+@keyframes caer { 0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0; } 10% { opacity: 0.7; } 100% { transform: translateY(70vh) rotate(360deg) scale(1.2) translateX(20px); opacity: 0; } }
+
+/* --- SECCIONES Y TARJETAS --- */
+.content-section { padding: 50px 20px; }
+.section-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px; }
+.titulo-seccion { font-size: 1.8rem; font-weight: 800; color: var(--texto-intenso); }
+.filtros { display: flex; gap: 10px; flex-wrap: wrap; }
 .btn-filtro {
-    background: #fff; border: none; padding: 8px 16px; border-radius: 20px;
-    color: var(--texto-oscuro); font-weight: 700; cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s;
+    background: #fff; border: 2px solid var(--rosa-pastel); padding: 8px 18px;
+    border-radius: 20px; color: var(--texto-intenso); font-weight: 700; cursor: pointer;
+    transition: all 0.3s var(--easing-smooth); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
-
-.btn-filtro.active {
-    background: var(--rosa-principal); color: #fff;
-    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-}
+.btn-filtro:hover { transform: translateY(-2px); border-color: var(--rosa-neon); }
+.btn-filtro.active { background: var(--rosa-neon); color: #fff; border-color: var(--rosa-neon); box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3); }
 
 .carrusel {
-    display: flex; gap: 25px; overflow-x: auto;
-    padding-bottom: 20px; padding-top: 10px;
-    scroll-snap-type: x mandatory;
+    display: flex; gap: 30px; overflow-x: auto;
+    padding: 10px 10px 30px 10px; scroll-snap-type: x mandatory;
 }
-.carrusel::-webkit-scrollbar { height: 6px; }
-.carrusel::-webkit-scrollbar-thumb { background: var(--rosa-claro); border-radius: 10px; }
+.carrusel::-webkit-scrollbar { height: 8px; }
+.carrusel::-webkit-scrollbar-thumb { background: var(--rosa-pastel); border-radius: 10px; }
 
-/* NUEVA TARJETA CON FORMA DE PÉTALO DE ROSA */
 .card-rosa {
-    min-width: 280px;
-    /* La magia: esquinas redondeadas asimétricas para parecer una rosa/hoja */
+    min-width: 290px;
+    /* Silueta de pétalo */
     border-radius: 60px 10px 60px 10px;
-    background: linear-gradient(135deg, #ffffff 40%, #ffeef2 100%);
-    border: 2px solid #ffb3c6;
-    padding: 18px;
-    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.12);
-    scroll-snap-align: center;
-    display: flex; flex-direction: column; gap: 12px;
-    transition: transform 0.3s;
+    background: #fff;
+    border: 2px solid var(--rosa-pastel);
+    padding: 20px;
+    box-shadow: var(--sombra-pro);
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; gap: 15px;
+    transition: all 0.4s var(--easing-smooth);
 }
+.card-rosa:hover { transform: translateY(-10px) scale(1.01); border-color: var(--rosa-neon); box-shadow: 0 20px 40px rgba(255,0,102,0.2); }
 
-.card-rosa:hover { transform: translateY(-5px); }
-
-.card-img-placeholder {
-    width: 100%; height: 180px;
-    /* La imagen interna también acompaña la forma */
+.card-img {
+    width: 100%; height: 190px;
+    /* Imagen interna con forma */
     border-radius: 45px 5px 30px 5px;
     object-fit: cover;
 }
 
-.card-rosa h3 { font-size: 1.3rem; color: var(--texto-oscuro); }
-.card-rosa p { font-size: 0.95rem; color: #666; flex-grow: 1; }
-.etiqueta { font-size: 0.85rem; font-weight: 900; color: var(--rosa-principal); }
-.precio-promocion { font-size: 1.4rem; color: #e63946; font-weight: 900; }
+.card-info { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
 
+/* TÍTULO CON DEGRADADO Y RESPLANDOR (Técnica Avanzada CSS) */
+.card-titulo-gradient {
+    font-size: 1.3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff0066, #ff6699, #ff0066);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Resplandor sutil en el texto */
+    text-shadow: 0 2px 10px rgba(255, 0, 102, 0.3);
+    animation: shineText 3s linear infinite;
+}
+@keyframes shineText { to { background-position: 200% center; } }
+
+.card-desc { font-size: 0.95rem; color: #666; flex-grow: 1; line-height: 1.5; }
+.etiqueta { font-size: 0.85rem; font-weight: 800; color: var(--rosa-neon); }
+
+.precio-promocion { font-size: 1.5rem; color: #e63946; font-weight: 900; }
+.precio-viejo { text-decoration: line-through; color: #a8a8a8; font-size: 1rem; font-weight: 400; margin-left: 8px; }
+
+/* BOTONES DE ACCIÓN */
 .btn-accion, .btn-comprar {
-    display: block; text-align: center; padding: 12px;
-    border-radius: 20px 5px 20px 5px; /* Botones con forma de hojita */
-    text-decoration: none; font-weight: 900; transition: 0.3s;
+    display: block; text-align: center; padding: 14px;
+    /* Botón con forma de hoja */
+    border-radius: 20px 5px 20px 5px;
+    text-decoration: none; font-weight: 800; transition: all 0.3s var(--easing-smooth);
+    border: none; cursor: pointer; font-size: 1rem;
+}
+.btn-accion { background: var(--crema-suave); color: var(--rosa-neon); border: 2px solid var(--rosa-pastel); }
+.btn-accion:hover { background: var(--rosa-neon); color: #fff; transform: translateY(-2px); }
+.btn-comprar { background: linear-gradient(135deg, #ff0066, #ff4d6d); color: #fff; box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4); }
+.btn-comprar:hover { transform: scale(1.05); box-shadow: 0 12px 25px rgba(255, 77, 109, 0.6); }
+
+/* --- MODAL PRO PREMIUM --- */
+.modal-pro {
+    display: none; position: fixed;
+    z-index: 500; /* Muy por encima de todo */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro simple para velocidad */
+    justify-content: center; align-items: center;
+    padding: 20px;
+}
+.modal-pro.activo { display: flex; }
+
+.modal-content-pro {
+    width: 100%; max-width: 550px;
+    max-height: 90vh; overflow-y: auto;
+    background: #fff;
+    /* Tarjeta flotante */
+    border-radius: 40px;
+    padding: 30px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    position: relative;
 }
 
-.btn-accion { background: var(--fondo-crema); color: var(--rosa-principal); border: 2px solid var(--rosa-claro); }
-.btn-accion:hover { background: var(--rosa-claro); color: #fff; }
-.btn-comprar { background: linear-gradient(135deg, var(--rosa-principal), #ff4d6d); color: #fff; }
-.btn-comprar:hover { transform: scale(1.02); }
+/* Animación de expansión al abrir */
+.animate-expand-in { animation: expandIn 0.5s var(--easing-smooth) forwards; }
+@keyframes expandIn {
+    0% { opacity: 0; transform: scale(0.7) translateY(50px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
 
+.modal-header-pro {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 20px;
+    border-bottom: 2px solid var(--rosa-pastel); padding-bottom: 15px;
+}
+.modal-header-pro h2 { color: var(--texto-intenso); font-size: 1.5rem; font-weight: 800; }
+.cerrar-modal-pro {
+    font-size: 2.5rem; color: var(--rosa-neon);
+    cursor: pointer; line-height: 1; font-weight: 600;
+    transition: 0.3s;
+}
+.cerrar-modal-pro:hover { transform: rotate(90deg); color: var(--texto-intenso); }
+
+.lista-pasos-pro { display: flex; flex-direction: column; gap: 20px; }
+
+.paso-pro {
+    display: flex; gap: 15px; align-items: center;
+    background: var(--crema-suave);
+    padding: 15px; border-radius: 25px;
+    border: 1px solid var(--rosa-pastel);
+}
+
+.img-paso-pro {
+    width: 90px; height: 90px;
+    object-fit: cover; border-radius: 20px;
+    flex-shrink: 0; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.paso-texto-pro h4 { color: var(--texto-intenso); font-size: 1.1rem; font-weight: 700; }
+.paso-texto-pro p { font-size: 0.9rem; color: #555; margin-top: 5px; line-height: 1.5; }
+
+/* --- ADAPTACIÓN MÓVIL --- */
 @media (max-width: 768px) {
-    .titulo-emotivo { font-size: 2.8rem; }
-    #mensaje-animado { font-size: 1.1rem; }
+    body { padding-top: 60px; }
+    .glass-nav { height: 60px; }
+    .hero-section { height: 55vh; }
+    .titulo-hero { font-size: 3rem; }
+    #mensaje-animado { font-size: 1.1rem; min-height: 60px; }
+    .titulo-seccion { font-size: 1.5rem; }
+    .card-rosa { min-width: 260px; padding: 15px; }
+    .card-img { height: 160px; }
+    .card-titulo-gradient { font-size: 1.2rem; }
+    .modal-content-pro { padding: 20px; border-radius: 30px; }
+    .modal-header-pro h2 { font-size: 1.3rem; }
+    .paso-pro { padding: 10px; flex-direction: column; align-items: flex-start; }
+    .img-paso-pro { width: 100%; height: 150px; border-radius: 15px; }
 }

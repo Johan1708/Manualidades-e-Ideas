@@ -3,36 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Especial Día de las Madres</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Especial para Mamá | Ideas y Regalos</title>
+    <!-- Fuentes Elegantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dia-de-las-madres.css">
 </head>
-<body>
+<body class="cargando-pagina">
 
-    <nav class="glass-nav">
-        <a href="index.html" class="btn-volver">← Volver al Menú</a>
-        <h2>Para ti, Mamá 🌹</h2>
-    </nav>
+    <!-- Botón Flotante de Regreso (Minimalista y fijo) -->
+    <a href="index.html" class="btn-volver-float">←</a>
 
     <header class="hero-section">
         <video autoplay loop muted playsinline id="bg-video">
             <source src="imagenes/diamadre.mp4" type="video/mp4">
         </video>
-        <!-- Capa oscura neutral sin tono rosa para que resalte el video y las letras -->
-        <div class="overlay-elegante"></div>
-        
-        <!-- Contenedor donde JavaScript generará los pétalos cayendo -->
+        <div class="overlay-cinematografico"></div>
         <div id="petalos-container"></div>
 
         <div class="hero-text">
-            <h1 class="titulo-emotivo">El camino de una madre</h1>
-            <p id="mensaje-animado"></p>
+            <h1 class="titulo-hero animate-pop-in">Para Ti, Mamá</h1>
+            <p id="mensaje-animado" class="animate-fade-in"></p>
         </div>
     </header>
 
+    <!-- SECCIÓN 1: MANUALIDADES -->
     <section class="content-section">
         <div class="section-header">
-            <h2>Manualidades con Amor 🎨</h2>
+            <h2 class="titulo-seccion">Manualidades con Amor</h2>
             <div class="filtros" id="filtros-manualidades">
                 <button class="btn-filtro active" data-filter="all">Todas</button>
                 <button class="btn-filtro" data-filter="gratis">Gratis</button>
@@ -41,71 +38,95 @@
         </div>
         
         <div class="carrusel" id="carrusel-manualidades">
-            <!-- Nota cómo la tarjeta ahora tiene la clase 'card-rosa' -->
+            <!-- Tarjeta 1: Ramo -->
             <div class="card-rosa" data-price="gratis">
-                <img src="imagenes/ramo-3d.gif" alt="Ramo" class="card-img-placeholder" style="background: #ffd6e0;">
-                <h3>Ramo de Rosas Eternas</h3>
-                <p>Cinta de seda y papel. ¡Fácil de hacer!</p>
-                <span class="etiqueta">Gratis | 1 hr</span>
-                <a href="https://www.youtube.com/results?search_query=como+hacer+rosas+eternas" target="_blank" class="btn-accion">Ver Tutorial 🎥</a>
+                <img src="imagenes/ramo-3d.gif" alt="Ramo 3D" class="card-img" style="background: #ffd6e0;">
+                <div class="card-info">
+                    <h3 class="card-titulo-gradient">Ramo de Rosas Eternas</h3>
+                    <p class="card-desc">Cinta de seda y papel. ¡Fácil de hacer! Conviértete en una experta.</p>
+                    <span class="etiqueta">Gratis | 1 hr</span>
+                    <button class="btn-accion btn-abrir-pasos" 
+                            data-modal-titulo="Ramo de Rosas Eternas"
+                            data-modal-pasos='[
+                                {"img": "imagenes/ramo-paso1.jpg", "texto": "Prepara los listones de 5cm. Necesitas un encendedor para sellar las orillas."},
+                                {"img": "imagenes/ramo-paso2.jpg", "texto": "Enrolla el listón para formar el capullo de la rosa y asegura con silicón caliente."},
+                                {"img": "imagenes/ramo-paso3.jpg", "texto": "Une varias rosas y añade hojas de listón verde para terminar el ramo."}
+                            ]'>Ver Pasos ✨</button>
+                </div>
             </div>
-
+            
+            <!-- Tarjeta 2: Caja -->
             <div class="card-rosa" data-price="bajo">
-                <img src="imagenes/caja-3d.png" alt="Caja" class="card-img-placeholder" style="background: #caffbf;">
-                <h3>Caja Explosiva</h3>
-                <p>Cartulina, fotos y mucho amor.</p>
-                <span class="etiqueta">$ Bajo | 2 hrs</span>
-                <a href="https://www.youtube.com/results?search_query=caja+explosiva" target="_blank" class="btn-accion">Ver Paso a Paso ✂️</a>
+                <img src="imagenes/caja-3d.png" alt="Caja Sorpresa" class="card-img" style="background: #caffbf;">
+                <div class="card-info">
+                    <h3 class="card-titulo-gradient">Caja Explosiva</h3>
+                    <p class="card-desc">Cartulina, fotos y mucho amor. Un regalo inolvidable para mamá.</p>
+                    <span class="etiqueta">$ Bajo | 2 hrs</span>
+                    <button class="btn-accion btn-abrir-pasos"
+                            data-modal-titulo="Caja Explosiva con Fotos"
+                            data-modal-pasos='[
+                                {"img": "imagenes/caja-paso1.jpg", "texto": "Corta la base de la caja y las capas internas en forma de cruz."},
+                                {"img": "imagenes/caja-paso2.jpg", "texto": "Decora cada capa con fotos, mensajes y bolsillos pequeños."},
+                                {"img": "imagenes/caja-paso3.jpg", "texto": "Dobla la caja y ponle la tapa. Al abrirla, se desarmará con todas las sorpresas."}
+                            ]'>Ver Pasos ✂️</button>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN 2: LUGARES (Estructura similar) -->
     <section class="content-section" style="background: #fff9fa;">
         <div class="section-header">
-            <h2>Paseos Inolvidables 🗺️</h2>
+            <h2 class="titulo-seccion">Paseos Inolvidables</h2>
             <div class="filtros" id="filtros-lugares">
                 <button class="btn-filtro active" data-filter="all">Todos</button>
-                <button class="btn-filtro" data-filter="gratis">Naturaleza</button>
                 <button class="btn-filtro" data-filter="alto">Restaurantes</button>
             </div>
         </div>
         
         <div class="carrusel" id="carrusel-lugares">
-            <div class="card-rosa" data-price="gratis">
-                <img src="imagenes/parque-3d.png" alt="Picnic" class="card-img-placeholder" style="background: #a0c4ff;">
-                <h3>Picnic en el Parque</h3>
-                <p>Prepara su comida favorita al aire libre.</p>
-                <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Cómo llegar 📍</a>
-            </div>
-
             <div class="card-rosa" data-price="alto">
-                <img src="imagenes/cafe-3d.png" alt="Cafetería" class="card-img-placeholder" style="background: #ffc6ff;">
-                <h3>Desayuno en Terraza</h3>
-                <p>Café de especialidad con vista a la ciudad.</p>
-                <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Buscar Restaurantes 📍</a>
+                <img src="imagenes/cafe-3d.png" alt="Cafetería" class="card-img" style="background: #ffc6ff;">
+                <div class="card-info">
+                    <h3 class="card-titulo-gradient">Desayuno en Terraza</h3>
+                    <p class="card-desc">Café de especialidad con vista a la ciudad. Consiéntela con un buen brunch.</p>
+                    <a href="https://www.google.com/maps/search/Mejores+cafeterias+terraza" target="_blank" class="btn-accion w-100">Cómo llegar 📍</a>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN 3: REGALOS (Estructura similar) -->
     <section class="content-section">
         <div class="section-header">
-            <h2>Regalos Sorpresa 🎁</h2>
-            <div class="filtros" id="filtros-regalos">
-                <button class="btn-filtro active" data-filter="all">Todos</button>
-                <button class="btn-filtro" data-filter="belleza">Belleza</button>
-            </div>
+            <h2 class="titulo-seccion">Regalos en Tendencia</h2>
         </div>
         
         <div class="carrusel" id="carrusel-regalos">
             <div class="card-rosa" data-price="belleza">
-                <img src="imagenes/skincare-3d.png" alt="Skincare" class="card-img-placeholder" style="background: #ffadad;">
-                <h3>Set de Skincare Coreano</h3>
-                <p>Piel radiante con mascarillas y serums.</p>
-                <h4 class="precio-promocion">$650 MXN</h4>
-                <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar">Comprar en Amazon 🛒</a>
+                <img src="imagenes/skincare-3d.png" alt="Skincare" class="card-img" style="background: #ffadad;">
+                <div class="card-info">
+                    <h3 class="card-titulo-gradient">Set de Skincare Coreano</h3>
+                    <p class="card-desc">Piel radiante con mascarillas y serums. ¡El secreto de la eterna juventud!</p>
+                    <h4 class="precio-promocion">$650 <span class="precio-viejo">$890</span></h4>
+                    <a href="https://www.amazon.com.mx/s?k=set+skincare+coreano" target="_blank" class="btn-comprar w-100">Comprar en Amazon 🛒</a>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- MODAL PRO (VENTANA FLOTANTE PREMIUM) -->
+    <div id="modal-pasos" class="modal-pro">
+        <div class="modal-content-pro animate-expand-in">
+            <div class="modal-header-pro">
+                <h2 id="modal-titulo-pro">Título Manualidad</h2>
+                <span class="cerrar-modal-pro" id="btn-cerrar-pro">×</span>
+            </div>
+            <div class="lista-pasos-pro" id="modal-lista-pro">
+                <!-- El JS llenará esto dinámicamente -->
+            </div>
+        </div>
+    </div>
 
     <script src="dia-de-las-madres.js"></script>
 </body>

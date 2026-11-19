@@ -19,6 +19,44 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    // 1. Consultar dinámicamente qué modelos soporta esta API Key
+    const listRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`
+    );
+    const listData = await listRes.json();
+
+    if (!listRes.ok) {
+      return res.status(500).json({
+        error: `Error al validar API Key (${listRes.status}): ${listData?.error?.message || "Clave inválida"}`
+      });
+    }
+
+    const modelosDisponibles = (listData.models || [])
+      .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
+      .map((m) => m.name.replace("models/", ""));
+
+    // Priorizar el modelo rápido disponible en tu cuenta
+    const prioridades = [
+      "gemini-3.8-flash",
+      "gemini-4-hydrogen",
+      "gemini-3-flash-preview",
+      "gemini-3.0-flash",
+      "gemini-2.5-flash",
+      "gemini-2.0-flash"
+    ];
+
+    const modeloElegido =
+      prioridades.find((p) => modelosDisponibles.includes(p)) ||
+      modelosDisponibles.find((m) => m.includes("flash") || m.includes("hydrogen")) ||
+      modelosDisponibles[0];
+
+    if (!modeloElegido) {
+      return res.status(500).json({
+        error: "Tu API Key no tiene modelos compatibles con generateContent."
+      });
+    }
+
+    // 2. Preparar prompts
     let systemPrompt = "";
     let userPrompt = "";
 
@@ -39,8 +77,9 @@ Ayúdalo con ideas de manualidades, materiales económicos, sustituciones casera
       userPrompt = message || "Hola";
     }
 
+    // 3. Generar respuesta sin parámetros incompatibles
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${modeloElegido}:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -49,8 +88,7 @@ Ayúdalo con ideas de manualidades, materiales económicos, sustituciones casera
           contents: [{ parts: [{ text: userPrompt }] }],
           generationConfig: {
             temperature: mode === "moderate_idea" ? 0.1 : 0.7,
-            maxOutputTokens: 450,
-            thinkingConfig: { thinkingLevel: "low" },
+            maxOutputTokens: 500,
             responseMimeType: mode === "moderate_idea" ? "application/json" : "text/plain"
           }
         })
@@ -61,7 +99,7 @@ Ayúdalo con ideas de manualidades, materiales económicos, sustituciones casera
 
     if (!response.ok) {
       return res.status(500).json({
-        error: `Error de Gemini (${response.status}): ${data?.error?.message || "Error desconocido"}`
+        error: `Error con modelo ${modeloElegido} (${response.status}): ${data?.error?.message || "Error desconocido"}`
       });
     }
 

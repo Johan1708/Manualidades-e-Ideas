@@ -21,20 +21,14 @@
 
     <!-- NAVEGACIÓN FLOTANTE -->
     <nav class="glass-nav">
-        <div class="nav-logo">El Jardín de Mamá 🌸</div>
-        <div class="nav-links">
-            <a href="#galeria">Flores</a>
-            <a href="#experiencias">Experiencias</a>
-            <a href="#ofertas">Temporada</a>
-        </div>
-        <a href="#" class="btn-nav-action">Regalar Ahora</a>
+        <a href="index.html" class="btn-volver-float" title="Volver al Menú">← Volver</a>
+        <div class="nav-text">El Jardín de Mamá 🌸</div>
     </nav>
 
-    <!-- FONDO INTERACTIVO -->
+    <!-- FONDO DE VIDEO Y PÉTALOS -->
     <div class="video-background">
         <video autoplay loop muted playsinline id="bg-video">
-            <!-- Usa tu video local o este de prueba temporal -->
-            <source src="https://cdn.pixabay.com/video/2020/05/26/40149-425262335_large.mp4" type="video/mp4">
+            <source src="imagenes/diamadre.mp4" type="video/mp4">
         </video>
         <div class="overlay-cinematografico"></div>
         <div id="petalos-container"></div>
@@ -48,165 +42,189 @@
             <div class="hero-text-container parallax-element" data-speed="0.5">
                 <h1 class="titulo-editorial">Mujer en<br><span>Floración</span></h1>
                 <p id="mensaje-animado" class="subtitulo-editorial"></p>
-                <div class="hero-actions animate-on-scroll">
-                    <a href="#galeria" class="btn-comprar premium-shadow">Explorar Colección</a>
-                </div>
             </div>
         </header>
 
-        <!-- SECCIÓN 1: GALERÍA BENTO 3D -->
-        <section id="galeria" class="mega-section">
+        <!-- SECCIÓN 1: SELECCIÓN FLORAL -->
+        <section class="mega-section">
             <div class="section-header animate-on-scroll">
                 <h2 class="titulo-seccion">Selección Floral 💐</h2>
                 <div class="filtros" id="filtros-flores">
-                    <button class="btn-filtro active" data-filter="all">Catálogo Completo</button>
-                    <button class="btn-filtro" data-filter="clasicas">Rosas & Clásicas</button>
-                    <button class="btn-filtro" data-filter="exoticas">Orquídeas & Exóticas</button>
+                    <button class="btn-filtro active" data-filter="all">Todas</button>
+                    <button class="btn-filtro" data-filter="clasicas">Clásicas</button>
+                    <button class="btn-filtro" data-filter="exoticas">Exóticas</button>
                 </div>
             </div>
 
             <div class="bento-gallery" id="grid-flores">
-                <!-- Tarjeta Grande -->
                 <article class="bento-card bento-grande filter-item tilt-effect" data-price="clasicas">
                     <div class="bento-content">
-                        <h3 class="bento-title card-titulo-gradient">Rosas Ecuatorianas Premium</h3>
-                        <p class="bento-desc">Cultivadas a más de 2,800 metros de altura para garantizar botones gigantes, colores vibrantes y una duración extraordinaria en florero.</p>
-                        <span class="etiqueta">Simboliza: Amor Incondicional</span>
+                        <h3 class="bento-title card-titulo-gradient">Rosas Ecuatorianas Rojas</h3>
+                        <p class="bento-desc">El símbolo universal del amor puro. Cultivadas en las alturas para lograr pétalos más grandes y colores más intensos y duraderos.</p>
+                        <span class="etiqueta">Significado: Amor Profundo y Respeto</span>
                         <button class="btn-editorial btn-abrir-pasos" 
-                                data-modal-titulo="El Secreto de las Rosas"
-                                data-modal-pasos='[{"img": "https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a", "texto": "Corte diagonal de 3cm bajo el grifo."}, {"img": "https://images.unsplash.com/photo-1563241527-3004b7be0ffd", "texto": "Agua fresca con nutrientes cada 48 hrs."}]'>Descubrir Cuidados ✨</button>
+                                data-modal-titulo="Cuidado de las Rosas"
+                                data-modal-pasos='[{"img": "imagenes/corte-tallo.jpg", "texto": "Corta los tallos en diagonal 2 cm antes de ponerlas en agua."}, {"img": "imagenes/agua-fresca.jpg", "texto": "Cambia el agua del florero cada 2 días para evitar bacterias."}, {"img": "imagenes/luz-indirecta.jpg", "texto": "Mantenlas alejadas del sol directo y corrientes de aire caliente."}]'>Guía de Cuidados ✨</button>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1546842931-886c185b4c8c" alt="Rosas" class="bento-img tilt-img">
+                    <img src="imagenes/rosas-3d.png" alt="Rosas" class="bento-img tilt-img" style="background: #ffd6e0;">
                 </article>
 
-                <!-- Tarjeta Ancha -->
                 <article class="bento-card bento-ancha filter-item tilt-effect" data-price="exoticas">
-                    <img src="https://images.unsplash.com/photo-1566804820202-0e9e4f2dc1d4" alt="Orquídea" class="bento-img tilt-img">
+                    <img src="imagenes/orquidea-3d.png" alt="Orquídea" class="bento-img tilt-img" style="background: #e0c3fc;">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Orquídea Phalaenopsis</h3>
-                        <p class="bento-desc">La joya de la botánica. Elegancia minimalista que perdura por meses, aportando serenidad a sus espacios favoritos.</p>
-                        <span class="etiqueta">Simboliza: Sofisticación</span>
+                        <p class="bento-desc">Elegancia pura. Una flor exótica de larga duración que aporta sofisticación a cualquier rincón de su hogar.</p>
+                        <span class="etiqueta">Significado: Belleza y Fuerza</span>
+                        <button class="btn-editorial btn-abrir-pasos"
+                                data-modal-titulo="El Secreto de las Orquídeas"
+                                data-modal-pasos='[{"img": "imagenes/riego-orquidea.jpg", "texto": "Riega por inmersión solo una vez a la semana."}, {"img": "imagenes/drenaje.jpg", "texto": "Asegúrate de escurrir bien; las raíces no deben quedar encharcadas."}, {"img": "imagenes/luz-filtrada.jpg", "texto": "Colócala cerca de una ventana con luz filtrada o cortina clara."}]'>Ver Pasos 💧</button>
                     </div>
                 </article>
                 
-                <!-- Tarjeta Alta -->
                 <article class="bento-card bento-alta filter-item tilt-effect" data-price="clasicas">
-                    <img src="https://images.unsplash.com/photo-1520763185298-1b434c919102" alt="Tulipanes" class="bento-img tilt-img">
+                    <img src="imagenes/tulipanes-3d.png" alt="Tulipanes" class="bento-img tilt-img" style="background: #ffdfba;">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Tulipanes Holandeses</h3>
-                        <p class="bento-desc">Sencillez y alegría primaveral. Siguen creciendo aún después de cortados.</p>
+                        <p class="bento-desc">Sencillez y alegría en tonos pastel que anuncian la primavera.</p>
+                        <span class="etiqueta">Amor incondicional</span>
                     </div>
                 </article>
 
-                <!-- Tarjeta Regular -->
                 <article class="bento-card filter-item tilt-effect" data-price="clasicas" style="grid-column: span 1;">
-                    <img src="https://images.unsplash.com/photo-1557008139-44d2d48083dc" alt="Girasol" class="bento-img tilt-img circular-img">
+                    <img src="imagenes/girasol-3d.png" alt="Girasol" class="bento-img tilt-img circular-img" style="background: #ffffba;">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Girasoles Sol</h3>
-                        <p class="bento-desc">Para la mujer que siempre busca la luz.</p>
+                        <p class="bento-desc">Para la mujer que ilumina nuestros días.</p>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: MARQUEE INFINITO (Testimonios) -->
-        <div class="marquee-wrapper animate-on-scroll">
-            <div class="marquee-content">
-                <span>"Las rosas duraron más de dos semanas, impresionantes." - Mariana G. 🌸</span>
-                <span>"El empaque es una verdadera obra de arte." - Carlos R. ✨</span>
-                <span>"Lloró de emoción al ver las orquídeas." - Lucía M. 💐</span>
-                <span>"Servicio impecable y flores frescas." - Diego V. 🌿</span>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 2: EXPERIENCIAS (CARRUSEL MEJORADO) -->
-        <section id="experiencias" class="mega-section glass-container animate-on-scroll">
+        <!-- SECCIÓN 2: EXPERIENCIAS -->
+        <section class="mega-section glass-container animate-on-scroll" style="margin: 40px auto;">
             <div class="section-header">
-                <h2 class="titulo-seccion text-white">Botánica y Momentos 🌿</h2>
+                <h2 class="titulo-seccion text-white">Experiencias y Naturaleza 🌿</h2>
                 <div class="filtros" id="filtros-experiencias">
-                    <button class="btn-filtro active" data-filter="all">Todo</button>
-                    <button class="btn-filtro" data-filter="taller">Talleres</button>
+                    <button class="btn-filtro active" data-filter="all">Todas</button>
+                    <button class="btn-filtro" data-filter="salida">Paseos</button>
+                    <button class="btn-filtro" data-filter="taller">Aprender</button>
                 </div>
             </div>
 
             <div class="carrusel" id="carrusel-experiencias">
-                <div class="card-rosa filter-item tilt-effect" data-price="taller">
-                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2" alt="Taller" class="card-img">
+                <div class="card-rosa filter-item tilt-effect" data-price="salida">
+                    <img src="imagenes/jardin-3d.png" alt="Jardín Botánico" class="card-img" style="background: #caffbf;">
                     <div class="card-info">
-                        <h3 class="card-titulo-gradient">Masterclass Floral</h3>
-                        <p class="card-desc">Cata de vinos y diseño floral. Una tarde madre e hija creando arreglos únicos con floristas expertos.</p>
-                        <button class="btn-accion">Agendar Cita 📅</button>
+                        <h3 class="card-titulo-gradient">Paseo por el Jardín Botánico</h3>
+                        <p class="card-desc">Caminen juntas rodeadas de la flora más espectacular de la ciudad en un día soleado.</p>
+                        <a href="https://www.google.com/maps/search/jardin+botanico" target="_blank" class="btn-accion">Buscar cercanos 📍</a>
                     </div>
                 </div>
-                <!-- Más tarjetas... -->
+
+                <div class="card-rosa filter-item tilt-effect" data-price="taller">
+                    <img src="imagenes/taller-floral-3d.png" alt="Taller Floral" class="card-img" style="background: #ffc6ff;">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Taller de Arreglos Florales</h3>
+                        <p class="card-desc">Tomen una clase juntas para aprender diseño floral con copas de vino rosado.</p>
+                        <button class="btn-accion">Reservar Lugar 🎟️</button>
+                    </div>
+                </div>
+
+                <div class="card-rosa filter-item tilt-effect" data-price="taller">
+                    <img src="imagenes/huerto-3d.png" alt="Huerto" class="card-img" style="background: #fdffb6;">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Kit de Huerto en Casa</h3>
+                        <p class="card-desc">Semillas de hierbas aromáticas y macetas para que ella cultive su propia magia.</p>
+                        <a href="#" class="btn-accion">Ver Tiendas 🌱</a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: LIVE DEALS -->
-        <section id="ofertas" class="mega-section live-deals-section animate-on-scroll">
+        <!-- SECCIÓN 3: DETALLES CON ESENCIA -->
+        <section class="mega-section">
+            <div class="section-header animate-on-scroll">
+                <h2 class="titulo-seccion">Detalles con Esencia 🎀</h2>
+                <div class="filtros" id="filtros-detalles">
+                    <button class="btn-filtro active" data-filter="all">Todos</button>
+                    <button class="btn-filtro" data-filter="perfume">Aromas</button>
+                    <button class="btn-filtro" data-filter="joya">Joyería</button>
+                </div>
+            </div>
+
+            <div class="bento-gallery" id="grid-detalles">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="perfume" style="background: rgba(255, 204, 221, 0.9);">
+                    <img src="imagenes/perfume-jazmin.png" alt="Perfume Floral" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Perfume de Jazmín y Peonía</h3>
+                        <p class="bento-desc">Un aroma suave y primaveral que encapsula un jardín floreciendo.</p>
+                        <p class="precio-bento">$1,850 MXN</p>
+                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Adquirir Aroma 🌸</a>
+                    </div>
+                </article>
+
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="joya" style="background: rgba(224, 195, 252, 0.9);">
+                    <img src="imagenes/collar-flores.png" alt="Joyería Botánica" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Collar Botánico</h3>
+                        <p class="bento-desc">Auténticas flores de nomeolvides encapsuladas en resina y plata.</p>
+                        <p class="precio-bento">$950 MXN</p>
+                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Adquirir Joya 💍</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: OFERTAS FLORALES EN VIVO -->
+        <section class="mega-section live-deals-section animate-on-scroll">
             <div class="live-deals-header">
-                <h2>🔥 EDICIONES LIMITADAS</h2>
-                <span class="live-badge pulse-anim">Stock Crítico</span>
+                <h2>🔥 FLORES DE TEMPORADA</h2>
+                <span class="live-badge pulse-anim">Solo quedan pocos ramos...</span>
             </div>
-            <div class="deals-grid">
+            <div class="carrusel">
                 <div class="card-rosa deal-card tilt-effect">
-                    <div class="deal-tag">-40%</div>
-                    <h3 class="card-titulo-gradient">Ramo Imperial (100 Rosas)</h3>
-                    <div class="precios">
-                        <p class="precio-viejo">$3,500</p>
-                        <p class="precio-promocion">$1,999 <small>MXN</small></p>
-                    </div>
-                    <p class="card-desc">Papel coreano premium, tiara brillante y dedicatoria lacrada.</p>
-                    <button class="btn-comprar w-100">Separar Ahora 🌹</button>
+                    <h3 class="card-titulo-gradient">Ramo Buchón (100 Rosas)</h3>
+                    <p class="precio-viejo">$3,500 MXN</p>
+                    <p class="precio-promocion">$1,999 MXN</p>
+                    <p class="card-desc">Impacto absoluto. Envuelto en papel coreano con corona brillante.</p>
+                    <button class="btn-comprar w-100">Reservar Ramo 🌹</button>
                 </div>
-                <!-- Añadir más deals según necesites -->
+                <div class="card-rosa deal-card tilt-effect">
+                    <h3 class="card-titulo-gradient">Caja Premium de Peonías</h3>
+                    <p class="precio-viejo">$2,800 MXN</p>
+                    <p class="precio-promocion">$1,650 MXN</p>
+                    <p class="card-desc">Flor ultra exclusiva que abre lentamente durante la semana.</p>
+                    <button class="btn-comprar w-100">Reservar Caja 🌸</button>
+                </div>
+                <div class="card-rosa deal-card tilt-effect">
+                    <h3 class="card-titulo-gradient">Suscripción Floral (3 Meses)</h3>
+                    <p class="precio-viejo">$4,200 MXN</p>
+                    <p class="precio-promocion">$3,100 MXN</p>
+                    <p class="card-desc">Recibirá un arreglo fresco diferente cada mes directo en su puerta.</p>
+                    <button class="btn-comprar w-100">Regalar Suscripción 📅</button>
+                </div>
             </div>
         </section>
 
-        <!-- NUEVO FOOTER MASIVO -->
-        <footer class="footer-premium">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2>El Jardín de Mamá</h2>
-                    <p>Redefiniendo el arte de regalar emociones a través del diseño botánico de alta costura.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Políticas</h4>
-                    <a href="#">Envíos y Entregas</a>
-                    <a href="#">Garantía de Frescura</a>
-                    <a href="#">Privacidad</a>
-                </div>
-                <div class="footer-newsletter">
-                    <h4>Únete al Club Botánico</h4>
-                    <p>Recibe guías de cuidado y accesos anticipados.</p>
-                    <form class="form-newsletter">
-                        <input type="email" placeholder="tu@correo.com">
-                        <button type="submit">Suscribir</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 El Jardín de Mamá. Diseñado con ❤️.</p>
-            </div>
+        <footer class="espacio-final">
+            <p>Plantado y cultivado con ❤️ para la mujer que nos dio la vida.</p>
         </footer>
     </main>
 
-    <!-- BOTÓN FLOTANTE WHATSAPP/CARRITO -->
-    <a href="#" class="floating-action-btn">
-        <span class="fab-icon">🛒</span>
-    </a>
-
-    <!-- MODAL PRO -->
+    <!-- VENTANA EMERGENTE PARA CUIDADOS FLORALES -->
     <div id="modal-pasos" class="modal-pro">
-        <div class="modal-content-pro">
+        <div class="modal-content-pro animate-expand-in">
             <div class="modal-header-pro">
-                <h2 id="modal-titulo-pro">Cuidados</h2>
+                <h2 id="modal-titulo-pro">Cuidados Florales</h2>
                 <span class="cerrar-modal-pro" id="btn-cerrar-pro">×</span>
             </div>
-            <div class="lista-pasos-pro" id="modal-lista-pro"></div>
+            <div class="lista-pasos-pro" id="modal-lista-pro">
+                <!-- Se llena con JavaScript -->
+            </div>
         </div>
     </div>
 
+    <!-- EL ENLACE CORRECTO A TU SCRIPT -->
     <script src="dia-de-las-madres.js"></script>
 </body>
 </html>

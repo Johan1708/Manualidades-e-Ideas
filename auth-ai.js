@@ -64,14 +64,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
 
       <div class="ai-quick-prompts">
-        <button class="ai-chip" data-prompt="Dame 3 ideas fáciles con cartón y papel para esta sección">📦 Ideas con cartón</button>
-        <button class="ai-chip" data-prompt="¿Cómo puedo sustituir materiales caros por cosas de casa?">💡 Ahorrar materiales</button>
-        <button class="ai-chip" data-prompt="Ayúdame a redactar una idea para subirla a la comunidad">✍️ Redactar mi idea</button>
+        <button type="button" class="ai-chip" data-prompt="Dame 3 ideas fáciles con cartón y papel para esta sección">📦 Ideas con cartón</button>
+        <button type="button" class="ai-chip" data-prompt="¿Cómo puedo sustituir materiales caros por cosas de casa?">💡 Ahorrar materiales</button>
+        <button type="button" class="ai-chip" data-prompt="Ayúdame a redactar una idea para subirla a la comunidad">✍️ Redactar mi idea</button>
       </div>
 
       <form class="ai-input-row" id="ai-chat-form">
         <input type="text" id="ai-chat-input" placeholder="Pregúntale algo a la IA..." maxlength="300" required />
-        <button type="submit">Enviar</button>
+        <button type="submit" id="ai-chat-submit">Enviar</button>
       </form>
     </aside>
 
@@ -323,6 +323,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
       const modData = await modRes.json();
 
+      if (!modRes.ok) {
+        throw new Error(modData.error || `Error del servidor (${modRes.status})`);
+      }
+
       if (!modData.aprobado) {
         statusEl.textContent = `❌ Publicación rechazada por IA: ${modData.motivo}`;
         statusEl.className = "status-banner error";
@@ -369,6 +373,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const aiDrawer = document.getElementById("ai-drawer");
   const aiMessages = document.getElementById("ai-messages");
   const aiInput = document.getElementById("ai-chat-input");
+  const aiSubmitBtn = document.getElementById("ai-chat-submit");
+  const aiChips = document.querySelectorAll(".ai-chip");
+  let isAiThinking = false;
+
+  function setChatLocked(locked) {
+    isAiThinking = locked;
+    aiInput.disabled = locked;
+    aiSubmitBtn.disabled = locked;
+    aiInput.placeholder = locked ? "Chispa IA está respondiendo..." : "Pregúntale algo a la IA...";
+    aiSubmitBtn.textContent = locked ? "..." : "Enviar";
+    aiSubmitBtn.style.opacity = locked ? "0.5" : "1";
+    aiSubmitBtn.style.cursor = locked ? "not-allowed" : "pointer";
+    aiChips.forEach((chip) => {
+      chip.disabled = locked;
+      chip.style.opacity = locked ? "0.45" : "1";
+      chip.style.pointerEvents = locked ? "none" : "auto";
+    });
+  }
 
   document.getElementById("open-ai-assistant").addEventListener("click", () => {
     aiDrawer.classList.toggle("open");
@@ -378,7 +400,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   async function sendToAI(text) {
-    if (!text.trim()) return;
+    if (!text.trim() || isAiThinking) return;
+
+    setChatLocked(true);
+
     const userBubble = document.createElement("div");
     userBubble.className = "ai-msg user";
     userBubble.textContent = text;
@@ -400,22 +425,41 @@ document.addEventListener("DOMContentLoaded", async () => {
           pageContext: pageTitle
         })
       });
-      const data = await res.json();
-      botBubble.textContent = data.reply || data.error || "No recibí respuesta.";
-    } catch {
-      botBubble.textContent = "No pude conectarme con Chispa IA en este momento.";
+
+      const rawText = await res.text();
+      let data = {};
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        throw new Error(`Respuesta inválida del servidor (${res.status}).`);
+      }
+
+      if (!res.ok) {
+        botBubble.textContent = data.error || `Error del servidor (${res.status}).`;
+      } else {
+        botBubble.textContent = data.reply || "No recibí respuesta.";
+      }
+    } catch (err) {
+      botBubble.textContent = err.message || "No pude conectarme con Chispa IA en este momento.";
+    } finally {
+      setChatLocked(false);
+      aiInput.focus();
+      aiMessages.scrollTop = aiMessages.scrollHeight;
     }
-    aiMessages.scrollTop = aiMessages.scrollHeight;
   }
 
   document.getElementById("ai-chat-form").addEventListener("submit", (e) => {
     e.preventDefault();
+    if (isAiThinking) return;
     const msg = aiInput.value;
     aiInput.value = "";
     sendToAI(msg);
   });
 
-  document.querySelectorAll(".ai-chip").forEach((chip) => {
-    chip.addEventListener("click", () => sendToAI(chip.getAttribute("data-prompt")));
+  aiChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      if (isAiThinking) return;
+      sendToAI(chip.getAttribute("data-prompt"));
+    });
   });
 });

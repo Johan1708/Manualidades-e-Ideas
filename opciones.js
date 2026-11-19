@@ -502,6 +502,19 @@ function setupHorrorAtmosphere() {
   }
 }
 
+/* EFECTO SPOTLIGHT INTERACTIVO EN TARJETAS DE CATEGORÍA Y PROYECTOS */
+function setupCardSpotlight() {
+  document.addEventListener("mousemove", (e) => {
+    const card = e.target.closest(".cat-card, .spooky-item-card");
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mx", `${x}px`);
+    card.style.setProperty("--my", `${y}px`);
+  });
+}
+
 /* CURSOR DOBLE GPU 1:1 */
 function setupCursor() {
   const cursorDot = document.querySelector(".cursor");
@@ -1695,6 +1708,7 @@ function setupScrollToTop() {
 document.addEventListener("DOMContentLoaded", () => {
   setupLiquidChrome();
   setupHorrorAtmosphere();
+  setupCardSpotlight();
   setupCursor();
   setupCountdown();
   setupContent();

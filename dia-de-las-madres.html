@@ -3,119 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Especial para Mamá | Ideas y Regalos</title>
-    <!-- Fuentes Elegantes -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Especial para Mamá | Experiencia Completa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dia-de-las-madres.css">
 </head>
-<body class="cargando-pagina">
+<body>
 
-    <!-- Botón Flotante de Regreso (Minimalista y fijo) -->
-    <a href="index.html" class="btn-volver-float">←</a>
+    <!-- NAVEGACIÓN FLOTANTE GLASSMORPHISM -->
+    <nav class="glass-nav">
+        <a href="index.html" class="btn-volver-float" title="Volver al Menú">← Volver</a>
+        <div class="nav-text">Especial Día de las Madres 🌹</div>
+    </nav>
 
-    <header class="hero-section">
+    <!-- FONDO DE VIDEO Y PÉTALOS -->
+    <div class="video-background">
         <video autoplay loop muted playsinline id="bg-video">
+            <!-- Recuerda: src="imagenes/diamadre.mp4" -->
             <source src="imagenes/diamadre.mp4" type="video/mp4">
         </video>
         <div class="overlay-cinematografico"></div>
         <div id="petalos-container"></div>
+    </div>
 
-        <div class="hero-text">
-            <h1 class="titulo-hero animate-pop-in">Para Ti, Mamá</h1>
-            <p id="mensaje-animado" class="animate-fade-in"></p>
-        </div>
-    </header>
-
-    <!-- SECCIÓN 1: MANUALIDADES -->
-    <section class="content-section">
-        <div class="section-header">
-            <h2 class="titulo-seccion">Manualidades con Amor</h2>
-            <div class="filtros" id="filtros-manualidades">
-                <button class="btn-filtro active" data-filter="all">Todas</button>
-                <button class="btn-filtro" data-filter="gratis">Gratis</button>
-                <button class="btn-filtro" data-filter="bajo">$ Bajo</button>
-            </div>
-        </div>
+    <!-- CONTENIDO PRINCIPAL (SCROLL SOBRE EL VIDEO) -->
+    <main class="scroll-content">
         
-        <div class="carrusel" id="carrusel-manualidades">
-            <!-- Tarjeta 1: Ramo -->
-            <div class="card-rosa" data-price="gratis">
-                <img src="imagenes/ramo-3d.gif" alt="Ramo 3D" class="card-img" style="background: #ffd6e0;">
-                <div class="card-info">
-                    <h3 class="card-titulo-gradient">Ramo de Rosas Eternas</h3>
-                    <p class="card-desc">Cinta de seda y papel. ¡Fácil de hacer! Conviértete en una experta.</p>
-                    <span class="etiqueta">Gratis | 1 hr</span>
-                    <button class="btn-accion btn-abrir-pasos" 
-                            data-modal-titulo="Ramo de Rosas Eternas"
-                            data-modal-pasos='[
-                                {"img": "imagenes/ramo-paso1.jpg", "texto": "Prepara los listones de 5cm. Necesitas un encendedor para sellar las orillas."},
-                                {"img": "imagenes/ramo-paso2.jpg", "texto": "Enrolla el listón para formar el capullo de la rosa y asegura con silicón caliente."},
-                                {"img": "imagenes/ramo-paso3.jpg", "texto": "Une varias rosas y añade hojas de listón verde para terminar el ramo."}
-                            ]'>Ver Pasos ✨</button>
-                </div>
-            </div>
-            
-            <!-- Tarjeta 2: Caja -->
-            <div class="card-rosa" data-price="bajo">
-                <img src="imagenes/caja-3d.png" alt="Caja Sorpresa" class="card-img" style="background: #caffbf;">
-                <div class="card-info">
-                    <h3 class="card-titulo-gradient">Caja Explosiva</h3>
-                    <p class="card-desc">Cartulina, fotos y mucho amor. Un regalo inolvidable para mamá.</p>
-                    <span class="etiqueta">$ Bajo | 2 hrs</span>
-                    <button class="btn-accion btn-abrir-pasos"
-                            data-modal-titulo="Caja Explosiva con Fotos"
-                            data-modal-pasos='[
-                                {"img": "imagenes/caja-paso1.jpg", "texto": "Corta la base de la caja y las capas internas en forma de cruz."},
-                                {"img": "imagenes/caja-paso2.jpg", "texto": "Decora cada capa con fotos, mensajes y bolsillos pequeños."},
-                                {"img": "imagenes/caja-paso3.jpg", "texto": "Dobla la caja y ponle la tapa. Al abrirla, se desarmará con todas las sorpresas."}
-                            ]'>Ver Pasos ✂️</button>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- HERO (TÍTULO PRINCIPAL) -->
+        <header class="hero-bento animate-on-scroll">
+            <h1 class="titulo-editorial">El Arte<br><span>de ser Mamá</span></h1>
+            <p id="mensaje-animado" class="subtitulo-editorial"></p>
+        </header>
 
-    <!-- SECCIÓN 2: LUGARES (Estructura similar) -->
-    <section class="content-section" style="background: #fff9fa;">
-        <div class="section-header">
-            <h2 class="titulo-seccion">Paseos Inolvidables</h2>
-            <div class="filtros" id="filtros-lugares">
-                <button class="btn-filtro active" data-filter="all">Todos</button>
-                <button class="btn-filtro" data-filter="alto">Restaurantes</button>
-            </div>
-        </div>
-        
-        <div class="carrusel" id="carrusel-lugares">
-            <div class="card-rosa" data-price="alto">
-                <img src="imagenes/cafe-3d.png" alt="Cafetería" class="card-img" style="background: #ffc6ff;">
-                <div class="card-info">
-                    <h3 class="card-titulo-gradient">Desayuno en Terraza</h3>
-                    <p class="card-desc">Café de especialidad con vista a la ciudad. Consiéntela con un buen brunch.</p>
-                    <a href="https://www.google.com/maps/search/Mejores+cafeterias+terraza" target="_blank" class="btn-accion w-100">Cómo llegar 📍</a>
+        <!-- SECCIÓN 1: MANUALIDADES (DISEÑO BENTO GRID CON FILTROS) -->
+        <section class="mega-section">
+            <div class="section-header animate-on-scroll">
+                <h2 class="titulo-seccion">Manualidades DIY 🎨</h2>
+                <div class="filtros" id="filtros-manualidades">
+                    <button class="btn-filtro active" data-filter="all">Todas</button>
+                    <button class="btn-filtro" data-filter="gratis">Gratis</button>
+                    <button class="btn-filtro" data-filter="bajo">$ Bajo</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- SECCIÓN 3: REGALOS (Estructura similar) -->
-    <section class="content-section">
-        <div class="section-header">
-            <h2 class="titulo-seccion">Regalos en Tendencia</h2>
-        </div>
-        
-        <div class="carrusel" id="carrusel-regalos">
-            <div class="card-rosa" data-price="belleza">
-                <img src="imagenes/skincare-3d.png" alt="Skincare" class="card-img" style="background: #ffadad;">
-                <div class="card-info">
-                    <h3 class="card-titulo-gradient">Set de Skincare Coreano</h3>
-                    <p class="card-desc">Piel radiante con mascarillas y serums. ¡El secreto de la eterna juventud!</p>
-                    <h4 class="precio-promocion">$650 <span class="precio-viejo">$890</span></h4>
-                    <a href="https://www.amazon.com.mx/s?k=set+skincare+coreano" target="_blank" class="btn-comprar w-100">Comprar en Amazon 🛒</a>
+            <div class="bento-gallery" id="grid-manualidades">
+                <!-- Tarjeta Grande -->
+                <article class="bento-card bento-grande filter-item" data-price="gratis">
+                    <div class="bento-content">
+                        <h3 class="bento-title card-titulo-gradient">Ramo de Rosas Eternas</h3>
+                        <p class="bento-desc">Cinta de seda y papel. Un detalle que nunca se marchita y que puedes hacer en casa.</p>
+                        <span class="etiqueta">Costo: Gratis | 1 hora</span>
+                        <button class="btn-editorial btn-abrir-pasos" 
+                                data-modal-titulo="Ramo de Rosas Eternas"
+                                data-modal-pasos='[{"img": "imagenes/ramo-paso1.jpg", "texto": "Corta listones de 5cm."}, {"img": "imagenes/ramo-paso2.jpg", "texto": "Quema las orillas y dobla."}, {"img": "imagenes/ramo-paso3.jpg", "texto": "Pega formando el capullo."}]'>Ver Pasos ✨</button>
+                    </div>
+                    <img src="imagenes/ramo-3d.gif" alt="Ramo" class="bento-img" style="background: #ffd6e0;">
+                </article>
+
+                <!-- Tarjeta Ancha -->
+                <article class="bento-card bento-ancha filter-item" data-price="bajo">
+                    <img src="imagenes/caja-3d.png" alt="Caja" class="bento-img" style="background: #caffbf;">
+                    <div class="bento-content">
+                        <h3 class="bento-title card-titulo-gradient">Caja Explosiva</h3>
+                        <p class="bento-desc">Cartulina, fotos y recuerdos saltando al abrir la tapa.</p>
+                        <span class="etiqueta">Costo: $ Bajo | 2 horas</span>
+                        <button class="btn-editorial btn-abrir-pasos"
+                                data-modal-titulo="Caja Explosiva con Fotos"
+                                data-modal-pasos='[{"img": "imagenes/caja-paso1.jpg", "texto": "Corta la cartulina en forma de cruz."}, {"img": "imagenes/caja-paso2.jpg", "texto": "Decora cada pestaña con fotos."}, {"img": "imagenes/caja-paso3.jpg", "texto": "Dobla y coloca la tapa para armar."}]'>Ver Pasos ✂️</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: LUGARES (DISEÑO CARRUSEL CON FILTROS) -->
+        <section class="mega-section" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 40px; margin: 40px 20px;">
+            <div class="section-header animate-on-scroll" style="padding: 20px;">
+                <h2 class="titulo-seccion text-white">Paseos Inolvidables 🗺️</h2>
+                <div class="filtros" id="filtros-lugares">
+                    <button class="btn-filtro active" data-filter="all">Todos</button>
+                    <button class="btn-filtro" data-filter="gratis">Naturaleza</button>
+                    <button class="btn-filtro" data-filter="alto">Lujo / Spa</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- MODAL PRO (VENTANA FLOTANTE PREMIUM) -->
+            <div class="carrusel" id="carrusel-lugares">
+                <div class="card-rosa filter-item" data-price="gratis">
+                    <img src="imagenes/parque-3d.png" alt="Picnic" class="card-img" style="background: #a0c4ff;">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Picnic en el Parque</h3>
+                        <p class="card-desc">Prepara su comida favorita al aire libre, sin prisas.</p>
+                        <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Cómo llegar 📍</a>
+                    </div>
+                </div>
+
+                <div class="card-rosa filter-item" data-price="alto">
+                    <img src="imagenes/spa-3d.png" alt="Spa" class="card-img" style="background: #bdb2ff;">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Día de Spa y Relajación</h3>
+                        <p class="card-desc">Masajes y alberca termal para consentirla todo el día.</p>
+                        <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Buscar Spas 📍</a>
+                    </div>
+                </div>
+
+                <div class="card-rosa filter-item" data-price="alto">
+                    <img src="imagenes/cafe-3d.png" alt="Café" class="card-img" style="background: #ffc6ff;">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Brunch en Terraza</h3>
+                        <p class="card-desc">Mimosa y desayuno gourmet con vista a la ciudad.</p>
+                        <a href="https://www.google.com/maps" target="_blank" class="btn-accion">Ver Restaurantes 📍</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: REGALOS (MIX BENTO GRID) -->
+        <section class="mega-section">
+            <div class="section-header animate-on-scroll">
+                <h2 class="titulo-seccion">Regalos Perfectos 🎁</h2>
+                <div class="filtros" id="filtros-regalos">
+                    <button class="btn-filtro active" data-filter="all">Todos</button>
+                    <button class="btn-filtro" data-filter="belleza">Belleza</button>
+                    <button class="btn-filtro" data-filter="tecnologia">Tecnología</button>
+                </div>
+            </div>
+
+            <div class="bento-gallery" id="grid-regalos">
+                <article class="bento-card bento-alta filter-item" data-price="belleza" style="background: rgba(255, 173, 173, 0.9);">
+                    <img src="imagenes/skincare-3d.png" alt="Skincare" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Skincare Coreano</h3>
+                        <p class="bento-desc">Piel radiante y joven.</p>
+                        <p class="precio-bento">$650 MXN</p>
+                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Comprar en Amazon 🛒</a>
+                    </div>
+                </article>
+
+                <article class="bento-card bento-alta filter-item" data-price="tecnologia" style="background: rgba(155, 246, 255, 0.9);">
+                    <img src="imagenes/kindle-3d.png" alt="Kindle" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Lector Kindle</h3>
+                        <p class="bento-desc">Miles de libros en su bolso.</p>
+                        <p class="precio-bento">$2,099 MXN</p>
+                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Comprar en Amazon 🛒</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: OFERTAS EN VIVO (FLASH DEALS) -->
+        <section class="mega-section live-deals-section animate-on-scroll">
+            <div class="live-deals-header">
+                <h2>🔥 OFERTAS RELÁMPAGO</h2>
+                <span class="live-badge">Actualizando Precios...</span>
+            </div>
+            <div class="carrusel">
+                <div class="card-rosa deal-card">
+                    <h3 class="card-titulo-gradient">Set Perfume Floral</h3>
+                    <p class="precio-viejo">$1,450 MXN</p>
+                    <p class="precio-promocion">$999 MXN</p>
+                    <p class="card-desc">Solo quedan 3 disponibles a este precio.</p>
+                    <button class="btn-comprar w-100">Aprovechar YA 🛒</button>
+                </div>
+                <div class="card-rosa deal-card">
+                    <h3 class="card-titulo-gradient">Bolso de Piel</h3>
+                    <p class="precio-viejo">$2,200 MXN</p>
+                    <p class="precio-promocion">$1,599 MXN</p>
+                    <p class="card-desc">Envío gratis en los próximos 30 minutos.</p>
+                    <button class="btn-comprar w-100">Aprovechar YA 🛒</button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="espacio-final">
+            <p>Hecho con ❤️ para la mejor mamá del mundo.</p>
+        </footer>
+    </main>
+
+    <!-- VENTANA EMERGENTE PRO (MODAL PARA TUTORIALES) -->
     <div id="modal-pasos" class="modal-pro">
         <div class="modal-content-pro animate-expand-in">
             <div class="modal-header-pro">
@@ -123,7 +186,7 @@
                 <span class="cerrar-modal-pro" id="btn-cerrar-pro">×</span>
             </div>
             <div class="lista-pasos-pro" id="modal-lista-pro">
-                <!-- El JS llenará esto dinámicamente -->
+                <!-- Se llena con JavaScript -->
             </div>
         </div>
     </div>

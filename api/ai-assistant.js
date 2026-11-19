@@ -1,58 +1,68 @@
-async function sendToAI(text) {
-    if (!text.trim() || isAiThinking) return;
+module.exports = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    setChatLocked(true);
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Usa POST" });
+  }
 
-    const userBubble = document.createElement("div");
-    userBubble.className = "ai-msg user";
-    userBubble.textContent = text;
-    aiMessages.appendChild(userBubble);
+  const apiKey = (process.env.GEMINI_API_KEY || "").trim();
+  if (!apiKey) {
+    return res.status(500).json({ error: "Falta GEMINI_API_KEY en Vercel." });
+  }
 
-    const botBubble = document.createElement("div");
-    botBubble.className = "ai-msg bot";
-    botBubble.textContent = "Pensando idea... ✨";
-    aiMessages.appendChild(botBubble);
-    aiMessages.scrollTop = aiMessages.scrollHeight;
+  const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
+  const { mode, message, pageContext, ideaPayload } = body;
 
-    const frontController = new AbortController();
-    const frontTimeout = setTimeout(() => frontController.abort(), 11000);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
 
-    try {
-      const res = await fetch("/api/ai-assistant", {
+  try {
+    const isMod = mode === "moderate_idea";
+    const systemPrompt = isMod
+      ? `Eres el moderador de "Manualidades e Ideas". Evalúa si es una manualidad respetuosa y clara. Responde SOLO JSON: {"aprobado": true/false, "motivo": "breve", "sugerencia_ia": "consejo corto"}`
+      : `Eres "Chispa IA", asistente creativo de "Manualidades e Ideas" en "${pageContext || "Inicio"}". Responde amable, práctico y breve (máximo 4 líneas).`;
+
+    const userPrompt = isMod
+      ? `Título: ${ideaPayload?.titulo}\nCategoría: ${ideaPayload?.categoria}\nMateriales: ${ideaPayload?.materiales}\nPasos: ${ideaPayload?.pasos}`
+      : (message || "Hola");
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        signal: frontController.signal,
+        signal: controller.signal,
         body: JSON.stringify({
-          mode: "chat",
-          message: text,
-          pageContext: pageTitle
+          system_instruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            temperature: isMod ? 0.1 : 0.7,
+            maxOutputTokens: 350,
+            thinkingConfig: { thinkingLevel: "low" },
+            responseMimeType: isMod ? "application/json" : "text/plain"
+          }
         })
+      }
+    );
+
+    clearTimeout(timer);
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(500).json({
+        error: `Gemini (${response.status}): ${data?.error?.message || "Error"}`
       });
-
-      clearTimeout(frontTimeout);
-      const rawText = await res.text();
-      let data = {};
-      try {
-        data = JSON.parse(rawText);
-      } catch {
-        throw new Error(`El servidor tardó demasiado (${res.status}). Intenta de nuevo.`);
-      }
-
-      if (!res.ok) {
-        botBubble.textContent = data.error || `Error del servidor (${res.status}).`;
-      } else {
-        botBubble.textContent = data.reply || "No recibí respuesta.";
-      }
-    } catch (err) {
-      clearTimeout(frontTimeout);
-      if (err.name === "AbortError") {
-        botBubble.textContent = "⏳ La respuesta tardó demasiado. Intenta enviar tu mensaje de nuevo.";
-      } else {
-        botBubble.textContent = err.message || "No pude conectarme con Chispa IA en este momento.";
-      }
-    } finally {
-      setChatLocked(false);
-      aiInput.focus();
-      aiMessages.scrollTop = aiMessages.scrollHeight;
     }
+
+    const replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sin respuesta.";
+    return res.status(200).json(isMod ? JSON.parse(replyText) : { reply: replyText });
+  } catch (err) {
+    clearTimeout(timer);
+    return res.status(500).json({
+      error: err.name === "AbortError" ? "Tiempo agotado (8s)" : `Error: ${err.message}`
+    });
   }
+};

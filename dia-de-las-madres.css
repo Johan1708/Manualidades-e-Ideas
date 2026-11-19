@@ -76,19 +76,30 @@ body, html {
 }
 
 .titulo {
-    font-size: 3rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    color: #ffffff;
+    /* Efecto 3D de luz: Brillo blanco + Brillo dorado amplio + Sombra negra profunda */
+    text-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.9),
+        0 0 35px rgba(255, 215, 0, 0.7),
+        3px 5px 15px rgba(0, 0, 0, 0.95);
     opacity: 0;
-    animation: aparecer 2s ease forwards 0.5s; /* Entra con desvanecimiento */
+    animation: aparecer 2s ease forwards 0.5s;
 }
 
 .mensaje {
-    font-size: 1.2rem;
-    max-width: 600px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    max-width: 700px;
     line-height: 1.6;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
-    min-height: 100px; /* Evita que el contenedor brinque mientras se escribe el texto */
+    color: #fffaf0; /* Un blanco ligeramente crema para dar calidez */
+    /* Resplandor sutil para lectura perfecta */
+    text-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.4),
+        2px 3px 12px rgba(0, 0, 0, 1);
+    min-height: 100px;
 }
 
 /* Animación del título */
@@ -101,5 +112,11 @@ body, html {
 @media (max-width: 768px) {
     .titulo { font-size: 2.2rem; }
     .mensaje { font-size: 1.1rem; }
+    .btn-regresar { top: 15px; left: 15px; padding: 8px 16px; }
+}
+/* --- ADAPTACIÓN A CELULARES --- */
+@media (max-width: 768px) {
+    .titulo { font-size: 3.2rem; }
+    .mensaje { font-size: 1.6rem; }
     .btn-regresar { top: 15px; left: 15px; padding: 8px 16px; }
 }

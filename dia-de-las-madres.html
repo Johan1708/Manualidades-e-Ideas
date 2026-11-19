@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspiración para Mamá | Manualidades y Lugares</title>
+    <title>Inspiración para Mamá | Manualidades, Lugares e Ideas</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dia-de-las-madres.css">
 </head>
@@ -12,7 +12,7 @@
     <!-- PRELOADER -->
     <div id="preloader">
         <div class="flor-loader">🌸</div>
-        <p>Preparando ideas...</p>
+        <p>Cultivando ideas para mamá...</p>
     </div>
 
     <!-- CURSOR PERSONALIZADO -->
@@ -22,6 +22,11 @@
     <!-- NAVEGACIÓN FLOTANTE -->
     <nav class="glass-nav">
         <a href="index.html" class="btn-volver-float" title="Volver al Menú">← Volver</a>
+        <div class="nav-links-nav">
+            <a href="#sec-manualidades">Manualidades</a>
+            <a href="#sec-lugares">Lugares</a>
+            <a href="#sec-productos">Ideas y Regalos</a>
+        </div>
         <div class="nav-text">Guía para Mamá 🌸</div>
     </nav>
 
@@ -45,172 +50,315 @@
             </div>
         </header>
 
-        <!-- SECCIÓN 1: MANUALIDADES -->
-        <section class="mega-section">
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 1: MANUALIDADES E IDEAS (BENTO GRID EXPANDIDO)    -->
+        <!-- ========================================================= -->
+        <section id="sec-manualidades" class="mega-section">
             <div class="section-header animate-on-scroll">
-                <h2 class="titulo-seccion">Manualidades e Ideas 🎨</h2>
+                <h2 class="titulo-seccion">Manualidades e Ideas DIY 🎨</h2>
                 <div class="filtros" id="filtros-manualidades">
-                    <button class="btn-filtro active" data-filter="all">Todas</button>
+                    <button class="btn-filtro active" data-filter="all">Todas (6)</button>
                     <button class="btn-filtro" data-filter="plantas">Con Plantas</button>
                     <button class="btn-filtro" data-filter="papel">Con Papel</button>
+                    <button class="btn-filtro" data-filter="aromas">Aromas y Hogar</button>
                 </div>
             </div>
 
             <div class="bento-gallery" id="grid-manualidades">
+                <!-- Manualidad 1 (Grande) -->
                 <article class="bento-card bento-grande filter-item tilt-effect" data-price="plantas">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Terrario Eterno en Frasco</h3>
-                        <p class="bento-desc">Construye un ecosistema en miniatura. Una manualidad terapéutica, hermosa y que requiere muy pocos cuidados en casa.</p>
-                        <span class="etiqueta">Nivel: Fácil</span>
+                        <p class="bento-desc">Construye un ecosistema en miniatura con suculentas y musgo. Una manualidad terapéutica y de bajo mantenimiento.</p>
+                        <span class="etiqueta">Dificultad: Fácil | 45 min</span>
                         <button class="btn-editorial btn-abrir-pasos" 
-                                data-modal-titulo="Cómo hacer un Terrario"
-                                data-modal-pasos='[{"img": "imagenes/paso-grava.jpg", "texto": "Paso 1: Coloca 3 cm de grava en el fondo para el drenaje."}, {"img": "imagenes/paso-carbon.jpg", "texto": "Paso 2: Añade carbón activado para evitar bacterias."}, {"img": "imagenes/paso-tierra.jpg", "texto": "Paso 3: Pon tierra para macetas y haz pequeños hoyos para tus suculentas."}]'>Ver Paso a Paso 🛠️</button>
+                                data-modal-titulo="Cómo hacer un Terrario Eterno"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/paso-grava.jpg", "texto": "Coloca 3 cm de grava o piedras de río en el fondo del frasco limpio para asegurar el drenaje."}, 
+                                    {"img": "imagenes/paso-carbon.jpg", "texto": "Añade una capa fina de carbón activado (1 cm) para filtrar el agua y evitar malos olores."}, 
+                                    {"img": "imagenes/paso-tierra.jpg", "texto": "Agrega sustrato especial para cactus/suculentas y haz pequeños hoyos con una cuchara."},
+                                    {"img": "imagenes/paso-decorar.jpg", "texto": "Planta las suculentas con cuidado, cubre espacios con musgo preservado y rocía ligeramente."}
+                                ]'>Ver Paso a Paso 🛠️</button>
                     </div>
                     <img src="imagenes/terrario.png" alt="Terrario" class="bento-img tilt-img">
                 </article>
 
+                <!-- Manualidad 2 (Ancha) -->
                 <article class="bento-card bento-ancha filter-item tilt-effect" data-price="papel">
                     <img src="imagenes/ramo-papel.png" alt="Flores de Papel" class="bento-img tilt-img">
                     <div class="bento-content">
-                        <h3 class="bento-title card-titulo-gradient">Flores de Papel Crepé</h3>
-                        <p class="bento-desc">Crea un ramo vibrante que nunca se marchitará usando papel italiano de alto gramaje.</p>
-                        <span class="etiqueta">Nivel: Medio</span>
+                        <h3 class="bento-title card-titulo-gradient">Ramo de Rosas de Listón</h3>
+                        <p class="bento-desc">Rosas eternas hechas con cinta de satín que nunca se marchitan y brillan con la luz.</p>
+                        <span class="etiqueta">Dificultad: Media | 1.5 hrs</span>
                         <button class="btn-editorial btn-abrir-pasos"
-                                data-modal-titulo="Flores de Papel"
-                                data-modal-pasos='[{"img": "imagenes/paso-corte.jpg", "texto": "Paso 1: Corta el papel en forma de pétalos."}, {"img": "imagenes/paso-alambre.jpg", "texto": "Paso 2: Forra alambre con cinta floral para el tallo."}, {"img": "imagenes/paso-armado.jpg", "texto": "Paso 3: Pega los pétalos uno a uno alrededor del tallo."}]'>Ver Pasos ✂️</button>
+                                data-modal-titulo="Rosas Eternas de Listón"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/paso-corte.jpg", "texto": "Corta 14 tiras de listón de satín de 4 cm de ancho por 9 cm de largo cada una."}, 
+                                    {"img": "imagenes/paso-alambre.jpg", "texto": "Dobla las esquinas superiores hacia el centro formando un triángulo y sella los bordes con encendedor."}, 
+                                    {"img": "imagenes/paso-armado.jpg", "texto": "Pega los pétalos en fila uno sobre otro con silicón caliente y enrolla todo alrededor de un palillo."}
+                                ]'>Ver Pasos ✂️</button>
                     </div>
                 </article>
                 
+                <!-- Manualidad 3 (Alta) -->
                 <article class="bento-card bento-alta filter-item tilt-effect" data-price="papel">
                     <img src="imagenes/album-fotos.png" alt="Álbum" class="bento-img tilt-img">
                     <div class="bento-content centered">
-                        <h3 class="bento-title">Álbum de Recuerdos</h3>
-                        <p class="bento-desc">Libreta decorada a mano con recortes y fotos vintage.</p>
+                        <h3 class="bento-title">Caja Explosiva de Fotos</h3>
+                        <p class="bento-desc">Al levantar la tapa, las paredes caen revelando fotos, cartas y recuerdos en capas.</p>
                         <span class="etiqueta">Scrapbook</span>
+                        <button class="btn-editorial btn-abrir-pasos"
+                                data-modal-titulo="Caja Explosiva Sorpresa"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/caja-1.jpg", "texto": "Corta tres cuadrados de cartulina de 30x30 cm, 27x27 cm y 24x24 cm. Divide cada uno en una cuadrícula de 3x3."}, 
+                                    {"img": "imagenes/caja-2.jpg", "texto": "Recorta las 4 esquinas de cada cartulina para que quede en forma de cruz y marca los dobleces."}, 
+                                    {"img": "imagenes/caja-3.jpg", "texto": "Pega las cruces una dentro de otra por el centro, decora con fotos y arma una tapa de 10.5x10.5 cm."}
+                                ]'>Ver Pasos 🎁</button>
                     </div>
                 </article>
 
-                <article class="bento-card filter-item tilt-effect" data-price="plantas" style="grid-column: span 1;">
-                    <img src="imagenes/maceta-pintada.png" alt="Maceta" class="bento-img tilt-img circular-img">
+                <!-- Manualidad 4 (Regular) -->
+                <article class="bento-card filter-item tilt-effect" data-price="aromas">
+                    <img src="imagenes/vela-lavanda.png" alt="Vela Aromática" class="bento-img tilt-img circular-img">
                     <div class="bento-content centered">
-                        <h3 class="bento-title">Macetas Pintadas</h3>
-                        <p class="bento-desc">Decora con acrílicos los hogares de tus plantas.</p>
+                        <h3 class="bento-title" style="font-size: 1.4rem;">Velas de Soya y Lavanda</h3>
+                        <p class="bento-desc">Cera ecológica con aceites esenciales y flores secas.</p>
+                        <button class="btn-editorial btn-abrir-pasos"
+                                data-modal-titulo="Vela Aromática Artesanal"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/vela-1.jpg", "texto": "Fija el pabilo en el centro de una taza o frasco bonito usando una gota de silicón."}, 
+                                    {"img": "imagenes/vela-2.jpg", "texto": "Derrite cera de soya a baño María. Cuando baje a 60°C añade 20 gotas de aceite esencial de lavanda."}, 
+                                    {"img": "imagenes/vela-3.jpg", "texto": "Vierte la cera en el molde, decora la superficie con flores secas de lavanda y deja enfriar 4 horas."}
+                                ]'>Ver Pasos 🕯️</button>
+                    </div>
+                </article>
+
+                <!-- Manualidad 5 (Ancha) -->
+                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="plantas">
+                    <div class="bento-content">
+                        <h3 class="bento-title card-titulo-gradient">Kokedama (Bola de Musgo)</h3>
+                        <p class="bento-desc">Técnica japonesa tradicional para cultivar plantas sin maceta, envueltas en una esfera de musgo vivo.</p>
+                        <span class="etiqueta">Dificultad: Media | 1 hr</span>
+                        <button class="btn-editorial btn-abrir-pasos"
+                                data-modal-titulo="Cómo hacer una Kokedama"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/koke-1.jpg", "texto": "Mezcla turba y sustrato akadama con agua hasta formar una masa moldeable que no se desmorone."}, 
+                                    {"img": "imagenes/koke-2.jpg", "texto": "Saca la planta de su maceta, limpia un poco la raíz y envuélvela formando una esfera compacta con la mezcla."}, 
+                                    {"img": "imagenes/koke-3.jpg", "texto": "Cubre toda la bola de tierra con láminas de musgo húmedo y átala firmemente dando vueltas con hilo de algodón."}
+                                ]'>Ver Pasos 🌿</button>
+                    </div>
+                    <img src="imagenes/kokedama.png" alt="Kokedama" class="bento-img tilt-img">
+                </article>
+
+                <!-- Manualidad 6 (Ancha) -->
+                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="aromas">
+                    <img src="imagenes/sales-bano.png" alt="Sales de Baño" class="bento-img tilt-img">
+                    <div class="bento-content">
+                        <h3 class="bento-title card-titulo-gradient">Sales de Baño con Rosas</h3>
+                        <p class="bento-desc">Exfoliante relajante con sal de Epsom, aceite de almendras y pétalos deshidratados.</p>
+                        <span class="etiqueta">Dificultad: Muy Fácil | 20 min</span>
+                        <button class="btn-editorial btn-abrir-pasos"
+                                data-modal-titulo="Sales Relajantes de Spa"
+                                data-modal-pasos='[
+                                    {"img": "imagenes/sal-1.jpg", "texto": "Mezcla en un tazón 1 taza de sal de Epsom con 1/2 taza de sal marina gruesa."}, 
+                                    {"img": "imagenes/sal-2.jpg", "texto": "Agrega 2 cucharadas de aceite de almendras dulces y 15 gotas de esencia de rosas o vainilla."}, 
+                                    {"img": "imagenes/sal-3.jpg", "texto": "Incorpora pétalos de rosa secos triturados, mezcla bien y envasa en un frasco hermético."}
+                                ]'>Ver Pasos 🛁</button>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: LUGARES PARA VISITAR -->
-        <section class="mega-section glass-container animate-on-scroll" style="margin: 40px auto;">
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 2: LUGARES PARA VISITAR (CARRUSEL CON MAPAS)      -->
+        <!-- ========================================================= -->
+        <section id="sec-lugares" class="mega-section glass-container animate-on-scroll" style="margin: 40px auto;">
             <div class="section-header">
                 <h2 class="titulo-seccion text-white">Lugares para Visitar 📍</h2>
                 <div class="filtros" id="filtros-lugares">
-                    <button class="btn-filtro active" data-filter="all">Todos</button>
-                    <button class="btn-filtro" data-filter="naturaleza">Naturaleza</button>
-                    <button class="btn-filtro" data-filter="talleres">Talleres</button>
+                    <button class="btn-filtro active" data-filter="all">Todos (6)</button>
+                    <button class="btn-filtro" data-filter="naturaleza">Naturaleza y Jardines</button>
+                    <button class="btn-filtro" data-filter="talleres">Talleres Creativos</button>
+                    <button class="btn-filtro" data-filter="gastronomia">Cafés y Terrazas</button>
                 </div>
             </div>
 
             <div class="carrusel" id="carrusel-lugares">
+                <!-- Lugar 1 -->
                 <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
                     <img src="imagenes/jardin-botanico-foto.jpg" alt="Jardín Botánico" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Jardín Botánico Regional</h3>
-                        <p class="card-desc">Un oasis perfecto para caminar juntas rodeadas de especies endémicas y tomar fotos hermosas.</p>
+                        <p class="card-desc">Un oasis perfecto para caminar juntas rodeadas de cactáceas, orquídeas y senderos tranquilos.</p>
                         <img src="imagenes/mapa-jardin.jpg" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
                     </div>
                 </div>
 
+                <!-- Lugar 2 -->
                 <div class="card-rosa filter-item tilt-effect" data-price="talleres">
                     <img src="imagenes/taller-ceramica-foto.jpg" alt="Taller de Cerámica" class="card-img">
                     <div class="card-info">
-                        <h3 class="card-titulo-gradient">Taller "Barro Mágico"</h3>
-                        <p class="card-desc">Un espacio donde podrán tomar una clase de 2 horas para moldear y pintar sus propias macetas.</p>
+                        <h3 class="card-titulo-gradient">Taller de Cerámica y Torno</h3>
+                        <p class="card-desc">Clase de 2 horas para moldear y pintar sus propias tazas o macetas mientras toman café.</p>
                         <img src="imagenes/mapa-taller.jpg" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
                     </div>
                 </div>
 
+                <!-- Lugar 3 -->
                 <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
                     <img src="imagenes/vivero-coyoacan.jpg" alt="Mercado Plantas" class="card-img">
                     <div class="card-info">
-                        <h3 class="card-titulo-gradient">Mercado de Plantas</h3>
-                        <p class="card-desc">Pasillos llenos de flores. El lugar ideal para conseguir los insumos para sus manualidades.</p>
+                        <h3 class="card-titulo-gradient">Mercado de Flores y Viveros</h3>
+                        <p class="card-desc">Pasillos llenos de aroma a tierra mojada y flores frescas. Ideal para elegir plantas juntas.</p>
                         <img src="imagenes/mapa-vivero.jpg" alt="Mapa" class="mini-mapa">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Mercado+de+Plantas" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Mercado+de+Plantas+y+Flores" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                    </div>
+                </div>
+
+                <!-- Lugar 4 -->
+                <div class="card-rosa filter-item tilt-effect" data-price="gastronomia">
+                    <img src="imagenes/cafeteria-jardin.jpg" alt="Cafetería Invernadero" class="card-img">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Cafetería Tipo Invernadero</h3>
+                        <p class="card-desc">Desayuno artesanal rodeadas de helechos colgantes, luz natural y repostería botánica.</p>
+                        <img src="imagenes/mapa-cafe.jpg" alt="Mapa" class="mini-mapa">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Cafeteria+jardin+terraza" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                    </div>
+                </div>
+
+                <!-- Lugar 5 -->
+                <div class="card-rosa filter-item tilt-effect" data-price="talleres">
+                    <img src="imagenes/pintura-vino.jpg" alt="Pintura y Vino" class="card-img">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Estudio "Arte y Vino"</h3>
+                        <p class="card-desc">Sesión guiada de pintura en lienzo sin experiencia previa, acompañada de una copa de vino.</p>
+                        <img src="imagenes/mapa-arte.jpg" alt="Mapa" class="mini-mapa">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+pintura+y+vino" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                    </div>
+                </div>
+
+                <!-- Lugar 6 -->
+                <div class="card-rosa filter-item tilt-effect" data-price="gastronomia">
+                    <img src="imagenes/casa-te.jpg" alt="Casa de Té" class="card-img">
+                    <div class="card-info">
+                        <h3 class="card-titulo-gradient">Salón de Té y Postres</h3>
+                        <p class="card-desc">Tarde de infusiones florales (jazmín, lavanda, manzanilla) con scones y tartas frescas.</p>
+                        <img src="imagenes/mapa-te.jpg" alt="Mapa" class="mini-mapa">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Salon+de+te+y+reposteria" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: DÓNDE ENCONTRAR PRODUCTOS -->
-        <section class="mega-section">
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 3: IDEAS DE REGALOS Y MATERIALES (BÚSQUEDA EXACTA)-->
+        <!-- ========================================================= -->
+        <section id="sec-productos" class="mega-section">
             <div class="section-header animate-on-scroll">
-                <h2 class="titulo-seccion">Dónde encontrar materiales 🛍️</h2>
+                <h2 class="titulo-seccion">Ideas para Comprar (Búsqueda Directa) 🔎</h2>
                 <div class="filtros" id="filtros-productos">
-                    <button class="btn-filtro active" data-filter="all">Todos</button>
-                    <button class="btn-filtro" data-filter="herramientas">Herramientas</button>
-                    <button class="btn-filtro" data-filter="insumos">Insumos</button>
+                    <button class="btn-filtro active" data-filter="all">Todas (8)</button>
+                    <button class="btn-filtro" data-filter="flores">Flores Eternas</button>
+                    <button class="btn-filtro" data-filter="kits">Kits DIY</button>
+                    <button class="btn-filtro" data-filter="bienestar">Spa y Hogar</button>
                 </div>
             </div>
 
             <div class="bento-gallery" id="grid-productos">
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="herramientas">
-                    <img src="imagenes/kit-herramientas.png" alt="Herramientas" class="bento-img">
+                <!-- Idea 1 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores">
+                    <img src="imagenes/rosa-domo.png" alt="Rosa Eterna en Domo" class="bento-img">
                     <div class="bento-content centered">
-                        <h3 class="bento-title">Set de Mini Herramientas</h3>
-                        <p class="bento-desc">Palas y rastrillos ideales para terrarios. <strong>📍 Encuéntralo en: Home Depot o Viveros locales.</strong></p>
-                        <p class="precio-bento">Aprox $250 MXN</p>
-                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Ver ejemplo online 🔎</a>
+                        <h3 class="bento-title">Rosa Eterna en Domo LED</h3>
+                        <p class="bento-desc">Rosa preservada natural dentro de cúpula de cristal con luces cálidas. <strong>Físico: Florerías boutique.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=rosa+eterna+en+domo+de+cristal+con+luz+led" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/rosa-eterna-domo-cristal-led" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
                     </div>
                 </article>
 
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="insumos">
-                    <img src="imagenes/papel-crepe.png" alt="Papel Crepé" class="bento-img">
+                <!-- Idea 2 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores">
+                    <img src="imagenes/collar-rosa.png" alt="Collar con Rosa" class="bento-img">
                     <div class="bento-content centered">
-                        <h3 class="bento-title">Papel Crepé Italiano</h3>
-                        <p class="bento-desc">Papel de alto gramaje para flores realistas. <strong>📍 Encuéntralo en: Fantasías Miguel o Lumen.</strong></p>
-                        <p class="precio-bento">Aprox $80 MXN</p>
-                        <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100">Ver ejemplo online 🔎</a>
+                        <h3 class="bento-title">Estuche con Rosa y Collar</h3>
+                        <p class="bento-desc">Joyero giratorio con rosa preservada y dije "Te Amo" en 100 idiomas. <strong>Físico: Joyerías locales.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=caja+rosa+eterna+con+collar+te+amo+100+idiomas" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/caja-rosa-eterna-collar" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
                     </div>
                 </article>
-            </div>
-        </section>
 
-        <!-- SECCIÓN 4: KITS DESTACADOS -->
-        <section class="mega-section live-deals-section animate-on-scroll">
-            <div class="live-deals-header">
-                <h2>🔥 KITS DE MANUALIDADES</h2>
-                <span class="live-badge pulse-anim">Recomendados para empezar</span>
-            </div>
-            <div class="carrusel">
-                <div class="card-rosa deal-card tilt-effect">
-                    <h3 class="card-titulo-gradient">Kit Botánico Premium</h3>
-                    <p class="precio-viejo">$1,200 MXN</p>
-                    <p class="precio-promocion">$850 MXN</p>
-                    <p class="card-desc">Herramientas de acero inoxidable, guantes de lino y delantal.</p>
-                    <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100" style="text-decoration:none;">Ver en Tienda 🛒</a>
-                </div>
-                <div class="card-rosa deal-card tilt-effect">
-                    <h3 class="card-titulo-gradient">Set de Frascos de Cristal</h3>
-                    <p class="precio-viejo">$450 MXN</p>
-                    <p class="precio-promocion">$299 MXN</p>
-                    <p class="card-desc">3 frascos de boca ancha perfectos para terrarios o velas.</p>
-                    <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100" style="text-decoration:none;">Ver en Tienda 🛒</a>
-                </div>
-                <div class="card-rosa deal-card tilt-effect">
-                    <h3 class="card-titulo-gradient">Maletín de Scrapbook</h3>
-                    <p class="precio-viejo">$900 MXN</p>
-                    <p class="precio-promocion">$650 MXN</p>
-                    <p class="card-desc">Incluye libreta, estampas vintage, cintas y plumones metálicos.</p>
-                    <a href="https://www.amazon.com.mx" target="_blank" class="btn-comprar w-100" style="text-decoration:none;">Ver en Tienda 🛒</a>
-                </div>
+                <!-- Idea 3 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits">
+                    <img src="imagenes/kit-velas.png" alt="Kit Hacer Velas" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Kit Completo para Velas</h3>
+                        <p class="bento-desc">Incluye cera de soya, jarra fundidora, esencias, pabilos y latas. <strong>Físico: Fantasías Miguel.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=kit+para+hacer+velas+aromaticas+cera+de+soya" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/kit-hacer-velas-aromaticas" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
+                    </div>
+                </article>
+
+                <!-- Idea 4 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits">
+                    <img src="imagenes/kit-herramientas.png" alt="Herramientas Terrario" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Set Herramientas Suculentas</h3>
+                        <p class="bento-desc">12 piezas mini: palas, pinzas curvas, soplador y regadera. <strong>Físico: Home Depot / Viveros.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=kit+herramientas+jardineria+suculentas+terrario" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/kit-herramientas-suculentas" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
+                    </div>
+                </article>
+
+                <!-- Idea 5 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="bienestar">
+                    <img src="imagenes/difusor-aromas.png" alt="Difusor" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Difusor Ultrasónico Madera</h3>
+                        <p class="bento-desc">Aromaterapia silenciosa con luz ambiental para su habitación. <strong>Físico: Tiendas departamentales.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=difusor+de+aromas+ultrasonico+madera+aceites+esenciales" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/difusor-aromas-ultrasonico" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
+                    </div>
+                </article>
+
+                <!-- Idea 6 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores">
+                    <img src="imagenes/lego-flores.png" alt="Ramo Bloques" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Ramo de Flores Armable</h3>
+                        <p class="bento-desc">Set botánico de bloques para armar juntas un ramo eterno decorativo. <strong>Físico: Juguetibici / Liverpool.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=ramo+de+flores+bloques+de+construccion+botanico" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/ramo-flores-armable-bloques" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
+                    </div>
+                </article>
+
+                <!-- Idea 7 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits">
+                    <img src="imagenes/kit-bordado.png" alt="Kit Bordado" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Kit de Bordado Floral</h3>
+                        <p class="bento-desc">Aros de bambú, telas estampadas con flores, hilos y agujas. <strong>Físico: Mercerías / Parisina.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=kit+de+bordado+para+principiantes+flores" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/kit-bordado-floral" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
+                    </div>
+                </article>
+
+                <!-- Idea 8 -->
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="bienestar">
+                    <img src="imagenes/taza-calentador.png" alt="Calentador de Taza" class="bento-img">
+                    <div class="bento-content centered">
+                        <h3 class="bento-title">Set Taza con Calentador</h3>
+                        <p class="bento-desc">Base eléctrica inteligente que mantiene su café o té siempre caliente. <strong>Físico: Miniso / Sears.</strong></p>
+                        <a href="https://www.amazon.com.mx/s?k=taza+con+calentador+electrico+regalo" target="_blank" class="btn-comprar w-100">Ver opciones en Amazon 🔎</a>
+                        <a href="https://listado.mercadolibre.com.mx/set-taza-calentador-electrico" target="_blank" class="btn-accion w-100" style="margin-top:5px;">Ver en Mercado Libre 🔎</a>
+                    </div>
+                </article>
             </div>
         </section>
 
         <footer class="espacio-final">
-            <p>Una guía creada para inspirar, crear y compartir con mamá. ❤️</p>
+            <p>Una guía creada para inspirar, crear y compartir momentos inolvidables con mamá. ❤️</p>
         </footer>
     </main>
 

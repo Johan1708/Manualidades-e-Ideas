@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
     
-    if(cursorDot && cursorOutline) {
+    if (cursorDot && cursorOutline) {
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     crearLluviaDePetalos();
 
     // 2. EFECTO MÁQUINA DE ESCRIBIR 
-    const textoEmotivo = "Descubre manualidades paso a paso, lugares mágicos para visitar juntas y las mejores ideas para inspirarte y crear recuerdos inolvidables con mamá.";
+    const textoEmotivo = "Explora manualidades paso a paso, lugares inolvidables para visitar juntos y opciones directas en el mercado para sorprender a mamá.";
     const elementoMensaje = document.getElementById("mensaje-animado");
     let indice = 0;
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (elementoMensaje && indice < textoEmotivo.length) {
             elementoMensaje.innerHTML += textoEmotivo.charAt(indice);
             indice++;
-            setTimeout(escribirTexto, 40); 
+            setTimeout(escribirTexto, 38); 
         }
     }
     setTimeout(escribirTexto, 1500); 
@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Activar los grupos de filtros
+    // Activar los 3 grupos de filtros
     inicializarFiltros('filtros-manualidades', 'grid-manualidades');
     inicializarFiltros('filtros-lugares', 'carrusel-lugares');
     inicializarFiltros('filtros-productos', 'grid-productos');
 
     // 4. ANIMACIÓN AL HACER SCROLL
-    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
     const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -138,13 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function cerrarModal() {
-        if(modalPro) {
+        if (modalPro) {
             modalPro.classList.remove('activo');
             document.body.style.overflow = ''; 
         }
     }
 
-    if(btnCerrarPro) btnCerrarPro.addEventListener('click', cerrarModal);
+    if (btnCerrarPro) btnCerrarPro.addEventListener('click', cerrarModal);
     window.addEventListener('click', (e) => { if (e.target === modalPro) cerrarModal(); });
 
     // 6. EFECTO 3D TILT (INCLINACIÓN) PREMIUM
@@ -156,8 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = e.clientY - rect.top;  
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -10; 
-            const rotateY = ((x - centerX) / centerX) * 10;
+            const rotateX = ((y - centerY) / centerY) * -8; 
+            const rotateY = ((x - centerX) / centerX) * 8;
             
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroText = document.querySelector('.parallax-element');
     window.addEventListener('scroll', () => {
         const scroll = window.scrollY;
-        if(heroText && scroll < 800) {
+        if (heroText && scroll < 800) {
             heroText.style.transform = `translateY(${scroll * 0.4}px)`;
             heroText.style.opacity = 1 - (scroll / 600);
         }

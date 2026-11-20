@@ -545,7 +545,7 @@ function injectOrbitAIStyles() {
       margin-bottom: 8px;
     }
 
-    /* BOTÓN Y PANEL FLOTANTE CHISPA IA EN ESTÉTICA PLATA / ESTELAR */
+    /* BOTÓN Y PANEL FLOTANTE Nova IA EN ESTÉTICA PLATA / ESTELAR */
     .ai-fab-btn {
       position: fixed !important;
       bottom: 22px !important;
@@ -736,14 +736,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     <aside class="ai-drawer" id="ai-drawer">
       <div class="ai-drawer-header">
         <div>
-          <h4>✨ Chispa IA • Guía Creativa</h4>
+          <h4>✨ Nova • Guía Creativa</h4>
           <small>Activo en: ${pageTitle.slice(0, 34)}</small>
         </div>
         <button class="ai-close-btn" id="close-ai-drawer" type="button">✕</button>
       </div>
 
       <div class="ai-messages" id="ai-messages">
-        <div class="ai-msg bot">¡Hola! Soy <strong>Chispa IA</strong>. Te ayudo a explorar <strong>Halloween, Día de Muertos, Navidad, Día de las Madres y Día del Padre</strong>, o a crear cualquier manualidad paso a paso. ¿Qué te gustaría hacer?</div>
+        <div class="ai-msg bot">¡Hola! Soy <strong>Nova</strong>. Te ayudo a explorar <strong>Halloween, Día de Muertos, Navidad, Día de las Madres y Día del Padre</strong>, o a crear cualquier manualidad paso a paso. ¿Qué te gustaría hacer?</div>
       </div>
 
       <div class="ai-quick-prompts">
@@ -818,7 +818,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
 
           <p style="font-size:0.78rem; color:#cbd5e1; text-align:center; margin:0 0 10px;">
-            Revisada por <strong>Chispa IA</strong> antes de guardarse en la comunidad.
+            Revisada por <strong>Nova</strong> antes de guardarse en la comunidad.
           </p>
 
           <div class="status-banner" id="idea-status"></div>
@@ -1104,7 +1104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="comunidad-meta">Por <strong>${idea.autor_nombre || "Creador"}</strong> • Costo: ${idea.costo_aprox}</div>
           <div class="comunidad-detail"><strong>Materiales:</strong>\n${idea.materiales}</div>
           <div class="comunidad-detail"><strong>Pasos:</strong>\n${idea.pasos}</div>
-          ${idea.consejo_ia ? `<div class="comunidad-detail" style="color:#f8fafc; margin-top:8px;">✨ <em>Tip Chispa IA: ${idea.consejo_ia}</em></div>` : ""}
+          ${idea.consejo_ia ? `<div class="comunidad-detail" style="color:#f8fafc; margin-top:8px;">✨ <em>Tip Nova: ${idea.consejo_ia}</em></div>` : ""}
         </article>
       `
       )
@@ -1212,7 +1212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     btn.disabled = true;
-    btn.textContent = "Chispa IA revisando... ⏳";
+    btn.textContent = "Nova esta revisando... ⏳";
     statusEl.className = "status-banner";
 
     try {
@@ -1289,7 +1289,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     isAiThinking = locked;
     aiInput.disabled = locked;
     aiSubmitBtn.disabled = locked;
-    aiInput.placeholder = locked ? "Chispa IA está respondiendo..." : "Pregúntale algo a la IA...";
+    aiInput.placeholder = locked ? "Nova está respondiendo..." : "Pregúntale algo a Nova...";
     aiSubmitBtn.textContent = locked ? "..." : "Enviar";
     aiSubmitBtn.style.opacity = locked ? "0.5" : "1";
     aiSubmitBtn.style.cursor = locked ? "not-allowed" : "pointer";
@@ -1357,7 +1357,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (err.name === "AbortError") {
         botBubble.textContent = "⏳ La respuesta tardó demasiado. Intenta enviar tu mensaje de nuevo.";
       } else {
-        botBubble.textContent = err.message || "No pude conectarme con Chispa IA en este momento.";
+        botBubble.textContent = err.message || "No pude conectarme con Nova en este momento.";
       }
     } finally {
       setChatLocked(false);

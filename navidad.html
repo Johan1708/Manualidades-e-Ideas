@@ -44,8 +44,8 @@
     <!-- EXPERIENCIA PRINCIPAL SOBRE TU SUÉTER TEJIDO -->
     <main id="main-experience" class="experience-container hidden">
         
-        <!-- BOTÓN VOLVER A INICIO -->
-        <button id="btn-back-home" class="home-return-btn" title="Volver a la portada">
+        <!-- BOTÓN VOLVER A INICIO (REDIRIGE A INDEX.HTML) -->
+        <button id="btn-back-home" class="home-return-btn" title="Ir al inicio principal">
             <span class="arrow-icon">←</span>
             <span>Inicio</span>
         </button>
@@ -77,8 +77,6 @@
                 <button class="filter-chip active" data-store="all">Todas las tiendas</button>
                 <button class="filter-chip" data-store="Amazon">Amazon</button>
                 <button class="filter-chip" data-store="Mercado Libre">Mercado Libre</button>
-                <button class="filter-chip" data-store="Walmart">Walmart</button>
-                <button class="filter-chip" data-store="Chedraui">Chedraui</button>
             </div>
         </header>
 
@@ -168,9 +166,12 @@
                 <h3 id="modal-title">Título</h3>
                 <p id="modal-intro">Detalles:</p>
                 <ul id="modal-materials" class="materials-list"></ul>
-                <a id="modal-store-link" href="#" target="_blank" rel="noopener noreferrer" class="pill-btn small store-cta hidden">
-                    Ir a la oferta en tienda ↗
-                </a>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+                    <button id="modal-fav-btn" type="button" class="pill-btn small">☆ Guardar en Favoritos</button>
+                    <a id="modal-store-link" href="#" target="_blank" rel="noopener noreferrer" class="pill-btn small store-cta hidden" style="margin-top:0;">
+                        Ir a la oferta en tienda ↗
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -184,7 +185,7 @@
                     <button class="dot-btn" data-section="2" title="Velas y Centros de Mesa"></button>
                     <button class="dot-btn" data-section="3" title="Envolturas y Tarjetas"></button>
                     <button class="dot-btn" data-section="4" title="Regalos Comestibles"></button>
-                    <button class="dot-btn deal-dot" data-section="5" title="Cazador de Ofertas IA (Amazon, ML, Walmart, Chedraui)"></button>
+                    <button class="dot-btn deal-dot" data-section="5" title="Cazador de Ofertas IA (Amazon y Mercado Libre)"></button>
                 </div>
                 <span class="dock-brand-right">A MANO</span>
             </div>

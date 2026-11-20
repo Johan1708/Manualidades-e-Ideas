@@ -158,7 +158,7 @@ function injectOrbitAIStyles() {
     }
 
     /* ======================================================================
-       PANTALLA HOLOGRÁFICA PLATEADA (LOGIN Y PUBLICAR IDEA)
+       PANTALLA HOLOGRÁFICA PLATEADA (LOGIN, PUBLICAR IDEA Y FAVORITOS)
        ====================================================================== */
     @keyframes pan-overlay {
       from { background-position: 0% 0%; }
@@ -449,31 +449,6 @@ function injectOrbitAIStyles() {
       box-shadow: 0 0 26px rgba(255, 255, 255, 0.65);
     }
 
-    /* MODAL FAVORITOS EN ESTÉTICA PLATA */
-    .global-modal-card {
-      width: min(460px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 22px;
-      border-radius: 18px;
-      border: 1.5px solid rgba(226, 232, 240, 0.65) !important;
-      background: linear-gradient(160deg, rgba(16, 18, 23, 0.95), rgba(10, 11, 14, 0.98)) !important;
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.18) !important;
-      color: #f8fafc !important;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-    }
-    .global-modal-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .global-modal-top h3 {
-      margin: 0;
-      color: #ffffff !important;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
-    }
-
     .status-banner {
       display: none;
       padding: 8px 11px;
@@ -494,27 +469,39 @@ function injectOrbitAIStyles() {
       color: #ffffff;
     }
 
-    /* BOTÓN FAVORITOS EN TARJETAS Y GRID COMUNIDAD */
+    /* BOTÓN ESTRELLITA EN CADA TARJETA / LUGAR / PRODUCTO */
     .orbit-fav-btn {
       display: inline-flex;
       align-items: center;
       gap: 5px;
       margin-top: 8px;
-      padding: 6px 12px;
+      padding: 6px 13px;
       border-radius: 999px;
-      border: 1px solid rgba(226, 232, 240, 0.5);
+      border: 1px solid rgba(226, 232, 240, 0.55);
       background: rgba(15, 17, 22, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       color: #e2e8f0;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
+      position: relative;
+      z-index: 15;
+      transition: all 0.22s ease;
+    }
+    .orbit-fav-btn:hover {
+      border-color: #ffffff;
+      background: rgba(30, 34, 44, 0.95);
+      transform: translateY(-1px);
     }
     .orbit-fav-btn.saved {
       background: rgba(255, 255, 255, 0.22);
       border-color: #ffffff;
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
     }
+
+    /* GRID DE IDEAS DE LA COMUNIDAD */
     .comunidad-grid-wrapper {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -544,6 +531,8 @@ function injectOrbitAIStyles() {
     }
     .comunidad-meta { font-size: 0.78rem; color: #94a3b8; margin-bottom: 10px; }
     .comunidad-detail { font-size: 0.84rem; line-height: 1.45; color: #e2e8f0; white-space: pre-line; margin-top: 6px; }
+
+    /* FILAS DE FAVORITOS DENTRO DE LA PANTALLA HOLOGRÁFICA PLATEADA */
     .fav-item-row {
       display: flex;
       align-items: center;
@@ -551,9 +540,14 @@ function injectOrbitAIStyles() {
       gap: 10px;
       padding: 10px 12px;
       border-radius: 10px;
-      border: 1px solid rgba(226, 232, 240, 0.28);
-      background: rgba(20, 22, 28, 0.88);
+      border: 1px solid rgba(226, 232, 240, 0.32);
+      background: rgba(10, 11, 15, 0.85);
       margin-bottom: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .fav-item-row:hover {
+      border-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
     }
 
     /* BOTÓN Y PANEL FLOTANTE Nova IA EN ESTÉTICA PLATA / ESTELAR */
@@ -721,6 +715,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   let authMode = "login";
   const pageTitle = document.title || window.location.pathname;
 
+  function detectarCategoriaActual() {
+    const ref = (window.location.pathname + " " + pageTitle).toLowerCase();
+    if (ref.includes("navidad")) return "Navidad";
+    if (ref.includes("muertos")) return "Día de Muertos";
+    if (ref.includes("padre")) return "Día del Padre";
+    if (ref.includes("madre")) return "Día de las Madres";
+    if (ref.includes("opciones") || ref.includes("halloween")) return "Halloween";
+    return pageTitle;
+  }
+
   const uiContainer = document.createElement("div");
   uiContainer.innerHTML = `
     <!-- DOCK INFERIOR DERECHO DE ICONOS (SE EXPANDEN AL PASAR EL CURSOR) -->
@@ -885,15 +889,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
 
-    <!-- MODAL MIS FAVORITOS -->
+    <!-- MODAL MIS FAVORITOS CON EXACTAMENTE EL MISMO DISEÑO HOLOGRÁFICO PLATEADO -->
     <div class="global-modal-overlay" id="favs-modal">
-      <div class="global-modal-card">
-        <div class="global-modal-top">
-          <h3>⭐ Mis Ideas Favoritas</h3>
-          <button class="ai-close-btn" id="close-favs-modal" type="button">✕</button>
-        </div>
-        <div id="favs-list-container">
-          <p style="font-size:0.86rem; color:#94a3b8;">Cargando favoritos...</p>
+      <div class="orbit-holo-screen login-size" id="orbit-favs-screen">
+        <div class="screen-image"></div>
+        <div class="screen-overlay"></div>
+        <div class="screen-content" style="justify-content: flex-start;">
+          <button class="ai-close-btn screen-top-close" id="close-favs-modal" type="button">✕</button>
+
+          <div class="screen-header-brand" style="margin-bottom:0.75rem;">
+            <span class="screen-scramble-title" id="favs-scramble-title" data-value="FAVORITOS">FAVORITOS</span>
+            <span class="screen-subtitle">@MIS_GUARDADOS_ORBIT</span>
+          </div>
+
+          <p style="font-size:0.78rem; color:#cbd5e1; text-align:center; margin:0 0 12px;">
+            Tarjetas, lugares y regalos guardados con estrella ⭐
+          </p>
+
+          <div id="favs-list-container" style="flex:1; overflow-y:auto;">
+            <p style="font-size:0.86rem; color:#94a3b8; text-align:center;">Cargando favoritos...</p>
+          </div>
         </div>
       </div>
     </div>
@@ -908,7 +923,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("ai-drawer")?.classList.add("pos-top");
   }
 
-  // EFECTO DE TEXTO SCRAMBLE PARA AMBAS PANTALLAS HOLOGRÁFICAS (LOGIN Y PUBLICAR)
+  // EFECTO DE TEXTO SCRAMBLE PARA LAS 3 PANTALLAS HOLOGRÁFICAS (LOGIN, PUBLICAR Y FAVORITOS)
   const scrambleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   function attachScrambleEffect(screenEl, titleEl) {
     if (!screenEl || !titleEl) return () => {};
@@ -950,6 +965,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("orbit-idea-screen"),
     document.getElementById("idea-scramble-title")
   );
+  const triggerFavsScramble = attachScrambleEffect(
+    document.getElementById("orbit-favs-screen"),
+    document.getElementById("favs-scramble-title")
+  );
 
   // Contadores de caracteres
   const bindCounter = (inputId, counterId, max) => {
@@ -980,6 +999,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   favsBtn.addEventListener("click", async () => {
     document.getElementById("favs-modal").classList.add("open");
+    triggerFavsScramble("FAVORITOS");
     await renderFavoritosModal();
   });
   logoutBtn.addEventListener("click", async () => {
@@ -1036,11 +1056,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadUserFavoritos();
   };
 
+  // ========================================================================
+  // DETECCIÓN AUTOMÁTICA DE TODAS LAS TARJETAS, LUGARES Y PRODUCTOS (HTML+JS)
+  // ========================================================================
+  const SELECTORES_TARJETAS = [
+    "[data-fav-id]",
+    ".glass-card",
+    ".altar-card-box",
+    ".bento-card",
+    ".card-rosa",
+    ".cat-card",
+    ".showcase-card",
+    ".spooky-card",
+    ".ogl-card",
+    ".gallery-card",
+    ".product-card",
+    ".place-card"
+  ].join(", ");
+
+  function extraerMetaTarjeta(card, idx) {
+    const tituloEl = card.querySelector(
+      "h1, h2, h3, h4, .bento-title, .card-titulo-gradient, .box-title, .card-label-badge, .title"
+    );
+    const titulo = (
+      card.getAttribute("data-fav-title") ||
+      (tituloEl ? tituloEl.textContent : "") ||
+      `Elemento ${idx + 1}`
+    ).trim();
+    const categoria = card.getAttribute("data-fav-cat") || detectarCategoriaActual();
+    const slug = titulo
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    const itemId =
+      card.getAttribute("data-fav-id") ||
+      `${categoria.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${slug || idx}`;
+
+    return { itemId, titulo, categoria };
+  }
+
   function refreshFavButtonsOnPage() {
-    document.querySelectorAll("[data-fav-id]").forEach((card) => {
-      const itemId = card.getAttribute("data-fav-id");
-      const titulo = card.getAttribute("data-fav-title") || "Manualidad";
-      const categoria = card.getAttribute("data-fav-cat") || pageTitle;
+    document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
+      // No poner estrellita dentro de modales emergentes
+      if (card.closest(".craft-modal, .popup-modal, .spooky-modal, .modal-pro, .global-modal-overlay")) {
+        return;
+      }
 
       let btn = card.querySelector(".orbit-fav-btn");
       if (!btn) {
@@ -1048,12 +1110,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         btn.type = "button";
         btn.className = "orbit-fav-btn";
         btn.addEventListener("click", (e) => {
+          e.preventDefault();
           e.stopPropagation();
-          window.toggleFavorito(itemId, titulo, categoria);
+          const actual = extraerMetaTarjeta(card, idx);
+          window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria);
         });
-        card.appendChild(btn);
+        const contenedor = card.querySelector(".bento-content, .card-info") || card;
+        contenedor.appendChild(btn);
       }
 
+      const { itemId } = extraerMetaTarjeta(card, idx);
       const isSaved = userFavoritosIds.has(itemId);
       btn.classList.toggle("saved", isSaved);
       btn.textContent = isSaved ? "⭐ Guardado" : "☆ Guardar";
@@ -1063,7 +1129,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function renderFavoritosModal() {
     const container = document.getElementById("favs-list-container");
     if (!currentUser) return;
-    container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8;">Cargando favoritos...</p>`;
+    container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center;">Cargando favoritos...</p>`;
 
     const { data, error } = await sb
       .from("favoritos_usuario")
@@ -1072,7 +1138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8;">Aún no tienes manualidades guardadas.</p>`;
+      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades, lugares o regalos guardados.</p>`;
       return;
     }
 
@@ -1084,7 +1150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <strong style="color:#fff; font-size:0.9rem;">${fav.titulo}</strong><br/>
             <small style="color:#cbd5e1;">${fav.categoria}</small>
           </div>
-          <div style="display:flex; gap:6px;">
+          <div style="display:flex; gap:6px; flex-shrink:0;">
             ${fav.url_pagina ? `<a href="${fav.url_pagina}" class="orbit-star-icon-btn" style="text-decoration:none; height:32px; padding:0 12px; font-size:0.72rem;">Ver</a>` : ""}
             <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" data-del-fav="${fav.item_id}">✕</button>
           </div>
@@ -1161,6 +1227,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const { data: sessionData } = await sb.auth.getSession();
   await updateSessionUI(sessionData?.session?.user || null);
   await loadComunidadIdeas();
+
+  // Observar tarjetas creadas dinámicamente por tus otros JS (Halloween, Día del Padre, Navidad, etc.)
+  const domObserver = new MutationObserver(() => {
+    refreshFavButtonsOnPage();
+  });
+  domObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
 
   sb.auth.onAuthStateChange(async (_event, session) => {
     await updateSessionUI(session?.user || null);
@@ -1303,6 +1378,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   document.getElementById("close-favs-modal").addEventListener("click", () => {
     document.getElementById("favs-modal").classList.remove("open");
+  });
+  document.getElementById("favs-modal").addEventListener("click", (e) => {
+    if (e.target.id === "favs-modal") document.getElementById("favs-modal").classList.remove("open");
   });
 
   const aiDrawer = document.getElementById("ai-drawer");

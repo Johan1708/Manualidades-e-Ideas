@@ -103,7 +103,7 @@ const MOTIFS = {
         ".vvvvvvvvvvvvv.",
         "..vvvvvvvvvvv..",
         "...vvvvvvvvv...",
-        "....vvvvvvvv...",
+        "....vvvvvvv....",
         "...vvvv.vvvv...",
         "..vvv.....vvv..",
         ".vv.........vv."
@@ -1302,7 +1302,7 @@ function initInteractiveSnow() {
 }
 
 // ================================================================
-// 3. DATOS DEL TALLER + IDENTIFICADORES EXPLÍCITOS POR SECCIÓN
+// 3. DATOS DEL TALLER + MATERIALES Y PASOS CON MINI-IMAGEN
 // ================================================================
 const tallerData = [
     {
@@ -1315,28 +1315,48 @@ const tallerData = [
                 label: "Esferas de Tela", tag1: "Reciclaje", tag2: "20 min",
                 title: "Esferas Tejidas y Retazos",
                 desc: "Forra esferas de unicel o plástico viejo con retazos de suéteres tejidos, cuerda de yute y ramas de canela.",
-                materials: ["Esferas base recicladas", "Retazos de tela tejida o fieltro", "Silicón frío o caliente", "Cordón de yute natural", "Ramas de canela y anís estrella"]
+                materials: ["Esferas base recicladas", "Retazos de tela tejida o fieltro", "Silicón frío o caliente", "Cordón de yute natural", "Ramas de canela y anís estrella"],
+                steps: [
+                    { text: "Corta tiras o cuadros de tela tejida de 10x10 cm que alcancen a cubrir la esfera.", img: "img/esfera-tela-1.jpg" },
+                    { text: "Aplica silicón en la parte superior y estira la tela alrededor sin dejar arrugas.", img: "img/esfera-tela-2.jpg" },
+                    { text: "Amarra un lazo de yute en el cuello y pega una rama de canela con anís estrella.", img: "img/esfera-tela-3.jpg" }
+                ]
             },
             {
                 pos: { top: "56%", left: "28%" }, icon: "star",
                 label: "Estrellas 3D", tag1: "Origami", tag2: "Papel Kraft",
                 title: "Estrellas Nórdicas de Papel",
                 desc: "Pega 7 bolsas de papel kraft entre sí, recorta los bordes en ángulo y ábrelas para formar estrellas tridimensionales.",
-                materials: ["7 bolsas de papel kraft", "Pegamento en barra", "Tijeras afiladas", "Perforadora de un hueco", "Hilo dorado para colgar"]
+                materials: ["7 bolsas de papel kraft", "Pegamento en barra", "Tijeras afiladas", "Perforadora de un hueco", "Hilo dorado para colgar"],
+                steps: [
+                    { text: "Apila las 7 bolsas de papel kraft aplicando pegamento en forma de T invertida entre cada una.", img: "img/estrella-kraft-1.jpg" },
+                    { text: "Recorta la parte superior en punta de flecha y haz cortes triangulares en los costados.", img: "img/estrella-kraft-2.jpg" },
+                    { text: "Abre el acordeón en abanico, pega los extremos y pasa el hilo dorado por la perforación.", img: "img/estrella-kraft-3.jpg" }
+                ]
             },
             {
                 pos: { top: "62%", left: "55%" }, icon: "wreath",
                 label: "Corona Natural", tag1: "Botánico", tag2: "Aromático",
                 title: "Corona de Eucalipto y Naranja",
                 desc: "Entrelaza ramas de eucalipto sobre un aro de madera y decora con rodajas de naranja deshidratada.",
-                materials: ["Aro de madera o alambre", "Ramas de eucalipto y pino", "Naranjas deshidratadas al horno", "Alambre floral fino", "Listón de terciopelo rojo"]
+                materials: ["Aro de madera o alambre", "Ramas de eucalipto y pino", "Naranjas deshidratadas al horno", "Alambre floral fino", "Listón de terciopelo rojo"],
+                steps: [
+                    { text: "Sujeta ramilletes de eucalipto y pino alrededor del aro usando alambre floral fino.", img: "img/corona-eucalipto-1.jpg" },
+                    { text: "Pega las rodajas de naranja deshidratada en grupos de dos sobre el follaje verde.", img: "img/corona-eucalipto-2.jpg" },
+                    { text: "Remata en la parte superior o inferior con un moño largo de terciopelo rojo.", img: "img/corona-eucalipto-3.jpg" }
+                ]
             },
             {
                 pos: { top: "40%", left: "76%" }, icon: "candycane",
                 label: "Bastones Hilo", tag1: "Clásico", tag2: "Fácil",
                 title: "Bastones de Caramelo en Lana",
                 desc: "Enrolla estambre rojo y blanco alrededor de limpiapipas gruesos y dales la curva clásica de bastón navideño.",
-                materials: ["Estambre rojo y blanco", "Limpiapipas o alambre maleable", "Cascabeles pequeños", "Tijeras"]
+                materials: ["Estambre rojo y blanco", "Limpiapipas o alambre maleable", "Cascabeles pequeños", "Tijeras"],
+                steps: [
+                    { text: "Une dos limpiapipas y ata juntos el inicio del estambre rojo y el blanco en un extremo.", img: "img/baston-lana-1.jpg" },
+                    { text: "Enrolla ambos colores alternándolos en espiral apretada hasta cubrir todo el alambre.", img: "img/baston-lana-2.jpg" },
+                    { text: "Dobla la punta superior en forma de gancho y ata un cascabel dorado en el centro.", img: "img/baston-lana-3.jpg" }
+                ]
             }
         ]
     },
@@ -1350,28 +1370,48 @@ const tallerData = [
                 label: "Aldea Luminosa", tag1: "Centro de Mesa", tag2: "Cartulina",
                 title: "Casitas Blancas con Luz LED",
                 desc: "Recorta fachadas de casitas en cartulina opalina, cala sus ventanas y coloca velas LED cálidas en su interior.",
-                materials: ["Cartulina opalina blanca (220g)", "Cúter de precisión y regla", "Velas LED a batería", "Papel albanene para las ventanas"]
+                materials: ["Cartulina opalina blanca (220g)", "Cúter de precisión y regla", "Velas LED a batería", "Papel albanene para las ventanas"],
+                steps: [
+                    { text: "Traza el molde de 4 paredes con techo a dos aguas sobre la cartulina opalina y recórtalo.", img: "img/aldea-led-1.jpg" },
+                    { text: "Cala las ventanas con cúter y pega papel albanene por dentro para difuminar la luz.", img: "img/aldea-led-2.jpg" },
+                    { text: "Dobla las pestañas, pega la estructura y coloca una vela LED encendida debajo.", img: "img/aldea-led-3.jpg" }
+                ]
             },
             {
                 pos: { top: "58%", left: "34%" }, icon: "tree",
                 label: "Pinos Acordeón", tag1: "Origami", tag2: "15 min",
                 title: "Abetos Plegados en Abanico",
                 desc: "Dobla círculos de papel verde bosque en acordeón y apílalos de mayor a menor sobre un palito de madera.",
-                materials: ["Papel verde bosque y dorado", "Palillos de brocheta", "Cuentas de madera para la base", "Estrella de cartón metálico"]
+                materials: ["Papel verde bosque y dorado", "Palillos de brocheta", "Cuentas de madera para la base", "Estrella de cartón metálico"],
+                steps: [
+                    { text: "Recorta 4 círculos de papel verde de distintos tamaños (de 12 cm a 6 cm de diámetro).", img: "img/pino-acordeon-1.jpg" },
+                    { text: "Pliega cada círculo en acordeón de 1 cm y perfora el centro con cuidado.", img: "img/pino-acordeon-2.jpg" },
+                    { text: "Inserta los abanicos de mayor a menor en el palillo clavado en una cuenta y corona con estrella.", img: "img/pino-acordeon-3.jpg" }
+                ]
             },
             {
                 pos: { top: "32%", left: "58%" }, icon: "snowflake",
                 label: "Copos Calados", tag1: "Ventanas", tag2: "Infantil",
                 title: "Copos de Nieve Simétricos",
                 desc: "Dobla cuadrados de papel seda en triángulos y realiza cortes geométricos para crear diseños irrepetibles.",
-                materials: ["Papel seda o bond blanco", "Tijeras pequeñas", "Cinta adhesiva transparente"]
+                materials: ["Papel seda o bond blanco", "Tijeras pequeñas", "Cinta adhesiva transparente"],
+                steps: [
+                    { text: "Dobla un cuadrado de papel por la diagonal y luego en tercios hasta formar un cono.", img: "img/copo-calado-1.jpg" },
+                    { text: "Recorta el borde superior en punta y haz muescas diagonales a ambos lados sin cortar todo.", img: "img/copo-calado-2.jpg" },
+                    { text: "Desdobla suavemente el papel y aplánalo bajo un libro antes de pegarlo en la ventana.", img: "img/copo-calado-3.jpg" }
+                ]
             },
             {
                 pos: { top: "56%", left: "75%" }, icon: "moon",
                 label: "Guirnalda", tag1: "Paredes", tag2: "Minimalista",
                 title: "Guirnalda de Lunas y Estrellas",
                 desc: "Cose a máquina o pega siluetas de cartulina dorada sobre un hilo largo para decorar marcos de puertas.",
-                materials: ["Cartulina dorada mate", "Hilo de algodón crudo", "Perforadora de figuras"]
+                materials: ["Cartulina dorada mate", "Hilo de algodón crudo", "Perforadora de figuras"],
+                steps: [
+                    { text: "Perfora o recorta pares idénticos de lunas crecientes y estrellas en cartulina dorada.", img: "img/guirnalda-lunas-1.jpg" },
+                    { text: "Coloca el hilo de algodón en medio y pega cada pareja de figuras frente con frente.", img: "img/guirnalda-lunas-2.jpg" },
+                    { text: "Deja 8 cm de separación entre cada figura y cuelga la guirnalda en puertas o paredes.", img: "img/guirnalda-lunas-3.jpg" }
+                ]
             }
         ]
     },
@@ -1385,28 +1425,48 @@ const tallerData = [
                 label: "Portavelas", tag1: "Frascos", tag2: "Rústico",
                 title: "Frascos Nevados con Sal de Grano",
                 desc: "Cubre frascos de vidrio con barniz transparente y ruédalos sobre sal gruesa para simular escarcha cristalina.",
-                materials: ["Frascos de vidrio reciclados", "Sal de grano gruesa", "Pegamento blanco o mod podge", "Ramas de romero fresco"]
+                materials: ["Frascos de vidrio reciclados", "Sal de grano gruesa", "Pegamento blanco o mod podge", "Ramas de romero fresco"],
+                steps: [
+                    { text: "Aplica una capa uniforme de pegamento blanco por todo el exterior del frasco limpio.", img: "img/frasco-nevado-1.jpg" },
+                    { text: "Rueda el frasco sobre una bandeja con sal de grano hasta cubrirlo por completo y deja secar.", img: "img/frasco-nevado-2.jpg" },
+                    { text: "Ata una ramita de romero fresco en la boca del frasco y coloca una vela dentro.", img: "img/frasco-nevado-3.jpg" }
+                ]
             },
             {
                 pos: { top: "32%", left: "38%" }, icon: "holly",
                 label: "Servilleteros", tag1: "Mesa", tag2: "Elegante",
                 title: "Aros de Romero y Arándanos",
                 desc: "Forma pequeños círculos con ramitas de romero fresco y ensarta arándanos rojos para abrazar las servilletas de lino.",
-                materials: ["Ramas frescas de romero", "Arándanos rojos frescos", "Alambre dorado delgado", "Servilletas de tela"]
+                materials: ["Ramas frescas de romero", "Arándanos rojos frescos", "Alambre dorado delgado", "Servilletas de tela"],
+                steps: [
+                    { text: "Corta 18 cm de alambre dorado y ensarta 3 arándanos rojos en el centro.", img: "img/servilletero-romero-1.jpg" },
+                    { text: "Curva el alambre formando un aro y envuelve dos ramitas de romero alrededor.", img: "img/servilletero-romero-2.jpg" },
+                    { text: "Tuerce las puntas del alambre por detrás y desliza la servilleta enrollada en el centro.", img: "img/servilletero-romero-3.jpg" }
+                ]
             },
             {
                 pos: { top: "58%", left: "56%" }, icon: "candle",
                 label: "Velas Canela", tag1: "Aroma", tag2: "10 min",
                 title: "Velones Envueltos en Canela",
                 desc: "Rodea velas blancas gruesas con ramas de canela enteras y sujétalas con un lazo de yute.",
-                materials: ["Velones cilíndricos blancos", "Rajas de canela del mismo alto", "Banda elástica y cordón de yute"]
+                materials: ["Velones cilíndricos blancos", "Rajas de canela del mismo alto", "Banda elástica y cordón de yute"],
+                steps: [
+                    { text: "Coloca una liga elástica alrededor del velón blanco para sostener las rajas temporalmente.", img: "img/vela-canela-1.jpg" },
+                    { text: "Inserta las ramas de canela una junto a otra cubriendo toda la circunferencia.", img: "img/vela-canela-2.jpg" },
+                    { text: "Envuelve con cordón de yute dando varias vueltas sobre la liga y haz un nudo firme.", img: "img/vela-canela-3.jpg" }
+                ]
             },
             {
                 pos: { top: "38%", left: "77%" }, icon: "pinecone",
                 label: "Camino Mesa", tag1: "Natural", tag2: "Piñas",
                 title: "Camino de Piñas Nevadas",
                 desc: "Pinta las puntas de piñas de pino recolectadas con pintura acrílica blanca para darles un toque invernal.",
-                materials: ["Piñas de pino secas", "Pintura acrílica blanca", "Esponja o pincel seco", "Guirnalda de micro-luces"]
+                materials: ["Piñas de pino secas", "Pintura acrílica blanca", "Esponja o pincel seco", "Guirnalda de micro-luces"],
+                steps: [
+                    { text: "Limpia las piñas secas con una brocha para retirar polvo o tierra.", img: "img/pinas-nevadas-1.jpg" },
+                    { text: "Da toques ligeros con pintura acrílica blanca únicamente en los bordes de cada escama.", img: "img/pinas-nevadas-2.jpg" },
+                    { text: "Distribúyelas al centro de la mesa entre ramas verdes y una serie de micro-luces cálidas.", img: "img/pinas-nevadas-3.jpg" }
+                ]
             }
         ]
     },
@@ -1420,28 +1480,48 @@ const tallerData = [
                 label: "Sello Lacre", tag1: "Clásico", tag2: "Cartas",
                 title: "Tarjetas con Sello de Cera",
                 desc: "Derrite barras de lacre rojo o dorado sobre cartulina texturizada y presiona con un sello metálico.",
-                materials: ["Barras de lacre y cuchara", "Sello metálico navideño", "Tarjetas de papel algodón", "Pluma fuente o marcador dorado"]
+                materials: ["Barras de lacre y cuchara", "Sello metálico navideño", "Tarjetas de papel algodón", "Pluma fuente o marcador dorado"],
+                steps: [
+                    { text: "Derrite 3 perlas o un trozo de barra de lacre en la cuchara metálica sobre una vela.", img: "img/sello-lacre-1.jpg" },
+                    { text: "Vierte un círculo de cera fundida sobre la solapa del sobre o la esquina de la tarjeta.", img: "img/sello-lacre-2.jpg" },
+                    { text: "Presiona el sello metálico frío durante 10 segundos y retíralo verticalmente con cuidado.", img: "img/sello-lacre-3.jpg" }
+                ]
             },
             {
                 pos: { top: "56%", left: "32%" }, icon: "gift",
                 label: "Furoshiki", tag1: "Tela", tag2: "Reutilizable",
                 title: "Envoltura Japonesa en Tela",
                 desc: "Envuelve cajas y libros usando pañuelos de algodón estampados con nudos decorativos sin usar cinta adhesiva.",
-                materials: ["Cuadrados de tela de algodón (50x50cm)", "Ramita de pino o acebo", "Etiqueta de cartón"]
+                materials: ["Cuadrados de tela de algodón (50x50cm)", "Ramita de pino o acebo", "Etiqueta de cartón"],
+                steps: [
+                    { text: "Extiende el pañuelo en rombo y coloca la caja en el centro en diagonal.", img: "img/furoshiki-1.jpg" },
+                    { text: "Dobla las esquinas superior e inferior sobre la caja metiendo los bordes hacia adentro.", img: "img/furoshiki-2.jpg" },
+                    { text: "Toma las puntas laterales, haz un nudo doble al centro y desliza una ramita de pino.", img: "img/furoshiki-3.jpg" }
+                ]
             },
             {
                 pos: { top: "44%", left: "60%" }, icon: "tag",
                 label: "Etiquetas", tag1: "Acuarela", tag2: "Personal",
                 title: "Etiquetas Pintadas a Acuarela",
                 desc: "Pinta pequeñas coronas verdes o bayas rojas en tarjetas recortadas y escribe el nombre de cada destinatario.",
-                materials: ["Papel acuarela (300g)", "Acuarelas verde y carmín", "Pincel fino redondo #2", "Listón delgado"]
+                materials: ["Papel acuarela (300g)", "Acuarelas verde y carmín", "Pincel fino redondo #2", "Listón delgado"],
+                steps: [
+                    { text: "Recorta rectángulos de papel acuarela de 5x9 cm y traza un círculo suave a lápiz.", img: "img/etiqueta-acuarela-1.jpg" },
+                    { text: "Pinta pequeñas hojas verdes alrededor del círculo y añade puntitos rojos como bayas.", img: "img/etiqueta-acuarela-2.jpg" },
+                    { text: "Escribe el nombre al centro cuando seque, perfora arriba y coloca el listón.", img: "img/etiqueta-acuarela-3.jpg" }
+                ]
             },
             {
                 pos: { top: "60%", left: "76%" }, icon: "deer",
                 label: "Reno Papel", tag1: "Niños", tag2: "Divertido",
                 title: "Bolsas de Regalo con Cara de Reno",
                 desc: "Transforma bolsas de papel marrón pegando astas de cartulina, ojos de papel y un pompón rojo brillante.",
-                materials: ["Bolsas kraft con asas", "Pompones rojos grandes", "Cartulina café oscura", "Pegamento blanco"]
+                materials: ["Bolsas kraft con asas", "Pompones rojos grandes", "Cartulina café oscura", "Pegamento blanco"],
+                steps: [
+                    { text: "Dibuja y recorta dos astas ramificadas en cartulina café oscura.", img: "img/bolsa-reno-1.jpg" },
+                    { text: "Pega las astas en el borde interior superior de la bolsa kraft junto a las asas.", img: "img/bolsa-reno-2.jpg" },
+                    { text: "Adhiere dos círculos blancos con pupila negra y pega el pompón rojo al centro como nariz.", img: "img/bolsa-reno-3.jpg" }
+                ]
             }
         ]
     },
@@ -1455,28 +1535,48 @@ const tallerData = [
                 label: "Mix Galletas", tag1: "Frasco", tag2: "Regalo",
                 title: "Frasco de Galletas en Capas",
                 desc: "Alterna capas de harina, azúcar mascabado, avena y chispas de chocolate en un frasco con la receta escrita.",
-                materials: ["Frasco hermético de 1 litro", "Harina, avena y azúcar morena", "Chispas de chocolate y nueces", "Etiqueta con instrucciones de horneado"]
+                materials: ["Frasco hermético de 1 litro", "Harina, avena y azúcar morena", "Chispas de chocolate y nueces", "Etiqueta con instrucciones de horneado"],
+                steps: [
+                    { text: "Vierte en el fondo 1 taza de harina con polvo para hornear y presiónala ligeramente.", img: "img/frasco-galletas-1.jpg" },
+                    { text: "Añade en capas separadas la avena, azúcar mascabado, chispas de chocolate y nueces.", img: "img/frasco-galletas-2.jpg" },
+                    { text: "Cierra herméticamente y ata una tarjeta indicando agregar 1 huevo y mantequilla al hornear.", img: "img/frasco-galletas-3.jpg" }
+                ]
             },
             {
                 pos: { top: "55%", left: "36%" }, icon: "mug",
                 label: "Chocolate", tag1: "Invierno", tag2: "Cucharas",
                 title: "Cucharas de Chocolate Caliente",
                 desc: "Llena cucharas de madera con chocolate fundido, malvaviscos mini y trocitos de caramelo de menta.",
-                materials: ["Cucharas de madera desechables", "Chocolate semi-amargo para fundir", "Mini malvaviscos", "Bolsitas de celofán y listón"]
+                materials: ["Cucharas de madera desechables", "Chocolate semi-amargo para fundir", "Mini malvaviscos", "Bolsitas de celofán y listón"],
+                steps: [
+                    { text: "Funde el chocolate a baño María hasta obtener una mezcla brillante y sin grumos.", img: "img/cuchara-chocolate-1.jpg" },
+                    { text: "Sumerge y rellena cada cuchara de madera apoyándolas horizontales sobre papel encerado.", img: "img/cuchara-chocolate-2.jpg" },
+                    { text: "Decora con mini malvaviscos antes de que endurezca y envuelve en celofán con listón.", img: "img/cuchara-chocolate-3.jpg" }
+                ]
             },
             {
                 pos: { top: "34%", left: "60%" }, icon: "gingerman",
                 label: "Jengibre", tag1: "Horneado", tag2: "Clásico",
                 title: "Galletas de Jengibre Glaseadas",
                 desc: "Hornea muñecos y estrellas especiadas con jengibre y clavo, y decóralos con glaseado real blanco.",
-                materials: ["Harina, miel y mantequilla", "Jengibre, canela y clavo molido", "Azúcar glass y clara de huevo", "Cortadores navideños"]
+                materials: ["Harina, miel y mantequilla", "Jengibre, canela y clavo molido", "Azúcar glass y clara de huevo", "Cortadores navideños"],
+                steps: [
+                    { text: "Mezcla mantequilla, miel y especias; incorpora harina hasta formar una masa suave y refrigera.", img: "img/galleta-jengibre-1.jpg" },
+                    { text: "Extiende la masa a 5 mm, corta los muñecos y hornea 10 minutos a 180 °C.", img: "img/galleta-jengibre-2.jpg" },
+                    { text: "Una vez frías, dibuja ojos, sonrisa y botones usando una manga con glaseado blanco.", img: "img/galleta-jengibre-3.jpg" }
+                ]
             },
             {
                 pos: { top: "52%", left: "76%" }, icon: "tea",
                 label: "Infusión", tag1: "Té", tag2: "Aromático",
                 title: "Mezcla de Té Especiado Navideño",
                 desc: "Combina té negro en hebras con cáscara de naranja seca, cardamomo, canela y clavos de olor en bolsitas de tela.",
-                materials: ["Té negro Assam o Ceilán", "Cardamomo verde y canela", "Cáscara de naranja deshidratada", "Saquitos de muselina de algodón"]
+                materials: ["Té negro Assam o Ceilán", "Cardamomo verde y canela", "Cáscara de naranja deshidratada", "Saquitos de muselina de algodón"],
+                steps: [
+                    { text: "Tritura ligeramente las vainas de cardamomo, la canela en rama y la cáscara de naranja seca.", img: "img/te-especiado-1.jpg" },
+                    { text: "Mezcla las especias con las hojas de té negro en un tazón seco.", img: "img/te-especiado-2.jpg" },
+                    { text: "Rellena los saquitos de muselina con 2 cucharaditas por bolsa y ciérralos con su cordón.", img: "img/te-especiado-3.jpg" }
+                ]
             }
         ]
     },
@@ -1595,7 +1695,6 @@ let realDealsQueue = [];
 let pushNotificationsEnabled = false;
 let dealPoolIndex = 0;
 
-// Consulta real a la API pública de Mercado Libre México (MLM)
 async function fetchRealMercadoLibreDeals() {
     const term = ML_SEARCH_TERMS[Math.floor(Math.random() * ML_SEARCH_TERMS.length)];
     const apiUrl = `https://api.mercadolibre.com/sites/MLM/search?q=${encodeURIComponent(term)}&limit=12`;
@@ -1625,7 +1724,6 @@ async function fetchRealMercadoLibreDeals() {
             });
         }
 
-        // Priorizar productos con descuento real primero
         deals.sort((a, b) => (b.oldPrice ? 1 : 0) - (a.oldPrice ? 1 : 0));
         return deals.slice(0, 6);
     } catch (err) {
@@ -1633,14 +1731,12 @@ async function fetchRealMercadoLibreDeals() {
     }
 }
 
-// Actualiza dinámicamente las tarjetas de la Sección 6 con resultados reales de la API
 async function syncRealDealsIntoSection6() {
     const mlDeals = await fetchRealMercadoLibreDeals();
     const sec6 = tallerData[5];
     if (!sec6) return;
 
     if (mlDeals.length > 0) {
-        // Actualizar tarjeta 1 (Mercado Libre)
         const d1 = mlDeals[0];
         sec6.cards[1].title = d1.title;
         sec6.cards[1].label = `ML ${d1.discount}`;
@@ -1654,7 +1750,6 @@ async function syncRealDealsIntoSection6() {
         ];
         sec6.cards[1].url = d1.url;
 
-        // Actualizar tarjeta 3 (Mercado Libre) si hay un segundo producto real
         if (mlDeals[1]) {
             const d2 = mlDeals[1];
             sec6.cards[3].title = d2.title;
@@ -1670,7 +1765,6 @@ async function syncRealDealsIntoSection6() {
             sec6.cards[3].url = d2.url;
         }
 
-        // Alimentar la cola de notificaciones en vivo mezclando Mercado Libre real + Amazon México
         realDealsQueue = [];
         mlDeals.forEach((m, i) => {
             realDealsQueue.push(m);
@@ -1685,7 +1779,6 @@ async function syncRealDealsIntoSection6() {
             });
         });
 
-        // Si el usuario está actualmente viendo la Sección 6, refrescar las tarjetas en pantalla
         if (currentSectionIdx === 5) {
             renderSectionProgressively(5);
         }
@@ -1698,7 +1791,6 @@ function initAIDealHunter() {
     const stores = ["Amazon", "Mercado Libre"];
     let scanStep = 0;
 
-    // Primera consulta real inmediata a la API
     syncRealDealsIntoSection6();
 
     if (btnNotif) {
@@ -1731,7 +1823,6 @@ function initAIDealHunter() {
         }
         scanStep++;
 
-        // Cada 4 ciclos volver a consultar la API real de Mercado Libre con otra categoría navideña
         if (scanStep % 4 === 0) {
             await syncRealDealsIntoSection6();
         }
@@ -1895,7 +1986,7 @@ function renderSectionProgressively(idx) {
 
         const actionBtn = document.getElementById(`action-btn-${i}`);
         if (actionBtn) {
-            actionBtn.textContent = sec.isDealsSection ? "Ver oferta en tienda" : "Ver materiales";
+            actionBtn.textContent = sec.isDealsSection ? "Ver oferta en tienda" : "Ver materiales y pasos";
         }
 
         setTimeout(() => {
@@ -1931,7 +2022,6 @@ function initCreativeMenu() {
         });
     }
 
-    // BOTÓN DE INICIO REDIRIGE DIRECTAMENTE A INDEX.HTML
     if (btnBackHome) {
         btnBackHome.addEventListener('click', () => {
             window.location.href = "index.html";
@@ -2056,14 +2146,16 @@ window.abrirDetalle = function(cardIndex) {
     const titleEl = document.getElementById('modal-title');
     const introEl = document.getElementById('modal-intro');
     const listEl = document.getElementById('modal-materials');
+    const stepsWrapper = document.getElementById('modal-steps-wrapper');
+    const stepsEl = document.getElementById('modal-steps');
     const storeLink = document.getElementById('modal-store-link');
     const favBtn = document.getElementById('modal-fav-btn');
 
-    badgeEl.textContent = sec.isDealsSection ? `Oferta Verificada • ${item.store}` : "Guía Rápida";
+    badgeEl.textContent = sec.isDealsSection ? `Oferta Verificada • ${item.store}` : "Guía Paso a Paso";
     titleEl.textContent = item.title;
     introEl.textContent = sec.isDealsSection
         ? "Resumen de disponibilidad y promoción detectada por el agente IA:"
-        : "Lista de materiales esenciales para realizar este proyecto en casa:";
+        : "Materiales esenciales para realizar este proyecto:";
 
     listEl.innerHTML = "";
     item.materials.forEach(mat => {
@@ -2071,6 +2163,33 @@ window.abrirDetalle = function(cardIndex) {
         li.textContent = mat;
         listEl.appendChild(li);
     });
+
+    // Renderizar los pasos con su mini-imagen (solo en secciones de manualidades)
+    if (stepsWrapper && stepsEl) {
+        if (!sec.isDealsSection && Array.isArray(item.steps) && item.steps.length > 0) {
+            stepsEl.innerHTML = "";
+            item.steps.forEach((step, idx) => {
+                const fileName = step.img.split('/').pop();
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'step-card';
+                stepDiv.innerHTML = `
+                    <div class="step-thumb-wrap">
+                        <img src="${step.img}" alt="Paso ${idx + 1}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span class="step-thumb-fallback" style="display:none;">Paso ${idx + 1}<br>${fileName}</span>
+                    </div>
+                    <div class="step-text-wrap">
+                        <span class="step-num-badge">Paso ${idx + 1}</span>
+                        <p>${step.text}</p>
+                    </div>
+                `;
+                stepsEl.appendChild(stepDiv);
+            });
+            stepsWrapper.classList.remove('hidden');
+        } else {
+            stepsEl.innerHTML = "";
+            stepsWrapper.classList.add('hidden');
+        }
+    }
 
     const favId = `navidad-sec${currentSectionIdx}-card${cardIndex}`;
     const favCategory = sec.isDealsSection ? `Navidad • ${item.store}` : "Navidad • Tutorial";
@@ -2090,7 +2209,6 @@ window.abrirDetalle = function(cardIndex) {
         }
     }
 
-    // En tutoriales se oculta "Ir a la oferta en tienda" y queda "Guardar en Favoritos"; en compras sí se muestra
     if (storeLink) {
         if (sec.isDealsSection && item.url) {
             storeLink.href = item.url;

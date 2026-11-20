@@ -585,7 +585,7 @@ body, html {
     font-weight: 300;
 }
 
-/* MODAL DE MATERIALES O DETALLE DE OFERTA */
+/* MODAL DE MATERIALES, PASOS O DETALLE DE OFERTA */
 .craft-modal {
     position: fixed;
     inset: 0;
@@ -606,11 +606,13 @@ body, html {
 
 .modal-box {
     position: relative;
-    width: 430px;
-    max-width: 90vw;
-    padding: 32px;
+    width: 520px;
+    max-width: 92vw;
+    max-height: 84vh;
+    overflow-y: auto;
+    padding: 30px;
     border-radius: 14px;
-    background: rgba(22, 12, 14, 0.9);
+    background: rgba(22, 12, 14, 0.92);
     border: 1px solid rgba(255, 223, 128, 0.38);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.75);
 }
@@ -646,18 +648,18 @@ body, html {
 .modal-box p {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .materials-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 7px;
 }
 
 .materials-list li {
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     padding-left: 18px;
     position: relative;
     color: rgba(255, 255, 255, 0.92);
@@ -669,6 +671,90 @@ body, html {
     left: 0;
     color: #d4af37;
     font-size: 0.75rem;
+}
+
+/* SECCIÓN DE PASOS CON MINI-IMAGEN EN EL MODAL */
+.modal-steps-wrapper {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 223, 128, 0.22);
+}
+
+.modal-steps-wrapper.hidden {
+    display: none;
+}
+
+.steps-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffd166;
+    margin-bottom: 10px;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.step-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 223, 128, 0.18);
+}
+
+.step-thumb-wrap {
+    flex-shrink: 0;
+    width: 62px;
+    height: 62px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 223, 128, 0.08);
+    border: 1px solid rgba(255, 223, 128, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.step-thumb-fallback {
+    font-size: 0.65rem;
+    text-align: center;
+    color: rgba(255, 243, 204, 0.7);
+    padding: 4px;
+    line-height: 1.2;
+}
+
+.step-text-wrap {
+    flex: 1;
+}
+
+.step-num-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffd166;
+    margin-bottom: 2px;
+}
+
+.step-text-wrap p {
+    margin: 0;
+    font-size: 0.83rem;
+    line-height: 1.42;
+    color: rgba(255, 255, 255, 0.92);
 }
 
 /* DOCK INFERIOR */
@@ -755,7 +841,6 @@ body, html {
         line-height: 1.45;
     }
 
-    /* Barra superior: Inicio a la izquierda, Radar IA a la derecha */
     .home-return-btn {
         top: 12px !important;
         left: 12px !important;
@@ -788,7 +873,6 @@ body, html {
         font-size: 0.66rem !important;
     }
 
-    /* Título debajo de la barra superior */
     .top-hero {
         top: 54px !important;
         width: 92% !important;
@@ -816,7 +900,6 @@ body, html {
         font-size: 0.66rem !important;
     }
 
-    /* Notificaciones IA abajo para que no tapen la escena ni los nodos */
     .ai-notifications-feed {
         top: auto !important;
         bottom: 68px !important;
@@ -828,7 +911,6 @@ body, html {
         z-index: 220 !important;
     }
 
-    /* Hotspots compactos para que no salgan de pantalla */
     .hotspot-trigger {
         gap: 7px !important;
     }
@@ -843,7 +925,6 @@ body, html {
         padding: 4px 10px !important;
     }
 
-    /* Tarjeta abierta centrada y con scroll interno */
     .hotspot-node.active {
         z-index: 300 !important;
     }
@@ -873,12 +954,17 @@ body, html {
 
     .modal-box {
         padding: 24px 18px !important;
-        max-height: 80dvh !important;
+        max-height: 82dvh !important;
         overflow-y: auto !important;
     }
 
     .modal-box h3 {
         font-size: 1.45rem !important;
+    }
+
+    .step-thumb-wrap {
+        width: 52px;
+        height: 52px;
     }
 
     .bottom-dock {

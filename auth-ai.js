@@ -92,7 +92,7 @@ function injectOrbitAIStyles() {
       align-items: center;
       justify-content: center;
       gap: 0px;
-      cursor: pointer;
+      cursor: pointer !important;
       overflow: hidden;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.08) !important;
       transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
@@ -461,31 +461,33 @@ function injectOrbitAIStyles() {
       align-items: center;
       justify-content: center;
       gap: 6px;
-      margin-top: 10px;
-      padding: 7px 14px;
+      width: 100%;
+      margin-top: 9px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(226, 232, 240, 0.65);
-      background: rgba(12, 14, 19, 0.92);
-      color: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, 0.65) !important;
+      background: rgba(12, 14, 19, 0.94) !important;
+      color: #f8fafc !important;
       font-family: 'Segoe UI', system-ui, sans-serif;
       font-size: 0.8rem;
       font-weight: 700;
-      cursor: pointer;
+      cursor: pointer !important;
+      pointer-events: auto !important;
       position: relative;
-      z-index: 25;
+      z-index: 40 !important;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
     .orbit-fav-btn:hover {
       transform: translateY(-1px);
-      border-color: #ffffff;
-      box-shadow: 0 0 14px rgba(255, 255, 255, 0.4);
+      border-color: #ffffff !important;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
     }
     .orbit-fav-btn.saved {
-      background: linear-gradient(135deg, rgba(226, 232, 240, 0.35), rgba(255, 255, 255, 0.22));
-      border-color: #ffffff;
-      color: #ffffff;
-      box-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
+      background: linear-gradient(135deg, rgba(226, 232, 240, 0.38), rgba(255, 255, 255, 0.24)) !important;
+      border-color: #ffffff !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
     }
 
     .comunidad-grid-wrapper {
@@ -552,7 +554,7 @@ function injectOrbitAIStyles() {
       font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 0.6px;
-      cursor: pointer;
+      cursor: pointer !important;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.24), inset 0 0 10px rgba(255, 255, 255, 0.1) !important;
       transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
@@ -605,7 +607,7 @@ function injectOrbitAIStyles() {
       border: 1px solid rgba(226, 232, 240, 0.5) !important;
       background: rgba(255, 255, 255, 0.1) !important;
       color: #ffffff !important;
-      cursor: pointer;
+      cursor: pointer !important;
     }
     .ai-close-btn:hover {
       background: rgba(255, 255, 255, 0.25) !important;
@@ -647,7 +649,7 @@ function injectOrbitAIStyles() {
       background: rgba(255, 255, 255, 0.08) !important;
       color: #e2e8f0 !important;
       font-size: 0.77rem;
-      cursor: pointer;
+      cursor: pointer !important;
     }
     .ai-chip:hover {
       background: rgba(255, 255, 255, 0.2) !important;
@@ -677,7 +679,7 @@ function injectOrbitAIStyles() {
       background: linear-gradient(135deg, #cbd5e1, #ffffff) !important;
       color: #090a0f !important;
       font-weight: 800;
-      cursor: pointer;
+      cursor: pointer !important;
     }
   `;
   document.head.appendChild(style);
@@ -1064,7 +1066,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       `Elemento ${idx + 1}`
     ).trim();
 
-    // Detectar si es Compra, Lugar o Manualidad + la sección
     const linkEl = card.querySelector("a[href]");
     const rawHref = linkEl ? linkEl.getAttribute("href") : "";
     let tipo = "Manualidad";
@@ -1077,7 +1078,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const seccion = card.getAttribute("data-fav-cat") || detectarCategoriaActual();
     const categoria = `${seccion} • ${tipo}`;
 
-    // Enlace directo: si la tarjeta tiene link de compra/mapa lo guarda, si no guarda la ruta de la página con ancla
     if (!card.id) {
       card.id = `orbit-item-${idx + 1}`;
     }
@@ -1100,7 +1100,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function refreshFavButtonsOnPage() {
     document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
-      if (card.closest(".craft-modal, .popup-modal, .spooky-modal, .modal-pro, .global-modal-overlay")) {
+      // Ignorar modales y la tarjeta introductoria de la montaña
+      if (
+        card.closest(".craft-modal, .popup-modal:not(#modal-galeria), .spooky-modal, .modal-pro, .global-modal-overlay, #glass-container")
+      ) {
         return;
       }
 
@@ -1116,7 +1119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           const actual = extraerMetaTarjeta(card, idx);
           window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria, actual.enlace);
         });
-        const contenedor = card.querySelector(".bento-content, .card-info, .card-body") || card;
+        const contenedor = card.querySelector(".ogl-card-body, .bento-content, .card-info, .card-body") || card;
         contenedor.appendChild(btn);
       }
 
@@ -1126,10 +1129,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Ejecutar al iniciar (con un segundo pase suave para tarjetas renderizadas por JS) y tras clics
+  // Ejecutar al iniciar y observar cualquier tarjeta agregada dinámicamente al DOM
   refreshFavButtonsOnPage();
-  setTimeout(refreshFavButtonsOnPage, 600);
-  setTimeout(refreshFavButtonsOnPage, 1600);
+  setTimeout(refreshFavButtonsOnPage, 500);
+  setTimeout(refreshFavButtonsOnPage, 1500);
+
+  let observerTimer = null;
+  const domObserver = new MutationObserver(() => {
+    clearTimeout(observerTimer);
+    observerTimer = setTimeout(refreshFavButtonsOnPage, 80);
+  });
+  domObserver.observe(document.body, { childList: true, subtree: true });
+
+  window.addEventListener("orbit:cards-updated", refreshFavButtonsOnPage);
 
   document.addEventListener("click", (e) => {
     if (e.target.closest(".orbit-fav-btn")) return;

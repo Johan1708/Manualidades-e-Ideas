@@ -957,7 +957,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const galeriaTitle = document.getElementById('galeria-title');
 
     // ==========================================================
-    // 3. MOTOR RULETA 3D INTERACTIVA DENTRO DEL MODAL (CORREGIDO)
+    // 3. MOTOR RULETA 3D INTERACTIVA DENTRO DEL MODAL
     // ==========================================================
     let rouletteAngle = 0;
 
@@ -967,7 +967,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const count = cards.length;
         if (count === 0) return;
 
-        // Radios diferenciados para evitar amontonamiento en 3D
         const radiusX = Math.min(window.innerWidth * 0.35, 480); 
         const radiusZ = 220; 
         const step = (Math.PI * 2) / count;
@@ -977,7 +976,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = Math.sin(angle) * radiusX;
             const z = Math.cos(angle) * radiusZ;
             
-            // Escala progresiva y visibilidad controlada
             const scale = 0.68 + ((z + radiusZ) / (radiusZ * 2)) * 0.32;
             const opacity = z < -80 ? 0.3 : 1.0; 
             const zIndex = Math.floor(z + radiusZ + 10);
@@ -1029,7 +1027,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filtered.forEach((item, index) => {
             const card = document.createElement('div');
-            // Clase CSS corregida sin empezar por número
             card.className = 'ogl-card roulette-3d-card';
             const numStr = (index + 1).toString().padStart(2, '0');
             
@@ -1051,6 +1048,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newBtn) initButtonParticles(newBtn);
         });
 
+        window.dispatchEvent(new Event('orbit:cards-updated'));
         setTimeout(update3DRoulettePositions, 50);
     }
 
@@ -1108,7 +1106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeMenu() { if (menuOverlay) menuOverlay.classList.remove('active'); }
 
     document.addEventListener('click', (e) => {
-        // 1. Botón "Al Menú" dentro del modal de galería
         const btnReturnMenu = e.target.closest('#btn-return-menu');
         if (btnReturnMenu) {
             e.preventDefault();
@@ -1116,7 +1113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Botón "Menú Inicio" (redirecciona a index.html o limpia modales)
         const btnHome = e.target.closest('#btn-home-alpinista, #btn-return-alpinista');
         if (btnHome) {
             const href = btnHome.getAttribute('href');
@@ -1130,21 +1126,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 3. Abrir Menú principal
         if (e.target.closest('#toggle-menu-btn, #btn-ver-mas-regalos')) {
             e.preventDefault(); 
             openMenu(); 
             return;
         }
 
-        // 4. Cerrar Menú lateral
         if (e.target.closest('#close-menu-btn')) { 
             e.preventDefault(); 
             closeMenu(); 
             return; 
         }
 
-        // 5. Cerrar Modales con la (X)
         const closeMod = e.target.closest('.close-modal, #close-tutorial');
         if (closeMod) {
             e.preventDefault();
@@ -1153,7 +1146,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 6. Abrir Tutorial Paso a Paso
         const tutBtn = e.target.closest('.open-tut-btn');
         if (tutBtn) {
             e.preventDefault();

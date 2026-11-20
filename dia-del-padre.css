@@ -390,7 +390,7 @@ body, html {
 
 .modal-fullscreen {
     width: 95vw;
-    height: 90vh;
+    height: 92vh;
     max-width: 1300px;
     display: flex;
     flex-direction: column;
@@ -432,7 +432,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .btn-return-nav {
@@ -480,7 +480,7 @@ body, html {
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin-bottom: 25px;
+    margin-bottom: 16px;
 }
 
 .filter-group {
@@ -514,7 +514,7 @@ body, html {
 
 .ogl-gallery-container {
     width: 100%;
-    height: 480px;
+    height: 515px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -567,7 +567,7 @@ body, html {
 
 .ogl-card-img {
     position: relative;
-    height: 180px;
+    height: 165px;
 }
 
 .ogl-card-img img {
@@ -601,13 +601,13 @@ body, html {
 }
 
 .ogl-card-body {
-    padding: 20px;
+    padding: 16px 18px;
     text-align: left;
 }
 
 .ogl-card-body h4 {
-    font-size: 1.15rem;
-    margin-bottom: 8px;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
     color: #ffffff;
 }
 
@@ -615,13 +615,13 @@ body, html {
     font-size: 0.8rem;
     color: #a1a1aa;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .ogl-details {
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     color: #d4d4d8;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .btn-card-action {
@@ -766,7 +766,6 @@ body, html {
         display: none !important;
     }
 
-    /* Barra inferior con buen margen para barras del navegador móvil */
     .top-flyer {
         bottom: 20px !important;
         padding: 0 16px !important;
@@ -777,7 +776,6 @@ body, html {
         font-size: 0.78rem !important;
     }
 
-    /* Menú lateral bien proporcionado */
     .menu-overlay-wrapper {
         padding-left: 24px !important;
         padding-right: 24px !important;
@@ -800,7 +798,6 @@ body, html {
         line-height: 1.25 !important;
     }
 
-    /* Tarjeta inicial sobre la montaña */
     .glass-container {
         bottom: 84px !important;
         width: 92% !important;
@@ -822,10 +819,9 @@ body, html {
         margin-bottom: 4px !important;
     }
 
-    /* Modales y Galería Ruleta 3D */
     .modal-fullscreen {
         width: 95vw !important;
-        height: 90dvh !important;
+        height: 92dvh !important;
         padding: 16px 12px !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
@@ -880,20 +876,20 @@ body, html {
     }
 
     .ogl-gallery-container {
-        height: 375px !important;
+        height: 415px !important;
     }
 
     .ogl-card.roulette-3d-card {
-        min-width: 230px !important;
-        max-width: 230px !important;
+        min-width: 235px !important;
+        max-width: 235px !important;
     }
 
     .ogl-card-img {
-        height: 130px !important;
+        height: 125px !important;
     }
 
     .ogl-card-body {
-        padding: 14px !important;
+        padding: 13px !important;
     }
 
     .ogl-card-body h4 {
@@ -914,7 +910,6 @@ body, html {
     .carousel-btn.prev-btn { left: 2px !important; }
     .carousel-btn.next-btn { right: 2px !important; }
 
-    /* Chat IA y Tutorial DIY */
     .ia-subtitle {
         font-size: 0.8rem !important;
         margin-top: 6px !important;

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SISTEMA GLOBAL ORBIT PLATA: ICONOS ESTELARES + PANTALLAS HOLOGRÁFICAS + IA
+   SISTEMA GLOBAL ORBIT PLATA: FAVORITOS PERMANENTES EN MANUALIDADES + IA
    ========================================================================== */
 
 const SUPABASE_URL = "https://fwbcltconkufmjkonwnd.supabase.co";
@@ -135,6 +135,31 @@ function injectOrbitAIStyles() {
       color: #fecaca !important;
     }
 
+    /* TOAST DE CONFIRMACIÓN DE FAVORITOS */
+    .orbit-toast {
+      position: fixed;
+      bottom: 82px;
+      right: 22px;
+      z-index: 100005;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: rgba(14, 16, 22, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .orbit-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* OVERLAY TRANSPARENTE */
     .global-modal-overlay {
       position: fixed !important;
@@ -152,7 +177,7 @@ function injectOrbitAIStyles() {
       display: flex !important;
     }
 
-    /* PANTALLA HOLOGRÁFICA PLATEADA (LOGIN, PUBLICAR IDEA Y FAVORITOS) */
+    /* PANTALLA HOLOGRÁFICA PLATEADA */
     @keyframes pan-overlay {
       from { background-position: 0% 0%; }
       to { background-position: 0% -100%; }
@@ -455,14 +480,14 @@ function injectOrbitAIStyles() {
       color: #ffffff;
     }
 
-    /* BOTÓN ESTRELLITA EN CADA MANUALIDAD, LUGAR Y COMPRA */
+    /* BOTÓN ESTRELLITA EN CADA TARJETA DE MANUALIDAD */
     .orbit-fav-btn {
       display: inline-flex !important;
       align-items: center;
       justify-content: center;
       gap: 6px;
       width: 100%;
-      margin-top: 9px;
+      margin-top: 10px;
       padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid rgba(226, 232, 240, 0.65) !important;
@@ -475,8 +500,8 @@ function injectOrbitAIStyles() {
       pointer-events: auto !important;
       position: relative;
       z-index: 40 !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+      transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     .orbit-fav-btn:hover {
       transform: translateY(-1px);
@@ -484,10 +509,10 @@ function injectOrbitAIStyles() {
       box-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
     }
     .orbit-fav-btn.saved {
-      background: linear-gradient(135deg, rgba(226, 232, 240, 0.38), rgba(255, 255, 255, 0.24)) !important;
-      border-color: #ffffff !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.28), rgba(255, 255, 255, 0.22)) !important;
+      border-color: #fde047 !important;
+      color: #fef9c3 !important;
+      box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
     }
 
     .comunidad-grid-wrapper {
@@ -696,6 +721,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   let authMode = "login";
   const pageTitle = document.title || window.location.pathname;
 
+  function showToast(msg) {
+    let toast = document.getElementById("orbit-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "orbit-toast";
+      toast.className = "orbit-toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove("show"), 2600);
+  }
+
   function detectarCategoriaActual() {
     const ref = (window.location.pathname + " " + pageTitle).toLowerCase();
     if (ref.includes("navidad")) return "Navidad";
@@ -870,7 +909,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
 
-    <!-- MODAL MIS FAVORITOS (PANTALLA HOLOGRÁFICA PLATEADA) -->
+    <!-- MODAL MIS FAVORITOS -->
     <div class="global-modal-overlay" id="favs-modal">
       <div class="orbit-holo-screen login-size" id="orbit-favs-screen">
         <div class="screen-image"></div>
@@ -884,7 +923,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
 
           <p style="font-size:0.78rem; color:#cbd5e1; text-align:center; margin:0 0 12px;">
-            Manualidades, lugares y compras guardados en tu cuenta ⭐
+            Tus manualidades favoritas guardadas permanentemente en tu perfil ⭐
           </p>
 
           <div id="favs-list-container" style="flex:1; overflow-y:auto;">
@@ -985,6 +1024,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     await updateSessionUI(null);
   });
 
+  // ========================================================================
+  // PERSISTENCIA PERMANENTE EN PERFIL (SUPABASE + RESPALDO LOCAL POR USUARIO)
+  // ========================================================================
+  function getLocalBackupKey() {
+    return currentUser ? `orbit_favs_backup_${currentUser.id}` : null;
+  }
+
+  function readLocalBackup() {
+    const key = getLocalBackupKey();
+    if (!key) return [];
+    try {
+      return JSON.parse(localStorage.getItem(key) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function writeLocalBackup(items) {
+    const key = getLocalBackupKey();
+    if (!key) return;
+    try {
+      localStorage.setItem(key, JSON.stringify(items));
+    } catch {}
+  }
+
   async function loadUserFavoritos() {
     userFavoritosIds.clear();
     if (!currentUser) {
@@ -992,14 +1056,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       refreshFavButtonsOnPage();
       return;
     }
-    const { data } = await sb
-      .from("favoritos_usuario")
-      .select("item_id")
-      .eq("user_id", currentUser.id);
 
-    if (Array.isArray(data)) {
+    const { data, error } = await sb
+      .from("favoritos_usuario")
+      .select("*")
+      .eq("user_id", currentUser.id)
+      .order("created_at", { ascending: false });
+
+    if (!error && Array.isArray(data)) {
       data.forEach((row) => userFavoritosIds.add(row.item_id));
+      writeLocalBackup(data);
+    } else {
+      // Si hubo fallo de red momentáneo, cargar desde respaldo local del perfil
+      const backup = readLocalBackup();
+      backup.forEach((row) => userFavoritosIds.add(row.item_id));
     }
+
     if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
     refreshFavButtonsOnPage();
   }
@@ -1009,33 +1081,51 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("auth-modal").classList.add("open");
       triggerAuthScramble("ACCESO");
       const statusEl = document.getElementById("auth-status");
-      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar en tu perfil ⭐";
+      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar tus manualidades favoritas ⭐";
       statusEl.className = "status-banner error";
       return;
     }
 
     if (userFavoritosIds.has(itemId)) {
-      await sb
+      // Solo se quita cuando el usuario explícitamente lo desmarca
+      const { error } = await sb
         .from("favoritos_usuario")
         .delete()
         .eq("user_id", currentUser.id)
         .eq("item_id", itemId);
+
+      if (!error) {
+        userFavoritosIds.delete(itemId);
+        const updatedBackup = readLocalBackup().filter((f) => f.item_id !== itemId);
+        writeLocalBackup(updatedBackup);
+        showToast("Eliminado de tus favoritos");
+      }
     } else {
-      await sb.from("favoritos_usuario").insert([
-        {
-          user_id: currentUser.id,
-          item_id: itemId,
-          titulo,
-          categoria,
-          url_pagina: enlaceGuardado || window.location.pathname
-        }
-      ]);
+      // Verificar que no exista duplicado antes de insertar y guardar de forma permanente
+      const nuevoFav = {
+        user_id: currentUser.id,
+        item_id: itemId,
+        titulo,
+        categoria,
+        url_pagina: enlaceGuardado || window.location.pathname
+      };
+
+      const { error } = await sb.from("favoritos_usuario").insert([nuevoFav]);
+      if (!error) {
+        userFavoritosIds.add(itemId);
+        const backup = readLocalBackup().filter((f) => f.item_id !== itemId);
+        backup.unshift({ ...nuevoFav, created_at: new Date().toISOString() });
+        writeLocalBackup(backup);
+        showToast(`⭐ "${titulo}" guardado en tu perfil`);
+      }
     }
-    await loadUserFavoritos();
+
+    if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
+    refreshFavButtonsOnPage();
   };
 
   // ========================================================================
-  // DETECTAR MANUALIDADES, LUGARES Y COMPRAS EN TODAS TUS PÁGINAS
+  // DETECTAR SOLO TARJETAS DE MANUALIDADES (IGNORANDO SELECTORES DE CATEGORÍA)
   // ========================================================================
   const SELECTORES_TARJETAS = [
     "[data-fav-id]",
@@ -1043,7 +1133,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     ".altar-card-box",
     ".bento-card",
     ".card-rosa",
-    ".cat-card",
     ".showcase-card",
     ".spooky-card",
     ".ogl-card",
@@ -1053,17 +1142,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     ".idea-card",
     ".item-card",
     ".compra-card",
-    ".lugar-card"
+    ".lugar-card",
+    ".craft-card",
+    ".manualidad-card",
+    ".opcion-card"
   ].join(", ");
+
+  function esTarjetaSelectorCategoria(card) {
+    // Evita colocar "Guardar" en los botones/tarjetas que solo despliegan una categoría (Decoración, Animatrónicos, etc.)
+    if (card.matches(".cat-card, .category-card, .selector-card, [data-cat], [data-category], [data-section], [data-filter]")) {
+      return true;
+    }
+    if (card.closest("#categorias, .categorias-grid, .category-selector, .cat-grid, #glass-container")) {
+      return true;
+    }
+    // Si tiene botón "Ver pasos", "Ver Tutorial", "Cómo llegar" o enlaces externos, SÍ es una manualidad/idea real
+    const tieneAccionReal = card.querySelector(
+      "button.btn-abrir-pasos, button.open-tut-btn, a[href^='http'], .btn-ver-pasos, [data-modal-pasos], [data-pasos]"
+    );
+    if (!tieneAccionReal && !card.hasAttribute("data-fav-id") && !card.classList.contains("comunidad-card")) {
+      // Si la tarjeta es corta y solo contiene un badge/etiqueta de categoría sin descripción ni pasos, ignorar
+      const texto = card.textContent.trim();
+      const tieneDescripcion = card.querySelector("p, .ogl-details, .bento-desc, .card-desc");
+      if (!tieneDescripcion && texto.length < 45) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   function extraerMetaTarjeta(card, idx) {
     const tituloEl = card.querySelector(
-      "h1, h2, h3, h4, .bento-title, .card-titulo-gradient, .box-title, .card-label-badge, .title"
+      "h1, h2, h3, h4, .bento-title, .card-titulo-gradient, .box-title, .title"
     );
     const titulo = (
       card.getAttribute("data-fav-title") ||
       (tituloEl ? tituloEl.textContent : "") ||
-      `Elemento ${idx + 1}`
+      `Manualidad ${idx + 1}`
     ).trim();
 
     const linkEl = card.querySelector("a[href]");
@@ -1100,10 +1215,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function refreshFavButtonsOnPage() {
     document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
-      // Ignorar modales y la tarjeta introductoria de la montaña
+      // Ignorar modales y tarjetas de selección de categoría
       if (
-        card.closest(".craft-modal, .popup-modal:not(#modal-galeria), .spooky-modal, .modal-pro, .global-modal-overlay, #glass-container")
+        card.closest(".craft-modal, .popup-modal:not(#modal-galeria), .spooky-modal, .modal-pro, .global-modal-overlay") ||
+        esTarjetaSelectorCategoria(card)
       ) {
+        const viejoBtn = card.querySelector(":scope > .orbit-fav-btn");
+        if (viejoBtn) viejoBtn.remove();
         return;
       }
 
@@ -1119,7 +1237,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           const actual = extraerMetaTarjeta(card, idx);
           window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria, actual.enlace);
         });
-        const contenedor = card.querySelector(".ogl-card-body, .bento-content, .card-info, .card-body") || card;
+        const contenedor =
+          card.querySelector(".ogl-card-body, .bento-content, .card-info, .card-body, .spooky-card-body, .card-content") ||
+          card;
         contenedor.appendChild(btn);
       }
 
@@ -1129,15 +1249,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Ejecutar al iniciar y observar cualquier tarjeta agregada dinámicamente al DOM
   refreshFavButtonsOnPage();
-  setTimeout(refreshFavButtonsOnPage, 500);
-  setTimeout(refreshFavButtonsOnPage, 1500);
+  setTimeout(refreshFavButtonsOnPage, 400);
+  setTimeout(refreshFavButtonsOnPage, 1200);
 
   let observerTimer = null;
   const domObserver = new MutationObserver(() => {
     clearTimeout(observerTimer);
-    observerTimer = setTimeout(refreshFavButtonsOnPage, 80);
+    observerTimer = setTimeout(refreshFavButtonsOnPage, 70);
   });
   domObserver.observe(document.body, { childList: true, subtree: true });
 
@@ -1145,7 +1264,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.addEventListener("click", (e) => {
     if (e.target.closest(".orbit-fav-btn")) return;
-    setTimeout(refreshFavButtonsOnPage, 120);
+    setTimeout(refreshFavButtonsOnPage, 100);
   });
 
   async function renderFavoritosModal() {
@@ -1159,12 +1278,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       .eq("user_id", currentUser.id)
       .order("created_at", { ascending: false });
 
-    if (error || !data || data.length === 0) {
-      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades, lugares o compras guardadas.</p>`;
+    const listaFinal = !error && Array.isArray(data) ? data : readLocalBackup();
+
+    if (!listaFinal || listaFinal.length === 0) {
+      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades favoritas guardadas. Pulsa "☆ Guardar" en cualquier manualidad para conservarla aquí.</p>`;
       return;
     }
 
-    container.innerHTML = data
+    container.innerHTML = listaFinal
       .map((fav) => {
         const esExterno = fav.url_pagina && fav.url_pagina.startsWith("http");
         const targetAttr = esExterno ? `target="_blank" rel="noopener noreferrer"` : "";
@@ -1176,7 +1297,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
             <div style="display:flex; gap:6px; flex-shrink:0;">
               ${fav.url_pagina ? `<a href="${fav.url_pagina}" ${targetAttr} class="orbit-star-icon-btn" style="text-decoration:none; height:32px; padding:0 12px; font-size:0.72rem;">Abrir 🔗</a>` : ""}
-              <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" data-del-fav="${fav.item_id}">✕</button>
+              <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" title="Quitar de favoritos" data-del-fav="${fav.item_id}">✕</button>
             </div>
           </div>
         `;

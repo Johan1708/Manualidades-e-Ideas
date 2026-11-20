@@ -646,49 +646,49 @@ function initInfiniteMenu() {
         {
             title: 'Altar de 2 Niveles',
             description: 'Representa la división entre el cielo (retratos y velas arriba) y la tierra (comida, agua y pan abajo). Ideal para espacios pequeños.',
-            image: 'img/altar-2-niveles.jpg',
+            image: 'imagenes/altar-2-niveles.jpg',
             key: 'altar2'
         },
         {
             title: 'Altar de 3 Niveles',
             description: 'El más tradicional en los hogares: simboliza el cielo en la cúspide, la tierra en el centro y el inframundo en la base.',
-            image: 'img/altar-3-niveles.jpg',
+            image: 'imagenes/altar-3-niveles.jpg',
             key: 'altar3'
         },
         {
             title: 'Altar de 7 Niveles',
             description: 'El altar completo tradicional que simboliza los siete escalones que el alma debe atravesar para llegar al descanso eterno.',
-            image: 'img/altar-7-niveles.jpg',
+            image: 'imagenes/altar-7-niveles.jpg',
             key: 'altar7'
         },
         {
             title: 'Altar con Arco Floral',
             description: 'Enmarcado por un arco de carrizo cubierto de cempasúchil y frutas, simbolizando la puerta de bienvenida entre ambos mundos.',
-            image: 'img/altar-arco.jpg',
+            image: 'imagenes/altar-arco.jpg',
             key: 'altarArco'
         },
         {
             title: 'Altar Minimalista',
             description: 'Pensado para mesas o escritorios: reúne lo esencial en un solo plano (agua, sal, veladora, cempasúchil y fotografía).',
-            image: 'img/altar-mesa.jpg',
+            image: 'imagenes/altar-mesa.png',
             key: 'altarMesa'
         },
         {
             title: 'Altar para Mascotas',
             description: 'Dedicado el 27 de octubre a los compañeros animales, con su retrato, croquetas, agua fresca, juguetes y luz blanca.',
-            image: 'img/altar-mascotas.jpg',
+            image: 'imagenes/altar-mascotas.png',
             key: 'altarMascotas'
         },
         {
             title: 'Altar Monumental',
             description: 'Estilo Huaquechula: estructura piramidal vestida con telas satinadas blancas, espejos y alfeñiques para difuntos recientes.',
-            image: 'img/altar-monumental.jpg',
+            image: 'imagenes/altar-monumental.jpg',
             key: 'altarMonumental'
         },
         {
             title: 'Altar Hanal Pixán',
             description: 'Tradición maya con manteles blancos bordados en punto de cruz, jícaras con atole nuevo y mukbilpollo horneado bajo tierra.',
-            image: 'img/altar-maya.jpg',
+            image: 'imagenes/altar-maya.jpg',
             key: 'altarMaya'
         }
     ];

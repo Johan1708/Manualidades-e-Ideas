@@ -455,29 +455,39 @@ function injectOrbitAIStyles() {
       color: #ffffff;
     }
 
-    /* BOTÓN FAVORITOS EN TARJETAS Y GRID COMUNIDAD */
+    /* BOTÓN ESTRELLITA EN CADA MANUALIDAD, LUGAR Y COMPRA */
     .orbit-fav-btn {
-      display: inline-flex;
+      display: inline-flex !important;
       align-items: center;
-      gap: 5px;
-      margin-top: 8px;
-      padding: 6px 12px;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 7px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(226, 232, 240, 0.5);
-      background: rgba(15, 17, 22, 0.88);
-      color: #e2e8f0;
-      font-size: 0.78rem;
-      font-weight: 600;
+      border: 1px solid rgba(226, 232, 240, 0.65);
+      background: rgba(12, 14, 19, 0.92);
+      color: #f8fafc;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       position: relative;
-      z-index: 15;
+      z-index: 25;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .orbit-fav-btn:hover {
+      transform: translateY(-1px);
+      border-color: #ffffff;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.4);
     }
     .orbit-fav-btn.saved {
-      background: rgba(255, 255, 255, 0.22);
+      background: linear-gradient(135deg, rgba(226, 232, 240, 0.35), rgba(255, 255, 255, 0.22));
       border-color: #ffffff;
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
     }
+
     .comunidad-grid-wrapper {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -514,7 +524,7 @@ function injectOrbitAIStyles() {
       gap: 10px;
       padding: 10px 12px;
       border-radius: 10px;
-      border: 1px solid rgba(226, 232, 240, 0.28);
+      border: 1px solid rgba(226, 232, 240, 0.32);
       background: rgba(10, 11, 15, 0.85);
       margin-bottom: 8px;
     }
@@ -858,7 +868,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
 
-    <!-- MODAL MIS FAVORITOS (MISMA PANTALLA HOLOGRÁFICA PLATEADA) -->
+    <!-- MODAL MIS FAVORITOS (PANTALLA HOLOGRÁFICA PLATEADA) -->
     <div class="global-modal-overlay" id="favs-modal">
       <div class="orbit-holo-screen login-size" id="orbit-favs-screen">
         <div class="screen-image"></div>
@@ -870,6 +880,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="screen-scramble-title" id="favs-scramble-title" data-value="FAVORITOS">FAVORITOS</span>
             <span class="screen-subtitle">@MIS_GUARDADOS_ORBIT</span>
           </div>
+
+          <p style="font-size:0.78rem; color:#cbd5e1; text-align:center; margin:0 0 12px;">
+            Manualidades, lugares y compras guardados en tu cuenta ⭐
+          </p>
 
           <div id="favs-list-container" style="flex:1; overflow-y:auto;">
             <p style="font-size:0.86rem; color:#94a3b8; text-align:center;">Cargando favoritos...</p>
@@ -988,12 +1002,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     refreshFavButtonsOnPage();
   }
 
-  window.toggleFavorito = async function (itemId, titulo, categoria) {
+  window.toggleFavorito = async function (itemId, titulo, categoria, enlaceGuardado) {
     if (!currentUser) {
       document.getElementById("auth-modal").classList.add("open");
       triggerAuthScramble("ACCESO");
       const statusEl = document.getElementById("auth-status");
-      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar tus favoritos ⭐";
+      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar en tu perfil ⭐";
       statusEl.className = "status-banner error";
       return;
     }
@@ -1011,16 +1025,34 @@ document.addEventListener("DOMContentLoaded", async () => {
           item_id: itemId,
           titulo,
           categoria,
-          url_pagina: window.location.pathname
+          url_pagina: enlaceGuardado || window.location.pathname
         }
       ]);
     }
     await loadUserFavoritos();
   };
 
-  // Detección ligera de tarjetas de todas tus secciones (solo al cargar y tras un clic)
-  const SELECTORES_TARJETAS =
-    "[data-fav-id], .glass-card, .altar-card-box, .bento-card, .card-rosa, .cat-card, .showcase-card, .spooky-card, .ogl-card, .gallery-card, .product-card, .place-card";
+  // ========================================================================
+  // DETECTAR MANUALIDADES, LUGARES Y COMPRAS EN TODAS TUS PÁGINAS
+  // ========================================================================
+  const SELECTORES_TARJETAS = [
+    "[data-fav-id]",
+    ".glass-card",
+    ".altar-card-box",
+    ".bento-card",
+    ".card-rosa",
+    ".cat-card",
+    ".showcase-card",
+    ".spooky-card",
+    ".ogl-card",
+    ".gallery-card",
+    ".product-card",
+    ".place-card",
+    ".idea-card",
+    ".item-card",
+    ".compra-card",
+    ".lugar-card"
+  ].join(", ");
 
   function extraerMetaTarjeta(card, idx) {
     const tituloEl = card.querySelector(
@@ -1031,7 +1063,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       (tituloEl ? tituloEl.textContent : "") ||
       `Elemento ${idx + 1}`
     ).trim();
-    const categoria = card.getAttribute("data-fav-cat") || detectarCategoriaActual();
+
+    // Detectar si es Compra, Lugar o Manualidad + la sección
+    const linkEl = card.querySelector("a[href]");
+    const rawHref = linkEl ? linkEl.getAttribute("href") : "";
+    let tipo = "Manualidad";
+    if (rawHref && (rawHref.startsWith("http") || card.matches(".product-card, .compra-card"))) {
+      tipo = rawHref.includes("maps") || rawHref.includes("goo.gl") ? "Lugar" : "Compra";
+    } else if (card.matches(".place-card, .lugar-card")) {
+      tipo = "Lugar";
+    }
+
+    const seccion = card.getAttribute("data-fav-cat") || detectarCategoriaActual();
+    const categoria = `${seccion} • ${tipo}`;
+
+    // Enlace directo: si la tarjeta tiene link de compra/mapa lo guarda, si no guarda la ruta de la página con ancla
+    if (!card.id) {
+      card.id = `orbit-item-${idx + 1}`;
+    }
+    const enlace =
+      card.getAttribute("data-fav-url") ||
+      (rawHref && rawHref !== "#" ? rawHref : `${window.location.pathname}#${card.id}`);
+
     const slug = titulo
       .toLowerCase()
       .normalize("NFD")
@@ -1040,9 +1093,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       .replace(/(^-|-$)/g, "");
     const itemId =
       card.getAttribute("data-fav-id") ||
-      `${categoria.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${slug || idx}`;
+      `${seccion.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${slug || idx}`;
 
-    return { itemId, titulo, categoria };
+    return { itemId, titulo, categoria, enlace };
   }
 
   function refreshFavButtonsOnPage() {
@@ -1051,7 +1104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      const { itemId, titulo, categoria } = extraerMetaTarjeta(card, idx);
+      const { itemId } = extraerMetaTarjeta(card, idx);
       let btn = card.querySelector(".orbit-fav-btn");
       if (!btn) {
         btn = document.createElement("button");
@@ -1061,9 +1114,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           e.preventDefault();
           e.stopPropagation();
           const actual = extraerMetaTarjeta(card, idx);
-          window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria);
+          window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria, actual.enlace);
         });
-        const contenedor = card.querySelector(".bento-content, .card-info") || card;
+        const contenedor = card.querySelector(".bento-content, .card-info, .card-body") || card;
         contenedor.appendChild(btn);
       }
 
@@ -1073,10 +1126,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Actualizar botones solo cuando el usuario hace clic (sin MutationObserver)
+  // Ejecutar al iniciar (con un segundo pase suave para tarjetas renderizadas por JS) y tras clics
+  refreshFavButtonsOnPage();
+  setTimeout(refreshFavButtonsOnPage, 600);
+  setTimeout(refreshFavButtonsOnPage, 1600);
+
   document.addEventListener("click", (e) => {
     if (e.target.closest(".orbit-fav-btn")) return;
-    setTimeout(refreshFavButtonsOnPage, 100);
+    setTimeout(refreshFavButtonsOnPage, 120);
   });
 
   async function renderFavoritosModal() {
@@ -1091,30 +1148,32 @@ document.addEventListener("DOMContentLoaded", async () => {
       .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades guardadas.</p>`;
+      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades, lugares o compras guardadas.</p>`;
       return;
     }
 
     container.innerHTML = data
-      .map(
-        (fav) => `
-        <div class="fav-item-row">
-          <div>
-            <strong style="color:#fff; font-size:0.9rem;">${fav.titulo}</strong><br/>
-            <small style="color:#cbd5e1;">${fav.categoria}</small>
+      .map((fav) => {
+        const esExterno = fav.url_pagina && fav.url_pagina.startsWith("http");
+        const targetAttr = esExterno ? `target="_blank" rel="noopener noreferrer"` : "";
+        return `
+          <div class="fav-item-row">
+            <div style="min-width:0;">
+              <strong style="color:#fff; font-size:0.9rem; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${fav.titulo}</strong>
+              <small style="color:#cbd5e1;">${fav.categoria}</small>
+            </div>
+            <div style="display:flex; gap:6px; flex-shrink:0;">
+              ${fav.url_pagina ? `<a href="${fav.url_pagina}" ${targetAttr} class="orbit-star-icon-btn" style="text-decoration:none; height:32px; padding:0 12px; font-size:0.72rem;">Abrir 🔗</a>` : ""}
+              <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" data-del-fav="${fav.item_id}">✕</button>
+            </div>
           </div>
-          <div style="display:flex; gap:6px;">
-            ${fav.url_pagina ? `<a href="${fav.url_pagina}" class="orbit-star-icon-btn" style="text-decoration:none; height:32px; padding:0 12px; font-size:0.72rem;">Ver</a>` : ""}
-            <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" data-del-fav="${fav.item_id}">✕</button>
-          </div>
-        </div>
-      `
-      )
+        `;
+      })
       .join("");
 
     container.querySelectorAll("[data-del-fav]").forEach((btn) => {
       btn.addEventListener("click", async () => {
-        await window.toggleFavorito(btn.getAttribute("data-del-fav"), "", "");
+        await window.toggleFavorito(btn.getAttribute("data-del-fav"), "", "", "");
         await renderFavoritosModal();
       });
     });

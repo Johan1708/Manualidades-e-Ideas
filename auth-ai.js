@@ -40,9 +40,7 @@ function injectOrbitAIStyles() {
       --chrome-rgb: 165 175 190;
     }
 
-    /* ======================================================================
-       DOCK INFERIOR DERECHO DE ICONOS ESTELARES (NO TAPA TUS BOTONES SUPERIORES)
-       ====================================================================== */
+    /* DOCK INFERIOR DERECHO DE ICONOS ESTELARES */
     .orbit-user-bar {
       position: fixed !important;
       bottom: 22px !important;
@@ -58,7 +56,6 @@ function injectOrbitAIStyles() {
       pointer-events: auto;
     }
 
-    /* En Día del Padre se sube automáticamente para dejar libres los botones inferiores */
     .orbit-user-bar.pos-top {
       top: 18px !important;
       bottom: auto !important;
@@ -70,7 +67,6 @@ function injectOrbitAIStyles() {
       100% { background-position: 0% 50%; }
     }
 
-    /* Botón píldora estilo MENÚ con destellos estelares plateados */
     .orbit-star-icon-btn {
       position: relative;
       height: 44px;
@@ -109,7 +105,6 @@ function injectOrbitAIStyles() {
       transition: transform 0.25s ease;
     }
 
-    /* Texto oculto que se despliega suavemente al pasar el cursor */
     .orbit-star-icon-btn .btn-label {
       max-width: 0;
       opacity: 0;
@@ -140,7 +135,7 @@ function injectOrbitAIStyles() {
       color: #fecaca !important;
     }
 
-    /* OVERLAY TRANSPARENTE PARA QUE SE SIGA VIENDO EL FONDO DE TU PÁGINA */
+    /* OVERLAY TRANSPARENTE */
     .global-modal-overlay {
       position: fixed !important;
       inset: 0 !important;
@@ -157,9 +152,7 @@ function injectOrbitAIStyles() {
       display: flex !important;
     }
 
-    /* ======================================================================
-       PANTALLA HOLOGRÁFICA PLATEADA (LOGIN Y PUBLICAR IDEA)
-       ====================================================================== */
+    /* PANTALLA HOLOGRÁFICA PLATEADA (LOGIN, PUBLICAR IDEA Y FAVORITOS) */
     @keyframes pan-overlay {
       from { background-position: 0% 0%; }
       to { background-position: 0% -100%; }
@@ -198,7 +191,6 @@ function injectOrbitAIStyles() {
       min-height: 540px;
     }
 
-    /* Muescas superior e inferior estilo pantalla futurista */
     .orbit-holo-screen::before,
     .orbit-holo-screen::after {
       content: "";
@@ -223,7 +215,6 @@ function injectOrbitAIStyles() {
       border-top-right-radius: 1rem;
     }
 
-    /* Imagen animada de fondo en escala de grises / plata */
     .orbit-holo-screen > .screen-image {
       background-image: url("https://images.unsplash.com/photo-1515266591878-f93e32bc5937?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80");
       height: 100%;
@@ -240,7 +231,6 @@ function injectOrbitAIStyles() {
       pointer-events: none;
     }
 
-    /* Líneas de escaneo CRT plateadas */
     .orbit-holo-screen > .screen-overlay {
       background: linear-gradient(
         rgba(220, 226, 235, 0.12),
@@ -259,7 +249,6 @@ function injectOrbitAIStyles() {
       pointer-events: none;
     }
 
-    /* Marco interior con contenido */
     .orbit-holo-screen > .screen-content {
       display: flex;
       flex-direction: column;
@@ -285,7 +274,6 @@ function injectOrbitAIStyles() {
       z-index: 8;
     }
 
-    /* Encabezado con líneas plateadas y efecto scramble */
     .screen-header-brand {
       display: flex;
       flex-direction: column;
@@ -358,7 +346,6 @@ function injectOrbitAIStyles() {
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
     }
 
-    /* Tabs y campos en tonos plata / cromo */
     .auth-tabs {
       display: flex;
       gap: 8px;
@@ -427,7 +414,6 @@ function injectOrbitAIStyles() {
       resize: vertical;
     }
 
-    /* Botón metálico plateado brillante */
     .btn-silver-primary {
       padding: 11px 16px;
       border-radius: 8px;
@@ -447,31 +433,6 @@ function injectOrbitAIStyles() {
       transform: translateY(-1px);
       background: linear-gradient(135deg, #cbd5e1, #ffffff, #e2e8f0) !important;
       box-shadow: 0 0 26px rgba(255, 255, 255, 0.65);
-    }
-
-    /* MODAL FAVORITOS EN ESTÉTICA PLATA */
-    .global-modal-card {
-      width: min(460px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 22px;
-      border-radius: 18px;
-      border: 1.5px solid rgba(226, 232, 240, 0.65) !important;
-      background: linear-gradient(160deg, rgba(16, 18, 23, 0.95), rgba(10, 11, 14, 0.98)) !important;
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.18) !important;
-      color: #f8fafc !important;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-    }
-    .global-modal-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .global-modal-top h3 {
-      margin: 0;
-      color: #ffffff !important;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
     }
 
     .status-banner {
@@ -508,6 +469,8 @@ function injectOrbitAIStyles() {
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
+      position: relative;
+      z-index: 15;
     }
     .orbit-fav-btn.saved {
       background: rgba(255, 255, 255, 0.22);
@@ -552,11 +515,11 @@ function injectOrbitAIStyles() {
       padding: 10px 12px;
       border-radius: 10px;
       border: 1px solid rgba(226, 232, 240, 0.28);
-      background: rgba(20, 22, 28, 0.88);
+      background: rgba(10, 11, 15, 0.85);
       margin-bottom: 8px;
     }
 
-    /* BOTÓN Y PANEL FLOTANTE Nova IA EN ESTÉTICA PLATA / ESTELAR */
+    /* BOTÓN Y PANEL FLOTANTE Nova IA */
     .ai-fab-btn {
       position: fixed !important;
       bottom: 22px !important;
@@ -721,9 +684,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   let authMode = "login";
   const pageTitle = document.title || window.location.pathname;
 
+  function detectarCategoriaActual() {
+    const ref = (window.location.pathname + " " + pageTitle).toLowerCase();
+    if (ref.includes("navidad")) return "Navidad";
+    if (ref.includes("muertos")) return "Día de Muertos";
+    if (ref.includes("padre")) return "Día del Padre";
+    if (ref.includes("madre")) return "Día de las Madres";
+    if (ref.includes("opciones") || ref.includes("halloween")) return "Halloween";
+    return pageTitle;
+  }
+
   const uiContainer = document.createElement("div");
   uiContainer.innerHTML = `
-    <!-- DOCK INFERIOR DERECHO DE ICONOS (SE EXPANDEN AL PASAR EL CURSOR) -->
+    <!-- DOCK INFERIOR DERECHO DE ICONOS -->
     <div class="orbit-user-bar" id="orbit-user-bar">
       <button type="button" class="orbit-star-icon-btn" id="global-login-btn" aria-label="Iniciar Sesión">
         <span class="btn-ico">👤</span>
@@ -777,7 +750,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </form>
     </aside>
 
-    <!-- MODAL LOGIN / REGISTRO CON DISEÑO DE PANTALLA HOLOGRÁFICA PLATEADA -->
+    <!-- MODAL LOGIN / REGISTRO -->
     <div class="global-modal-overlay" id="auth-modal">
       <div class="orbit-holo-screen login-size" id="orbit-login-screen">
         <div class="screen-image"></div>
@@ -823,7 +796,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
 
-    <!-- MODAL SUBIR IDEA CON EL MISMO DISEÑO DE PANTALLA HOLOGRÁFICA PLATEADA -->
+    <!-- MODAL SUBIR IDEA -->
     <div class="global-modal-overlay" id="submit-idea-modal">
       <div class="orbit-holo-screen" id="orbit-idea-screen">
         <div class="screen-image"></div>
@@ -885,22 +858,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
 
-    <!-- MODAL MIS FAVORITOS -->
+    <!-- MODAL MIS FAVORITOS (MISMA PANTALLA HOLOGRÁFICA PLATEADA) -->
     <div class="global-modal-overlay" id="favs-modal">
-      <div class="global-modal-card">
-        <div class="global-modal-top">
-          <h3>⭐ Mis Ideas Favoritas</h3>
-          <button class="ai-close-btn" id="close-favs-modal" type="button">✕</button>
-        </div>
-        <div id="favs-list-container">
-          <p style="font-size:0.86rem; color:#94a3b8;">Cargando favoritos...</p>
+      <div class="orbit-holo-screen login-size" id="orbit-favs-screen">
+        <div class="screen-image"></div>
+        <div class="screen-overlay"></div>
+        <div class="screen-content" style="justify-content: flex-start;">
+          <button class="ai-close-btn screen-top-close" id="close-favs-modal" type="button">✕</button>
+
+          <div class="screen-header-brand" style="margin-bottom:0.75rem;">
+            <span class="screen-scramble-title" id="favs-scramble-title" data-value="FAVORITOS">FAVORITOS</span>
+            <span class="screen-subtitle">@MIS_GUARDADOS_ORBIT</span>
+          </div>
+
+          <div id="favs-list-container" style="flex:1; overflow-y:auto;">
+            <p style="font-size:0.86rem; color:#94a3b8; text-align:center;">Cargando favoritos...</p>
+          </div>
         </div>
       </div>
     </div>
   `;
   document.body.appendChild(uiContainer);
 
-  // En Día del Padre los botones Inicio y MENÚ están abajo: subimos el dock y Nova arriba
   const rutaActual = (window.location.pathname + " " + pageTitle).toLowerCase();
   if (rutaActual.includes("padre")) {
     document.getElementById("orbit-user-bar")?.classList.add("pos-top");
@@ -908,7 +887,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("ai-drawer")?.classList.add("pos-top");
   }
 
-  // EFECTO DE TEXTO SCRAMBLE PARA AMBAS PANTALLAS HOLOGRÁFICAS (LOGIN Y PUBLICAR)
   const scrambleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   function attachScrambleEffect(screenEl, titleEl) {
     if (!screenEl || !titleEl) return () => {};
@@ -950,8 +928,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("orbit-idea-screen"),
     document.getElementById("idea-scramble-title")
   );
+  const triggerFavsScramble = attachScrambleEffect(
+    document.getElementById("orbit-favs-screen"),
+    document.getElementById("favs-scramble-title")
+  );
 
-  // Contadores de caracteres
   const bindCounter = (inputId, counterId, max) => {
     const el = document.getElementById(inputId);
     const cnt = document.getElementById(counterId);
@@ -980,6 +961,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   favsBtn.addEventListener("click", async () => {
     document.getElementById("favs-modal").classList.add("open");
+    triggerFavsScramble("FAVORITOS");
     await renderFavoritosModal();
   });
   logoutBtn.addEventListener("click", async () => {
@@ -1036,22 +1018,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadUserFavoritos();
   };
 
-  function refreshFavButtonsOnPage() {
-    document.querySelectorAll("[data-fav-id]").forEach((card) => {
-      const itemId = card.getAttribute("data-fav-id");
-      const titulo = card.getAttribute("data-fav-title") || "Manualidad";
-      const categoria = card.getAttribute("data-fav-cat") || pageTitle;
+  // Detección ligera de tarjetas de todas tus secciones (solo al cargar y tras un clic)
+  const SELECTORES_TARJETAS =
+    "[data-fav-id], .glass-card, .altar-card-box, .bento-card, .card-rosa, .cat-card, .showcase-card, .spooky-card, .ogl-card, .gallery-card, .product-card, .place-card";
 
+  function extraerMetaTarjeta(card, idx) {
+    const tituloEl = card.querySelector(
+      "h1, h2, h3, h4, .bento-title, .card-titulo-gradient, .box-title, .card-label-badge, .title"
+    );
+    const titulo = (
+      card.getAttribute("data-fav-title") ||
+      (tituloEl ? tituloEl.textContent : "") ||
+      `Elemento ${idx + 1}`
+    ).trim();
+    const categoria = card.getAttribute("data-fav-cat") || detectarCategoriaActual();
+    const slug = titulo
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    const itemId =
+      card.getAttribute("data-fav-id") ||
+      `${categoria.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${slug || idx}`;
+
+    return { itemId, titulo, categoria };
+  }
+
+  function refreshFavButtonsOnPage() {
+    document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
+      if (card.closest(".craft-modal, .popup-modal, .spooky-modal, .modal-pro, .global-modal-overlay")) {
+        return;
+      }
+
+      const { itemId, titulo, categoria } = extraerMetaTarjeta(card, idx);
       let btn = card.querySelector(".orbit-fav-btn");
       if (!btn) {
         btn = document.createElement("button");
         btn.type = "button";
         btn.className = "orbit-fav-btn";
         btn.addEventListener("click", (e) => {
+          e.preventDefault();
           e.stopPropagation();
-          window.toggleFavorito(itemId, titulo, categoria);
+          const actual = extraerMetaTarjeta(card, idx);
+          window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria);
         });
-        card.appendChild(btn);
+        const contenedor = card.querySelector(".bento-content, .card-info") || card;
+        contenedor.appendChild(btn);
       }
 
       const isSaved = userFavoritosIds.has(itemId);
@@ -1060,10 +1073,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Actualizar botones solo cuando el usuario hace clic (sin MutationObserver)
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".orbit-fav-btn")) return;
+    setTimeout(refreshFavButtonsOnPage, 100);
+  });
+
   async function renderFavoritosModal() {
     const container = document.getElementById("favs-list-container");
     if (!currentUser) return;
-    container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8;">Cargando favoritos...</p>`;
+    container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center;">Cargando favoritos...</p>`;
 
     const { data, error } = await sb
       .from("favoritos_usuario")
@@ -1072,7 +1091,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8;">Aún no tienes manualidades guardadas.</p>`;
+      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades guardadas.</p>`;
       return;
     }
 
@@ -1288,7 +1307,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // Cerrar modales con botón X o haciendo clic fuera en el fondo
+  // Cerrar modales
   document.getElementById("close-auth-modal").addEventListener("click", () => {
     document.getElementById("auth-modal").classList.remove("open");
   });
@@ -1303,6 +1322,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   document.getElementById("close-favs-modal").addEventListener("click", () => {
     document.getElementById("favs-modal").classList.remove("open");
+  });
+  document.getElementById("favs-modal").addEventListener("click", (e) => {
+    if (e.target.id === "favs-modal") document.getElementById("favs-modal").classList.remove("open");
   });
 
   const aiDrawer = document.getElementById("ai-drawer");

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SISTEMA GLOBAL ORBIT PLATA: FAVORITOS INDIVIDUALES + IA
+   SISTEMA GLOBAL ORBIT PLATA: FAVORITOS INDIVIDUALES + IA (GUARDADO GARANTIZADO)
    ========================================================================== */
 
 const SUPABASE_URL = "https://fwbcltconkufmjkonwnd.supabase.co";
@@ -207,12 +207,6 @@ function injectOrbitAIStyles() {
       box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
     }
 
-    .comunidad-grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; margin: 24px auto; max-width: 1140px; padding: 0 16px; }
-    .comunidad-card { padding: 18px; border-radius: 16px; border: 1px solid rgba(226, 232, 240, 0.35); background: rgba(14, 16, 20, 0.88); color: #f1f5f9; }
-    .comunidad-card h4 { margin: 6px 0 8px; color: #ffffff; }
-    .comunidad-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; background: rgba(226, 232, 240, 0.16); border: 1px solid rgba(226, 232, 240, 0.5); color: #f8fafc; }
-    .comunidad-meta { font-size: 0.78rem; color: #94a3b8; margin-bottom: 10px; }
-    .comunidad-detail { font-size: 0.84rem; line-height: 1.45; color: #e2e8f0; white-space: pre-line; margin-top: 6px; }
     .fav-item-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(226, 232, 240, 0.32); background: rgba(10, 11, 15, 0.85); margin-bottom: 8px; }
 
     /* BOTÓN Y PANEL FLOTANTE Nova IA */
@@ -469,18 +463,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       .eq("user_id", currentUser.id)
       .order("created_at", { ascending: false });
 
+    const localItems = readLocalBackup();
+    const mergedMap = new Map();
+
+    localItems.forEach((row) => mergedMap.set(row.item_id, row));
     if (!error && Array.isArray(data)) {
-      data.forEach((row) => userFavoritosIds.add(row.item_id));
-      writeLocalBackup(data);
-    } else {
-      readLocalBackup().forEach((row) => userFavoritosIds.add(row.item_id));
+      data.forEach((row) => mergedMap.set(row.item_id, row));
     }
+
+    const finalItems = Array.from(mergedMap.values());
+    finalItems.forEach((row) => userFavoritosIds.add(row.item_id));
+    writeLocalBackup(finalItems);
 
     if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
     syncIndividualButtonsState();
   }
 
-  // FUNCIÓN INDIVIDUAL QUE LLAMA CADA BOTÓN DE ESTRELLITA DE CADA SECCIÓN
+  // FUNCIÓN INDIVIDUAL QUE GUARDA EN MEMORIA + LOCALSTORAGE + SUPABASE
   window.guardarEnFavoritosYRedirigir = async function (itemId, titulo, categoria, enlaceGuardado) {
     if (!currentUser) {
       document.getElementById("auth-modal").classList.add("open");
@@ -490,21 +489,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    if (!userFavoritosIds.has(itemId)) {
-      const nuevoFav = {
-        user_id: currentUser.id,
-        item_id: itemId,
-        titulo,
-        categoria,
-        url_pagina: enlaceGuardado || window.location.pathname
-      };
+    const nuevoFav = {
+      user_id: currentUser.id,
+      item_id: itemId,
+      titulo: titulo || "Elemento guardado",
+      categoria: categoria || "Favorito",
+      url_pagina: enlaceGuardado || window.location.pathname
+    };
 
+    if (!userFavoritosIds.has(itemId)) {
+      // 1. Guardado inmediato en memoria y respaldo local para que nunca se pierda
+      userFavoritosIds.add(itemId);
+      const backup = readLocalBackup().filter((f) => f.item_id !== itemId);
+      backup.unshift({ ...nuevoFav, created_at: new Date().toISOString() });
+      writeLocalBackup(backup);
+
+      // 2. Sincronizar en Supabase
       const { error } = await sb.from("favoritos_usuario").insert([nuevoFav]);
-      if (!error) {
-        userFavoritosIds.add(itemId);
-        const backup = readLocalBackup().filter((f) => f.item_id !== itemId);
-        backup.unshift({ ...nuevoFav, created_at: new Date().toISOString() });
-        writeLocalBackup(backup);
+      if (error) {
+        console.warn("Aviso Supabase favoritos_usuario:", error.message);
       }
     }
 
@@ -515,19 +518,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function eliminarFavoritoDesdeModal(itemId) {
     if (!currentUser) return;
-    const { error } = await sb
+
+    userFavoritosIds.delete(itemId);
+    writeLocalBackup(readLocalBackup().filter((f) => f.item_id !== itemId));
+
+    await sb
       .from("favoritos_usuario")
       .delete()
       .eq("user_id", currentUser.id)
       .eq("item_id", itemId);
 
-    if (!error) {
-      userFavoritosIds.delete(itemId);
-      writeLocalBackup(readLocalBackup().filter((f) => f.item_id !== itemId));
-      if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
-      syncIndividualButtonsState();
-      await renderFavoritosModal();
-    }
+    if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
+    syncIndividualButtonsState();
+    await renderFavoritosModal();
   }
 
   async function renderFavoritosModal() {
@@ -541,7 +544,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       .eq("user_id", currentUser.id)
       .order("created_at", { ascending: false });
 
-    const listaFinal = !error && Array.isArray(data) ? data : readLocalBackup();
+    const localItems = readLocalBackup();
+    const mergedMap = new Map();
+
+    if (!error && Array.isArray(data)) {
+      data.forEach((row) => mergedMap.set(row.item_id, row));
+    }
+    localItems.forEach((row) => {
+      if (!mergedMap.has(row.item_id)) mergedMap.set(row.item_id, row);
+    });
+
+    const listaFinal = Array.from(mergedMap.values());
 
     if (!listaFinal || listaFinal.length === 0) {
       container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes favoritos guardados.</p>`;

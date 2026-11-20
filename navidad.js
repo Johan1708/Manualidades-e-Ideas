@@ -1317,9 +1317,9 @@ const tallerData = [
                 desc: "Forra esferas de unicel o plástico viejo con retazos de suéteres tejidos, cuerda de yute y ramas de canela.",
                 materials: ["Esferas base recicladas", "Retazos de tela tejida o fieltro", "Silicón frío o caliente", "Cordón de yute natural", "Ramas de canela y anís estrella"],
                 steps: [
-                    { text: "Corta tiras o cuadros de tela tejida de 10x10 cm que alcancen a cubrir la esfera.", img: "imagenesv/esfera-tela-1.jpg" },
-                    { text: "Aplica silicón en la parte superior y estira la tela alrededor sin dejar arrugas.", img: "imagenesv/esfera-tela-2.jpg" },
-                    { text: "Amarra un lazo de yute en el cuello y pega una rama de canela con anís estrella.", img: "imagenesv/esfera-tela-3.jpg" }
+                    { text: "Corta tiras o cuadros de tela tejida de 10x10 cm que alcancen a cubrir la esfera.", img: "imagenes/esfera-tela-1.jpg" },
+                    { text: "Aplica silicón en la parte superior y estira la tela alrededor sin dejar arrugas.", img: "imagenes/esfera-tela-2.jpg" },
+                    { text: "Amarra un lazo de yute en el cuello y pega una rama de canela con anís estrella.", img: "imagenes/esfera-tela-3.jpg" }
                 ]
             },
             {
@@ -1329,9 +1329,9 @@ const tallerData = [
                 desc: "Pega 7 bolsas de papel kraft entre sí, recorta los bordes en ángulo y ábrelas para formar estrellas tridimensionales.",
                 materials: ["7 bolsas de papel kraft", "Pegamento en barra", "Tijeras afiladas", "Perforadora de un hueco", "Hilo dorado para colgar"],
                 steps: [
-                    { text: "Apila las 7 bolsas de papel kraft aplicando pegamento en forma de T invertida entre cada una.", img: "imagenesv/estrella-kraft-1.jpg" },
-                    { text: "Recorta la parte superior en punta de flecha y haz cortes triangulares en los costados.", img: "imagenesv/estrella-kraft-2.jpg" },
-                    { text: "Abre el acordeón en abanico, pega los extremos y pasa el hilo dorado por la perforación.", img: "imagenesv/estrella-kraft-3.jpg" }
+                    { text: "Apila las 7 bolsas de papel kraft aplicando pegamento en forma de T invertida entre cada una.", img: "imagenes/estrella-kraft-1.jpg" },
+                    { text: "Recorta la parte superior en punta de flecha y haz cortes triangulares en los costados.", img: "imagenes/estrella-kraft-2.jpg" },
+                    { text: "Abre el acordeón en abanico, pega los extremos y pasa el hilo dorado por la perforación.", img: "imagenes/estrella-kraft-3.jpg" }
                 ]
             },
             {
@@ -1341,9 +1341,9 @@ const tallerData = [
                 desc: "Entrelaza ramas de eucalipto sobre un aro de madera y decora con rodajas de naranja deshidratada.",
                 materials: ["Aro de madera o alambre", "Ramas de eucalipto y pino", "Naranjas deshidratadas al horno", "Alambre floral fino", "Listón de terciopelo rojo"],
                 steps: [
-                    { text: "Sujeta ramilletes de eucalipto y pino alrededor del aro usando alambre floral fino.", img: "imagenesv/corona-eucalipto-1.jpg" },
-                    { text: "Pega las rodajas de naranja deshidratada en grupos de dos sobre el follaje verde.", img: "imagenesv/corona-eucalipto-2.jpg" },
-                    { text: "Remata en la parte superior o inferior con un moño largo de terciopelo rojo.", img: "imagenesv/corona-eucalipto-3.jpg" }
+                    { text: "Sujeta ramilletes de eucalipto y pino alrededor del aro usando alambre floral fino.", img: "imagenes/corona-eucalipto-1.jpg" },
+                    { text: "Pega las rodajas de naranja deshidratada en grupos de dos sobre el follaje verde.", img: "imagenes/corona-eucalipto-2.jpg" },
+                    { text: "Remata en la parte superior o inferior con un moño largo de terciopelo rojo.", img: "imagenes/corona-eucalipto-3.jpg" }
                 ]
             },
             {
@@ -1353,9 +1353,9 @@ const tallerData = [
                 desc: "Enrolla estambre rojo y blanco alrededor de limpiapipas gruesos y dales la curva clásica de bastón navideño.",
                 materials: ["Estambre rojo y blanco", "Limpiapipas o alambre maleable", "Cascabeles pequeños", "Tijeras"],
                 steps: [
-                    { text: "Une dos limpiapipas y ata juntos el inicio del estambre rojo y el blanco en un extremo.", img: "imagenesv/baston-lana-1.jpg" },
-                    { text: "Enrolla ambos colores alternándolos en espiral apretada hasta cubrir todo el alambre.", img: "imagenesv/baston-lana-2.jpg" },
-                    { text: "Dobla la punta superior en forma de gancho y ata un cascabel dorado en el centro.", img: "imagenesv/baston-lana-3.jpg" }
+                    { text: "Une dos limpiapipas y ata juntos el inicio del estambre rojo y el blanco en un extremo.", img: "imagenes/baston-lana-1.jpg" },
+                    { text: "Enrolla ambos colores alternándolos en espiral apretada hasta cubrir todo el alambre.", img: "imagenes/baston-lana-2.jpg" },
+                    { text: "Dobla la punta superior en forma de gancho y ata un cascabel dorado en el centro.", img: "imagenes/baston-lana-3.jpg" }
                 ]
             }
         ]
@@ -1372,9 +1372,9 @@ const tallerData = [
                 desc: "Recorta fachadas de casitas en cartulina opalina, cala sus ventanas y coloca velas LED cálidas en su interior.",
                 materials: ["Cartulina opalina blanca (220g)", "Cúter de precisión y regla", "Velas LED a batería", "Papel albanene para las ventanas"],
                 steps: [
-                    { text: "Traza el molde de 4 paredes con techo a dos aguas sobre la cartulina opalina y recórtalo.", img: "imagenesv/aldea-led-1.jpg" },
-                    { text: "Cala las ventanas con cúter y pega papel albanene por dentro para difuminar la luz.", img: "imagenesv/aldea-led-2.jpg" },
-                    { text: "Dobla las pestañas, pega la estructura y coloca una vela LED encendida debajo.", img: "imagenesv/aldea-led-3.jpg" }
+                    { text: "Traza el molde de 4 paredes con techo a dos aguas sobre la cartulina opalina y recórtalo.", img: "imagenes/aldea-led-1.jpg" },
+                    { text: "Cala las ventanas con cúter y pega papel albanene por dentro para difuminar la luz.", img: "imagenes/aldea-led-2.jpg" },
+                    { text: "Dobla las pestañas, pega la estructura y coloca una vela LED encendida debajo.", img: "imagenes/aldea-led-3.jpg" }
                 ]
             },
             {
@@ -1384,9 +1384,9 @@ const tallerData = [
                 desc: "Dobla círculos de papel verde bosque en acordeón y apílalos de mayor a menor sobre un palito de madera.",
                 materials: ["Papel verde bosque y dorado", "Palillos de brocheta", "Cuentas de madera para la base", "Estrella de cartón metálico"],
                 steps: [
-                    { text: "Recorta 4 círculos de papel verde de distintos tamaños (de 12 cm a 6 cm de diámetro).", img: "imagenesv/pino-acordeon-1.jpg" },
-                    { text: "Pliega cada círculo en acordeón de 1 cm y perfora el centro con cuidado.", img: "imagenesv/pino-acordeon-2.jpg" },
-                    { text: "Inserta los abanicos de mayor a menor en el palillo clavado en una cuenta y corona con estrella.", img: "imagenesv/pino-acordeon-3.jpg" }
+                    { text: "Recorta 4 círculos de papel verde de distintos tamaños (de 12 cm a 6 cm de diámetro).", img: "imagenes/pino-acordeon-1.jpg" },
+                    { text: "Pliega cada círculo en acordeón de 1 cm y perfora el centro con cuidado.", img: "imagenes/pino-acordeon-2.jpg" },
+                    { text: "Inserta los abanicos de mayor a menor en el palillo clavado en una cuenta y corona con estrella.", img: "imagenes/pino-acordeon-3.jpg" }
                 ]
             },
             {
@@ -1396,9 +1396,9 @@ const tallerData = [
                 desc: "Dobla cuadrados de papel seda en triángulos y realiza cortes geométricos para crear diseños irrepetibles.",
                 materials: ["Papel seda o bond blanco", "Tijeras pequeñas", "Cinta adhesiva transparente"],
                 steps: [
-                    { text: "Dobla un cuadrado de papel por la diagonal y luego en tercios hasta formar un cono.", img: "imagenesv/copo-calado-1.jpg" },
-                    { text: "Recorta el borde superior en punta y haz muescas diagonales a ambos lados sin cortar todo.", img: "imagenesv/copo-calado-2.jpg" },
-                    { text: "Desdobla suavemente el papel y aplánalo bajo un libro antes de pegarlo en la ventana.", img: "imagenesv/copo-calado-3.jpg" }
+                    { text: "Dobla un cuadrado de papel por la diagonal y luego en tercios hasta formar un cono.", img: "imagenes/copo-calado-1.jpg" },
+                    { text: "Recorta el borde superior en punta y haz muescas diagonales a ambos lados sin cortar todo.", img: "imagenes/copo-calado-2.jpg" },
+                    { text: "Desdobla suavemente el papel y aplánalo bajo un libro antes de pegarlo en la ventana.", img: "imagenes/copo-calado-3.jpg" }
                 ]
             },
             {
@@ -1408,9 +1408,9 @@ const tallerData = [
                 desc: "Cose a máquina o pega siluetas de cartulina dorada sobre un hilo largo para decorar marcos de puertas.",
                 materials: ["Cartulina dorada mate", "Hilo de algodón crudo", "Perforadora de figuras"],
                 steps: [
-                    { text: "Perfora o recorta pares idénticos de lunas crecientes y estrellas en cartulina dorada.", img: "imagenesv/guirnalda-lunas-1.jpg" },
-                    { text: "Coloca el hilo de algodón en medio y pega cada pareja de figuras frente con frente.", img: "imagenesv/guirnalda-lunas-2.jpg" },
-                    { text: "Deja 8 cm de separación entre cada figura y cuelga la guirnalda en puertas o paredes.", img: "imagenesv/guirnalda-lunas-3.jpg" }
+                    { text: "Perfora o recorta pares idénticos de lunas crecientes y estrellas en cartulina dorada.", img: "imagenes/guirnalda-lunas-1.jpg" },
+                    { text: "Coloca el hilo de algodón en medio y pega cada pareja de figuras frente con frente.", img: "imagenes/guirnalda-lunas-2.jpg" },
+                    { text: "Deja 8 cm de separación entre cada figura y cuelga la guirnalda en puertas o paredes.", img: "imagenes/guirnalda-lunas-3.jpg" }
                 ]
             }
         ]
@@ -1427,9 +1427,9 @@ const tallerData = [
                 desc: "Cubre frascos de vidrio con barniz transparente y ruédalos sobre sal gruesa para simular escarcha cristalina.",
                 materials: ["Frascos de vidrio reciclados", "Sal de grano gruesa", "Pegamento blanco o mod podge", "Ramas de romero fresco"],
                 steps: [
-                    { text: "Aplica una capa uniforme de pegamento blanco por todo el exterior del frasco limpio.", img: "imagenesv/frasco-nevado-1.jpg" },
-                    { text: "Rueda el frasco sobre una bandeja con sal de grano hasta cubrirlo por completo y deja secar.", img: "imagenesv/frasco-nevado-2.jpg" },
-                    { text: "Ata una ramita de romero fresco en la boca del frasco y coloca una vela dentro.", img: "imagenesv/frasco-nevado-3.jpg" }
+                    { text: "Aplica una capa uniforme de pegamento blanco por todo el exterior del frasco limpio.", img: "imagenes/frasco-nevado-1.jpg" },
+                    { text: "Rueda el frasco sobre una bandeja con sal de grano hasta cubrirlo por completo y deja secar.", img: "imagenes/frasco-nevado-2.jpg" },
+                    { text: "Ata una ramita de romero fresco en la boca del frasco y coloca una vela dentro.", img: "imagenes/frasco-nevado-3.jpg" }
                 ]
             },
             {
@@ -1439,9 +1439,9 @@ const tallerData = [
                 desc: "Forma pequeños círculos con ramitas de romero fresco y ensarta arándanos rojos para abrazar las servilletas de lino.",
                 materials: ["Ramas frescas de romero", "Arándanos rojos frescos", "Alambre dorado delgado", "Servilletas de tela"],
                 steps: [
-                    { text: "Corta 18 cm de alambre dorado y ensarta 3 arándanos rojos en el centro.", img: "imagenesv/servilletero-romero-1.jpg" },
-                    { text: "Curva el alambre formando un aro y envuelve dos ramitas de romero alrededor.", img: "imagenesv/servilletero-romero-2.jpg" },
-                    { text: "Tuerce las puntas del alambre por detrás y desliza la servilleta enrollada en el centro.", img: "imagenesv/servilletero-romero-3.jpg" }
+                    { text: "Corta 18 cm de alambre dorado y ensarta 3 arándanos rojos en el centro.", img: "imagenes/servilletero-romero-1.jpg" },
+                    { text: "Curva el alambre formando un aro y envuelve dos ramitas de romero alrededor.", img: "imagenes/servilletero-romero-2.jpg" },
+                    { text: "Tuerce las puntas del alambre por detrás y desliza la servilleta enrollada en el centro.", img: "imagenes/servilletero-romero-3.jpg" }
                 ]
             },
             {
@@ -1451,9 +1451,9 @@ const tallerData = [
                 desc: "Rodea velas blancas gruesas con ramas de canela enteras y sujétalas con un lazo de yute.",
                 materials: ["Velones cilíndricos blancos", "Rajas de canela del mismo alto", "Banda elástica y cordón de yute"],
                 steps: [
-                    { text: "Coloca una liga elástica alrededor del velón blanco para sostener las rajas temporalmente.", img: "imagenesv/vela-canela-1.jpg" },
-                    { text: "Inserta las ramas de canela una junto a otra cubriendo toda la circunferencia.", img: "imagenesv/vela-canela-2.jpg" },
-                    { text: "Envuelve con cordón de yute dando varias vueltas sobre la liga y haz un nudo firme.", img: "imagenesv/vela-canela-3.jpg" }
+                    { text: "Coloca una liga elástica alrededor del velón blanco para sostener las rajas temporalmente.", img: "imagenes/vela-canela-1.jpg" },
+                    { text: "Inserta las ramas de canela una junto a otra cubriendo toda la circunferencia.", img: "imagenes/vela-canela-2.jpg" },
+                    { text: "Envuelve con cordón de yute dando varias vueltas sobre la liga y haz un nudo firme.", img: "imagenes/vela-canela-3.jpg" }
                 ]
             },
             {
@@ -1463,9 +1463,9 @@ const tallerData = [
                 desc: "Pinta las puntas de piñas de pino recolectadas con pintura acrílica blanca para darles un toque invernal.",
                 materials: ["Piñas de pino secas", "Pintura acrílica blanca", "Esponja o pincel seco", "Guirnalda de micro-luces"],
                 steps: [
-                    { text: "Limpia las piñas secas con una brocha para retirar polvo o tierra.", img: "imagenesv/pinas-nevadas-1.jpg" },
-                    { text: "Da toques ligeros con pintura acrílica blanca únicamente en los bordes de cada escama.", img: "imagenesv/pinas-nevadas-2.jpg" },
-                    { text: "Distribúyelas al centro de la mesa entre ramas verdes y una serie de micro-luces cálidas.", img: "imagenesv/pinas-nevadas-3.jpg" }
+                    { text: "Limpia las piñas secas con una brocha para retirar polvo o tierra.", img: "imagenes/pinas-nevadas-1.jpg" },
+                    { text: "Da toques ligeros con pintura acrílica blanca únicamente en los bordes de cada escama.", img: "imagenes/pinas-nevadas-2.jpg" },
+                    { text: "Distribúyelas al centro de la mesa entre ramas verdes y una serie de micro-luces cálidas.", img: "imagenes/pinas-nevadas-3.jpg" }
                 ]
             }
         ]
@@ -1482,9 +1482,9 @@ const tallerData = [
                 desc: "Derrite barras de lacre rojo o dorado sobre cartulina texturizada y presiona con un sello metálico.",
                 materials: ["Barras de lacre y cuchara", "Sello metálico navideño", "Tarjetas de papel algodón", "Pluma fuente o marcador dorado"],
                 steps: [
-                    { text: "Derrite 3 perlas o un trozo de barra de lacre en la cuchara metálica sobre una vela.", img: "imagenesv/sello-lacre-1.jpg" },
-                    { text: "Vierte un círculo de cera fundida sobre la solapa del sobre o la esquina de la tarjeta.", img: "imagenesv/sello-lacre-2.jpg" },
-                    { text: "Presiona el sello metálico frío durante 10 segundos y retíralo verticalmente con cuidado.", img: "imagenesv/sello-lacre-3.jpg" }
+                    { text: "Derrite 3 perlas o un trozo de barra de lacre en la cuchara metálica sobre una vela.", img: "imagenes/sello-lacre-1.jpg" },
+                    { text: "Vierte un círculo de cera fundida sobre la solapa del sobre o la esquina de la tarjeta.", img: "imagenes/sello-lacre-2.jpg" },
+                    { text: "Presiona el sello metálico frío durante 10 segundos y retíralo verticalmente con cuidado.", img: "imagenes/sello-lacre-3.jpg" }
                 ]
             },
             {
@@ -1494,9 +1494,9 @@ const tallerData = [
                 desc: "Envuelve cajas y libros usando pañuelos de algodón estampados con nudos decorativos sin usar cinta adhesiva.",
                 materials: ["Cuadrados de tela de algodón (50x50cm)", "Ramita de pino o acebo", "Etiqueta de cartón"],
                 steps: [
-                    { text: "Extiende el pañuelo en rombo y coloca la caja en el centro en diagonal.", img: "imagenesv/furoshiki-1.jpg" },
-                    { text: "Dobla las esquinas superior e inferior sobre la caja metiendo los bordes hacia adentro.", img: "imagenesv/furoshiki-2.jpg" },
-                    { text: "Toma las puntas laterales, haz un nudo doble al centro y desliza una ramita de pino.", img: "imagenesv/furoshiki-3.jpg" }
+                    { text: "Extiende el pañuelo en rombo y coloca la caja en el centro en diagonal.", img: "imagenes/furoshiki-1.jpg" },
+                    { text: "Dobla las esquinas superior e inferior sobre la caja metiendo los bordes hacia adentro.", img: "imagenes/furoshiki-2.jpg" },
+                    { text: "Toma las puntas laterales, haz un nudo doble al centro y desliza una ramita de pino.", img: "imagenes/furoshiki-3.jpg" }
                 ]
             },
             {
@@ -1506,9 +1506,9 @@ const tallerData = [
                 desc: "Pinta pequeñas coronas verdes o bayas rojas en tarjetas recortadas y escribe el nombre de cada destinatario.",
                 materials: ["Papel acuarela (300g)", "Acuarelas verde y carmín", "Pincel fino redondo #2", "Listón delgado"],
                 steps: [
-                    { text: "Recorta rectángulos de papel acuarela de 5x9 cm y traza un círculo suave a lápiz.", img: "imagenesv/etiqueta-acuarela-1.jpg" },
-                    { text: "Pinta pequeñas hojas verdes alrededor del círculo y añade puntitos rojos como bayas.", img: "imagenesv/etiqueta-acuarela-2.jpg" },
-                    { text: "Escribe el nombre al centro cuando seque, perfora arriba y coloca el listón.", img: "imagenesv/etiqueta-acuarela-3.jpg" }
+                    { text: "Recorta rectángulos de papel acuarela de 5x9 cm y traza un círculo suave a lápiz.", img: "imagenes/etiqueta-acuarela-1.jpg" },
+                    { text: "Pinta pequeñas hojas verdes alrededor del círculo y añade puntitos rojos como bayas.", img: "imagenes/etiqueta-acuarela-2.jpg" },
+                    { text: "Escribe el nombre al centro cuando seque, perfora arriba y coloca el listón.", img: "imagenes/etiqueta-acuarela-3.jpg" }
                 ]
             },
             {
@@ -1518,9 +1518,9 @@ const tallerData = [
                 desc: "Transforma bolsas de papel marrón pegando astas de cartulina, ojos de papel y un pompón rojo brillante.",
                 materials: ["Bolsas kraft con asas", "Pompones rojos grandes", "Cartulina café oscura", "Pegamento blanco"],
                 steps: [
-                    { text: "Dibuja y recorta dos astas ramificadas en cartulina café oscura.", img: "imagenesv/bolsa-reno-1.jpg" },
-                    { text: "Pega las astas en el borde interior superior de la bolsa kraft junto a las asas.", img: "imagenesv/bolsa-reno-2.jpg" },
-                    { text: "Adhiere dos círculos blancos con pupila negra y pega el pompón rojo al centro como nariz.", img: "imagenesv/bolsa-reno-3.jpg" }
+                    { text: "Dibuja y recorta dos astas ramificadas en cartulina café oscura.", img: "imagenes/bolsa-reno-1.jpg" },
+                    { text: "Pega las astas en el borde interior superior de la bolsa kraft junto a las asas.", img: "imagenes/bolsa-reno-2.jpg" },
+                    { text: "Adhiere dos círculos blancos con pupila negra y pega el pompón rojo al centro como nariz.", img: "imagenes/bolsa-reno-3.jpg" }
                 ]
             }
         ]
@@ -1537,9 +1537,9 @@ const tallerData = [
                 desc: "Alterna capas de harina, azúcar mascabado, avena y chispas de chocolate en un frasco con la receta escrita.",
                 materials: ["Frasco hermético de 1 litro", "Harina, avena y azúcar morena", "Chispas de chocolate y nueces", "Etiqueta con instrucciones de horneado"],
                 steps: [
-                    { text: "Vierte en el fondo 1 taza de harina con polvo para hornear y presiónala ligeramente.", img: "imagenesv/frasco-galletas-1.jpg" },
-                    { text: "Añade en capas separadas la avena, azúcar mascabado, chispas de chocolate y nueces.", img: "imagenesv/frasco-galletas-2.jpg" },
-                    { text: "Cierra herméticamente y ata una tarjeta indicando agregar 1 huevo y mantequilla al hornear.", img: "imagenesv/frasco-galletas-3.jpg" }
+                    { text: "Vierte en el fondo 1 taza de harina con polvo para hornear y presiónala ligeramente.", img: "imagenes/frasco-galletas-1.jpg" },
+                    { text: "Añade en capas separadas la avena, azúcar mascabado, chispas de chocolate y nueces.", img: "imagenes/frasco-galletas-2.jpg" },
+                    { text: "Cierra herméticamente y ata una tarjeta indicando agregar 1 huevo y mantequilla al hornear.", img: "imagenes/frasco-galletas-3.jpg" }
                 ]
             },
             {
@@ -1549,9 +1549,9 @@ const tallerData = [
                 desc: "Llena cucharas de madera con chocolate fundido, malvaviscos mini y trocitos de caramelo de menta.",
                 materials: ["Cucharas de madera desechables", "Chocolate semi-amargo para fundir", "Mini malvaviscos", "Bolsitas de celofán y listón"],
                 steps: [
-                    { text: "Funde el chocolate a baño María hasta obtener una mezcla brillante y sin grumos.", img: "imagenesv/cuchara-chocolate-1.jpg" },
-                    { text: "Sumerge y rellena cada cuchara de madera apoyándolas horizontales sobre papel encerado.", img: "imagenesv/cuchara-chocolate-2.jpg" },
-                    { text: "Decora con mini malvaviscos antes de que endurezca y envuelve en celofán con listón.", img: "imagenesv/cuchara-chocolate-3.jpg" }
+                    { text: "Funde el chocolate a baño María hasta obtener una mezcla brillante y sin grumos.", img: "imagenes/cuchara-chocolate-1.jpg" },
+                    { text: "Sumerge y rellena cada cuchara de madera apoyándolas horizontales sobre papel encerado.", img: "imagenes/cuchara-chocolate-2.jpg" },
+                    { text: "Decora con mini malvaviscos antes de que endurezca y envuelve en celofán con listón.", img: "imagenes/cuchara-chocolate-3.jpg" }
                 ]
             },
             {
@@ -1561,9 +1561,9 @@ const tallerData = [
                 desc: "Hornea muñecos y estrellas especiadas con jengibre y clavo, y decóralos con glaseado real blanco.",
                 materials: ["Harina, miel y mantequilla", "Jengibre, canela y clavo molido", "Azúcar glass y clara de huevo", "Cortadores navideños"],
                 steps: [
-                    { text: "Mezcla mantequilla, miel y especias; incorpora harina hasta formar una masa suave y refrigera.", img: "imagenesv/galleta-jengibre-1.jpg" },
-                    { text: "Extiende la masa a 5 mm, corta los muñecos y hornea 10 minutos a 180 °C.", img: "imagenesv/galleta-jengibre-2.jpg" },
-                    { text: "Una vez frías, dibuja ojos, sonrisa y botones usando una manga con glaseado blanco.", img: "imagenesv/galleta-jengibre-3.jpg" }
+                    { text: "Mezcla mantequilla, miel y especias; incorpora harina hasta formar una masa suave y refrigera.", img: "imagenes/galleta-jengibre-1.jpg" },
+                    { text: "Extiende la masa a 5 mm, corta los muñecos y hornea 10 minutos a 180 °C.", img: "imagenes/galleta-jengibre-2.jpg" },
+                    { text: "Una vez frías, dibuja ojos, sonrisa y botones usando una manga con glaseado blanco.", img: "imagenes/galleta-jengibre-3.jpg" }
                 ]
             },
             {
@@ -1573,9 +1573,9 @@ const tallerData = [
                 desc: "Combina té negro en hebras con cáscara de naranja seca, cardamomo, canela y clavos de olor en bolsitas de tela.",
                 materials: ["Té negro Assam o Ceilán", "Cardamomo verde y canela", "Cáscara de naranja deshidratada", "Saquitos de muselina de algodón"],
                 steps: [
-                    { text: "Tritura ligeramente las vainas de cardamomo, la canela en rama y la cáscara de naranja seca.", img: "imagenesv/te-especiado-1.jpg" },
-                    { text: "Mezcla las especias con las hojas de té negro en un tazón seco.", img: "imagenesv/te-especiado-2.jpg" },
-                    { text: "Rellena los saquitos de muselina con 2 cucharaditas por bolsa y ciérralos con su cordón.", img: "imagenesv/te-especiado-3.jpg" }
+                    { text: "Tritura ligeramente las vainas de cardamomo, la canela en rama y la cáscara de naranja seca.", img: "imagenes/te-especiado-1.jpg" },
+                    { text: "Mezcla las especias con las hojas de té negro en un tazón seco.", img: "imagenes/te-especiado-2.jpg" },
+                    { text: "Rellena los saquitos de muselina con 2 cucharaditas por bolsa y ciérralos con su cordón.", img: "imagenes/te-especiado-3.jpg" }
                 ]
             }
         ]

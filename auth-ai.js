@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SISTEMA GLOBAL ORBIT PLATA: FAVORITOS PERMANENTES EN MANUALIDADES + IA
+   SISTEMA GLOBAL ORBIT PLATA: FAVORITOS PERMANENTES EN CADA MANUALIDAD + IA
    ========================================================================== */
 
 const SUPABASE_URL = "https://fwbcltconkufmjkonwnd.supabase.co";
@@ -133,31 +133,6 @@ function injectOrbitAIStyles() {
     .orbit-star-icon-btn.danger:hover {
       border-color: #fca5a5 !important;
       color: #fecaca !important;
-    }
-
-    /* TOAST DE CONFIRMACIÓN DE FAVORITOS */
-    .orbit-toast {
-      position: fixed;
-      bottom: 82px;
-      right: 22px;
-      z-index: 100005;
-      padding: 10px 16px;
-      border-radius: 12px;
-      background: rgba(14, 16, 22, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      color: #ffffff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      font-size: 0.84rem;
-      font-weight: 600;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75);
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .orbit-toast.show {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     /* OVERLAY TRANSPARENTE */
@@ -480,7 +455,7 @@ function injectOrbitAIStyles() {
       color: #ffffff;
     }
 
-    /* BOTÓN ESTRELLITA EN CADA TARJETA DE MANUALIDAD */
+    /* BOTÓN ESTRELLITA EN CADA MANUALIDAD / PRODUCTO DE CADA SECCIÓN */
     .orbit-fav-btn {
       display: inline-flex !important;
       align-items: center;
@@ -721,20 +696,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   let authMode = "login";
   const pageTitle = document.title || window.location.pathname;
 
-  function showToast(msg) {
-    let toast = document.getElementById("orbit-toast");
-    if (!toast) {
-      toast = document.createElement("div");
-      toast.id = "orbit-toast";
-      toast.className = "orbit-toast";
-      document.body.appendChild(toast);
-    }
-    toast.textContent = msg;
-    toast.classList.add("show");
-    clearTimeout(toast._t);
-    toast._t = setTimeout(() => toast.classList.remove("show"), 2600);
-  }
-
   function detectarCategoriaActual() {
     const ref = (window.location.pathname + " " + pageTitle).toLowerCase();
     if (ref.includes("navidad")) return "Navidad";
@@ -923,7 +884,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
 
           <p style="font-size:0.78rem; color:#cbd5e1; text-align:center; margin:0 0 12px;">
-            Tus manualidades favoritas guardadas permanentemente en tu perfil ⭐
+            Tus manualidades y productos guardados permanentemente ⭐<br>
+            (Solo se eliminan si pulsas <strong>✕</strong> aquí)
           </p>
 
           <div id="favs-list-container" style="flex:1; overflow-y:auto;">
@@ -1006,6 +968,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const logoutBtn = document.getElementById("global-logout-btn");
   const logoutBtnLabel = document.getElementById("logout-btn-label");
 
+  async function abrirModalFavoritos() {
+    document.getElementById("favs-modal").classList.add("open");
+    triggerFavsScramble("FAVORITOS");
+    await renderFavoritosModal();
+  }
+
   loginBtn.addEventListener("click", () => {
     document.getElementById("auth-modal").classList.add("open");
     triggerAuthScramble(authMode === "register" ? "REGISTRO" : "ACCESO");
@@ -1014,11 +982,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("submit-idea-modal").classList.add("open");
     triggerIdeaScramble("PUBLICAR");
   });
-  favsBtn.addEventListener("click", async () => {
-    document.getElementById("favs-modal").classList.add("open");
-    triggerFavsScramble("FAVORITOS");
-    await renderFavoritosModal();
-  });
+  favsBtn.addEventListener("click", abrirModalFavoritos);
   logoutBtn.addEventListener("click", async () => {
     await sb.auth.signOut();
     await updateSessionUI(null);
@@ -1067,7 +1031,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       data.forEach((row) => userFavoritosIds.add(row.item_id));
       writeLocalBackup(data);
     } else {
-      // Si hubo fallo de red momentáneo, cargar desde respaldo local del perfil
       const backup = readLocalBackup();
       backup.forEach((row) => userFavoritosIds.add(row.item_id));
     }
@@ -1076,32 +1039,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     refreshFavButtonsOnPage();
   }
 
-  window.toggleFavorito = async function (itemId, titulo, categoria, enlaceGuardado) {
+  // Solo guarda en favoritos y abre "Mis Favoritos". NUNCA elimina desde la tarjeta.
+  window.guardarEnFavoritosYRedirigir = async function (itemId, titulo, categoria, enlaceGuardado) {
     if (!currentUser) {
       document.getElementById("auth-modal").classList.add("open");
       triggerAuthScramble("ACCESO");
       const statusEl = document.getElementById("auth-status");
-      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar tus manualidades favoritas ⭐";
+      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar en Mis Favoritos ⭐";
       statusEl.className = "status-banner error";
       return;
     }
 
-    if (userFavoritosIds.has(itemId)) {
-      // Solo se quita cuando el usuario explícitamente lo desmarca
-      const { error } = await sb
-        .from("favoritos_usuario")
-        .delete()
-        .eq("user_id", currentUser.id)
-        .eq("item_id", itemId);
-
-      if (!error) {
-        userFavoritosIds.delete(itemId);
-        const updatedBackup = readLocalBackup().filter((f) => f.item_id !== itemId);
-        writeLocalBackup(updatedBackup);
-        showToast("Eliminado de tus favoritos");
-      }
-    } else {
-      // Verificar que no exista duplicado antes de insertar y guardar de forma permanente
+    if (!userFavoritosIds.has(itemId)) {
       const nuevoFav = {
         user_id: currentUser.id,
         item_id: itemId,
@@ -1116,20 +1065,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         const backup = readLocalBackup().filter((f) => f.item_id !== itemId);
         backup.unshift({ ...nuevoFav, created_at: new Date().toISOString() });
         writeLocalBackup(backup);
-        showToast(`⭐ "${titulo}" guardado en tu perfil`);
       }
     }
 
     if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
     refreshFavButtonsOnPage();
+    await abrirModalFavoritos();
   };
 
+  // Única función que borra un favorito (exclusiva del botón ✕ dentro de "Mis Favoritos")
+  async function eliminarFavoritoDesdeModal(itemId) {
+    if (!currentUser) return;
+    const { error } = await sb
+      .from("favoritos_usuario")
+      .delete()
+      .eq("user_id", currentUser.id)
+      .eq("item_id", itemId);
+
+    if (!error) {
+      userFavoritosIds.delete(itemId);
+      const updatedBackup = readLocalBackup().filter((f) => f.item_id !== itemId);
+      writeLocalBackup(updatedBackup);
+      if (favsBtnLabel) favsBtnLabel.textContent = `Favoritos (${userFavoritosIds.size})`;
+      refreshFavButtonsOnPage();
+      await renderFavoritosModal();
+    }
+  }
+
   // ========================================================================
-  // DETECTAR SOLO TARJETAS DE MANUALIDADES (IGNORANDO SELECTORES DE CATEGORÍA)
+  // IDENTIFICAR EXCLUSIVAMENTE TARJETAS DE PRODUCTOS / MANUALIDADES REALES
   // ========================================================================
-  const SELECTORES_TARJETAS = [
+  const SELECTORES_CANDIDATOS = [
     "[data-fav-id]",
-    ".glass-card",
     ".altar-card-box",
     ".bento-card",
     ".card-rosa",
@@ -1145,30 +1112,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     ".lugar-card",
     ".craft-card",
     ".manualidad-card",
-    ".opcion-card"
+    ".opcion-card",
+    ".comunidad-card",
+    ".glass-card"
   ].join(", ");
 
-  function esTarjetaSelectorCategoria(card) {
-    // Evita colocar "Guardar" en los botones/tarjetas que solo despliegan una categoría (Decoración, Animatrónicos, etc.)
-    if (card.matches(".cat-card, .category-card, .selector-card, [data-cat], [data-category], [data-section], [data-filter]")) {
+  function esTarjetaDeProductoOManualidad(card) {
+    // 1. Nunca dentro de modales de diálogo ni overlays
+    if (card.closest(".craft-modal, .popup-modal:not(#modal-galeria), .spooky-modal, .modal-pro, .global-modal-overlay")) {
+      return false;
+    }
+
+    // 2. Excluir explícitamente cualquier tarjeta que sea selector de categoría
+    // (como Decoración, Animatrónicos, Fiesta Halloween, Disfraces)
+    if (
+      card.matches(
+        ".cat-card, .category-card, .selector-card, [data-cat], [data-category], [data-section], [data-filter], [onclick*='selectCategory'], [onclick*='filtrar'], [onclick*='mostrar']"
+      )
+    ) {
+      return false;
+    }
+
+    // Si es una .glass-card o tarjeta en contenedor de categorías que NO tiene acción de producto/pasos ni data-fav-id
+    if (card.classList.contains("glass-card") && !card.hasAttribute("data-fav-id")) {
+      return false;
+    }
+
+    // 3. Debe tener atributo data-fav-id explícito O ser una tarjeta de manualidad/producto/lugar con contenido real
+    if (card.hasAttribute("data-fav-id") || card.classList.contains("comunidad-card")) {
       return true;
     }
-    if (card.closest("#categorias, .categorias-grid, .category-selector, .cat-grid, #glass-container")) {
-      return true;
-    }
-    // Si tiene botón "Ver pasos", "Ver Tutorial", "Cómo llegar" o enlaces externos, SÍ es una manualidad/idea real
-    const tieneAccionReal = card.querySelector(
-      "button.btn-abrir-pasos, button.open-tut-btn, a[href^='http'], .btn-ver-pasos, [data-modal-pasos], [data-pasos]"
+
+    const tieneBotonOEnlaceProducto = card.querySelector(
+      "button.btn-abrir-pasos, button.open-tut-btn, .btn-ver-pasos, [data-modal-pasos], [data-pasos], a[href^='http'], a[href*='amazon'], a[href*='mercadolibre'], a[href*='maps']"
     );
-    if (!tieneAccionReal && !card.hasAttribute("data-fav-id") && !card.classList.contains("comunidad-card")) {
-      // Si la tarjeta es corta y solo contiene un badge/etiqueta de categoría sin descripción ni pasos, ignorar
-      const texto = card.textContent.trim();
-      const tieneDescripcion = card.querySelector("p, .ogl-details, .bento-desc, .card-desc");
-      if (!tieneDescripcion && texto.length < 45) {
-        return true;
-      }
-    }
-    return false;
+    const tieneTextoProducto = card.querySelector(
+      "p, .ogl-details, .bento-desc, .card-desc, .precio, .price, .costo"
+    );
+
+    return Boolean(tieneBotonOEnlaceProducto || tieneTextoProducto);
   }
 
   function extraerMetaTarjeta(card, idx) {
@@ -1178,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const titulo = (
       card.getAttribute("data-fav-title") ||
       (tituloEl ? tituloEl.textContent : "") ||
-      `Manualidad ${idx + 1}`
+      `Opción ${idx + 1}`
     ).trim();
 
     const linkEl = card.querySelector("a[href]");
@@ -1214,14 +1196,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function refreshFavButtonsOnPage() {
-    document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
-      // Ignorar modales y tarjetas de selección de categoría
-      if (
-        card.closest(".craft-modal, .popup-modal:not(#modal-galeria), .spooky-modal, .modal-pro, .global-modal-overlay") ||
-        esTarjetaSelectorCategoria(card)
-      ) {
-        const viejoBtn = card.querySelector(":scope > .orbit-fav-btn");
-        if (viejoBtn) viejoBtn.remove();
+    document.querySelectorAll(SELECTORES_CANDIDATOS).forEach((card, idx) => {
+      if (!esTarjetaDeProductoOManualidad(card)) {
+        // Asegurar que no quede ningún botón en selectores de categoría
+        const btnIncorrecto = card.querySelector(":scope > .orbit-fav-btn");
+        if (btnIncorrecto) btnIncorrecto.remove();
         return;
       }
 
@@ -1235,7 +1214,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           e.preventDefault();
           e.stopPropagation();
           const actual = extraerMetaTarjeta(card, idx);
-          window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria, actual.enlace);
+          window.guardarEnFavoritosYRedirigir(
+            actual.itemId,
+            actual.titulo,
+            actual.categoria,
+            actual.enlace
+          );
         });
         const contenedor =
           card.querySelector(".ogl-card-body, .bento-content, .card-info, .card-body, .spooky-card-body, .card-content") ||
@@ -1245,7 +1229,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const isSaved = userFavoritosIds.has(itemId);
       btn.classList.toggle("saved", isSaved);
-      btn.textContent = isSaved ? "⭐ Guardado" : "☆ Guardar";
+      btn.textContent = isSaved ? "⭐ En Mis Favoritos" : "☆ Guardar en Favoritos";
     });
   }
 
@@ -1281,7 +1265,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const listaFinal = !error && Array.isArray(data) ? data : readLocalBackup();
 
     if (!listaFinal || listaFinal.length === 0) {
-      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes manualidades favoritas guardadas. Pulsa "☆ Guardar" en cualquier manualidad para conservarla aquí.</p>`;
+      container.innerHTML = `<p style="font-size:0.86rem; color:#94a3b8; text-align:center; padding:16px 0;">Aún no tienes favoritos guardados. Pulsa "☆ Guardar en Favoritos" en cualquier manualidad o producto para añadirlo aquí.</p>`;
       return;
     }
 
@@ -1297,7 +1281,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
             <div style="display:flex; gap:6px; flex-shrink:0;">
               ${fav.url_pagina ? `<a href="${fav.url_pagina}" ${targetAttr} class="orbit-star-icon-btn" style="text-decoration:none; height:32px; padding:0 12px; font-size:0.72rem;">Abrir 🔗</a>` : ""}
-              <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" title="Quitar de favoritos" data-del-fav="${fav.item_id}">✕</button>
+              <button type="button" class="orbit-star-icon-btn danger" style="height:32px; min-width:32px; padding:0 8px;" title="Eliminar de Mis Favoritos" data-del-fav="${fav.item_id}">✕</button>
             </div>
           </div>
         `;
@@ -1306,8 +1290,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.querySelectorAll("[data-del-fav]").forEach((btn) => {
       btn.addEventListener("click", async () => {
-        await window.toggleFavorito(btn.getAttribute("data-del-fav"), "", "", "");
-        await renderFavoritosModal();
+        await eliminarFavoritoDesdeModal(btn.getAttribute("data-del-fav"));
       });
     });
   }

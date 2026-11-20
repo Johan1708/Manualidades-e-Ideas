@@ -1057,7 +1057,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // ========================================================================
-  // DETECCIÓN AUTOMÁTICA DE TODAS LAS TARJETAS, LUGARES Y PRODUCTOS (HTML+JS)
+  // DETECCIÓN SEGURA DE TODAS LAS TARJETAS, LUGARES Y PRODUCTOS (SIN BUCLES)
   // ========================================================================
   const SELECTORES_TARJETAS = [
     "[data-fav-id]",
@@ -1097,33 +1097,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { itemId, titulo, categoria };
   }
 
+  let isUpdatingFavs = false;
+
   function refreshFavButtonsOnPage() {
-    document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
-      // No poner estrellita dentro de modales emergentes
-      if (card.closest(".craft-modal, .popup-modal, .spooky-modal, .modal-pro, .global-modal-overlay")) {
-        return;
-      }
+    if (isUpdatingFavs) return;
+    isUpdatingFavs = true;
 
-      let btn = card.querySelector(".orbit-fav-btn");
-      if (!btn) {
-        btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "orbit-fav-btn";
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const actual = extraerMetaTarjeta(card, idx);
-          window.toggleFavorito(actual.itemId, actual.titulo, actual.categoria);
-        });
-        const contenedor = card.querySelector(".bento-content, .card-info") || card;
-        contenedor.appendChild(btn);
-      }
+    try {
+      document.querySelectorAll(SELECTORES_TARJETAS).forEach((card, idx) => {
+        if (card.closest(".craft-modal, .popup-modal, .spooky-modal, .modal-pro, .global-modal-overlay")) {
+          return;
+        }
 
-      const { itemId } = extraerMetaTarjeta(card, idx);
-      const isSaved = userFavoritosIds.has(itemId);
-      btn.classList.toggle("saved", isSaved);
-      btn.textContent = isSaved ? "⭐ Guardado" : "☆ Guardar";
-    });
+        const { itemId } = extraerMetaTarjeta(card, idx);
+        let btn = card.querySelector(".orbit-fav-btn");
+
+        if (!btn) {
+          btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "orbit-fav-btn";
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentMeta = extraerMetaTarjeta(card, idx);
+            window.toggleFavorito(currentMeta.itemId, currentMeta.titulo, currentMeta.categoria);
+          });
+          const contenedor = card.querySelector(".bento-content, .card-info") || card;
+          contenedor.appendChild(btn);
+        }
+
+        const isSaved = userFavoritosIds.has(itemId);
+        const nuevoTexto = isSaved ? "⭐ Guardado" : "☆ Guardar";
+        if (btn.textContent !== nuevoTexto) {
+          btn.classList.toggle("saved", isSaved);
+          btn.textContent = nuevoTexto;
+        }
+      });
+    } finally {
+      isUpdatingFavs = false;
+    }
   }
 
   async function renderFavoritosModal() {
@@ -1228,10 +1240,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   await updateSessionUI(sessionData?.session?.user || null);
   await loadComunidadIdeas();
 
-  // Observar tarjetas creadas dinámicamente por tus otros JS (Halloween, Día del Padre, Navidad, etc.)
-  const domObserver = new MutationObserver(() => {
-    refreshFavButtonsOnPage();
+  // Observador con debounce e ignorando botones propios para evitar cualquier congelamiento
+  let favDebounceTimer = null;
+  const domObserver = new MutationObserver((mutations) => {
+    if (isUpdatingFavs) return;
+    const huboNodosNuevos = mutations.some(
+      (m) => m.addedNodes.length > 0 && ![...m.addedNodes].every((n) => n.classList?.contains("orbit-fav-btn"))
+    );
+    if (!huboNodosNuevos) return;
+
+    clearTimeout(favDebounceTimer);
+    favDebounceTimer = setTimeout(() => {
+      refreshFavButtonsOnPage();
+    }, 150);
   });
+
   domObserver.observe(document.body, {
     childList: true,
     subtree: true

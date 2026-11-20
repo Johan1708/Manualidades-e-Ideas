@@ -1247,9 +1247,9 @@ const regionalData = {
         sharedStates: ["Michoacán", "Jalisco", "Guanajuato", "Aguascalientes"],
         stateKeys: ["michoacan", "jalisco", "guanajuato", "aguascalientes"],
         images: [
-            "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=500&auto=format&fit=crop"
+            "imagenes/michoacan-1.jpg",
+            "imagenes/michoacan-2.jpg",
+            "imagenes/michoacan-3.jpg"
         ],
         elements: ["✨ Arcos de Cempasúchil", "🕯️ Redes de Pesca con Velas", "🐟 Pescado Blanco", "🍞 Pan de Muerto Artesanal"],
         lat: 19.5133, lng: -101.6094, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Patzcuaro+Michoacan+Dia+de+Muertos"
@@ -1261,9 +1261,9 @@ const regionalData = {
         sharedStates: ["Jalisco", "Michoacán", "Guanajuato", "Aguascalientes"],
         stateKeys: ["jalisco", "michoacan", "guanajuato", "aguascalientes"],
         images: [
-            "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=500&auto=format&fit=crop"
+            "imagenes/jalisco-1.jpg",
+            "imagenes/jalisco-2.jpg",
+            "imagenes/jalisco-3.jpg"
         ],
         elements: ["✨ Arcos de Cempasúchil", "🎺 Mariachi Tradicional", "🍞 Pan de Muerto Artesanal"],
         lat: 20.6597, lng: -103.3496, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Guadalajara+Dia+de+Muertos"
@@ -1275,9 +1275,9 @@ const regionalData = {
         sharedStates: ["Ciudad de México", "Estado de México", "Morelos", "Tlaxcala"],
         stateKeys: ["cdmx", "edomex", "morelos", "tlaxcala"],
         images: [
-            "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=500&auto=format&fit=crop"
+            "imagenes/cdmx-1.jpg",
+            "imagenes/cdmx-2.jpg",
+            "imagenes/cdmx-3.jpg"
         ],
         elements: ["💀 Calaveras de Azúcar Neón", "🕯️ La Alumbrada en Panteón", "🌺 Flor de Cresta de Gallo", "🌽 Tamales de Mole"],
         lat: 19.2253, lng: -98.9619, mapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Andres+Mixquic+Dia+de+Muertos"
@@ -1289,9 +1289,9 @@ const regionalData = {
         sharedStates: ["San Luis Potosí", "Hidalgo", "Veracruz", "Tamaulipas"],
         stateKeys: ["sanluispotosi", "hidalgo", "veracruz", "tamaulipas"],
         images: [
-            "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=500&auto=format&fit=crop"
+            "imagenes/sanluispotosi-1.jpg",
+            "imagenes/sanluispotosi-2.jpg",
+            "imagenes/sanluispotosi-3.jpg"
         ],
         elements: ["🎭 Máscaras de Huehues", "🫔 Zacahuil Gigante", "🕯️ Arcos Huastecos"],
         lat: 21.9833, lng: -98.9833, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Huasteca+Potosina+Xantolo"
@@ -1303,9 +1303,9 @@ const regionalData = {
         sharedStates: ["Oaxaca", "Chiapas", "Guerrero"],
         stateKeys: ["oaxaca", "chiapas", "guerrero"],
         images: [
-            "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=500&auto=format&fit=crop"
+            "imagenes/oaxaca-1.jpg",
+            "imagenes/oaxaca-2.jpg",
+            "imagenes/oaxaca-3.jpg"
         ],
         elements: ["🍲 Mole Negro y Mezcal", "🥖 Pan de Yema con Caritas", "🌾 Copal y Sahumerio", "🍫 Chocolate de Agua"],
         lat: 17.0654, lng: -96.7236, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Oaxaca+Centro+Dia+de+Muertos"
@@ -1317,9 +1317,9 @@ const regionalData = {
         sharedStates: ["Yucatán", "Quintana Roo", "Campeche", "Tabasco"],
         stateKeys: ["yucatan", "quintanaroo", "campeche", "tabasco"],
         images: [
-            "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=500&auto=format&fit=crop"
+            "imagenes/yucatan-1.jpg",
+            "imagenes/yucatan-2.jpg",
+            "imagenes/yucatan-3.jpg"
         ],
         elements: ["🫔 Mukbilpollo (Pib)", "🥣 Atole Sak-Ha en Jícaras", "🪡 Manteletes Bordados Maya", "🕯️ Velas de Cera Virgen"],
         lat: 20.9676, lng: -89.6237, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Merida+Yucatan+Hanal+Pixan"
@@ -1331,9 +1331,9 @@ const regionalData = {
         sharedStates: ["Puebla", "Tlaxcala", "Querétaro"],
         stateKeys: ["puebla", "tlaxcala", "queretaro"],
         images: [
-            "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=500&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=500&auto=format&fit=crop"
+            "imagenes/puebla-1.jpg",
+            "imagenes/puebla-2.jpeg",
+            "imagenes/puebla-3.jpg"
         ],
         elements: ["🏛️ Pirámide de Satín Blanco", "🪞 Espejos de la Eternidad", "🍯 Alfeñiques Dorados", "🕯️ Cirios Monumentales"],
         lat: 18.7725, lng: -98.5502, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Huaquechula+Puebla+Altares+Monumentales"

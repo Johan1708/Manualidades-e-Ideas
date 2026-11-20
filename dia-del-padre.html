@@ -52,7 +52,6 @@
                 <div class="menu-item" data-section="objetos">Objetos & Regalos</div>
                 <div class="menu-item" data-section="manualidades">Manualidades DIY Paso a Paso</div>
                 <div class="menu-item" data-section="lugares">Lugares & Experiencias</div>
-                <div class="menu-item" data-modal="modal-ia-chat">Asistente Guía IA</div>
             </div>
         </div>
     </div>
@@ -144,34 +143,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: ASISTENTE GUÍA DE IA -->
-    <div id="modal-ia-chat" class="popup-modal">
-        <div class="glass-card menu-themed-card modal-medium">
-            <button class="close-modal">×</button>
-            <div class="father-header">Guía Inteligente</div>
-            <h3 class="modal-sec-title">Asistente Personal de Recomendación</h3>
-            <p class="ia-subtitle">Escribe tu presupuesto o los materiales que tienes en casa para darte una idea personalizada.</p>
-            
-            <div class="ia-chat-box" id="ia-chat-box">
-                <div class="chat-msg ai-msg">
-                    <i class="fa-solid fa-robot"></i>
-                    <span>¡Hola! Cuéntame tu presupuesto (ej. <em>"$400 MXN"</em>) o tus materiales en casa (ej. <em>"madera, fotos, cartón"</em>) y te diré qué regalarle a papá.</span>
-                </div>
-            </div>
-
-            <div class="ia-input-container">
-                <input type="text" id="ia-user-input" placeholder="Ej: Tengo $300 o madera en casa...">
-                <div class="box">
-                    <button id="ia-send-btn" class="btn btn-canvas-particle">
-                        <span><i class="fa-solid fa-paper-plane"></i></span>
-                        <canvas class="btn-canvas"></canvas>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 3: TUTORIAL PASO A PASO -->
+    <!-- MODAL 2: TUTORIAL PASO A PASO -->
     <div id="modal-tutorial" class="popup-modal">
         <div class="glass-card menu-themed-card modal-medium">
             <button class="close-modal" id="close-tutorial">×</button>
@@ -182,6 +154,12 @@
             <div class="tutorial-content">
                 <img id="tut-img" src="" alt="Tutorial" class="tut-main-img">
                 <div class="tut-steps" id="tut-steps-list"></div>
+                <div class="box" style="width:100%; margin-top:16px;">
+                    <button id="tut-fav-btn" type="button" class="btn btn-canvas-particle btn-card-action" style="width:100%;">
+                        <span>☆ Guardar en Favoritos</span>
+                        <canvas class="btn-canvas"></canvas>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

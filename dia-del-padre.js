@@ -687,90 +687,97 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
 
     // ==========================================================
-    // 2. BASE DE DATOS EXTENDIDA
+    // 2. BASE DE DATOS EXTENDIDA (IMÁGENES LOCALES EN imagenes/)
     // ==========================================================
     const sectionsDatabase = {
         objetos: [
             {
+                id: "padre-obj-1",
                 title: "Reloj Casio Vintage Stainless Steel",
                 age: "maduro",
                 price: 979,
                 formattedPrice: "$979 MXN",
                 location: "Amazon México",
-                img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-reloj-casio.jpg",
                 desc: "Reloj retro acero inoxidable con cronómetro digital, alarma y resistencia al agua.",
                 shopUrl: "https://www.amazon.com.mx/s?k=reloj+casio+vintage+hombre"
             },
             {
+                id: "padre-obj-2",
                 title: "Termo Negro 30oz Grabado Láser",
                 age: "joven",
                 price: 350,
                 formattedPrice: "$350 MXN",
                 location: "Mercado Libre México",
-                img: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-termo-negro.jpg",
                 desc: "Termo de acero grabado con nombre personalizado. Bebidas frías por 24 horas.",
                 shopUrl: "https://listado.mercadolibre.com.mx/termo-dia-del-padre-personalizado"
             },
             {
+                id: "padre-obj-3",
                 title: "Kit Asador Profesional en Estuche",
                 age: "maduro",
                 price: 999,
                 formattedPrice: "$999 MXN",
                 location: "Amazon México",
-                img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-kit-asador.jpg",
                 desc: "Estuche ejecutivo de aluminio con 20 utensilios de acero inoxidable para parrillada.",
                 shopUrl: "https://www.amazon.com.mx/s?k=kit+asador+profesional+para+regalo"
             },
             {
+                id: "padre-obj-4",
                 title: "Bocina Bluetooth Portátil Resistent",
                 age: "joven",
                 price: 850,
                 formattedPrice: "$850 MXN",
                 location: "Amazon México",
-                img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-bocina-bluetooth.jpg",
                 desc: "Sonido envolvente 360°, impermeable IPX7 y batería de 15 horas.",
                 shopUrl: "https://www.amazon.com.mx/s?k=bocina+bluetooth+portatil+resistente"
             },
             {
+                id: "padre-obj-5",
                 title: "Billetera Piel Tarjetero RFID",
                 age: "mayor",
                 price: 420,
                 formattedPrice: "$420 MXN",
                 location: "Mercado Libre México",
-                img: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-billetera-piel.jpg",
                 desc: "Cartera de piel genuina con desplegable pop-up y protección antirrobo de datos.",
                 shopUrl: "https://listado.mercadolibre.com.mx/billetera-hombre-rfid-piel"
             },
             {
+                id: "padre-obj-6",
                 title: "Vasos de Whisky con Piedras de Basalto",
                 age: "maduro",
                 price: 490,
                 formattedPrice: "$490 MXN",
                 location: "Amazon México",
-                img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-vasos-whisky.jpg",
                 desc: "Set de 2 vasos de cristal con piedras refrigerantes en caja de madera de lujo.",
                 shopUrl: "https://www.amazon.com.mx/s?k=vasos+whisky+piedras+regalo"
             },
             {
+                id: "padre-obj-7",
                 title: "Set Grooming & Barba de Lujo",
                 age: "joven",
                 price: 299,
                 formattedPrice: "$299 MXN",
                 location: "Amazon México",
-                img: "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-kit-barba.jpg",
                 desc: "Aceite de argán, bálsamo, cepillo de cerdas naturales y tijeras de precisión.",
                 shopUrl: "https://www.amazon.com.mx/s?k=kit+barba+grooming+regalo"
             }
         ],
         manualidades: [
             {
-                id: "man-1",
+                id: "padre-man-1",
                 title: "Llavero de Cuero Grabado DIY",
                 age: "joven",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Materiales caseros",
-                img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-llavero.jpg",
                 desc: "Corta y pirograba las iniciales de papá en un sobrante de piel sintética con argolla metálica.",
                 isTutorial: true,
                 tutorialSteps: [
@@ -780,13 +787,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: "man-2",
+                id: "padre-man-2",
                 title: "Marco 3D con Palitos de Madera",
                 age: "joven",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Materiales de reciclaje",
-                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-marco.jpg",
                 desc: "Construye un marco rústico pegando palitos de paleta pintados en titanio o negro mate.",
                 isTutorial: true,
                 tutorialSteps: [
@@ -796,13 +803,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: "man-3",
+                id: "padre-man-3",
                 title: "Organizador Rústico con Latas",
                 age: "maduro",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Reciclaje de cocina",
-                img: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-latas.jpg",
                 desc: "Pinta latas de conserva en negro mate, pégalas sobre madera y envuélvelas con mecate de yute.",
                 isTutorial: true,
                 tutorialSteps: [
@@ -812,13 +819,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: "man-4",
+                id: "padre-man-4",
                 title: "Arte 3D con Hilos y Clavos",
                 age: "joven",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Madera casera e hilo",
-                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-hilorama.jpg",
                 desc: "Traza una figura de montaña o corazón en madera, coloca chinches/clavos y entrecruza hilo.",
                 isTutorial: true,
                 tutorialSteps: [
@@ -828,13 +835,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: "man-5",
+                id: "padre-man-5",
                 title: "Portalentes con Pinza de Madera",
                 age: "mayor",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Pinza y tabla",
-                img: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-portalentes.jpg",
                 desc: "Cuelga una pinza de ropa de madera sobre una tablita decorada para sujetar los lentes de papá.",
                 isTutorial: true,
                 tutorialSteps: [
@@ -844,13 +851,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: "man-6",
+                id: "padre-man-6",
                 title: "Tarjeta Caja de Herramientas",
                 age: "joven",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Cartulinas y tijeras",
-                img: "https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-tarjeta-herramientas.jpg",
                 desc: "Maletín de cartulina con cupones recortables (lavado de auto, botana a la cama, etc.).",
                 isTutorial: true,
                 tutorialSteps: [
@@ -860,13 +867,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: "man-7",
+                id: "padre-man-7",
                 title: "Posavasos Espiral de Yute",
                 age: "maduro",
                 price: 0,
                 formattedPrice: "DIY / GRATIS",
                 location: "Cartón y cordón",
-                img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-diy-posavasos-yute.jpg",
                 desc: "Círculos de cartón grueso forrados con mecate en espiral pegado con silicón caliente.",
                 isTutorial: true,
                 tutorialSteps: [
@@ -878,76 +885,95 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         lugares: [
             {
+                id: "padre-lug-1",
                 title: "Cerro de las Campanas",
                 age: "mayor",
                 price: 20,
                 formattedPrice: "$18 - $20 MXN / Gratis INAPAM",
                 location: "Centro Histórico, Querétaro",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-campanas.jpg",
                 desc: "Parque histórico arbolado con vista panorámica, jardines y la capilla donde culminó el imperio.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cerro+de+las+Campanas+Queretaro"
             },
             {
+                id: "padre-lug-2",
                 title: "Museo de Arte de Querétaro (MAQRO)",
                 age: "mayor",
                 price: 0,
                 formattedPrice: "ENTRADA LIBRE ($0 MXN)",
                 location: "Exconvento San Agustín, Querétaro",
-                img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-maqro.jpg",
                 desc: "Recorrido por uno de los patios barrocos más hermosos de América Latina y exposiciones de arte.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Museo+de+Arte+de+Queretaro"
             },
             {
+                id: "padre-lug-3",
                 title: "Zona Arqueológica El Cerrito",
                 age: "maduro",
                 price: 0,
                 formattedPrice: "GRATIS en Domingo / < $20 MXN",
                 location: "El Pueblito, Corregidora",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-cerrito.jpg",
                 desc: "Caminata al aire libre alrededor de la gran pirámide con acceso a su museo de sitio.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Zona+Arqueologica+El+Cerrito+Queretaro"
             },
             {
+                id: "padre-lug-4",
                 title: "Paseo por la Alameda Hidalgo",
                 age: "mayor",
                 price: 0,
                 formattedPrice: "GRATIS ($0 MXN)",
                 location: "Av. Zaragoza, Querétaro",
-                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-alameda.jpg",
                 desc: "Caminata bajo fresnos y sauces centenarios, quiosco central y andadores llenos de sombra.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Alameda+Hidalgo+Queretaro"
             },
             {
+                id: "padre-lug-5",
                 title: "Mirador de Los Arcos y Templo de la Cruz",
                 age: "joven",
                 price: 0,
                 formattedPrice: "GRATIS ($0 MXN)",
                 location: "La Cruz, Santiago de Querétaro",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-arcos.jpg",
                 desc: "Caminata por la calzada del acueducto icónico de la ciudad y atardecer desde el mirador.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Mirador+de+los+Arcos+Queretaro"
             },
             {
+                id: "padre-lug-6",
                 title: "Cervecería Hércules",
                 age: "joven",
                 price: 650,
                 formattedPrice: "$650 MXN (Consumo prom.)",
                 location: "Hércules, Santiago de Querétaro",
-                img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-hercules.jpg",
                 desc: "Cerveza artesanal hecha en casa, ambiente industrial al aire libre y gastronomía internacional.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cerveceria+Hercules+Queretaro"
             },
             {
+                id: "padre-lug-7",
                 title: "Recorrido y Cata en Viñedos Freixenet",
                 age: "maduro",
                 price: 850,
                 formattedPrice: "$850 MXN por persona",
                 location: "Ezequiel Montes, Querétaro",
-                img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
+                img: "imagenes/padre-lugar-freixenet.jpg",
                 desc: "Visita a las cavas subterráneas a 25 metros de profundidad con degustación de vinos.",
                 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Vinedos+Freixenet+Queretaro"
             }
         ]
+    };
+
+    window.handlePadreImageError = function(imgEl) {
+        const base = imgEl.getAttribute('data-base');
+        const attempt = parseInt(imgEl.getAttribute('data-attempt') || '0', 10);
+        const fallbacks = [base + '.JPG', base + '.jpeg', base + '.JPEG', base + '.png', base + '.webp'];
+        if (attempt < fallbacks.length) {
+            imgEl.setAttribute('data-attempt', String(attempt + 1));
+            imgEl.src = fallbacks[attempt];
+        } else {
+            imgEl.style.opacity = '0.35';
+        }
     };
 
     let currentSectionKey = "objetos";
@@ -1013,6 +1039,11 @@ document.addEventListener('DOMContentLoaded', () => {
             manualidades: "Manualidades DIY Paso a Paso (Económicas)",
             lugares: "Lugares para Visitar & Experiencias ($0 - $20 MXN o Más)"
         };
+        const favCatMap = {
+            objetos: "Día del Padre • Regalo",
+            manualidades: "Día del Padre • Manualidad",
+            lugares: "Día del Padre • Lugar"
+        };
         if (galeriaTitle) galeriaTitle.textContent = titlesMap[currentSectionKey] || "Sección Seleccionada";
 
         const currentData = sectionsDatabase[currentSectionKey] || [];
@@ -1029,74 +1060,51 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'ogl-card roulette-3d-card';
             const numStr = (index + 1).toString().padStart(2, '0');
+            const favId = item.id || `padre-${currentSectionKey}-${index}`;
+            const favCategory = favCatMap[currentSectionKey] || "Día del Padre";
+            const favUrl = item.shopUrl || item.mapsUrl || `dia-del-padre.html#${favId}`;
+            const basePath = item.img.replace(/\.[^/.]+$/, "");
             
             let actionBtnHtml = "";
             if (item.isTutorial) {
                 actionBtnHtml = `<div class="box" style="width:100%"><button class="btn btn-canvas-particle btn-card-action open-tut-btn" data-id="${item.id}" style="width:100%"><span><i class="fa-solid fa-book-open"></i> Ver Tutorial</span><canvas class="btn-canvas"></canvas></button></div>`;
             } else {
                 const targetUrl = item.shopUrl || item.mapsUrl;
-                actionBtnHtml = `<div class="box" style="width:100%"><a href="${targetUrl}" target="_blank" class="btn btn-canvas-particle btn-card-action" style="width:100%"><span><i class="fa-solid fa-cart-shopping"></i> Comprar / Ver Mapa</span><canvas class="btn-canvas"></canvas></a></div>`;
+                actionBtnHtml = `<div class="box" style="width:100%"><a href="${targetUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-canvas-particle btn-card-action" style="width:100%"><span><i class="fa-solid fa-cart-shopping"></i> Comprar / Ver Mapa</span><canvas class="btn-canvas"></canvas></a></div>`;
             }
 
+            const favBtnHtml = `
+                <div class="box" style="width:100%; margin-top:8px;">
+                    <button type="button" class="btn btn-canvas-particle btn-card-action padre-fav-btn"
+                        data-fav-item="${favId}"
+                        data-fav-title="${item.title}"
+                        data-fav-cat="${favCategory}"
+                        data-fav-url="${favUrl}"
+                        style="width:100%">
+                        <span>☆ Guardar en Favoritos</span>
+                        <canvas class="btn-canvas"></canvas>
+                    </button>
+                </div>
+            `;
+
             card.innerHTML = `
-                <div class="ogl-card-img"><img src="${item.img}" alt="${item.title}"><span class="ogl-index-num">${numStr}</span><span class="ogl-price-tag">${item.formattedPrice}</span></div>
-                <div class="ogl-card-body"><h4>${item.title}</h4><span class="ogl-location-info"><i class="fa-solid fa-store"></i> ${item.location}</span><p class="ogl-details">${item.desc}</p>${actionBtnHtml}</div>
+                <div class="ogl-card-img"><img src="${item.img}" data-base="${basePath}" data-attempt="0" alt="${item.title}" onerror="handlePadreImageError(this)"><span class="ogl-index-num">${numStr}</span><span class="ogl-price-tag">${item.formattedPrice}</span></div>
+                <div class="ogl-card-body"><h4>${item.title}</h4><span class="ogl-location-info"><i class="fa-solid fa-store"></i> ${item.location}</span><p class="ogl-details">${item.desc}</p>${actionBtnHtml}${favBtnHtml}</div>
             `;
             track.appendChild(card);
             
-            const newBtn = card.querySelector('.btn-canvas-particle');
-            if (newBtn) initButtonParticles(newBtn);
+            card.querySelectorAll('.btn-canvas-particle').forEach(b => initButtonParticles(b));
         });
 
+        if (typeof window.syncIndividualButtonsState === "function") {
+            window.syncIndividualButtonsState();
+        }
         window.dispatchEvent(new Event('orbit:cards-updated'));
         setTimeout(update3DRoulettePositions, 50);
     }
 
     if (ageSelect) ageSelect.addEventListener('change', renderSectionGallery);
     if (priceSelect) priceSelect.addEventListener('change', renderSectionGallery);
-
-    // Asistente IA
-    const iaInput = document.getElementById('ia-user-input');
-    const iaSendBtn = document.getElementById('ia-send-btn');
-    const iaChatBox = document.getElementById('ia-chat-box');
-
-    function processIaResponse() {
-        if (!iaInput || !iaChatBox) return;
-        const text = iaInput.value.trim();
-        if (!text) return;
-
-        const userDiv = document.createElement('div');
-        userDiv.className = 'chat-msg user-msg';
-        userDiv.innerHTML = `<span>${text}</span>`;
-        iaChatBox.appendChild(userDiv);
-        iaInput.value = '';
-
-        iaChatBox.scrollTop = iaChatBox.scrollHeight;
-
-        setTimeout(() => {
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'chat-msg ai-msg';
-            const query = text.toLowerCase();
-            let responseStr = "";
-
-            if (query.includes("20") || query.includes("gratis") || query.includes("barato") || query.includes("parque")) {
-                responseStr = "🌳 **Opciones por $20 o GRATIS en QRO:** El **Cerro de las Campanas ($18-$20 MXN)**, el **Museo de Arte MAQRO ($0 MXN)** o la pirámide de **El Cerrito** son increíbles opciones.";
-            } else if (query.includes("cuero") || query.includes("lata") || query.includes("madera") || query.includes("casa")) {
-                responseStr = "💡 **Recomendación DIY:** El **Organizador Rústico con Latas** o el **Arte con Hilos y Clavos** se hacen con cosas de casa por $0 MXN. ¡Abre la sección de Manualidades para ver las instrucciones!";
-            } else if (query.includes("300") || query.includes("500") || query.includes("termo")) {
-                responseStr = "🎁 **Ideal con tu presupuesto:** El **Termo Negro Grabado ($350 MXN)** en Mercado Libre o los **Vasos de Whisky con Piedras ($490 MXN)** en Amazon son excelentes opciones.";
-            } else {
-                responseStr = "✨ **Guía Inteligente:** Revisa nuestras 20 categorías de Objetos, Manualidades paso a paso o Paseos en Querétaro (varias gratis o por menos de $20 MXN) desde el Menú.";
-            }
-
-            aiDiv.innerHTML = `<i class="fa-solid fa-robot"></i> <span>${responseStr}</span>`;
-            iaChatBox.appendChild(aiDiv);
-            iaChatBox.scrollTop = iaChatBox.scrollHeight;
-        }, 400);
-    }
-
-    if (iaSendBtn) iaSendBtn.onclick = (e) => { e.preventDefault(); processIaResponse(); };
-    if (iaInput) iaInput.onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); processIaResponse(); } };
 
     // Gestor Global de Clics Corregido
     const menuOverlay = document.getElementById("menu-overlay");
@@ -1106,6 +1114,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeMenu() { if (menuOverlay) menuOverlay.classList.remove('active'); }
 
     document.addEventListener('click', (e) => {
+        const favBtn = e.target.closest('.padre-fav-btn');
+        if (favBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const fId = favBtn.getAttribute('data-fav-item');
+            const fTitle = favBtn.getAttribute('data-fav-title');
+            const fCat = favBtn.getAttribute('data-fav-cat');
+            const fUrl = favBtn.getAttribute('data-fav-url');
+            if (typeof window.guardarEnFavoritosYRedirigir === "function") {
+                window.guardarEnFavoritosYRedirigir(fId, fTitle, fCat, fUrl);
+            }
+            return;
+        }
+
         const btnReturnMenu = e.target.closest('#btn-return-menu');
         if (btnReturnMenu) {
             e.preventDefault();
@@ -1155,9 +1177,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tutTitle = document.getElementById('tut-title');
                 const tutImg = document.getElementById('tut-img');
                 const stepsList = document.getElementById('tut-steps-list');
+                const tutFavBtn = document.getElementById('tut-fav-btn');
 
                 if (tutTitle) tutTitle.textContent = itemData.title;
-                if (tutImg) tutImg.src = itemData.img;
+                if (tutImg) {
+                    const basePath = itemData.img.replace(/\.[^/.]+$/, "");
+                    tutImg.setAttribute('data-base', basePath);
+                    tutImg.setAttribute('data-attempt', '0');
+                    tutImg.style.opacity = '1';
+                    tutImg.onerror = function() { window.handlePadreImageError(this); };
+                    tutImg.src = itemData.img;
+                }
                 if (stepsList) {
                     stepsList.innerHTML = '';
                     itemData.tutorialSteps.forEach(s => {
@@ -1166,6 +1196,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         stepDiv.innerHTML = `<h5>${s.step}</h5><p>${s.text}</p>`;
                         stepsList.appendChild(stepDiv);
                     });
+                }
+                if (tutFavBtn) {
+                    tutFavBtn.setAttribute('data-fav-item', itemData.id);
+                    const spanEl = tutFavBtn.querySelector('span');
+                    if (spanEl) spanEl.textContent = "☆ Guardar en Favoritos";
+                    tutFavBtn.onclick = (ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        if (typeof window.guardarEnFavoritosYRedirigir === "function") {
+                            window.guardarEnFavoritosYRedirigir(
+                                itemData.id,
+                                itemData.title,
+                                "Día del Padre • Manualidad",
+                                `dia-del-padre.html#${itemData.id}`
+                            );
+                        }
+                    };
+                    if (typeof window.syncIndividualButtonsState === "function") {
+                        window.syncIndividualButtonsState();
+                    }
                 }
                 document.getElementById('modal-tutorial')?.classList.add('active');
             }

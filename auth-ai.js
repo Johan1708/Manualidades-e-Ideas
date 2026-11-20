@@ -51,6 +51,17 @@ function injectOrbitAIStyles() {
       display: flex !important;
       align-items: center;
       gap: 10px;
+      pointer-events: none;
+    }
+
+    .orbit-user-bar > * {
+      pointer-events: auto;
+    }
+
+    /* En Día del Padre se sube automáticamente para dejar libres los botones inferiores */
+    .orbit-user-bar.pos-top {
+      top: 18px !important;
+      bottom: auto !important;
     }
 
     @keyframes starfield-drift {
@@ -572,6 +583,10 @@ function injectOrbitAIStyles() {
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.24), inset 0 0 10px rgba(255, 255, 255, 0.1) !important;
       transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
+    .ai-fab-btn.pos-top {
+      top: 18px !important;
+      bottom: auto !important;
+    }
     .ai-fab-btn:hover {
       transform: translateY(-2px) scale(1.03);
       border-color: #ffffff !important;
@@ -594,6 +609,10 @@ function injectOrbitAIStyles() {
       box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 28px rgba(255, 255, 255, 0.18) !important;
       color: #f8fafc !important;
       font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    .ai-drawer.pos-top {
+      top: 74px !important;
+      bottom: auto !important;
     }
     .ai-drawer.open { display: flex !important; }
     .ai-drawer-header {
@@ -880,6 +899,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
   `;
   document.body.appendChild(uiContainer);
+
+  // En Día del Padre los botones Inicio y MENÚ están abajo: subimos el dock y Nova arriba
+  const rutaActual = (window.location.pathname + " " + pageTitle).toLowerCase();
+  if (rutaActual.includes("padre")) {
+    document.getElementById("orbit-user-bar")?.classList.add("pos-top");
+    document.getElementById("open-ai-assistant")?.classList.add("pos-top");
+    document.getElementById("ai-drawer")?.classList.add("pos-top");
+  }
 
   // EFECTO DE TEXTO SCRAMBLE PARA AMBAS PANTALLAS HOLOGRÁFICAS (LOGIN Y PUBLICAR)
   const scrambleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

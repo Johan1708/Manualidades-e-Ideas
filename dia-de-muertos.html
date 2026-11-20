@@ -335,98 +335,22 @@
             <!-- COLUMNA 2: CHECKLIST INTERACTIVO DE ELEMENTOS -->
             <div class="altar-card-box" data-fav-id="muertos-altar-checklist" data-fav-title="Checklist para tu Altar" data-fav-cat="Día de Muertos">
                 <h3 class="box-title">Checklist para tu Altar</h3>
-                <p class="box-desc" id="checklistUserLabel">Marca los elementos que ya tienes listos para tu altar (tu progreso se guarda automáticamente):</p>
+                <p class="box-desc">Marca los elementos que ya tienes listos para tu altar:</p>
                 <div class="checklist-items" id="altarChecklist">
-                    <label class="check-item"><input type="checkbox" data-check-id="fotos" onchange="updateAltarProgress()"> <span>📷 Fotografías de tus difuntos</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="velas" onchange="updateAltarProgress()"> <span>🕯️ Veladoras / Velas de cera virgen</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="flores" onchange="updateAltarProgress()"> <span>🌼 Flores de Cempasúchil y Mano de León</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="pan" onchange="updateAltarProgress()"> <span>🍞 Pan de Muerto tradicional</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="copal" onchange="updateAltarProgress()"> <span>💨 Copal e Incienso natural</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="agua" onchange="updateAltarProgress()"> <span>💧 Vaso con Agua purificada y plato de Sal</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="papel" onchange="updateAltarProgress()"> <span>🎨 Papel Picado de colores</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="calaveras" onchange="updateAltarProgress()"> <span>💀 Calaveritas de azúcar o chocolate</span></label>
-                    <label class="check-item"><input type="checkbox" data-check-id="comida" onchange="updateAltarProgress()"> <span>🍲 Platillo y bebida favorita del difunto</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>📷 Fotografías de tus difuntos</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🕯️ Veladoras / Velas de cera virgen</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🌼 Flores de Cempasúchil y Mano de León</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🍞 Pan de Muerto tradicional</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💨 Copal e Incienso natural</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💧 Vaso con Agua purificada y plato de Sal</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🎨 Papel Picado de colores</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💀 Calaveritas de azúcar o chocolate</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🍲 Platillo y bebida favorita del difunto</span></label>
                 </div>
                 <div class="progress-bar-container">
                     <div class="progress-text" id="progressText">Altar preparado: 0%</div>
                     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
                 </div>
-            </div>
-        </div>
-
-        <!-- NUEVA SECCIÓN: DIFERENTES FORMAS DE HACER UN ALTAR (SOLO FOTOS Y DESCRIPCIÓN ABAJO) -->
-        <div class="altar-styles-block">
-            <div class="altar-styles-header">
-                <h3 class="box-title" style="font-size: 24px;">Formas y Estilos de Hacer un Altar</h3>
-                <p class="box-desc">Explora distintas maneras de montar tu ofrenda en casa según tu espacio y tradición; guarda tus favoritas con el corazón.</p>
-            </div>
-
-            <div class="altar-styles-grid">
-                <!-- ESTILO 1: 2 NIVELES -->
-                <article class="altar-style-card" data-fav-id="altar-estilo-2-niveles" data-fav-title="Altar de 2 Niveles (Cielo y Tierra)" data-fav-cat="Día de Muertos">
-                    <div class="altar-style-img-box">
-                        <img src="img/altar-2-niveles.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=700&auto=format&fit=crop';" alt="Altar de 2 niveles cielo y tierra">
-                    </div>
-                    <div class="altar-style-body">
-                        <h4>Altar de 2 Niveles (Cielo y Tierra)</h4>
-                        <p>Ideal para espacios pequeños en casa. Representa la división entre el plano celestial (arriba con retratos y veladoras) y los frutos de la tierra (abajo con comida, agua y pan de muerto).</p>
-                    </div>
-                </article>
-
-                <!-- ESTILO 2: 3 NIVELES -->
-                <article class="altar-style-card" data-fav-id="altar-estilo-3-niveles" data-fav-title="Altar de 3 Niveles (Cielo, Tierra e Inframundo)" data-fav-cat="Día de Muertos">
-                    <div class="altar-style-img-box">
-                        <img src="img/altar-3-niveles.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=700&auto=format&fit=crop';" alt="Altar tradicional de 3 niveles">
-                    </div>
-                    <div class="altar-style-body">
-                        <h4>Altar de 3 Niveles (Cielo, Tierra e Inframundo)</h4>
-                        <p>El formato más común en los hogares mexicanos. Simboliza el cielo en el escalón más alto, la tierra en el nivel intermedio y el inframundo o purgatorio en la base con camino de cempasúchil.</p>
-                    </div>
-                </article>
-
-                <!-- ESTILO 3: ARCO DE CEMPASÚCHIL -->
-                <article class="altar-style-card" data-fav-id="altar-estilo-arco" data-fav-title="Altar con Arco de Cempasúchil" data-fav-cat="Día de Muertos">
-                    <div class="altar-style-img-box">
-                        <img src="img/altar-arco.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=700&auto=format&fit=crop';" alt="Altar con arco de flor de cempasúchil">
-                    </div>
-                    <div class="altar-style-body">
-                        <h4>Altar con Arco de Cempasúchil</h4>
-                        <p>Característico de Michoacán, Oaxaca y la Huasteca. Se arma una estructura de carrizo o madera forrada de flores y frutas que funciona como la puerta de bienvenida entre el mundo de los muertos y los vivos.</p>
-                    </div>
-                </article>
-
-                <!-- ESTILO 4: MINIMALISTA EN MESA -->
-                <article class="altar-style-card" data-fav-id="altar-estilo-mesa" data-fav-title="Altar Minimalista de Mesa o Repisa" data-fav-cat="Día de Muertos">
-                    <div class="altar-style-img-box">
-                        <img src="img/altar-mesa.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=700&auto=format&fit=crop';" alt="Altar minimalista en mesa">
-                    </div>
-                    <div class="altar-style-body">
-                        <h4>Altar Minimalista de Mesa o Repisa</h4>
-                        <p>Pensado para departamentos o escritorios. Reúne los cuatro elementos esenciales en un solo plano: agua, sal, una veladora, copal, flor de cempasúchil y la fotografía enmarcada del ser querido.</p>
-                    </div>
-                </article>
-
-                <!-- ESTILO 5: MASCOTAS -->
-                <article class="altar-style-card" data-fav-id="altar-estilo-mascotas" data-fav-title="Altar Dedicado a Mascotas" data-fav-cat="Día de Muertos">
-                    <div class="altar-style-img-box">
-                        <img src="img/altar-mascotas.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=700&auto=format&fit=crop';" alt="Altar de Día de Muertos para mascotas">
-                    </div>
-                    <div class="altar-style-body">
-                        <h4>Altar Dedicado a Mascotas (27 de Octubre)</h4>
-                        <p>Se coloca para recibir a los compañeros animales que partieron. Incluye su retrato, su plato con croquetas o premios favoritos, agua fresca, su juguete preferido y una vela blanca para guiarlos.</p>
-                    </div>
-                </article>
-
-                <!-- ESTILO 6: ALTAR MONUMENTAL BLANCO -->
-                <article class="altar-style-card" data-fav-id="altar-estilo-monumental" data-fav-title="Altar Piramidal de Telas Blancas" data-fav-cat="Día de Muertos">
-                    <div class="altar-style-img-box">
-                        <img src="img/altar-monumental.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1572293007244-8b60335d2b7d?q=80&w=700&auto=format&fit=crop';" alt="Altar monumental estilo Huaquechula">
-                    </div>
-                    <div class="altar-style-body">
-                        <h4>Altar Piramidal de Telas Blancas</h4>
-                        <p>Inspirado en Huaquechula, Puebla. Se levanta con telas satinadas blancas plisadas en forma escalonada, espejos que reflejan el alma y figuras de alfeñique para honrar a quienes fallecieron recientemente.</p>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -446,7 +370,7 @@
                 </div>
 
                 <!-- CARA FRONTAL EN FORMATO CARTA SAGRADA DE PERGAMINO -->
-                <div class="card-face card-front sacred-letter-style" data-fav-id="muertos-carta-regional" data-fav-title="Carta Sacra Regional" data-fav-cat="Día de Muertos">
+                <div class="card-face card-front sacred-letter-style">
                     <div class="letter-flower-stamp">🌸</div>
                     
                     <div class="card-badge-top" id="modal-tag">MEMORIA Y TRADICIÓN FEDERATIVA</div>

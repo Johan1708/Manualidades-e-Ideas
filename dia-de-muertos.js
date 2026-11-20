@@ -1417,87 +1417,21 @@ function setupSearch() {
 /* ==========================================================================
    7. PROGRESS BAR INTERACTIVA DE GUÍA DE ALTAR
    ========================================================================== */
-/* ==========================================================================
-   7. PROGRESS BAR INTERACTIVA DE GUÍA DE ALTAR (GUARDADO POR USUARIO)
-   ========================================================================== */
-function getAltarChecklistStorageKey() {
-    // Detecta automáticamente el usuario activo guardado por auth-ai.js en localStorage
-    const possibleKeys = ['auth_current_user', 'tradicion_current_user', 'currentUser', 'usuarioActivo', 'user'];
-    for (const k of possibleKeys) {
-        try {
-            const raw = localStorage.getItem(k);
-            if (!raw) continue;
-            const parsed = JSON.parse(raw);
-            const id = parsed?.email || parsed?.username || parsed?.id || parsed?.nombre;
-            if (id) return `altar_checklist_${String(id).toLowerCase().trim()}`;
-        } catch (e) {
-            if (localStorage.getItem(k)) {
-                return `altar_checklist_${localStorage.getItem(k).toLowerCase().trim()}`;
-            }
-        }
-    }
-    // Búsqueda dinámica por si auth-ai usa otra clave con objeto de sesión
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && (key.includes('user') || key.includes('session') || key.includes('auth')) && !key.startsWith('altar_checklist_')) {
-            try {
-                const val = JSON.parse(localStorage.getItem(key));
-                const id = val?.email || val?.username || val?.uid || val?.id;
-                if (id) return `altar_checklist_${String(id).toLowerCase().trim()}`;
-            } catch (_) {}
-        }
-    }
-    return 'altar_checklist_invitado';
-}
-
-function saveAltarChecklistState() {
-    const checkboxes = document.querySelectorAll('#altarChecklist input[type="checkbox"]');
-    const state = {};
-    checkboxes.forEach((cb, index) => {
-        const id = cb.getAttribute('data-check-id') || `item_${index}`;
-        state[id] = cb.checked;
-    });
-    localStorage.setItem(getAltarChecklistStorageKey(), JSON.stringify(state));
-}
-
-function loadAltarChecklistState() {
-    const checkboxes = document.querySelectorAll('#altarChecklist input[type="checkbox"]');
-    if (!checkboxes.length) return;
-
-    const storageKey = getAltarChecklistStorageKey();
-    let saved = {};
-    try {
-        saved = JSON.parse(localStorage.getItem(storageKey)) || {};
-    } catch (e) {
-        saved = {};
-    }
-
-    checkboxes.forEach((cb, index) => {
-        const id = cb.getAttribute('data-check-id') || `item_${index}`;
-        cb.checked = Boolean(saved[id]);
-    });
-
-    updateAltarProgress(false);
-}
-
-function updateAltarProgress(shouldSave = true) {
+function updateAltarProgress() {
     const checkboxes = document.querySelectorAll('#altarChecklist input[type="checkbox"]');
     const total = checkboxes.length;
     let checkedCount = 0;
 
     checkboxes.forEach(cb => { if (cb.checked) checkedCount++; });
 
-    const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+    const percentage = Math.round((checkedCount / total) * 100);
     const progressFill = document.getElementById('progressFill');
     const progressText = document.getElementById('progressText');
 
     if (progressFill) progressFill.style.width = `${percentage}%`;
     if (progressText) progressText.innerText = `Altar preparado: ${percentage}% (${checkedCount} de ${total} elementos)`;
-
-    if (shouldSave) {
-        saveAltarChecklistState();
-    }
 }
+
 /* ==========================================================================
    8. OFRENDA 3D: CARTAS SAGRADAS AL TOCAR ELEMENTOS
    ========================================================================== */

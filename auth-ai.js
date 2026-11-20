@@ -729,7 +729,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     <!-- BOTÓN FLOTANTE IA -->
     <button class="ai-fab-btn" id="open-ai-assistant" type="button">
-      <span>✨ Chispa IA</span>
+      <span> Nova </span>
     </button>
 
     <!-- PANEL DE CHAT IA -->

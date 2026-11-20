@@ -10,17 +10,14 @@
 </head>
 <body>
 
-    <!-- PRELOADER -->
     <div id="preloader">
         <div class="flor-loader">🌸</div>
         <p>Para mamá...</p>
     </div>
 
-    <!-- CURSOR PERSONALIZADO -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- NAVEGACIÓN FLOTANTE -->
     <nav class="glass-nav">
         <a href="index.html" class="btn-volver-float" title="Volver al Menú">← Volver</a>
         <div class="nav-links-nav">
@@ -31,7 +28,6 @@
         <div class="nav-text">Guía para Mamá</div>
     </nav>
 
-    <!-- FONDO DE VIDEO Y PÉTALOS -->
     <div class="video-background">
         <video autoplay loop muted playsinline id="bg-video">
             <source src="imagenes/diamadre.mp4" type="video/mp4">
@@ -40,10 +36,7 @@
         <div id="petalos-container"></div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="scroll-content">
-        
-        <!-- HERO CON PARALLAX -->
         <header class="hero-bento">
             <div class="hero-text-container parallax-element" data-speed="0.5">
                 <h1 class="titulo-editorial">Mario <br><span> Benedetti</span></h1>
@@ -51,9 +44,7 @@
             </div>
         </header>
 
-        <!-- ========================================================= -->
-        <!-- SECCIÓN 1: MANUALIDADES E IDEAS (8 PROYECTOS PASO A PASO) -->
-        <!-- ========================================================= -->
+        <!-- SECCIÓN 1: MANUALIDADES E IDEAS -->
         <section id="sec-manualidades" class="mega-section">
             <div class="section-header animate-on-scroll">
                 <h2 class="titulo-seccion">Manualidades e Ideas DIY</h2>
@@ -67,8 +58,8 @@
             </div>
 
             <div class="bento-gallery" id="grid-manualidades">
-                <!-- Idea 1 (Grande): Picnic Estético -->
-                <article class="bento-card bento-grande filter-item tilt-effect" data-price="experiencias" data-fav-id="madres-man-1" data-fav-title="Picnic Botánico al Aire Libre" data-fav-cat="Día de las Madres">
+                <!-- Idea 1 -->
+                <article id="madres-man-1" class="bento-card bento-grande filter-item tilt-effect" data-price="experiencias">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Picnic Botánico al Aire Libre</h3>
                         <p class="bento-desc">Organiza una tarde inolvidable en el parque o jardín con tabla de quesos, flores frescas, cojines y su música favorita.</p>
@@ -81,12 +72,13 @@
                                     {"img": "imagenes/picnic-3.jpg", "texto": "Toque estético: Lleva un frasco de vidrio con flores frescas, copas de acrílico o cristal y una bocina portátil con música acústica suave."},
                                     {"img": "imagenes/picnic-4.jpg", "texto": "Recuerdo final: Lleva una cámara instantánea o toma retratos con luz del atardecer (hora dorada) y entrégale una carta escrita a mano."}
                                 ]'>Ver Guía Paso a Paso</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-1" onclick="guardarEnFavoritosYRedirigir('madres-man-1', 'Picnic Botánico al Aire Libre', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-1')">☆ Guardar en Favoritos</button>
                     </div>
                     <img src="imagenes/picnic-estetico.jpg" alt="Picnic" class="bento-img tilt-img">
                 </article>
 
-                <!-- Idea 2 (Ancha): Terrario -->
-                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="plantas" data-fav-id="madres-man-2" data-fav-title="Terrario Eterno en Frasco" data-fav-cat="Día de las Madres">
+                <!-- Idea 2 -->
+                <article id="madres-man-2" class="bento-card bento-ancha filter-item tilt-effect" data-price="plantas">
                     <img src="imagenes/terrario.jpg" alt="Terrario" class="bento-img tilt-img">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Terrario Eterno en Frasco</h3>
@@ -100,11 +92,12 @@
                                     {"img": "imagenes/paso-tierra.jpg", "texto": "Agrega sustrato especial para cactus/suculentas y haz pequeños hoyos con una cuchara."},
                                     {"img": "imagenes/paso-decorar.jpg", "texto": "Planta las suculentas con cuidado, cubre espacios con musgo preservado y rocía ligeramente."}
                                 ]'>Ver Pasos</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-2" onclick="guardarEnFavoritosYRedirigir('madres-man-2', 'Terrario Eterno en Frasco', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-2')">☆ Guardar en Favoritos</button>
                     </div>
                 </article>
                 
-                <!-- Idea 3 (Alta): Caja Explosiva -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="papel" data-fav-id="madres-man-3" data-fav-title="Caja Explosiva de Fotos" data-fav-cat="Día de las Madres">
+                <!-- Idea 3 -->
+                <article id="madres-man-3" class="bento-card bento-alta filter-item tilt-effect" data-price="papel">
                     <img src="imagenes/album-fotos.jpg" alt="Caja Explosiva" class="bento-img tilt-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Caja Explosiva de Fotos</h3>
@@ -117,11 +110,12 @@
                                     {"img": "imagenes/caja-2.jpg", "texto": "Recorta las 4 esquinas de cada cartulina para que quede en forma de cruz y marca bien los dobleces."}, 
                                     {"img": "imagenes/caja-3.jpg", "texto": "Pega las cruces una dentro de otra por el centro, decora con fotos y arma una tapa de 10.5x10.5 cm."}
                                 ]'>Ver Pasos</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-3" onclick="guardarEnFavoritosYRedirigir('madres-man-3', 'Caja Explosiva de Fotos', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-3')">☆ Guardar en Favoritos</button>
                     </div>
                 </article>
 
-                <!-- Idea 4 (Regular): Velas -->
-                <article class="bento-card filter-item tilt-effect" data-price="aromas" data-fav-id="madres-man-4" data-fav-title="Velas de Soya y Lavanda" data-fav-cat="Día de las Madres">
+                <!-- Idea 4 -->
+                <article id="madres-man-4" class="bento-card filter-item tilt-effect" data-price="aromas">
                     <img src="imagenes/vela-lavanda.jpg" alt="Vela Aromática" class="bento-img tilt-img circular-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title" style="font-size: 1.4rem;">Velas de Soya y Lavanda</h3>
@@ -133,11 +127,12 @@
                                     {"img": "imagenes/vela-2.jpg", "texto": "Derrite cera de soya a baño María. Cuando baje a 60°C añade 20 gotas de aceite esencial de lavanda."}, 
                                     {"img": "imagenes/vela-3.jpg", "texto": "Vierte la cera en el molde, decora la superficie con flores secas de lavanda y deja enfriar 4 horas."}
                                 ]'>Ver Pasos</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-4" onclick="guardarEnFavoritosYRedirigir('madres-man-4', 'Velas de Soya y Lavanda', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-4')">☆ Guardar en Favoritos</button>
                     </div>
                 </article>
 
-                <!-- Idea 5 (Ancha): Rosas de Listón -->
-                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="papel" data-fav-id="madres-man-5" data-fav-title="Ramo de Rosas de Listón" data-fav-cat="Día de las Madres">
+                <!-- Idea 5 -->
+                <article id="madres-man-5" class="bento-card bento-ancha filter-item tilt-effect" data-price="papel">
                     <img src="imagenes/ramo-papel.jpg" alt="Rosas de Listón" class="bento-img tilt-img">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Ramo de Rosas de Listón</h3>
@@ -150,11 +145,12 @@
                                     {"img": "imagenes/paso-alambre.jpg", "texto": "Dobla las esquinas superiores hacia el centro formando un triángulo y sella los bordes con encendedor."}, 
                                     {"img": "imagenes/paso-armado.jpg", "texto": "Pega los pétalos en fila uno sobre otro con silicón caliente y enrolla todo alrededor de un palillo."}
                                 ]'>Ver Pasos</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-5" onclick="guardarEnFavoritosYRedirigir('madres-man-5', 'Ramo de Rosas de Listón', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-5')">☆ Guardar en Favoritos</button>
                     </div>
                 </article>
 
-                <!-- Idea 6 (Ancha): Kokedama -->
-                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="plantas" data-fav-id="madres-man-6" data-fav-title="Kokedama (Bola de Musgo)" data-fav-cat="Día de las Madres">
+                <!-- Idea 6 -->
+                <article id="madres-man-6" class="bento-card bento-ancha filter-item tilt-effect" data-price="plantas">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Kokedama (Bola de Musgo)</h3>
                         <p class="bento-desc">Técnica japonesa para cultivar plantas sin maceta, envueltas en una esfera de musgo vivo.</p>
@@ -166,12 +162,13 @@
                                     {"img": "imagenes/koke-2.jpg", "texto": "Saca la planta de su maceta, limpia un poco la raíz y envuélvela formando una esfera compacta."}, 
                                     {"img": "imagenes/koke-3.jpg", "texto": "Cubre toda la bola de tierra con láminas de musgo húmedo y átala firmemente dando vueltas con hilo de algodón."}
                                 ]'>Ver Pasos</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-6" onclick="guardarEnFavoritosYRedirigir('madres-man-6', 'Kokedama (Bola de Musgo)', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-6')">☆ Guardar en Favoritos</button>
                     </div>
                     <img src="imagenes/kokedama.jpg" alt="Kokedama" class="bento-img tilt-img">
                 </article>
 
-                <!-- Idea 7 (Ancha): Desayuno a la cama -->
-                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="experiencias" data-fav-id="madres-man-7" data-fav-title="Charola de Desayuno Gourmet" data-fav-cat="Día de las Madres">
+                <!-- Idea 7 -->
+                <article id="madres-man-7" class="bento-card bento-ancha filter-item tilt-effect" data-price="experiencias">
                     <img src="imagenes/desayuno-cama.jpg" alt="Desayuno" class="bento-img tilt-img">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Charola de Desayuno Gourmet</h3>
@@ -184,11 +181,12 @@
                                     {"img": "imagenes/desa-2.jpg", "texto": "Sirve jugo de naranja recién exprimido en una copa y su café o té favorito en una taza precalentada."}, 
                                     {"img": "imagenes/desa-3.jpg", "texto": "Acomoda todo en una bandeja de madera con una servilleta de tela, un florero mini y una tarjeta de buenos días."}
                                 ]'>Ver Pasos ☕</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-7" onclick="guardarEnFavoritosYRedirigir('madres-man-7', 'Charola de Desayuno Gourmet', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-7')">☆ Guardar en Favoritos</button>
                     </div>
                 </article>
 
-                <!-- Idea 8 (Ancha): Sales de Baño -->
-                <article class="bento-card bento-ancha filter-item tilt-effect" data-price="aromas" data-fav-id="madres-man-8" data-fav-title="Sales de Baño y Exfoliante Spa" data-fav-cat="Día de las Madres">
+                <!-- Idea 8 -->
+                <article id="madres-man-8" class="bento-card bento-ancha filter-item tilt-effect" data-price="aromas">
                     <div class="bento-content">
                         <h3 class="bento-title card-titulo-gradient">Sales de Baño y Exfoliante Spa</h3>
                         <p class="bento-desc">Mezcla relajante con sal de Epsom, aceite de almendras dulces y pétalos deshidratados.</p>
@@ -200,15 +198,14 @@
                                     {"img": "imagenes/sal-2.jpg", "texto": "Agrega 2 cucharadas de aceite de almendras dulces y 15 gotas de esencia de rosas o vainilla."}, 
                                     {"img": "imagenes/sal-3.jpg", "texto": "Incorpora pétalos de rosa secos triturados, mezcla bien y envasa en un frasco hermético con moño."}
                                 ]'>Ver Pasos 🛁</button>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-man-8" onclick="guardarEnFavoritosYRedirigir('madres-man-8', 'Sales de Baño y Exfoliante Spa', 'Día de las Madres • Manualidad', 'dia-de-las-madres.html#madres-man-8')">☆ Guardar en Favoritos</button>
                     </div>
                     <img src="imagenes/sales-bano.jpg" alt="Sales de Baño" class="bento-img tilt-img">
                 </article>
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- SECCIÓN 2: LUGARES PARA VISITAR (LUGARES CON MAPAS)       -->
-        <!-- ========================================================= -->
+        <!-- SECCIÓN 2: LUGARES PARA VISITAR -->
         <section id="sec-lugares" class="mega-section glass-container animate-on-scroll" style="margin: 40px auto;">
             <div class="section-header">
                 <h2 class="titulo-seccion text-white">Lugares para Visitar</h2>
@@ -223,87 +220,92 @@
 
             <div class="carrusel" id="carrusel-lugares">
                 <!-- Lugar 1 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="naturaleza" data-fav-id="madres-lugar-1" data-fav-title="Jardín Botánico Regional" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico">
+                <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
                     <img src="imagenes/jardin-botanico-foto.png" alt="Jardín Botánico" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Jardín Botánico Regional</h3>
                         <p class="card-desc">Un oasis perfecto para caminar juntas rodeadas de cactáceas, orquídeas y senderos tranquilos.</p>
                         <img src="imagenes/mapa-jardin.jpeg" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-1" onclick="guardarEnFavoritosYRedirigir('madres-lugar-1', 'Jardín Botánico Regional', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Jardin+Botanico')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
 
                 <!-- Lugar 2 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="naturaleza" data-fav-id="madres-lugar-2" data-fav-title="Parque Ecológico y Lago" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Parque+ecologico+areas+verdes">
+                <div class="card-rosa filter-item tilt-effect" data-price="naturaleza">
                     <img src="imagenes/parque-picnic.png" alt="Parque para Picnic" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Parque Ecológico y Lago</h3>
                         <p class="card-desc">Explanadas verdes bajo árboles frondosos, ideales para extender una manta y hacer un picnic inolvidable.</p>
                         <img src="imagenes/mapa-parque.png" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Parque+ecologico+areas+verdes" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-2" onclick="guardarEnFavoritosYRedirigir('madres-lugar-2', 'Parque Ecológico y Lago', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Parque+ecologico+areas+verdes')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
 
                 <!-- Lugar 3 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="talleres" data-fav-id="madres-lugar-3" data-fav-title="Taller de Cerámica y Torno" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica">
+                <div class="card-rosa filter-item tilt-effect" data-price="talleres">
                     <img src="imagenes/taller-ceramica-foto.png" alt="Taller de Cerámica" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Taller de Cerámica y Torno</h3>
                         <p class="card-desc">Clase de 2 horas para moldear y pintar sus propias tazas o macetas mientras toman café.</p>
                         <img src="imagenes/mapa-taller.png" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-3" onclick="guardarEnFavoritosYRedirigir('madres-lugar-3', 'Taller de Cerámica y Torno', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Taller+de+Ceramica')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
 
                 <!-- Lugar 5 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="gastronomia" data-fav-id="madres-lugar-5" data-fav-title="Cafetería Tipo Invernadero" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Cafeteria+jardin+terraza">
+                <div class="card-rosa filter-item tilt-effect" data-price="gastronomia">
                     <img src="imagenes/cafeteria-jardin.jpeg" alt="Cafetería Invernadero" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Cafetería Tipo Invernadero</h3>
                         <p class="card-desc">Desayuno artesanal rodeadas de helechos colgantes, luz natural y repostería botánica.</p>
                         <img src="imagenes/mapa-cafe.png" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Cafeteria+jardin+terraza" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-5" onclick="guardarEnFavoritosYRedirigir('madres-lugar-5', 'Cafetería Tipo Invernadero', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Cafeteria+jardin+terraza')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
 
                 <!-- Lugar 6 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="talleres" data-fav-id="madres-lugar-6" data-fav-title="Estudio Arte y Vino" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Taller+de+pintura+y+vino">
+                <div class="card-rosa filter-item tilt-effect" data-price="talleres">
                     <img src="imagenes/pintura-vino.png" alt="Pintura y Vino" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Estudio "Arte y Vino"</h3>
                         <p class="card-desc">Sesión guiada de pintura en lienzo sin experiencia previa, acompañada de una copa de vino.</p>
                         <img src="imagenes/mapa-arte.png" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Taller+de+pintura+y+vino" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-6" onclick="guardarEnFavoritosYRedirigir('madres-lugar-6', 'Estudio Arte y Vino', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Taller+de+pintura+y+vino')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
 
                 <!-- Lugar 7 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="gastronomia" data-fav-id="madres-lugar-7" data-fav-title="Salón de Té y Postres" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Salon+de+te+y+reposteria">
+                <div class="card-rosa filter-item tilt-effect" data-price="gastronomia">
                     <img src="imagenes/casa-te.png" alt="Casa de Té" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Salón de Té y Postres</h3>
                         <p class="card-desc">Tarde de infusiones florales (jazmín, lavanda, manzanilla) con scones y tartas frescas.</p>
                         <img src="imagenes/mapa-te.png" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Salon+de+te+y+reposteria" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-7" onclick="guardarEnFavoritosYRedirigir('madres-lugar-7', 'Salón de Té y Postres', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Salon+de+te+y+reposteria')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
 
                 <!-- Lugar 8 -->
-                <div class="card-rosa filter-item tilt-effect" data-price="bienestar" data-fav-id="madres-lugar-8" data-fav-title="Spa Holístico y Masajes" data-fav-cat="Día de las Madres" data-fav-url="https://www.google.com/maps/dir/?api=1&destination=Spa+masajes+relajantes">
+                <div class="card-rosa filter-item tilt-effect" data-price="bienestar">
                     <img src="imagenes/spa-holistico.png" alt="Spa Día" class="card-img">
                     <div class="card-info">
                         <h3 class="card-titulo-gradient">Spa Holístico y Masajes</h3>
                         <p class="card-desc">Circuito de hidroterapia y masaje relajante con aromaterapia floral para consentirla al máximo.</p>
                         <img src="imagenes/mapa-spa.png" alt="Mapa" class="mini-mapa">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Spa+masajes+relajantes" target="_blank" class="btn-accion">📍 Cómo llegar (Maps)</a>
+                        <button type="button" class="orbit-fav-btn" data-fav-item="madres-lugar-8" onclick="guardarEnFavoritosYRedirigir('madres-lugar-8', 'Spa Holístico y Masajes', 'Día de las Madres • Lugar', 'https://www.google.com/maps/dir/?api=1&destination=Spa+masajes+relajantes')">☆ Guardar en Favoritos</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- SECCIÓN 3: IDEAS PARA COMPRAR CON PRECIOS Y DOBLE OPCIÓN  -->
-        <!-- ========================================================= -->
+        <!-- SECCIÓN 3: IDEAS PARA COMPRAR -->
         <section id="sec-productos" class="mega-section">
             <div class="section-header animate-on-scroll">
                 <h2 class="titulo-seccion">Ideas para Comprar</h2>
@@ -318,7 +320,7 @@
 
             <div class="bento-gallery" id="grid-productos">
                 <!-- Producto 1 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores" data-fav-id="madres-prod-1" data-fav-title="Rosa Eterna en Domo LED" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=rosa+eterna+en+domo+de+cristal+con+luz+led">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores">
                     <img src="imagenes/rosa-domo.jpg" alt="Rosa Eterna en Domo" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Rosa Eterna en Domo LED</h3>
@@ -327,12 +329,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=rosa+eterna+en+domo+de+cristal+con+luz+led" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/rosa-eterna-domo-cristal-led" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-1" onclick="guardarEnFavoritosYRedirigir('madres-prod-1', 'Rosa Eterna en Domo LED', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=rosa+eterna+en+domo+de+cristal+con+luz+led')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 2 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="picnic" data-fav-id="madres-prod-2" data-fav-title="Canasta de Mimbre Picnic" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=canasta+de+picnic+de+mimbre+con+accesorios">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="picnic">
                     <img src="imagenes/canasta-picnic.jpg" alt="Canasta de Picnic" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Canasta de Mimbre Picnic</h3>
@@ -341,12 +344,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=canasta+de+picnic+de+mimbre+con+accesorios" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/canasta-picnic-mimbre" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-2" onclick="guardarEnFavoritosYRedirigir('madres-prod-2', 'Canasta de Mimbre Picnic', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=canasta+de+picnic+de+mimbre+con+accesorios')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 3 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores" data-fav-id="madres-prod-3" data-fav-title="Estuche Rosa y Collar" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=caja+rosa+eterna+con+collar+te+amo+100+idiomas">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores">
                     <img src="imagenes/collar-rosa.jpg" alt="Collar con Rosa" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Estuche Rosa y Collar</h3>
@@ -355,12 +359,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=caja+rosa+eterna+con+collar+te+amo+100+idiomas" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/caja-rosa-eterna-collar" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-3" onclick="guardarEnFavoritosYRedirigir('madres-prod-3', 'Estuche Rosa y Collar', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=caja+rosa+eterna+con+collar+te+amo+100+idiomas')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 4 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits" data-fav-id="madres-prod-4" data-fav-title="Kit Completo para Velas" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=kit+para+hacer+velas+aromaticas+cera+de+soya">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits">
                     <img src="imagenes/kit-velas.jpg" alt="Kit Hacer Velas" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Kit Completo para Velas</h3>
@@ -369,12 +374,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=kit+para+hacer+velas+aromaticas+cera+de+soya" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/kit-hacer-velas-aromaticas" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-4" onclick="guardarEnFavoritosYRedirigir('madres-prod-4', 'Kit Completo para Velas', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=kit+para+hacer+velas+aromaticas+cera+de+soya')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 5 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="picnic" data-fav-id="madres-prod-5" data-fav-title="Manta Picnic Plegable" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=manta+de+picnic+impermeable+grande+plegable">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="picnic">
                     <img src="imagenes/manta-picnic.jpg" alt="Manta Picnic Impermeable" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Manta Picnic Plegable</h3>
@@ -383,12 +389,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=manta+de+picnic+impermeable+grande+plegable" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/manta-picnic-impermeable-grande" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-5" onclick="guardarEnFavoritosYRedirigir('madres-prod-5', 'Manta Picnic Plegable', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=manta+de+picnic+impermeable+grande+plegable')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 6 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits" data-fav-id="madres-prod-6" data-fav-title="Set Herramientas Terrario" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=kit+herramientas+jardineria+suculentas+terrario">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits">
                     <img src="imagenes/kit-herramientas.jpg" alt="Herramientas Terrario" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Set Herramientas Terrario</h3>
@@ -397,12 +404,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=kit+herramientas+jardineria+suculentas+terrario" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/kit-herramientas-suculentas" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-6" onclick="guardarEnFavoritosYRedirigir('madres-prod-6', 'Set Herramientas Terrario', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=kit+herramientas+jardineria+suculentas+terrario')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 7 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="bienestar" data-fav-id="madres-prod-7" data-fav-title="Difusor Ultrasónico Madera" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=difusor+de+aromas+ultrasonico+madera+aceites+esenciales">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="bienestar">
                     <img src="imagenes/difusor-aromas.jpg" alt="Difusor" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Difusor Ultrasónico Madera</h3>
@@ -411,12 +419,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=difusor+de+aromas+ultrasonico+madera+aceites+esenciales" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/difusor-aromas-ultrasonico" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-7" onclick="guardarEnFavoritosYRedirigir('madres-prod-7', 'Difusor Ultrasónico Madera', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=difusor+de+aromas+ultrasonico+madera+aceites+esenciales')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 8 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores" data-fav-id="madres-prod-8" data-fav-title="Ramo de Flores Armable" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=ramo+de+flores+bloques+de+construccion+botanico">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="flores">
                     <img src="imagenes/lego-flores.jpg" alt="Ramo Bloques" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Ramo de Flores Armable</h3>
@@ -425,12 +434,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=ramo+de+flores+bloques+de+construccion+botanico" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/ramo-flores-armable-bloques" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-8" onclick="guardarEnFavoritosYRedirigir('madres-prod-8', 'Ramo de Flores Armable', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=ramo+de+flores+bloques+de+construccion+botanico')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 9 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits" data-fav-id="madres-prod-9" data-fav-title="Set Pintura Acrílica y Caballete" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=kit+pintura+acrilica+con+caballete+de+mesa+y+lienzos">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="kits">
                     <img src="imagenes/kit-pintura-oleo.jpg" alt="Set Pintura" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Set Pintura Acrílica y Caballete</h3>
@@ -439,12 +449,13 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=kit+pintura+acrilica+con+caballete+de+mesa+y+lienzos" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/set-pintura-acrilica-caballete" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-9" onclick="guardarEnFavoritosYRedirigir('madres-prod-9', 'Set Pintura Acrílica y Caballete', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=kit+pintura+acrilica+con+caballete+de+mesa+y+lienzos')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- Producto 10 -->
-                <article class="bento-card bento-alta filter-item tilt-effect" data-price="bienestar" data-fav-id="madres-prod-10" data-fav-title="Set Taza con Calentador" data-fav-cat="Día de las Madres" data-fav-url="https://www.amazon.com.mx/s?k=taza+con+calentador+electrico+regalo">
+                <article class="bento-card bento-alta filter-item tilt-effect" data-price="bienestar">
                     <img src="imagenes/taza-calentador.jpg" alt="Calentador de Taza" class="bento-img">
                     <div class="bento-content centered">
                         <h3 class="bento-title">Set Taza con Calentador</h3>
@@ -453,6 +464,7 @@
                         <div class="dual-buttons">
                             <a href="https://www.amazon.com.mx/s?k=taza+con+calentador+electrico+regalo" target="_blank" class="btn-comprar">Amazon 🔎</a>
                             <a href="https://listado.mercadolibre.com.mx/set-taza-calentador-electrico" target="_blank" class="btn-accion">Mercado Libre 🔎</a>
+                            <button type="button" class="orbit-fav-btn" data-fav-item="madres-prod-10" onclick="guardarEnFavoritosYRedirigir('madres-prod-10', 'Set Taza con Calentador', 'Día de las Madres • Compra', 'https://www.amazon.com.mx/s?k=taza+con+calentador+electrico+regalo')">☆ Guardar en Favoritos</button>
                         </div>
                     </div>
                 </article>
@@ -464,7 +476,6 @@
         </footer>
     </main>
 
-    <!-- VENTANA EMERGENTE PARA PASOS DE MANUALIDADES -->
     <div id="modal-pasos" class="modal-pro">
         <div class="modal-content-pro animate-expand-in">
             <div class="modal-header-pro">

@@ -676,7 +676,7 @@ function initInfiniteMenu() {
         {
             title: 'Altar para Mascotas',
             description: 'Dedicado el 27 de octubre a los compañeros animales, con su retrato, croquetas, agua fresca, juguetes y luz blanca.',
-            image: 'imagenes/altar-mascotas.png',
+            image: 'imagenes/altar-mascotas.jpg',
             key: 'altarMascotas'
         },
         {

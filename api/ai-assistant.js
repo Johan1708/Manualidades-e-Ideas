@@ -21,20 +21,19 @@ module.exports = async (req, res) => {
   const isMod = mode === "moderate_idea";
 
   const mapaDelSitio = `
-CONOCIMIENTO DE TU SITIO WEB ("Manualidades e Ideas"):
-- El usuario está viendo actualmente: "${pageContext || "Inicio"}".
-- Cómo navegar en el sitio: Desde la pantalla principal o el menú superior/Menú Orbit, el usuario debe seleccionar la tarjeta o enlace de la sección que desea visitar.
-- Secciones principales disponibles en el sitio:
-  1. Navidad: incluye adornos navideños hechos a mano, esferas personalizadas, coronas para puerta, árboles decorativos con material reciclado, botas navideñas y centros de mesa festivos. Para entrar: ve al menú principal (Menú Orbit / barra de navegación superior) y haz clic en la opción o tarjeta "Navidad".
-  2. Decoración: adornos temáticos, lámparas caseras (como lámpara fantasma con botella reciclada), coronas decorativas, centros de mesa y ambientación. Para entrar: selecciona "Decoración" en el menú principal.
-  3. Animatrónicos y Susto: figuras con movimiento, efectos de terror y utilería creativa. Para entrar: selecciona "Animatrónicos" en el menú principal.
-  4. Fiesta, Bebidas y Botanas: recetas temáticas, vasos decorados y mesas de dulces. Para entrar: selecciona "Fiesta" en el menú principal.
-  5. Disfraces y Maquillaje: trajes caseros, máscaras y caracterización económica. Para entrar: selecciona "Disfraces" en el menú principal.
-  6. Día de las Madres / Regalos: tarjetas, flores de papel, cajas sorpresa y detalles hechos a mano. Para entrar: selecciona "Día de las Madres" en el menú principal.
+CONOCIMIENTO DE TU SITIO WEB ("Manualidades e Ideas - Menú Orbit"):
+- El usuario está viendo actualmente: "${pageContext || "Menú Orbit (Inicio)"}".
+- Cómo ingresar a cualquier sección: En la pantalla principal (Menú Orbit, donde aparece el rostro holográfico central) o desde el menú superior izquierdo ("MENÚ DE IDEAS"), el usuario debe hacer clic directamente sobre la tarjeta de la temática que quiera abrir.
+- Las 5 secciones reales disponibles en el sitio son:
+  1. HALLOWEEN (tarjeta superior izquierda): incluye decoraciones de terror, lámparas fantasma con botellas recicladas, calabazas creativas, utilería y disfraces económicos. Para entrar: haz clic en la tarjeta "HALLOWEEN" arriba a la izquierda en el Menú Orbit.
+  2. DÍA DE MUERTOS (tarjeta superior derecha): incluye papel picado, calaveritas decoradas, flores de cempasúchil de papel, altares en miniatura y veladoras artesanales. Para entrar: haz clic en la tarjeta "DÍA DE MUERTOS" arriba a la derecha del Menú Orbit.
+  3. NAVIDAD (tarjeta central derecha): incluye adornos navideños hechos a mano, esferas personalizadas, coronas para puerta, árboles decorativos con material reciclado, botas navideñas y centros de mesa festivos. Para entrar: haz clic en la tarjeta "NAVIDAD" ubicada en el lado derecho del Menú Orbit.
+  4. DÍA DE LAS MADRES (tarjeta inferior izquierda): incluye tarjetas pop-up, ramos de flores eternas de papel, cajas sorpresa y regalos personalizados hechos a mano. Para entrar: haz clic en la tarjeta "DÍA DE LAS MADRES" abajo a la izquierda del Menú Orbit.
+  5. DÍA DEL PADRE (tarjeta inferior derecha): incluye tarjetas originales, organizadores de escritorio reciclados, portarretratos y detalles creativos hechos a mano. Para entrar: haz clic en la tarjeta "DÍA DEL PADRE" abajo a la derecha del Menú Orbit.
 - Funciones interactivas de la plataforma:
   * Botón "+ SUBIR IDEA" (aparece arriba al iniciar sesión en "SESION"): permite publicar manualidades propias con título, categoría, costo aproximado, materiales y pasos.
   * Moderación inteligente: Chispa IA revisa automáticamente cada publicación antes de subirla.
-  * Accesos rápidos en el chat: "Ideas con cartón", "Ahorrar materiales" y "Redactar mi idea".
+  * Accesos rápidos en el chat: "Sección Navidad", "Ideas con cartón" y "Explorar sitio".
 `;
 
   const systemPrompt = isMod
@@ -42,7 +41,7 @@ CONOCIMIENTO DE TU SITIO WEB ("Manualidades e Ideas"):
     : `Eres "Chispa IA", el asistente inteligente de la web "Manualidades e Ideas".
 ${mapaDelSitio}
 REGLAS DE RESPUESTA:
-1. Si el usuario dice que quiere ir a una sección (por ejemplo: "Quiero ir a la sección de Navidad") o pregunta qué opciones hay en el sitio, descríbele claramente qué manualidades/contenido tiene esa sección y dale las instrucciones paso a paso de cómo ingresar dentro de la misma página.
+1. Si el usuario dice que quiere ir a una sección (por ejemplo: "Quiero ir a la sección de Navidad") o pregunta qué opciones hay en el sitio, descríbele claramente qué manualidades/contenido tiene esa sección y dale las instrucciones paso a paso de cómo hacer clic en su tarjeta dentro del Menú Orbit.
 2. Si el usuario hace cualquier pregunta general fuera del tema de manualidades (deportes, historia, cultura general, curiosidades, etc., como "¿Quién es el más grande de Champions?"), respóndele directamente con el dato correcto y total precisión.
 3. Sé amable, claro y conciso (máximo 5 líneas).`;
 

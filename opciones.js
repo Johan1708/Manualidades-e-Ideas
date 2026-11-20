@@ -1853,11 +1853,7 @@ function setupCategoryMapping() {
     grid.innerHTML = "";
     filtered.forEach((item, index) => {
       const card = document.createElement("article");
-      const favId = `halloween-${currentCategory}-${item.tipo}-${index}`;
-      card.id = favId;
       card.className = "spooky-item-card creepy-infested";
-
-      const favUrl = item.tipo === "diy" ? `opciones.html#${favId}` : item.amazonUrl;
 
       const buttonsHTML = item.tipo === "diy"
         ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>`
@@ -1886,28 +1882,6 @@ function setupCategoryMapping() {
         </div>
       `;
 
-      const favBtn = document.createElement("button");
-      favBtn.type = "button";
-      favBtn.className = "orbit-fav-btn";
-      favBtn.setAttribute("data-fav-item", favId);
-      favBtn.textContent = "☆ Guardar en Favoritos";
-      favBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (typeof window.guardarEnFavoritosYRedirigir === "function") {
-          window.guardarEnFavoritosYRedirigir(
-            favId,
-            item.titulo,
-            `Halloween • ${item.tipo === "diy" ? "Idea DIY" : "Producto"}`,
-            favUrl
-          );
-        }
-      });
-
-      const actionsContainer = card.querySelector(".spooky-actions");
-      if (actionsContainer) {
-        actionsContainer.appendChild(favBtn);
-      }
-
       infestCard(card, index + 4);
 
       const detailBtn = card.querySelector(".btn-open-detail");
@@ -1917,10 +1891,6 @@ function setupCategoryMapping() {
 
       grid.appendChild(card);
     });
-
-    if (typeof window.syncIndividualButtonsState === "function") {
-      window.syncIndividualButtonsState();
-    }
   }
 
   cards.forEach((card) => {

@@ -1853,14 +1853,25 @@ function setupCategoryMapping() {
     grid.innerHTML = "";
     filtered.forEach((item, index) => {
       const card = document.createElement("article");
+      const favId = `halloween-${currentCategory}-${item.tipo}-${index}`;
+      card.id = favId;
       card.className = "spooky-item-card creepy-infested";
 
+      const favUrl = item.tipo === "diy" ? `opciones.html#${favId}` : item.amazonUrl;
+      const safeTitle = String(item.titulo || "").replace(/'/g, "\\'").replace(/"/g, """);
+      const safeCat = `Halloween • ${item.tipo === "diy" ? "Idea DIY" : "Producto"}`;
+      const safeUrl = String(favUrl || "").replace(/'/g, "\\'").replace(/"/g, """);
+
+      const favBtnHTML = `<button type="button" class="orbit-fav-btn" data-fav-item="${favId}" onclick="guardarEnFavoritosYRedirigir('${favId}', '${safeTitle}', '${safeCat}', '${safeUrl}')">☆ Guardar en Favoritos</button>`;
+
       const buttonsHTML = item.tipo === "diy"
-        ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>`
+        ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>
+           ${favBtnHTML}`
         : `
           <a href="${item.amazonUrl}" target="_blank" class="btn-spooky-primary">Ver en Amazon 🔎</a>
           <a href="${item.mlUrl}" target="_blank" class="btn-spooky-secondary">Ver en Mercado Libre 🔎</a>
           <button class="btn-spooky-secondary btn-open-detail" style="border-style:dashed;">Ficha Técnica 📋</button>
+          ${favBtnHTML}
         `;
 
       card.innerHTML = `
@@ -1891,6 +1902,10 @@ function setupCategoryMapping() {
 
       grid.appendChild(card);
     });
+
+    if (typeof window.syncIndividualButtonsState === "function") {
+      window.syncIndividualButtonsState();
+    }
   }
 
   cards.forEach((card) => {

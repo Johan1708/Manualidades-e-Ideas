@@ -1858,20 +1858,13 @@ function setupCategoryMapping() {
       card.className = "spooky-item-card creepy-infested";
 
       const favUrl = item.tipo === "diy" ? `opciones.html#${favId}` : item.amazonUrl;
-      const safeTitle = String(item.titulo || "").replace(/'/g, "\\'").replace(/"/g, """);
-      const safeCat = `Halloween • ${item.tipo === "diy" ? "Idea DIY" : "Producto"}`;
-      const safeUrl = String(favUrl || "").replace(/'/g, "\\'").replace(/"/g, """);
-
-      const favBtnHTML = `<button type="button" class="orbit-fav-btn" data-fav-item="${favId}" onclick="guardarEnFavoritosYRedirigir('${favId}', '${safeTitle}', '${safeCat}', '${safeUrl}')">☆ Guardar en Favoritos</button>`;
 
       const buttonsHTML = item.tipo === "diy"
-        ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>
-           ${favBtnHTML}`
+        ? `<button class="btn-spooky-primary btn-open-detail">Ver Paso a Paso 🛠️</button>`
         : `
           <a href="${item.amazonUrl}" target="_blank" class="btn-spooky-primary">Ver en Amazon 🔎</a>
           <a href="${item.mlUrl}" target="_blank" class="btn-spooky-secondary">Ver en Mercado Libre 🔎</a>
           <button class="btn-spooky-secondary btn-open-detail" style="border-style:dashed;">Ficha Técnica 📋</button>
-          ${favBtnHTML}
         `;
 
       card.innerHTML = `
@@ -1892,6 +1885,28 @@ function setupCategoryMapping() {
           </div>
         </div>
       `;
+
+      const favBtn = document.createElement("button");
+      favBtn.type = "button";
+      favBtn.className = "orbit-fav-btn";
+      favBtn.setAttribute("data-fav-item", favId);
+      favBtn.textContent = "☆ Guardar en Favoritos";
+      favBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (typeof window.guardarEnFavoritosYRedirigir === "function") {
+          window.guardarEnFavoritosYRedirigir(
+            favId,
+            item.titulo,
+            `Halloween • ${item.tipo === "diy" ? "Idea DIY" : "Producto"}`,
+            favUrl
+          );
+        }
+      });
+
+      const actionsContainer = card.querySelector(".spooky-actions");
+      if (actionsContainer) {
+        actionsContainer.appendChild(favBtn);
+      }
 
       infestCard(card, index + 4);
 

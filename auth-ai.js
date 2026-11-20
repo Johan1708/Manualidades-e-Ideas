@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AUTH + FAVORITOS + MODERACIÓN DE IDEAS + ASISTENTE IA GLOBAL (ESTÉTICA ORBIT)
+   AUTH FUTURISTA (PANTALLA HOLOGRÁFICA) + FAVORITOS + IDEAS + CHISPA IA GLOBAL
    ========================================================================== */
 
 const SUPABASE_URL = "https://fwbcltconkufmjkonwnd.supabase.co";
@@ -30,12 +30,16 @@ function loadSupabaseSDK() {
   });
 }
 
-// Inyectar estilos globales con estética Orbit (Vidrio oscuro + Neón Cian + Plata metálico)
 function injectOrbitAIStyles() {
   if (document.getElementById("chispa-orbit-theme")) return;
   const style = document.createElement("style");
   style.id = "chispa-orbit-theme";
   style.textContent = `
+    :root {
+      --orbit-blue-rgb: 0 220 255;
+      --orbit-primary-rgb: 33 150 243;
+    }
+
     /* BARRA GLOBAL DE SESIÓN Y ACCIONES (ARRIBA A LA DERECHA EN TODAS LAS PÁGINAS) */
     .orbit-user-bar {
       position: fixed !important;
@@ -52,7 +56,7 @@ function injectOrbitAIStyles() {
       padding: 9px 16px;
       border-radius: 999px;
       border: 1.5px solid rgba(0, 240, 255, 0.7) !important;
-      background: rgba(10, 16, 26, 0.9) !important;
+      background: rgba(10, 16, 26, 0.88) !important;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       color: #e8fcff !important;
@@ -78,12 +82,351 @@ function injectOrbitAIStyles() {
       border-color: rgba(255, 95, 115, 0.65) !important;
       color: #ffc2cb !important;
     }
-    .orbit-pill-btn.danger:hover {
-      border-color: #ff5f73 !important;
-      box-shadow: 0 0 16px rgba(255, 95, 115, 0.5) !important;
+
+    /* OVERLAY TRANSPARENTE PARA QUE SE SIGA VIENDO EL FONDO DE TU PÁGINA */
+    .global-modal-overlay {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 100000 !important;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(4, 8, 16, 0.48) !important;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+    .global-modal-overlay.open {
+      display: flex !important;
     }
 
-    /* BOTÓN FAVORITOS EN TARJETAS */
+    /* ======================================================================
+       TARJETA FUTURISTA DE LOGIN (.orbit-login-screen) CON EFECTO ESCÁNER
+       ====================================================================== */
+    @keyframes pan-overlay {
+      from { background-position: 0% 0%; }
+      to { background-position: 0% -100%; }
+    }
+
+    @keyframes pan-image {
+      0% { background-position: 36% 42%; background-size: 200%; }
+      20% { background-position: 30% 35%; background-size: 200%; }
+      20.0001% { background-position: 60% 85%; background-size: 500%; }
+      40% { background-position: 49% 81%; background-size: 500%; }
+      40.0001% { background-position: 80% 42%; background-size: 300%; }
+      60% { background-position: 84% 33%; background-size: 300%; }
+      60.0001% { background-position: 0% 0%; background-size: 300%; }
+      80% { background-position: 15% 4%; background-size: 300%; }
+      80.0001% { background-position: 80% 10%; background-size: 300%; }
+      100% { background-position: 72% 14%; background-size: 300%; }
+    }
+
+    .orbit-login-screen {
+      width: min(430px, 94vw);
+      min-height: 550px;
+      max-height: 92vh;
+      display: flex;
+      border: 3px solid rgb(var(--orbit-primary-rgb) / 85%);
+      border-radius: 1.1rem;
+      background-color: rgba(8, 16, 28, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 0 40px rgba(33, 150, 243, 0.45), inset 0 0 24px rgba(0, 240, 255, 0.15);
+      box-sizing: border-box;
+    }
+
+    /* Muescas superior e inferior estilo pantalla futurista */
+    .orbit-login-screen::before,
+    .orbit-login-screen::after {
+      content: "";
+      height: 5px;
+      position: absolute;
+      z-index: 6;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      box-shadow: 0 0 10px #ffffff;
+    }
+    .orbit-login-screen::before {
+      width: 16%;
+      top: 0;
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+    .orbit-login-screen::after {
+      width: 26%;
+      bottom: 0;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    /* Imagen animada de fondo dentro de la tarjeta */
+    .orbit-login-screen > .screen-image {
+      background-image: url("https://images.unsplash.com/photo-1515266591878-f93e32bc5937?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80");
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      background-size: 300%;
+      background-position: 0% 0%;
+      filter: sepia(100%) hue-rotate(165deg) brightness(0.75);
+      opacity: 0.42;
+      animation: pan-image 15s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Líneas de escaneo CRT/Holograma animadas */
+    .orbit-login-screen > .screen-overlay {
+      background: linear-gradient(
+        rgb(var(--orbit-primary-rgb) / 0.18),
+        rgb(var(--orbit-primary-rgb) / 0.18) 3px,
+        transparent 3px,
+        transparent 9px
+      );
+      background-size: 100% 9px;
+      height: 100%;
+      width: 100%;
+      animation: pan-overlay 22s infinite linear;
+      position: absolute;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+    }
+
+    /* Marco interior con contenido del Login */
+    .orbit-login-screen > .screen-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+      position: relative;
+      z-index: 4;
+      margin: 0.95rem;
+      padding: 1.4rem 1.35rem 1.6rem;
+      border: 1px solid rgb(var(--orbit-primary-rgb) / 55%);
+      border-radius: 0.75rem;
+      overflow-y: auto;
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .screen-top-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 8;
+    }
+
+    /* Encabezado tipo CODEPEN / HYPERPLEXED con efecto scramble */
+    .screen-header-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 0.4rem;
+      margin-bottom: 1.1rem;
+      position: relative;
+      padding-top: 0.9rem;
+    }
+    .screen-header-brand::before,
+    .screen-header-brand::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      background-color: rgb(var(--orbit-primary-rgb));
+      border-radius: 1rem;
+      box-shadow: 0px 0px 8px 3px rgb(var(--orbit-primary-rgb) / 60%);
+    }
+    .screen-header-brand::before {
+      height: 2px;
+      width: 50px;
+      transform: translateX(-18px);
+      opacity: 0.8;
+    }
+    .screen-header-brand::after {
+      height: 3px;
+      width: 30px;
+      transform: translateX(24px);
+    }
+
+    .screen-scramble-title {
+      position: relative;
+      font-family: "Source Code Pro", "Consolas", monospace;
+      font-size: 2.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.14rem;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(33, 150, 243, 0.85);
+      display: inline-block;
+      margin: 0;
+    }
+    .screen-scramble-title::before,
+    .screen-scramble-title::after {
+      content: "";
+      height: 4px;
+      width: 4px;
+      position: absolute;
+      border: 2px solid #ffffff;
+      border-radius: 2px;
+    }
+    .screen-scramble-title::before {
+      top: 52%;
+      right: -1.1rem;
+    }
+    .screen-scramble-title::after {
+      top: 42%;
+      left: -1.1rem;
+    }
+
+    .screen-subtitle {
+      font-family: "Source Code Pro", "Consolas", monospace;
+      opacity: 0.85;
+      font-size: 0.78rem;
+      color: #9be7ff;
+      letter-spacing: 0.22rem;
+      text-transform: uppercase;
+      margin-top: 4px;
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Tabs y campos dentro de la tarjeta futurista */
+    .auth-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgb(var(--orbit-primary-rgb) / 50%);
+      background: rgba(8, 18, 32, 0.7);
+      color: #a9dcff;
+      font-family: "Source Code Pro", monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .auth-tab-btn.active {
+      background: rgb(var(--orbit-primary-rgb) / 30%);
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 0 14px rgb(var(--orbit-primary-rgb) / 45%);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 11px;
+    }
+    .form-field label {
+      font-size: 0.78rem;
+      font-family: "Source Code Pro", monospace;
+      letter-spacing: 0.04rem;
+      color: #bae6fd;
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgb(var(--orbit-primary-rgb) / 55%);
+      background: rgba(6, 13, 24, 0.82);
+      color: #ffffff;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgb(var(--orbit-primary-rgb) / 50%);
+    }
+    .form-field textarea {
+      min-height: 75px;
+      resize: vertical;
+    }
+
+    .btn-spooky-primary {
+      padding: 11px 16px;
+      border-radius: 8px;
+      border: 1px solid #7dd3fc;
+      background: linear-gradient(135deg, #0284c7, #2196f3, #00d4ff) !important;
+      color: #ffffff !important;
+      font-family: "Source Code Pro", monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 18px rgba(33, 150, 243, 0.55);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .btn-spooky-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 26px rgba(56, 189, 248, 0.85);
+    }
+
+    /* MODAL ESTÁNDAR PARA SUBIR IDEA Y FAVORITOS */
+    .global-modal-card {
+      width: min(470px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1.5px solid rgba(0, 240, 255, 0.55) !important;
+      background: linear-gradient(160deg, rgba(13, 19, 30, 0.94), rgba(8, 12, 20, 0.96)) !important;
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.28) !important;
+      color: #eef7ff !important;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    .global-modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .global-modal-top h3 {
+      margin: 0;
+      color: #ffffff !important;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+    }
+
+    .status-banner {
+      display: none;
+      padding: 8px 11px;
+      border-radius: 8px;
+      font-size: 0.81rem;
+      margin-bottom: 10px;
+    }
+    .status-banner.error {
+      display: block;
+      background: rgba(255, 65, 90, 0.22);
+      border: 1px solid rgba(255, 80, 100, 0.7);
+      color: #ffc2cb;
+    }
+    .status-banner.success {
+      display: block;
+      background: rgba(0, 240, 180, 0.18);
+      border: 1px solid rgba(0, 240, 180, 0.65);
+      color: #9effe6;
+    }
+
+    /* BOTÓN FAVORITOS Y GRID COMUNIDAD */
     .orbit-fav-btn {
       display: inline-flex;
       align-items: center;
@@ -97,16 +440,12 @@ function injectOrbitAIStyles() {
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
     .orbit-fav-btn.saved {
       background: rgba(255, 204, 0, 0.18);
       border-color: #ffd54f;
       color: #ffe57f;
-      box-shadow: 0 0 12px rgba(255, 213, 79, 0.35);
     }
-
-    /* GRID DE IDEAS DE LA COMUNIDAD */
     .comunidad-grid-wrapper {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -122,9 +461,8 @@ function injectOrbitAIStyles() {
       background: rgba(12, 18, 28, 0.88);
       backdrop-filter: blur(10px);
       color: #eef7ff;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     }
-    .comunidad-card h4 { margin: 6px 0 8px; color: #ffffff; font-size: 1.05rem; }
+    .comunidad-card h4 { margin: 6px 0 8px; color: #ffffff; }
     .comunidad-badge {
       display: inline-block;
       padding: 3px 10px;
@@ -136,13 +474,7 @@ function injectOrbitAIStyles() {
       color: #6ef6ff;
     }
     .comunidad-meta { font-size: 0.78rem; color: #9ac5d6; margin-bottom: 10px; }
-    .comunidad-detail {
-      font-size: 0.84rem;
-      line-height: 1.45;
-      color: #d8ecf5;
-      white-space: pre-line;
-      margin-top: 6px;
-    }
+    .comunidad-detail { font-size: 0.84rem; line-height: 1.45; color: #d8ecf5; white-space: pre-line; margin-top: 6px; }
     .fav-item-row {
       display: flex;
       align-items: center;
@@ -155,7 +487,7 @@ function injectOrbitAIStyles() {
       margin-bottom: 8px;
     }
 
-    /* BOTÓN FLOTANTE CHISPA IA - SIEMPRE VISIBLE */
+    /* BOTÓN Y PANEL FLOTANTE CHISPA IA */
     .ai-fab-btn {
       position: fixed !important;
       bottom: 22px !important;
@@ -169,7 +501,6 @@ function injectOrbitAIStyles() {
       border: 1.5px solid rgba(0, 240, 255, 0.75) !important;
       background: linear-gradient(135deg, rgba(12, 18, 28, 0.92), rgba(22, 34, 48, 0.92)) !important;
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       color: #e8fcff !important;
       font-family: 'Orbitron', 'Segoe UI', sans-serif;
       font-weight: 700;
@@ -177,15 +508,13 @@ function injectOrbitAIStyles() {
       letter-spacing: 0.6px;
       cursor: pointer;
       box-shadow: 0 0 18px rgba(0, 240, 255, 0.35), inset 0 0 10px rgba(0, 240, 255, 0.15) !important;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
     .ai-fab-btn:hover {
       transform: translateY(-2px) scale(1.03);
       border-color: #00f0ff !important;
-      box-shadow: 0 0 26px rgba(0, 240, 255, 0.65), inset 0 0 14px rgba(0, 240, 255, 0.25) !important;
+      box-shadow: 0 0 26px rgba(0, 240, 255, 0.65) !important;
     }
-
-    /* PANEL DE CHAT IA - ESTÉTICA HOLOGRÁFICA ORBIT */
     .ai-drawer {
       position: fixed !important;
       bottom: 78px !important;
@@ -200,21 +529,11 @@ function injectOrbitAIStyles() {
       border: 1.5px solid rgba(0, 240, 255, 0.55) !important;
       background: rgba(10, 14, 22, 0.92) !important;
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), 0 0 28px rgba(0, 240, 255, 0.25) !important;
       color: #eef6ff !important;
       font-family: 'Segoe UI', system-ui, sans-serif;
     }
-    .ai-drawer.open {
-      display: flex !important;
-      animation: orbitFadeIn 0.22s ease-out;
-    }
-    @keyframes orbitFadeIn {
-      from { opacity: 0; transform: translateY(10px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* ENCABEZADO DEL PANEL */
+    .ai-drawer.open { display: flex !important; }
     .ai-drawer-header {
       padding: 13px 16px !important;
       background: linear-gradient(135deg, rgba(0, 195, 255, 0.24), rgba(18, 26, 40, 0.95)) !important;
@@ -222,43 +541,18 @@ function injectOrbitAIStyles() {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
     }
-    .ai-drawer-header h4 {
-      margin: 0 !important;
-      font-size: 0.98rem !important;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: #ffffff !important;
-      text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
-    }
-    .ai-drawer-header small {
-      display: block;
-      margin-top: 2px;
-      font-size: 0.74rem !important;
-      color: #8eeeff !important;
-    }
-
+    .ai-drawer-header h4 { margin: 0 !important; font-size: 0.98rem !important; color: #ffffff !important; }
+    .ai-drawer-header small { display: block; font-size: 0.74rem !important; color: #8eeeff !important; }
     .ai-close-btn {
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      border: 1px solid rgba(0, 240, 255, 0.4) !important;
-      background: rgba(0, 240, 255, 0.1) !important;
+      border: 1px solid rgba(0, 240, 255, 0.45) !important;
+      background: rgba(0, 240, 255, 0.14) !important;
       color: #d8fbff !important;
-      font-size: 0.9rem;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
     }
-    .ai-close-btn:hover {
-      background: rgba(0, 240, 255, 0.28) !important;
-      border-color: #00f0ff !important;
-    }
-
-    /* ÁREA DE MENSAJES */
     .ai-messages {
       flex: 1;
       padding: 14px;
@@ -266,37 +560,20 @@ function injectOrbitAIStyles() {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0, 240, 255, 0.45) transparent;
     }
-    .ai-msg {
-      max-width: 86%;
-      padding: 10px 13px;
-      border-radius: 14px;
-      font-size: 0.88rem;
-      line-height: 1.42;
-      word-wrap: break-word;
-    }
+    .ai-msg { max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: 0.88rem; line-height: 1.42; }
     .ai-msg.bot {
       align-self: flex-start;
       background: rgba(24, 34, 50, 0.88) !important;
       border: 1px solid rgba(0, 240, 255, 0.28) !important;
       color: #e6f4ff !important;
-      border-bottom-left-radius: 4px;
-    }
-    .ai-msg.bot strong {
-      color: #4ef4ff !important;
     }
     .ai-msg.user {
       align-self: flex-end;
       background: linear-gradient(135deg, #0099cc, #00d4ff) !important;
       color: #041019 !important;
       font-weight: 600;
-      border-bottom-right-radius: 4px;
-      box-shadow: 0 4px 14px rgba(0, 212, 255, 0.3);
     }
-
-    /* CHIPS DE PREGUNTAS RÁPIDAS */
     .ai-quick-prompts {
       padding: 8px 12px;
       display: flex;
@@ -304,8 +581,6 @@ function injectOrbitAIStyles() {
       overflow-x: auto;
       border-top: 1px solid rgba(0, 240, 255, 0.16);
       background: rgba(8, 12, 19, 0.7);
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0, 240, 255, 0.35) transparent;
     }
     .ai-chip {
       white-space: nowrap;
@@ -316,15 +591,7 @@ function injectOrbitAIStyles() {
       color: #baf6ff !important;
       font-size: 0.77rem;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
-    .ai-chip:hover {
-      background: rgba(0, 240, 255, 0.22) !important;
-      border-color: #00f0ff !important;
-      color: #ffffff !important;
-    }
-
-    /* BARRA DE ESCRITURA */
     .ai-input-row {
       display: flex;
       gap: 8px;
@@ -342,13 +609,6 @@ function injectOrbitAIStyles() {
       font-size: 0.86rem;
       outline: none;
     }
-    .ai-input-row input::placeholder {
-      color: #7ea4b8 !important;
-    }
-    .ai-input-row input:focus {
-      border-color: #00f0ff !important;
-      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-    }
     .ai-input-row button {
       padding: 9px 15px;
       border-radius: 10px;
@@ -356,129 +616,7 @@ function injectOrbitAIStyles() {
       background: linear-gradient(135deg, #00b8e6, #00f0ff) !important;
       color: #03121a !important;
       font-weight: 800;
-      font-size: 0.85rem;
       cursor: pointer;
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .ai-input-row button:hover:not(:disabled) {
-      transform: scale(1.03);
-      box-shadow: 0 0 18px rgba(0, 240, 255, 0.7);
-    }
-
-    /* MODALES GLOBALES (LOGIN, FAVORITOS Y SUBIR IDEA) EN ESTÉTICA ORBIT */
-    .global-modal-overlay {
-      position: fixed !important;
-      inset: 0 !important;
-      z-index: 100000 !important;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      background: rgba(4, 7, 13, 0.82) !important;
-      backdrop-filter: blur(10px);
-    }
-    .global-modal-overlay.open {
-      display: flex !important;
-    }
-    .global-modal-card {
-      width: min(460px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 22px;
-      border-radius: 18px;
-      border: 1.5px solid rgba(0, 240, 255, 0.5) !important;
-      background: linear-gradient(160deg, rgba(13, 19, 30, 0.96), rgba(8, 12, 20, 0.98)) !important;
-      box-shadow: 0 0 35px rgba(0, 240, 255, 0.25) !important;
-      color: #eef7ff !important;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-    }
-    .global-modal-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .global-modal-top h3 {
-      margin: 0;
-      color: #ffffff !important;
-      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
-    }
-    .auth-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .auth-tab-btn {
-      flex: 1;
-      padding: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      background: rgba(255, 255, 255, 0.04);
-      color: #a9d8e6;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .auth-tab-btn.active {
-      background: rgba(0, 240, 255, 0.2);
-      border-color: #00f0ff;
-      color: #ffffff;
-    }
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      margin-bottom: 12px;
-    }
-    .form-field label {
-      font-size: 0.83rem;
-      color: #b8e6f5;
-      display: flex;
-      justify-content: space-between;
-    }
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      padding: 9px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(0, 240, 255, 0.35);
-      background: rgba(16, 24, 36, 0.92);
-      color: #ffffff;
-      font-size: 0.88rem;
-      outline: none;
-    }
-    .form-field textarea {
-      min-height: 75px;
-      resize: vertical;
-    }
-    .btn-spooky-primary {
-      padding: 11px 16px;
-      border-radius: 10px;
-      border: none;
-      background: linear-gradient(135deg, #00a8d6, #00f0ff) !important;
-      color: #03121a !important;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
-    }
-    .status-banner {
-      display: none;
-      padding: 9px 12px;
-      border-radius: 10px;
-      font-size: 0.83rem;
-      margin-bottom: 12px;
-    }
-    .status-banner.error {
-      display: block;
-      background: rgba(255, 65, 90, 0.16);
-      border: 1px solid rgba(255, 80, 100, 0.6);
-      color: #ffb3be;
-    }
-    .status-banner.success {
-      display: block;
-      background: rgba(0, 240, 180, 0.15);
-      border: 1px solid rgba(0, 240, 180, 0.55);
-      color: #9effe6;
     }
   `;
   document.head.appendChild(style);
@@ -536,45 +674,53 @@ document.addEventListener("DOMContentLoaded", async () => {
       </form>
     </aside>
 
-    <!-- MODAL LOGIN / REGISTRO -->
+    <!-- MODAL LOGIN / REGISTRO CON DISEÑO DE PANTALLA FUTURISTA -->
     <div class="global-modal-overlay" id="auth-modal">
-      <div class="global-modal-card">
-        <div class="global-modal-top">
-          <h3 id="auth-modal-heading">Iniciar Sesión</h3>
-          <button class="ai-close-btn" id="close-auth-modal" type="button">✕</button>
+      <div class="orbit-login-screen" id="orbit-login-screen">
+        <div class="screen-image"></div>
+        <div class="screen-overlay"></div>
+        <div class="screen-content">
+          <button class="ai-close-btn screen-top-close" id="close-auth-modal" type="button">✕</button>
+
+          <div class="screen-header-brand">
+            <span class="screen-scramble-title" id="auth-scramble-title" data-value="ACCESO">ACCESO</span>
+            <span class="screen-subtitle">@MANUALIDADES_ORBIT</span>
+          </div>
+
+          <div>
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab-btn active" data-auth-tab="login">Entrar</button>
+              <button type="button" class="auth-tab-btn" data-auth-tab="register">Crear Cuenta</button>
+            </div>
+
+            <div class="status-banner" id="auth-status"></div>
+
+            <form id="auth-form">
+              <div class="form-field" id="register-name-field" style="display:none;">
+                <label>Apodo Creativo <span>(3-25)</span></label>
+                <input type="text" id="auth-name" minlength="3" maxlength="25" placeholder="Ej. LunaCreativa" />
+              </div>
+
+              <div class="form-field">
+                <label>Correo Electrónico</label>
+                <input type="email" id="auth-email" required placeholder="tu@correo.com" />
+              </div>
+
+              <div class="form-field">
+                <label>Contraseña <span>(mín 6)</span></label>
+                <input type="password" id="auth-password" minlength="6" required placeholder="••••••" />
+              </div>
+
+              <button type="submit" class="btn-spooky-primary" style="width:100%; margin-top:8px;" id="auth-submit-btn">
+                Iniciar Sesión
+              </button>
+            </form>
+          </div>
         </div>
-
-        <div class="auth-tabs">
-          <button type="button" class="auth-tab-btn active" data-auth-tab="login">Entrar</button>
-          <button type="button" class="auth-tab-btn" data-auth-tab="register">Crear Cuenta</button>
-        </div>
-
-        <div class="status-banner" id="auth-status"></div>
-
-        <form id="auth-form">
-          <div class="form-field" id="register-name-field" style="display:none;">
-            <label>Nombre o Apodo Creativo <span>(3-25 caracteres)</span></label>
-            <input type="text" id="auth-name" minlength="3" maxlength="25" placeholder="Ej. LunaCreativa" />
-          </div>
-
-          <div class="form-field">
-            <label>Correo Electrónico</label>
-            <input type="email" id="auth-email" required placeholder="tu@correo.com" />
-          </div>
-
-          <div class="form-field">
-            <label>Contraseña <span>(mínimo 6 caracteres)</span></label>
-            <input type="password" id="auth-password" minlength="6" required placeholder="••••••" />
-          </div>
-
-          <button type="submit" class="btn-spooky-primary" style="width:100%; margin-top:6px;" id="auth-submit-btn">
-            Iniciar Sesión
-          </button>
-        </form>
       </div>
     </div>
 
-    <!-- MODAL SUBIR IDEA CON PARÁMETROS Y REVISIÓN IA -->
+    <!-- MODAL SUBIR IDEA -->
     <div class="global-modal-overlay" id="submit-idea-modal">
       <div class="global-modal-card">
         <div class="global-modal-top">
@@ -590,7 +736,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         <form id="submit-idea-form">
           <div class="form-field">
-            <label>Título de la manualidad <span class="char-counter" id="cnt-titulo">0/80</span></label>
+            <label>Título de la manualidad <span id="cnt-titulo">0/80</span></label>
             <input type="text" id="idea-titulo" minlength="5" maxlength="80" required placeholder="Ej. Esfera navideña con botella reciclada" />
           </div>
 
@@ -606,19 +752,19 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
 
           <div class="form-field">
-            <label>Costo aproximado <span class="char-counter">(máx 30 caracteres)</span></label>
+            <label>Costo aproximado <span>(máx 30)</span></label>
             <input type="text" id="idea-costo" maxlength="30" required placeholder="Ej. $50 MXN o Material reciclado" />
           </div>
 
           <div class="form-field">
-            <label>Materiales necesarios <span class="char-counter" id="cnt-mat">0/600</span></label>
+            <label>Materiales necesarios <span id="cnt-mat">0/600</span></label>
             <textarea id="idea-materiales" minlength="10" maxlength="600" required placeholder="- 1 botella de plástico
 - Pintura acrílica
 - Luz LED"></textarea>
           </div>
 
           <div class="form-field">
-            <label>Instrucciones Paso a Paso <span class="char-counter" id="cnt-pasos">0/2000</span></label>
+            <label>Instrucciones Paso a Paso <span id="cnt-pasos">0/2000</span></label>
             <textarea id="idea-pasos" minlength="20" maxlength="2000" required placeholder="1. Lava y seca la botella...
 2. Pinta dos capas..."></textarea>
           </div>
@@ -645,6 +791,42 @@ document.addEventListener("DOMContentLoaded", async () => {
   `;
   document.body.appendChild(uiContainer);
 
+  // EFECTO DE TEXTO SCRAMBLE EN LA TARJETA FUTURISTA DE LOGIN
+  const scrambleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let scrambleInterval = null;
+  const loginScreen = document.getElementById("orbit-login-screen");
+  const scrambleTitle = document.getElementById("auth-scramble-title");
+
+  function triggerScramble(targetText) {
+    if (!scrambleTitle) return;
+    if (targetText) {
+      scrambleTitle.dataset.value = targetText;
+      scrambleTitle.innerText = targetText;
+    }
+    let iteration = 0;
+    clearInterval(scrambleInterval);
+    scrambleInterval = setInterval(() => {
+      scrambleTitle.innerText = scrambleTitle.dataset.value
+        .split("")
+        .map((letter, index) => {
+          if (letter === " ") return " ";
+          if (index < iteration) return scrambleTitle.dataset.value[index];
+          return scrambleLetters[Math.floor(Math.random() * 26)];
+        })
+        .join("");
+
+      if (iteration >= scrambleTitle.dataset.value.length) {
+        clearInterval(scrambleInterval);
+      }
+      iteration += 1 / 3;
+    }, 30);
+  }
+
+  if (loginScreen) {
+    loginScreen.addEventListener("mouseenter", () => triggerScramble());
+  }
+
+  // Contadores de caracteres
   const bindCounter = (inputId, counterId, max) => {
     const el = document.getElementById(inputId);
     const cnt = document.getElementById(counterId);
@@ -663,6 +845,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   loginBtn.addEventListener("click", () => {
     document.getElementById("auth-modal").classList.add("open");
+    triggerScramble(authMode === "register" ? "REGISTRO" : "ACCESO");
   });
   uploadBtn.addEventListener("click", () => {
     document.getElementById("submit-idea-modal").classList.add("open");
@@ -698,6 +881,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.toggleFavorito = async function (itemId, titulo, categoria) {
     if (!currentUser) {
       document.getElementById("auth-modal").classList.add("open");
+      triggerScramble("ACCESO");
       const statusEl = document.getElementById("auth-status");
       statusEl.textContent = "Inicia sesión o crea una cuenta para guardar tus favoritos ⭐";
       statusEl.className = "status-banner error";
@@ -860,8 +1044,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       tab.classList.add("active");
       authMode = tab.getAttribute("data-auth-tab");
       document.getElementById("register-name-field").style.display = authMode === "register" ? "flex" : "none";
-      document.getElementById("auth-modal-heading").textContent =
-        authMode === "register" ? "Crear Cuenta" : "Iniciar Sesión";
+      triggerScramble(authMode === "register" ? "REGISTRO" : "ACCESO");
       document.getElementById("auth-submit-btn").textContent =
         authMode === "register" ? "Registrarme" : "Iniciar Sesión";
     });
@@ -977,8 +1160,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  // Cerrar modales con botón X o haciendo clic fuera en el fondo
   document.getElementById("close-auth-modal").addEventListener("click", () => {
     document.getElementById("auth-modal").classList.remove("open");
+  });
+  document.getElementById("auth-modal").addEventListener("click", (e) => {
+    if (e.target.id === "auth-modal") document.getElementById("auth-modal").classList.remove("open");
   });
   document.getElementById("close-idea-modal").addEventListener("click", () => {
     document.getElementById("submit-idea-modal").classList.remove("open");

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AUTH + MODERACIÓN DE IDEAS + ASISTENTE IA GLOBAL (ESTÉTICA ORBIT NEÓN CIAN)
+   AUTH + FAVORITOS + MODERACIÓN DE IDEAS + ASISTENTE IA GLOBAL (ESTÉTICA ORBIT)
    ========================================================================== */
 
 const SUPABASE_URL = "https://fwbcltconkufmjkonwnd.supabase.co";
@@ -36,6 +36,125 @@ function injectOrbitAIStyles() {
   const style = document.createElement("style");
   style.id = "chispa-orbit-theme";
   style.textContent = `
+    /* BARRA GLOBAL DE SESIÓN Y ACCIONES (ARRIBA A LA DERECHA EN TODAS LAS PÁGINAS) */
+    .orbit-user-bar {
+      position: fixed !important;
+      top: 18px !important;
+      right: 22px !important;
+      z-index: 99999 !important;
+      display: flex !important;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .orbit-pill-btn {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(0, 240, 255, 0.7) !important;
+      background: rgba(10, 16, 26, 0.9) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #e8fcff !important;
+      font-family: 'Orbitron', 'Segoe UI', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .orbit-pill-btn:hover {
+      border-color: #00f0ff !important;
+      transform: translateY(-1px);
+      box-shadow: 0 0 22px rgba(0, 240, 255, 0.65) !important;
+    }
+    .orbit-pill-btn.primary {
+      background: linear-gradient(135deg, #00a8d6, #00f0ff) !important;
+      color: #03121a !important;
+      border: none !important;
+    }
+    .orbit-pill-btn.danger {
+      border-color: rgba(255, 95, 115, 0.65) !important;
+      color: #ffc2cb !important;
+    }
+    .orbit-pill-btn.danger:hover {
+      border-color: #ff5f73 !important;
+      box-shadow: 0 0 16px rgba(255, 95, 115, 0.5) !important;
+    }
+
+    /* BOTÓN FAVORITOS EN TARJETAS */
+    .orbit-fav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      background: rgba(12, 20, 32, 0.85);
+      color: #bdf6ff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .orbit-fav-btn.saved {
+      background: rgba(255, 204, 0, 0.18);
+      border-color: #ffd54f;
+      color: #ffe57f;
+      box-shadow: 0 0 12px rgba(255, 213, 79, 0.35);
+    }
+
+    /* GRID DE IDEAS DE LA COMUNIDAD */
+    .comunidad-grid-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+      margin: 24px auto;
+      max-width: 1140px;
+      padding: 0 16px;
+    }
+    .comunidad-card {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      background: rgba(12, 18, 28, 0.88);
+      backdrop-filter: blur(10px);
+      color: #eef7ff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+    .comunidad-card h4 { margin: 6px 0 8px; color: #ffffff; font-size: 1.05rem; }
+    .comunidad-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(0, 240, 255, 0.16);
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      color: #6ef6ff;
+    }
+    .comunidad-meta { font-size: 0.78rem; color: #9ac5d6; margin-bottom: 10px; }
+    .comunidad-detail {
+      font-size: 0.84rem;
+      line-height: 1.45;
+      color: #d8ecf5;
+      white-space: pre-line;
+      margin-top: 6px;
+    }
+    .fav-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      background: rgba(16, 24, 36, 0.85);
+      margin-bottom: 8px;
+    }
+
     /* BOTÓN FLOTANTE CHISPA IA - SIEMPRE VISIBLE */
     .ai-fab-btn {
       position: fixed !important;
@@ -247,7 +366,7 @@ function injectOrbitAIStyles() {
       box-shadow: 0 0 18px rgba(0, 240, 255, 0.7);
     }
 
-    /* MODALES GLOBALES (LOGIN Y SUBIR IDEA) EN ESTÉTICA ORBIT */
+    /* MODALES GLOBALES (LOGIN, FAVORITOS Y SUBIR IDEA) EN ESTÉTICA ORBIT */
     .global-modal-overlay {
       position: fixed !important;
       inset: 0 !important;
@@ -372,11 +491,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sb = supabaseLib.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   let currentUser = null;
+  let userFavoritosIds = new Set();
   let authMode = "login";
   const pageTitle = document.title || window.location.pathname;
 
   const uiContainer = document.createElement("div");
   uiContainer.innerHTML = `
+    <!-- BARRA GLOBAL DE SESIÓN, FAVORITOS Y PUBLICAR IDEA -->
+    <div class="orbit-user-bar" id="orbit-user-bar">
+      <button type="button" class="orbit-pill-btn" id="global-login-btn">👤 Iniciar Sesión</button>
+      <button type="button" class="orbit-pill-btn" id="global-favs-btn" style="display:none;">⭐ Favoritos (0)</button>
+      <button type="button" class="orbit-pill-btn primary" id="global-upload-btn" style="display:none;">+ Subir Idea</button>
+      <button type="button" class="orbit-pill-btn danger" id="global-logout-btn" style="display:none;">Salir</button>
+    </div>
+
     <!-- BOTÓN FLOTANTE IA -->
     <button class="ai-fab-btn" id="open-ai-assistant" type="button">
       <span>✨ Chispa IA</span>
@@ -501,6 +629,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         </form>
       </div>
     </div>
+
+    <!-- MODAL MIS FAVORITOS -->
+    <div class="global-modal-overlay" id="favs-modal">
+      <div class="global-modal-card">
+        <div class="global-modal-top">
+          <h3>⭐ Mis Ideas Favoritas</h3>
+          <button class="ai-close-btn" id="close-favs-modal" type="button">✕</button>
+        </div>
+        <div id="favs-list-container">
+          <p style="font-size:0.86rem; color:#9ac5d6;">Cargando favoritos...</p>
+        </div>
+      </div>
+    </div>
   `;
   document.body.appendChild(uiContainer);
 
@@ -515,52 +656,203 @@ document.addEventListener("DOMContentLoaded", async () => {
   bindCounter("idea-materiales", "cnt-mat", 600);
   bindCounter("idea-pasos", "cnt-pasos", 2000);
 
-  const headerActions = document.querySelector(".header-actions") || document.querySelector("header");
-  const sessionBtn = document.querySelector(".header .button");
+  const loginBtn = document.getElementById("global-login-btn");
+  const favsBtn = document.getElementById("global-favs-btn");
+  const uploadBtn = document.getElementById("global-upload-btn");
+  const logoutBtn = document.getElementById("global-logout-btn");
 
-  const uploadBtn = document.createElement("button");
-  uploadBtn.className = "button";
-  uploadBtn.textContent = "+ SUBIR IDEA";
-  uploadBtn.style.display = "none";
+  loginBtn.addEventListener("click", () => {
+    document.getElementById("auth-modal").classList.add("open");
+  });
   uploadBtn.addEventListener("click", () => {
     document.getElementById("submit-idea-modal").classList.add("open");
   });
+  favsBtn.addEventListener("click", async () => {
+    document.getElementById("favs-modal").classList.add("open");
+    await renderFavoritosModal();
+  });
+  logoutBtn.addEventListener("click", async () => {
+    await sb.auth.signOut();
+    await updateSessionUI(null);
+  });
 
-  if (headerActions && sessionBtn) {
-    headerActions.insertBefore(uploadBtn, sessionBtn);
+  async function loadUserFavoritos() {
+    userFavoritosIds.clear();
+    if (!currentUser) {
+      favsBtn.textContent = "⭐ Favoritos (0)";
+      refreshFavButtonsOnPage();
+      return;
+    }
+    const { data } = await sb
+      .from("favoritos_usuario")
+      .select("item_id")
+      .eq("user_id", currentUser.id);
+
+    if (Array.isArray(data)) {
+      data.forEach((row) => userFavoritosIds.add(row.item_id));
+    }
+    favsBtn.textContent = `⭐ Favoritos (${userFavoritosIds.size})`;
+    refreshFavButtonsOnPage();
   }
 
-  function updateSessionUI(user) {
+  window.toggleFavorito = async function (itemId, titulo, categoria) {
+    if (!currentUser) {
+      document.getElementById("auth-modal").classList.add("open");
+      const statusEl = document.getElementById("auth-status");
+      statusEl.textContent = "Inicia sesión o crea una cuenta para guardar tus favoritos ⭐";
+      statusEl.className = "status-banner error";
+      return;
+    }
+
+    if (userFavoritosIds.has(itemId)) {
+      await sb
+        .from("favoritos_usuario")
+        .delete()
+        .eq("user_id", currentUser.id)
+        .eq("item_id", itemId);
+    } else {
+      await sb.from("favoritos_usuario").insert([
+        {
+          user_id: currentUser.id,
+          item_id: itemId,
+          titulo,
+          categoria,
+          url_pagina: window.location.pathname
+        }
+      ]);
+    }
+    await loadUserFavoritos();
+  };
+
+  function refreshFavButtonsOnPage() {
+    document.querySelectorAll("[data-fav-id]").forEach((card) => {
+      const itemId = card.getAttribute("data-fav-id");
+      const titulo = card.getAttribute("data-fav-title") || "Manualidad";
+      const categoria = card.getAttribute("data-fav-cat") || pageTitle;
+
+      let btn = card.querySelector(".orbit-fav-btn");
+      if (!btn) {
+        btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "orbit-fav-btn";
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          window.toggleFavorito(itemId, titulo, categoria);
+        });
+        card.appendChild(btn);
+      }
+
+      const isSaved = userFavoritosIds.has(itemId);
+      btn.classList.toggle("saved", isSaved);
+      btn.textContent = isSaved ? "⭐ Guardado en Favoritos" : "☆ Guardar en Favoritos";
+    });
+  }
+
+  async function renderFavoritosModal() {
+    const container = document.getElementById("favs-list-container");
+    if (!currentUser) return;
+    container.innerHTML = `<p style="font-size:0.86rem; color:#9ac5d6;">Cargando favoritos...</p>`;
+
+    const { data, error } = await sb
+      .from("favoritos_usuario")
+      .select("*")
+      .eq("user_id", currentUser.id)
+      .order("created_at", { ascending: false });
+
+    if (error || !data || data.length === 0) {
+      container.innerHTML = `<p style="font-size:0.86rem; color:#9ac5d6;">Aún no tienes manualidades guardadas. Haz clic en "☆ Guardar en Favoritos" en cualquier idea.</p>`;
+      return;
+    }
+
+    container.innerHTML = data
+      .map(
+        (fav) => `
+        <div class="fav-item-row">
+          <div>
+            <strong style="color:#fff; font-size:0.9rem;">${fav.titulo}</strong><br/>
+            <small style="color:#7ce8ff;">${fav.categoria}</small>
+          </div>
+          <div style="display:flex; gap:6px;">
+            ${fav.url_pagina ? `<a href="${fav.url_pagina}" class="orbit-pill-btn" style="text-decoration:none; padding:5px 10px; font-size:0.74rem;">Ver</a>` : ""}
+            <button type="button" class="orbit-pill-btn danger" style="padding:5px 10px; font-size:0.74rem;" data-del-fav="${fav.item_id}">✕</button>
+          </div>
+        </div>
+      `
+      )
+      .join("");
+
+    container.querySelectorAll("[data-del-fav]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        await window.toggleFavorito(btn.getAttribute("data-del-fav"), "", "");
+        await renderFavoritosModal();
+      });
+    });
+  }
+
+  async function loadComunidadIdeas() {
+    const grid = document.getElementById("comunidad-ideas-grid");
+    if (!grid) return;
+
+    const categoriaFiltro = grid.getAttribute("data-categoria");
+    let query = sb
+      .from("ideas_comunidad")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (categoriaFiltro) {
+      query = query.eq("categoria", categoriaFiltro);
+    }
+
+    const { data, error } = await query;
+    if (error || !data || data.length === 0) {
+      grid.innerHTML = `<p style="text-align:center; color:#9ac5d6;">Aún no hay ideas publicadas en esta sección. ¡Inicia sesión y sé el primero en subir una!</p>`;
+      return;
+    }
+
+    grid.classList.add("comunidad-grid-wrapper");
+    grid.innerHTML = data
+      .map(
+        (idea) => `
+        <article class="comunidad-card" data-fav-id="idea-${idea.id}" data-fav-title="${idea.titulo}" data-fav-cat="${idea.categoria}">
+          <span class="comunidad-badge">${idea.categoria}</span>
+          <h4>${idea.titulo}</h4>
+          <div class="comunidad-meta">Por <strong>${idea.autor_nombre || "Creador"}</strong> • Costo: ${idea.costo_aprox}</div>
+          <div class="comunidad-detail"><strong>Materiales:</strong>\n${idea.materiales}</div>
+          <div class="comunidad-detail"><strong>Pasos:</strong>\n${idea.pasos}</div>
+          ${idea.consejo_ia ? `<div class="comunidad-detail" style="color:#7ce8ff; margin-top:8px;">✨ <em>Tip Chispa IA: ${idea.consejo_ia}</em></div>` : ""}
+        </article>
+      `
+      )
+      .join("");
+
+    refreshFavButtonsOnPage();
+  }
+
+  async function updateSessionUI(user) {
     currentUser = user;
-    if (!sessionBtn) return;
     if (user) {
       const displayName = user.user_metadata?.display_name || user.email.split("@")[0];
-      sessionBtn.textContent = `SALIR (${displayName.toUpperCase()})`;
+      loginBtn.style.display = "none";
+      favsBtn.style.display = "inline-block";
       uploadBtn.style.display = "inline-block";
+      logoutBtn.style.display = "inline-block";
+      logoutBtn.textContent = `Salir (${displayName})`;
     } else {
-      sessionBtn.textContent = "SESION";
+      loginBtn.style.display = "inline-block";
+      favsBtn.style.display = "none";
       uploadBtn.style.display = "none";
+      logoutBtn.style.display = "none";
     }
+    await loadUserFavoritos();
   }
 
   const { data: sessionData } = await sb.auth.getSession();
-  updateSessionUI(sessionData?.session?.user || null);
+  await updateSessionUI(sessionData?.session?.user || null);
+  await loadComunidadIdeas();
 
-  sb.auth.onAuthStateChange((_event, session) => {
-    updateSessionUI(session?.user || null);
+  sb.auth.onAuthStateChange(async (_event, session) => {
+    await updateSessionUI(session?.user || null);
   });
-
-  if (sessionBtn) {
-    sessionBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      if (currentUser) {
-        await sb.auth.signOut();
-        updateSessionUI(null);
-      } else {
-        document.getElementById("auth-modal").classList.add("open");
-      }
-    });
-  }
 
   document.querySelectorAll("[data-auth-tab]").forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -599,7 +891,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         statusEl.textContent = error.message;
         statusEl.classList.add("error");
       } else {
-        statusEl.textContent = "¡Cuenta creada! Ya puedes subir tus ideas.";
+        statusEl.textContent = "¡Cuenta creada! Ya puedes guardar favoritos y subir tus ideas.";
         statusEl.classList.add("success");
         setTimeout(() => document.getElementById("auth-modal").classList.remove("open"), 1100);
       }
@@ -674,6 +966,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       statusEl.textContent = `✅ ¡Idea publicada! Consejo de IA: ${modData.sugerencia_ia}`;
       statusEl.className = "status-banner success";
       e.target.reset();
+      await loadComunidadIdeas();
       setTimeout(() => document.getElementById("submit-idea-modal").classList.remove("open"), 2200);
     } catch (err) {
       statusEl.textContent = "Error al guardar la idea: " + err.message;
@@ -689,6 +982,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   document.getElementById("close-idea-modal").addEventListener("click", () => {
     document.getElementById("submit-idea-modal").classList.remove("open");
+  });
+  document.getElementById("close-favs-modal").addEventListener("click", () => {
+    document.getElementById("favs-modal").classList.remove("open");
   });
 
   const aiDrawer = document.getElementById("ai-drawer");

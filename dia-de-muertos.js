@@ -635,7 +635,7 @@ function toggleSidebar() {
 }
 
 /* ==========================================================================
-   5. COMPONENTE MENÚ INFINITO 3D (WEBGL2)
+   5. COMPONENTE MENÚ INFINITO 3D (WEBGL2) - FORMAS Y ESTILOS DE ALTARES
    ========================================================================== */
 function initInfiniteMenu() {
     const root = document.getElementById('infiniteMenuWrapper');
@@ -644,58 +644,52 @@ function initInfiniteMenu() {
 
     const items = [
         {
-            title: 'Flor de Cempasúchil',
-            description: 'El camino de luz y aroma dorado que guía a los difuntos desde el Mictlán a su altar.',
-            image: 'https://images.unsplash.com/photo-1508361001413-7a9dca21d08a?q=80&w=600&auto=format&fit=crop',
-            key: 'cruz'
+            title: 'Altar de 2 Niveles',
+            description: 'Representa la división entre el cielo (retratos y velas arriba) y la tierra (comida, agua y pan abajo). Ideal para espacios pequeños.',
+            image: 'img/altar-2-niveles.jpg',
+            key: 'altar2'
         },
         {
-            title: 'Pan de Muerto',
-            description: 'Simboliza el ciclo sagrado de la vida y la muerte, adornado con los huesos de la memoria.',
-            image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=600&auto=format&fit=crop',
-            key: 'pan'
+            title: 'Altar de 3 Niveles',
+            description: 'El más tradicional en los hogares: simboliza el cielo en la cúspide, la tierra en el centro y el inframundo en la base.',
+            image: 'img/altar-3-niveles.jpg',
+            key: 'altar3'
         },
         {
-            title: 'Velas & Veladoras',
-            description: 'La flama encendida que ilumina el camino de regreso y disipa las tinieblas de la noche.',
-            image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=600&auto=format&fit=crop',
-            key: 'vela'
+            title: 'Altar de 7 Niveles',
+            description: 'El altar completo tradicional que simboliza los siete escalones que el alma debe atravesar para llegar al descanso eterno.',
+            image: 'img/altar-7-niveles.jpg',
+            key: 'altar7'
         },
         {
-            title: 'Copal e Incienso',
-            description: 'Sahumerio místico que purifica la atmósfera del hogar y eleva las plegarias al cielo.',
-            image: 'https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=600&auto=format&fit=crop',
-            key: 'copal'
+            title: 'Altar con Arco Floral',
+            description: 'Enmarcado por un arco de carrizo cubierto de cempasúchil y frutas, simbolizando la puerta de bienvenida entre ambos mundos.',
+            image: 'img/altar-arco.jpg',
+            key: 'altarArco'
         },
         {
-            title: 'Retratos Sagrados',
-            description: 'Fotografía en el nivel superior para honrar el recuerdo de los seres queridos amados.',
-            image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop',
-            key: 'foto'
+            title: 'Altar Minimalista',
+            description: 'Pensado para mesas o escritorios: reúne lo esencial en un solo plano (agua, sal, veladora, cempasúchil y fotografía).',
+            image: 'img/altar-mesa.jpg',
+            key: 'altarMesa'
         },
         {
-            title: 'Papel Picado',
-            description: 'Representa el elemento viento y la frágil alegría festiva del reencuentro de las almas.',
-            image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop',
-            key: 'papel'
+            title: 'Altar para Mascotas',
+            description: 'Dedicado el 27 de octubre a los compañeros animales, con su retrato, croquetas, agua fresca, juguetes y luz blanca.',
+            image: 'img/altar-mascotas.jpg',
+            key: 'altarMascotas'
         },
         {
-            title: 'Calaveritas',
-            description: 'Dulce alfeñique con el nombre del difunto en la frente para recordar la dulzura del alma.',
-            image: 'https://images.unsplash.com/photo-1572293007244-8b60335d2b7d?q=80&w=600&auto=format&fit=crop',
-            key: 'dulces'
+            title: 'Altar Monumental',
+            description: 'Estilo Huaquechula: estructura piramidal vestida con telas satinadas blancas, espejos y alfeñiques para difuntos recientes.',
+            image: 'img/altar-monumental.jpg',
+            key: 'altarMonumental'
         },
         {
-            title: 'Manjares & Mole',
-            description: 'Banquete caliente de mole, tamales y frutas para deleitar el alma del difunto.',
-            image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=600&auto=format&fit=crop',
-            key: 'comida'
-        },
-        {
-            title: 'Agua & Sal',
-            description: 'Mitiga la sed del espíritu tras su largo viaje y purifica su esencia para el retorno.',
-            image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?q=80&w=600&auto=format&fit=crop',
-            key: 'agua'
+            title: 'Altar Hanal Pixán',
+            description: 'Tradición maya con manteles blancos bordados en punto de cruz, jícaras con atole nuevo y mukbilpollo horneado bajo tierra.',
+            image: 'img/altar-maya.jpg',
+            key: 'altarMaya'
         }
     ];
 
@@ -1041,9 +1035,19 @@ function initInfiniteMenu() {
       const titleEl = document.getElementById('menuActiveTitle');
       const descEl = document.getElementById('menuActiveDesc');
       const btnEl = document.getElementById('menuActiveBtn');
+      const overlayEl = document.getElementById('infiniteMenuOverlay');
 
       if (titleEl) titleEl.innerText = item.title;
       if (descEl) descEl.innerText = item.description;
+
+      // Actualiza los atributos de Favoritos para auth-ai.js según la idea de altar activa
+      if (overlayEl) {
+        overlayEl.setAttribute('data-fav-id', `muertos-idea-${item.key}`);
+        overlayEl.setAttribute('data-fav-title', item.title);
+        overlayEl.setAttribute('data-fav-cat', 'Día de Muertos');
+        if (typeof window.syncFavButtons === 'function') window.syncFavButtons();
+      }
+
       if (btnEl) {
         btnEl.onclick = () => {
           showLetterModal(item.key);
@@ -1415,27 +1419,124 @@ function setupSearch() {
 }
 
 /* ==========================================================================
-   7. PROGRESS BAR INTERACTIVA DE GUÍA DE ALTAR
+   7. PROGRESS BAR INTERACTIVA DE GUÍA DE ALTAR (GUARDADO POR USUARIO)
    ========================================================================== */
-function updateAltarProgress() {
+function getAltarChecklistStorageKey() {
+    const possibleKeys = ['auth_current_user', 'tradicion_current_user', 'currentUser', 'usuarioActivo', 'user'];
+    for (const k of possibleKeys) {
+        try {
+            const raw = localStorage.getItem(k);
+            if (!raw) continue;
+            const parsed = JSON.parse(raw);
+            const id = parsed?.email || parsed?.username || parsed?.id || parsed?.nombre;
+            if (id) return `altar_checklist_${String(id).toLowerCase().trim()}`;
+        } catch (e) {
+            if (localStorage.getItem(k)) {
+                return `altar_checklist_${localStorage.getItem(k).toLowerCase().trim()}`;
+            }
+        }
+    }
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.includes('user') || key.includes('session') || key.includes('auth')) && !key.startsWith('altar_checklist_')) {
+            try {
+                const val = JSON.parse(localStorage.getItem(key));
+                const id = val?.email || val?.username || val?.uid || val?.id;
+                if (id) return `altar_checklist_${String(id).toLowerCase().trim()}`;
+            } catch (_) {}
+        }
+    }
+    return 'altar_checklist_invitado';
+}
+
+function saveAltarChecklistState() {
+    const checkboxes = document.querySelectorAll('#altarChecklist input[type="checkbox"]');
+    const state = {};
+    checkboxes.forEach((cb, index) => {
+        const id = cb.getAttribute('data-check-id') || `item_${index}`;
+        state[id] = cb.checked;
+    });
+    localStorage.setItem(getAltarChecklistStorageKey(), JSON.stringify(state));
+}
+
+function loadAltarChecklistState() {
+    const checkboxes = document.querySelectorAll('#altarChecklist input[type="checkbox"]');
+    if (!checkboxes.length) return;
+
+    const storageKey = getAltarChecklistStorageKey();
+    let saved = {};
+    try {
+        saved = JSON.parse(localStorage.getItem(storageKey)) || {};
+    } catch (e) {
+        saved = {};
+    }
+
+    checkboxes.forEach((cb, index) => {
+        const id = cb.getAttribute('data-check-id') || `item_${index}`;
+        cb.checked = Boolean(saved[id]);
+    });
+
+    updateAltarProgress(false);
+}
+
+function updateAltarProgress(shouldSave = true) {
     const checkboxes = document.querySelectorAll('#altarChecklist input[type="checkbox"]');
     const total = checkboxes.length;
     let checkedCount = 0;
 
     checkboxes.forEach(cb => { if (cb.checked) checkedCount++; });
 
-    const percentage = Math.round((checkedCount / total) * 100);
+    const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
     const progressFill = document.getElementById('progressFill');
     const progressText = document.getElementById('progressText');
 
     if (progressFill) progressFill.style.width = `${percentage}%`;
     if (progressText) progressText.innerText = `Altar preparado: ${percentage}% (${checkedCount} de ${total} elementos)`;
+
+    if (shouldSave) {
+        saveAltarChecklistState();
+    }
 }
 
 /* ==========================================================================
-   8. OFRENDA 3D: CARTAS SAGRADAS AL TOCAR ELEMENTOS
+   8. OFRENDA 3D Y ESTILOS DE ALTAR: CARTAS SAGRADAS AL TOCAR ELEMENTOS
    ========================================================================== */
 const ofrendaElementsInfo = {
+    // --- FORMAS Y ESTILOS DE ALTAR (ESFERA 3D) ---
+    altar2: {
+        title: "Altar de 2 Niveles (Cielo y Tierra)",
+        desc: "Es una forma sencilla y muy significativa de montar la ofrenda en casa. El nivel superior representa el cielo y la bóveda celeste (donde van las fotografías, santos y veladoras), mientras que el nivel inferior representa la tierra con sus frutos, pan de muerto, agua y platillos típicos."
+    },
+    altar3: {
+        title: "Altar de 3 Niveles (Cielo, Tierra e Inframundo)",
+        desc: "El formato clásico de los hogares mexicanos. El escalón más alto representa el cielo; el escalón intermedio simboliza la tierra donde habitamos los vivos; y el nivel inferior representa el inframundo o purgatorio, acompañado de un camino de pétalos de cempasúchil y velas en el piso."
+    },
+    altar7: {
+        title: "Altar Tradicional de 7 Niveles",
+        desc: "Representa los 7 destinos o niveles que el alma debe recorrer para alcanzar el descanso eterno. En la cúspide se coloca la imagen religiosa; en el segundo nivel las ánimas del purgatorio; en el tercero la sal; en el cuarto el pan de muerto; en el quinto la comida; en el sexto las fotografías; y en el séptimo la cruz de ceniza o flores."
+    },
+    altarArco: {
+        title: "Altar con Arco de Cempasúchil",
+        desc: "Muy característico de Michoacán, Oaxaca y la Huasteca. Se construye un arco con varas de carrizo o caña forradas con flor de cempasúchil, mano de león y frutas colgantes (como mandarinas, cañas y plátanos), simbolizando el portal sagrado por donde cruzan las almas."
+    },
+    altarMesa: {
+        title: "Altar Minimalista de Mesa o Repisa",
+        desc: "Ideal para departamentos, habitaciones o espacios reducidos sin perder el sentido espiritual. Se coloca un mantel blanco o morado sobre una mesa y se disponen los cuatro elementos de la naturaleza: agua (vaso cristalino), tierra (frutas y pan), viento (papel picado) y fuego (una veladora), junto al retrato del ser querido."
+    },
+    altarMascotas: {
+        title: "Altar Dedicado a las Mascotas",
+        desc: "Se enciende la noche del 27 de octubre para recibir a perros, gatos y compañeros animales que partieron. Incluye su fotografía, su plato con alimento o premios favoritos, agua limpia, su juguete preferido, flores de cempasúchil y una veladora blanca."
+    },
+    altarMonumental: {
+        title: "Altar Piramidal de Telas Blancas",
+        desc: "Inspirado en los altares monumentales de Huaquechula, Puebla. Se arma una estructura escalonada de gran altura cubierta con telas satinadas blancas plisadas, cirios altos, figuras de alfeñique y un espejo al fondo que permite ver el reflejo del alma del difunto."
+    },
+    altarMaya: {
+        title: "Altar Maya Hanal Pixán",
+        desc: "Originario de la Península de Yucatán. Se caracteriza por el uso de manteles blancos bordados a mano (hipiles o servilletas en punto de cruz), velas de cera virgen negra o de colores (según si es para adultos o niños), jícaras con chocolate o atole y el tradicional mukbilpollo."
+    },
+
+    // --- ELEMENTOS DE LA OFRENDA 3D INFERIOR ---
     cruz: {
         title: "Cruz y Camino de Pétalos de Cempasúchil",
         desc: "Formada con pétalos dorados en el piso. Señala los cuatro puntos cardinales y sirve como sendero aromático y luminoso para que las almas no pierdan el rumbo al descender desde el Mictlán hasta el hogar."
@@ -1482,11 +1583,21 @@ function showLetterModal(key) {
     const modal = document.getElementById('ofrenda-letter-modal');
     const title = document.getElementById('letterTitle');
     const body = document.getElementById('letterBody');
+    const letterCard = modal ? modal.querySelector('.letter-card') : null;
     if (!modal || !title || !body) return;
 
     const data = ofrendaElementsInfo[key] || ofrendaElementsInfo.cruz;
     title.innerText = data.title;
     body.innerText = data.desc;
+
+    // Permite guardar esta carta / idea de altar en Favoritos desde el modal
+    if (letterCard) {
+        letterCard.setAttribute('data-fav-id', `muertos-carta-${key}`);
+        letterCard.setAttribute('data-fav-title', data.title);
+        letterCard.setAttribute('data-fav-cat', 'Día de Muertos');
+        if (typeof window.syncFavButtons === 'function') window.syncFavButtons();
+    }
+
     modal.style.display = 'flex';
 }
 
@@ -1684,6 +1795,7 @@ function openRegionModal(stateKey) {
 
     const modalWrapper = document.getElementById("card-modal-wrapper");
     const flipper = document.getElementById("ghoulCardFlipper");
+    const cardFront = modalWrapper ? modalWrapper.querySelector(".card-front") : null;
     const titleEl = document.getElementById("modal-title");
     const stateNameEl = document.getElementById("modal-state-name");
     const tagEl = document.getElementById("modal-tag");
@@ -1693,6 +1805,13 @@ function openRegionModal(stateKey) {
     const sharedList = document.getElementById("shared-states-list");
     const mapsLink = document.getElementById("modal-maps-link");
     const resultBox = document.getElementById("location-result");
+
+    if (cardFront) {
+        cardFront.setAttribute("data-fav-id", `muertos-estado-${data.id}`);
+        cardFront.setAttribute("data-fav-title", `${data.name} - ${data.title}`);
+        cardFront.setAttribute("data-fav-cat", "Día de Muertos");
+        if (typeof window.syncFavButtons === "function") window.syncFavButtons();
+    }
 
     if (titleEl) titleEl.textContent = data.title;
     if (stateNameEl) stateNameEl.textContent = data.name;
@@ -1947,6 +2066,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initInfiniteMenu();
     renderStatesList();
     setupSearch();
+    loadAltarChecklistState();
+    window.addEventListener('storage', loadAltarChecklistState);
     setup3DOfrendaScene();
     setupMapInteractions();
     setupGeolocationCalculator();

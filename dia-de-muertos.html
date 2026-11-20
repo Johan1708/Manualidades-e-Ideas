@@ -293,20 +293,20 @@
     <section id="ideas-altar-section" class="altar-ideas-section">
         <div class="ideas-header">
             <h2 class="ideas-title">Ideas para tu altar </h2>
-            <p class="ideas-subtitle">Desliza la Esfera 3D o interactúa con los elementos para explorar el significado y preparar tu ofrenda en casa</p>
+            <p class="ideas-subtitle">Desliza la Esfera 3D o interactúa con las opciones para descubrir distintas formas de montar tu ofrenda en casa</p>
         </div>
 
         <!-- COMPONENTE MENÚ INFINITO 3D -->
         <div class="infinite-menu-wrapper" id="infiniteMenuWrapper">
             <canvas id="infiniteMenuCanvas" class="infinite-menu-canvas"></canvas>
             
-            <!-- OVERLAY CON INFORMACIÓN DEL ELEMENTO SELECCIONADO -->
-            <div class="infinite-menu-overlay" id="infiniteMenuOverlay">
+            <!-- OVERLAY CON INFORMACIÓN DEL ELEMENTO SELECCIONADO Y BOTÓN FAVORITOS -->
+            <div class="infinite-menu-overlay" id="infiniteMenuOverlay" data-fav-id="muertos-idea-altar2" data-fav-title="Altar de 2 Niveles" data-fav-cat="Día de Muertos">
                 <div class="menu-info-left">
                     <h3 id="menuActiveTitle" class="menu-active-title">Cargando...</h3>
                 </div>
                 <div class="menu-info-right">
-                    <p id="menuActiveDesc" class="menu-active-desc">Explora la esfera 3D deslizando con el cursor o tocando cada elemento.</p>
+                    <p id="menuActiveDesc" class="menu-active-desc">Explora la esfera 3D deslizando con el cursor o tocando cada estilo de altar.</p>
                 </div>
                 <button id="menuActiveBtn" class="menu-active-btn" aria-label="Ver detalles">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -337,15 +337,15 @@
                 <h3 class="box-title">Checklist para tu Altar</h3>
                 <p class="box-desc">Marca los elementos que ya tienes listos para tu altar:</p>
                 <div class="checklist-items" id="altarChecklist">
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>📷 Fotografías de tus difuntos</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🕯️ Veladoras / Velas de cera virgen</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🌼 Flores de Cempasúchil y Mano de León</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🍞 Pan de Muerto tradicional</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💨 Copal e Incienso natural</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💧 Vaso con Agua purificada y plato de Sal</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🎨 Papel Picado de colores</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>💀 Calaveritas de azúcar o chocolate</span></label>
-                    <label class="check-item"><input type="checkbox" onchange="updateAltarProgress()"> <span>🍲 Platillo y bebida favorita del difunto</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="fotos" onchange="updateAltarProgress()"> <span>📷 Fotografías de tus difuntos</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="velas" onchange="updateAltarProgress()"> <span>🕯️ Veladoras / Velas de cera virgen</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="flores" onchange="updateAltarProgress()"> <span>🌼 Flores de Cempasúchil y Mano de León</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="pan" onchange="updateAltarProgress()"> <span>🍞 Pan de Muerto tradicional</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="copal" onchange="updateAltarProgress()"> <span>💨 Copal e Incienso natural</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="agua" onchange="updateAltarProgress()"> <span>💧 Vaso con Agua purificada y plato de Sal</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="papel" onchange="updateAltarProgress()"> <span>🎨 Papel Picado de colores</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="calaveras" onchange="updateAltarProgress()"> <span>💀 Calaveritas de azúcar o chocolate</span></label>
+                    <label class="check-item"><input type="checkbox" data-check-id="comida" onchange="updateAltarProgress()"> <span>🍲 Platillo y bebida favorita del difunto</span></label>
                 </div>
                 <div class="progress-bar-container">
                     <div class="progress-text" id="progressText">Altar preparado: 0%</div>
@@ -370,7 +370,7 @@
                 </div>
 
                 <!-- CARA FRONTAL EN FORMATO CARTA SAGRADA DE PERGAMINO -->
-                <div class="card-face card-front sacred-letter-style">
+                <div class="card-face card-front sacred-letter-style" data-fav-id="muertos-carta-regional" data-fav-title="Carta Sacra Regional" data-fav-cat="Día de Muertos">
                     <div class="letter-flower-stamp">🌸</div>
                     
                     <div class="card-badge-top" id="modal-tag">MEMORIA Y TRADICIÓN FEDERATIVA</div>
@@ -436,7 +436,7 @@
 
         <!-- CARTA RITUAL FLOTANTE PARA CADA ELEMENTO -->
         <div id="ofrenda-letter-modal" class="letter-modal-overlay">
-            <div class="letter-card">
+            <div class="letter-card" data-fav-id="muertos-carta-altar2" data-fav-title="Altar de 2 Niveles (Cielo y Tierra)" data-fav-cat="Día de Muertos">
                 <div class="letter-stamp">🌸</div>
                 <div class="letter-header">
                     <span class="letter-subtitle">MEMORIA Y OFRENDA SAGRADA</span>

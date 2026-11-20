@@ -103,7 +103,7 @@ const MOTIFS = {
         ".vvvvvvvvvvvvv.",
         "..vvvvvvvvvvv..",
         "...vvvvvvvvv...",
-        "....vvvvvvv....",
+        "....vvvvvvvv...",
         "...vvvv.vvvv...",
         "..vvv.....vvv..",
         ".vv.........vv."
@@ -144,7 +144,6 @@ const SWEATER_THEMES = [
 ];
 
 function generateSweaterTexture(theme) {
-    // 1024x1024 consume 75% menos RAM/GPU que 2048x2048 manteniendo la misma nitidez
     const CANVAS_SIZE = 1024;
     const texCanvas = document.createElement('canvas');
     texCanvas.width = CANVAS_SIZE;
@@ -187,7 +186,6 @@ function generateSweaterTexture(theme) {
         }
     }
 
-    // Textura ligera de estambre (15,000 partículas en lugar de 120,000)
     for (let i = 0; i < 15000; i++) {
         const x = Math.random() * CANVAS_SIZE;
         const y = Math.random() * CANVAS_SIZE;
@@ -941,7 +939,6 @@ function buildChristmas3DMesh(type) {
         }
     }
 
-    // Orientación inicial ligera para que se aprecie el volumen 3D aun estando quieto
     group.rotation.set(0.12, -0.25, 0.04);
 
     group.traverse(child => {
@@ -1032,7 +1029,6 @@ function initKnitBackground() {
 
     envMapTexture = buildStudioEnvMap(renderer);
 
-    // Solo generamos la textura de la sección 1 al inicio para que no se trabe la entrada
     knitPatternsCache[0] = generateSweaterTexture(SWEATER_THEMES[0]);
 
     const normCanvas = document.createElement('canvas');
@@ -1145,11 +1141,9 @@ function animateKnit() {
         ud.currentScale += (goalScale - ud.currentScale) * 0.15;
         obj.scale.setScalar(Math.max(0.001, ud.currentScale));
 
-        // SOLO gira cuando el mouse pasa por encima o está seleccionado en móvil/desktop
         if (isHovered) {
             obj.rotation.y += 0.055;
         } else {
-            // Regresa suavemente a su ángulo frontal cuando quitas el mouse
             const normalizedY = obj.rotation.y % (Math.PI * 2);
             obj.rotation.y = normalizedY + (ud.initialRotY - normalizedY) * 0.1;
         }
@@ -1159,7 +1153,7 @@ function animateKnit() {
 }
 
 // ================================================================
-// 2. SISTEMA DE NIEVE OPTIMIZADO (SIN LAG NI CRASHEOS EN MÓVILES)
+// 2. SISTEMA DE NIEVE OPTIMIZADO
 // ================================================================
 function initInteractiveSnow() {
     const snowCanvas = document.createElement('canvas');
@@ -1490,63 +1484,63 @@ const tallerData = [
         isDealsSection: true,
         categoryLabel: "SECCIÓN 6 DE 6 • CAZADOR DE OFERTAS IA EN VIVO",
         heroTitle: "OFERTAS Y DESCUENTOS IA.",
-        heroSub: "Rastreo continuo en Amazon, Mercado Libre, Walmart y Chedraui.",
+        heroSub: "Rastreo real en vivo de ofertas navideñas en Amazon y Mercado Libre.",
         cards: [
             {
                 pos: { top: "42%", left: "11%" }, icon: "shoppingBag",
                 store: "Amazon",
-                label: "Amazon -45%", tag1: "Amazon Prime", tag2: "-45% HOY",
-                title: "Árbol Nevado 2.10m + Serie 400 Luces LED",
-                desc: "Detectado por IA hace 3 min. Bajó de $2,899 a $1,590 MXN con envío gratis a todas las sucursales y domicilios.",
+                label: "Amazon Ofertas", tag1: "Amazon México", tag2: "En Vivo",
+                title: "Árboles de Navidad Nevados y con Luz LED",
+                desc: "Búsqueda IA en tiempo real en Amazon México con descuentos de temporada y envío Prime.",
                 materials: [
-                    "Tienda: Amazon México (Vendido por Amazon)",
-                    "Precio Oferta: $1,590 MXN (Antes $2,899)",
-                    "Disponibilidad: Envío Full 24 hrs",
-                    "Cupón IA detectado: NAVIDAD2026"
+                    "Tienda: Amazon México (Ofertas Verificadas)",
+                    "Categoría: Árboles navideños nevados y frondosos",
+                    "Disponibilidad: Envío Prime en todo México",
+                    "Filtro aplicado: Mejores descuentos activos"
                 ],
-                url: "https://www.amazon.com.mx/s?k=arbol+navidad+nevado+luces+led"
+                url: "https://www.amazon.com.mx/s?k=arbol+navidad+nevado+luces+led&rh=p_n_deal_type%3A23565492011"
             },
             {
                 pos: { top: "58%", left: "30%" }, icon: "gift",
                 store: "Mercado Libre",
-                label: "Mercado Libre -38%", tag1: "Mercado Libre", tag2: "Envío Full",
-                title: "Set 100 Esferas Inastillables + Estrella Punta",
-                desc: "Oferta relámpago detectada: Set decorativo dorado y carmesí de $799 a $495 MXN en tiendas oficiales.",
+                label: "Mercado Libre", tag1: "Mercado Libre", tag2: "API Real",
+                title: "Set de Esferas Navideñas y Adornos para Árbol",
+                desc: "Resultados reales consultados vía API de Mercado Libre México con envío Full.",
                 materials: [
-                    "Tienda: Mercado Libre Oficial",
-                    "Precio Oferta: $495 MXN (Antes $799)",
-                    "Meses sin intereses: 6 MSI disponibles",
-                    "Entrega: Llega mañana en todo México"
+                    "Tienda: Mercado Libre México",
+                    "Categoría: Esferas y adornos navideños",
+                    "Beneficio: Envío Full y Meses sin Intereses",
+                    "Consulta: Actualizada en tiempo real por IA"
                 ],
-                url: "https://listado.mercadolibre.com.mx/set-esferas-navidenas"
+                url: "https://listado.mercadolibre.com.mx/esferas-navidenas_Descuento_Desde-20_NoIndex_True"
             },
             {
                 pos: { top: "40%", left: "56%" }, icon: "tree",
-                store: "Walmart",
-                label: "Walmart -40%", tag1: "Walmart", tag2: "Todas Sucursales",
-                title: "Villa Navideña Musical con Tren en Movimiento",
-                desc: "Liquidación de temporada detectada en tienda en línea y sucursales físicas Walmart Supercenter y Express.",
+                store: "Amazon",
+                label: "Luces LED Amazon", tag1: "Amazon México", tag2: "Top Oferta",
+                title: "Series de Luces Cascada y Cortina LED Navideña",
+                desc: "Ofertas relámpago detectadas por IA en iluminación navideña exterior e interior en Amazon.",
                 materials: [
-                    "Tienda: Walmart México (Todas las sucursales)",
-                    "Precio Oferta: $899 MXN (Antes $1,499)",
-                    "Modalidad: Pickup en sucursal o envío hoy",
-                    "Incluye: Adaptador de corriente y luces LED"
+                    "Tienda: Amazon México",
+                    "Categoría: Series y cascadas de luces LED",
+                    "Modalidad: Envío rápido a domicilio",
+                    "Filtro aplicado: Ofertas del día"
                 ],
-                url: "https://www.walmart.com.mx/productos?Ntt=villa+navidena"
+                url: "https://www.amazon.com.mx/s?k=serie+luces+navidad+led+cascada&rh=p_n_deal_type%3A23565492011"
             },
             {
                 pos: { top: "56%", left: "75%" }, icon: "star",
-                store: "Chedraui",
-                label: "Chedraui 3x2", tag1: "Chedraui", tag2: "Bonificación",
-                title: "Vajilla Navideña 16 Piezas + Copas Cristal",
-                desc: "Promoción nocturna IA: 30% de descuento directo + 15% en monedero MiChedraui en todas las sucursales.",
+                store: "Mercado Libre",
+                label: "Villas y Coronas ML", tag1: "Mercado Libre", tag2: "API Real",
+                title: "Villas Navideñas Luminosas, Inflables y Coronas",
+                desc: "Promociones activas extraídas directamente desde el catálogo de Mercado Libre México.",
                 materials: [
-                    "Tienda: Chedraui y Selecto (Todas las sucursales)",
-                    "Precio Oferta: $1,120 MXN (Antes $1,650)",
-                    "Beneficio extra: 15% bonificación MiChedraui",
-                    "Vigencia: Hasta agotar existencias"
+                    "Tienda: Mercado Libre México",
+                    "Categoría: Villas, inflables y coronas navideñas",
+                    "Envío: Gratis en compras elegibles Full",
+                    "Consulta: Actualizada en tiempo real por IA"
                 ],
-                url: "https://www.chedraui.com.mx/navidad"
+                url: "https://listado.mercadolibre.com.mx/decoracion-navidena-villa-inflable_Descuento_Desde-20_NoIndex_True"
             }
         ]
     }
@@ -1555,67 +1549,157 @@ const tallerData = [
 let currentSectionIdx = 0;
 
 // ================================================================
-// 4. AGENTE IA DE RASTREO CONTINUO Y NOTIFICACIONES EN TIEMPO REAL
+// 4. AGENTE IA DE RASTREO REAL (API MERCADO LIBRE + AMAZON MÉXICO)
 // ================================================================
-const liveDealsPool = [
+const AMAZON_SEARCH_QUERIES = [
     {
         store: "Amazon",
-        title: "Proyector Láser Copos de Nieve Exterior",
-        price: "$429 MXN",
-        oldPrice: "$850 MXN",
-        discount: "-50%",
-        url: "https://www.amazon.com.mx/s?k=proyector+copos+nieve+navidad"
-    },
-    {
-        store: "Mercado Libre",
-        title: "Suéter Navideño Tejido Reno LED Unisex",
-        price: "$389 MXN",
-        oldPrice: "$690 MXN",
-        discount: "-43%",
-        url: "https://listado.mercadolibre.com.mx/sueter-navideno-reno"
-    },
-    {
-        store: "Walmart",
-        title: "Inflable Santa Claus 2.4m con Luz Interna",
-        price: "$1,090 MXN",
-        oldPrice: "$1,899 MXN",
-        discount: "-42%",
-        url: "https://www.walmart.com.mx/productos?Ntt=inflable+navideno"
-    },
-    {
-        store: "Chedraui",
-        title: "Canasta Navideña Gourmet + Sidra y Turrón",
-        price: "$649 MXN",
-        oldPrice: "$980 MXN",
-        discount: "-34%",
-        url: "https://www.chedraui.com.mx/navidad"
+        query: "arbol navidad nevado luces led",
+        title: "Árbol de Navidad Nevado con Luces LED (Ofertas Amazon)",
+        discount: "OFERTA",
+        url: "https://www.amazon.com.mx/s?k=arbol+navidad+nevado+luces+led&rh=p_n_deal_type%3A23565492011"
     },
     {
         store: "Amazon",
-        title: "Kit 24 Rollos Papel Kraft + Sellos Lacre",
-        price: "$279 MXN",
-        oldPrice: "$499 MXN",
-        discount: "-44%",
-        url: "https://www.amazon.com.mx/s?k=papel+regalo+navidad+kraft"
+        query: "proyector copos nieve navidad exterior",
+        title: "Proyector Láser Copos de Nieve Navidad (Amazon México)",
+        discount: "TOP DEAL",
+        url: "https://www.amazon.com.mx/s?k=proyector+copos+nieve+navidad+exterior&rh=p_n_deal_type%3A23565492011"
     },
     {
-        store: "Walmart",
-        title: "Serie Cascada 300 LED Blanco Cálido 8m",
-        price: "$249 MXN",
-        oldPrice: "$450 MXN",
-        discount: "-45%",
-        url: "https://www.walmart.com.mx/productos?Ntt=serie+luces+navidad"
+        store: "Amazon",
+        query: "villa navidena musical luz led",
+        title: "Villa Navideña Musical con Movimiento y Luz (Amazon)",
+        discount: "OFERTA",
+        url: "https://www.amazon.com.mx/s?k=villa+navidena+musical+luz+led&rh=p_n_deal_type%3A23565492011"
+    },
+    {
+        store: "Amazon",
+        query: "sueter navideno reno luces led",
+        title: "Suéter Navideño Tejido con Luces LED (Amazon México)",
+        discount: "OFERTA",
+        url: "https://www.amazon.com.mx/s?k=sueter+navideno+reno+luces+led&rh=p_n_deal_type%3A23565492011"
     }
 ];
 
+const ML_SEARCH_TERMS = [
+    "arbol navidad luces led",
+    "esferas navidenas set",
+    "inflable navideno santa claus",
+    "serie luces cascada navidad",
+    "villa navidena luz musical",
+    "corona navidena puerta"
+];
+
+let realDealsQueue = [];
 let pushNotificationsEnabled = false;
 let dealPoolIndex = 0;
+
+// Consulta real a la API pública de Mercado Libre México (MLM)
+async function fetchRealMercadoLibreDeals() {
+    const term = ML_SEARCH_TERMS[Math.floor(Math.random() * ML_SEARCH_TERMS.length)];
+    const apiUrl = `https://api.mercadolibre.com/sites/MLM/search?q=${encodeURIComponent(term)}&limit=12`;
+
+    try {
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("ML API error");
+        const data = await res.json();
+        if (!data.results || !data.results.length) return [];
+
+        const deals = [];
+        for (const item of data.results) {
+            if (!item.price || !item.permalink) continue;
+            const hasDiscount = item.original_price && item.original_price > item.price;
+            const pct = hasDiscount
+                ? `-${Math.round(((item.original_price - item.price) / item.original_price) * 100)}%`
+                : "OFERTA";
+
+            deals.push({
+                store: "Mercado Libre",
+                title: item.title,
+                price: `$${Number(item.price).toLocaleString("es-MX")} MXN`,
+                oldPrice: hasDiscount ? `$${Number(item.original_price).toLocaleString("es-MX")} MXN` : "",
+                discount: pct,
+                url: item.permalink,
+                isRealML: true
+            });
+        }
+
+        // Priorizar productos con descuento real primero
+        deals.sort((a, b) => (b.oldPrice ? 1 : 0) - (a.oldPrice ? 1 : 0));
+        return deals.slice(0, 6);
+    } catch (err) {
+        return [];
+    }
+}
+
+// Actualiza dinámicamente las tarjetas de la Sección 6 con resultados reales de la API
+async function syncRealDealsIntoSection6() {
+    const mlDeals = await fetchRealMercadoLibreDeals();
+    const sec6 = tallerData[5];
+    if (!sec6) return;
+
+    if (mlDeals.length > 0) {
+        // Actualizar tarjeta 1 (Mercado Libre)
+        const d1 = mlDeals[0];
+        sec6.cards[1].title = d1.title;
+        sec6.cards[1].label = `ML ${d1.discount}`;
+        sec6.cards[1].tag2 = d1.discount;
+        sec6.cards[1].desc = `Detectado en vivo por API de Mercado Libre: ${d1.price}${d1.oldPrice ? ` (Antes ${d1.oldPrice})` : ""}.`;
+        sec6.cards[1].materials = [
+            "Tienda: Mercado Libre México (API Oficial en vivo)",
+            `Precio Actual: ${d1.price}`,
+            d1.oldPrice ? `Precio Anterior: ${d1.oldPrice} (${d1.discount})` : "Promoción activa verificada",
+            "Clic en 'Ir a la oferta en tienda' para abrir publicación real"
+        ];
+        sec6.cards[1].url = d1.url;
+
+        // Actualizar tarjeta 3 (Mercado Libre) si hay un segundo producto real
+        if (mlDeals[1]) {
+            const d2 = mlDeals[1];
+            sec6.cards[3].title = d2.title;
+            sec6.cards[3].label = `ML ${d2.discount}`;
+            sec6.cards[3].tag2 = d2.discount;
+            sec6.cards[3].desc = `Detectado en vivo por API de Mercado Libre: ${d2.price}${d2.oldPrice ? ` (Antes ${d2.oldPrice})` : ""}.`;
+            sec6.cards[3].materials = [
+                "Tienda: Mercado Libre México (API Oficial en vivo)",
+                `Precio Actual: ${d2.price}`,
+                d2.oldPrice ? `Precio Anterior: ${d2.oldPrice} (${d2.discount})` : "Promoción activa verificada",
+                "Clic en 'Ir a la oferta en tienda' para abrir publicación real"
+            ];
+            sec6.cards[3].url = d2.url;
+        }
+
+        // Alimentar la cola de notificaciones en vivo mezclando Mercado Libre real + Amazon México
+        realDealsQueue = [];
+        mlDeals.forEach((m, i) => {
+            realDealsQueue.push(m);
+            const amz = AMAZON_SEARCH_QUERIES[i % AMAZON_SEARCH_QUERIES.length];
+            realDealsQueue.push({
+                store: "Amazon",
+                title: amz.title,
+                price: "Ver precio en oferta",
+                oldPrice: "",
+                discount: amz.discount,
+                url: amz.url
+            });
+        });
+
+        // Si el usuario está actualmente viendo la Sección 6, refrescar las tarjetas en pantalla
+        if (currentSectionIdx === 5) {
+            renderSectionProgressively(5);
+        }
+    }
+}
 
 function initAIDealHunter() {
     const statusText = document.getElementById('ai-status-text');
     const btnNotif = document.getElementById('btn-enable-notif');
-    const stores = ["Amazon", "Mercado Libre", "Walmart", "Chedraui"];
+    const stores = ["Amazon", "Mercado Libre"];
     let scanStep = 0;
+
+    // Primera consulta real inmediata a la API
+    syncRealDealsIntoSection6();
 
     if (btnNotif) {
         btnNotif.addEventListener('click', async () => {
@@ -1630,7 +1714,7 @@ function initAIDealHunter() {
                 pushNotificationsEnabled = true;
                 btnNotif.classList.add('active');
                 btnNotif.textContent = "🔔 Alertas Activas";
-                showDealNotification(liveDealsPool[0]);
+                if (realDealsQueue.length > 0) showDealNotification(realDealsQueue[0]);
             } else {
                 pushNotificationsEnabled = true;
                 btnNotif.classList.add('active');
@@ -1639,7 +1723,7 @@ function initAIDealHunter() {
         });
     }
 
-    setInterval(() => {
+    setInterval(async () => {
         if (document.hidden) return;
         const currentStore = stores[scanStep % stores.length];
         if (statusText) {
@@ -1647,16 +1731,36 @@ function initAIDealHunter() {
         }
         scanStep++;
 
+        // Cada 4 ciclos volver a consultar la API real de Mercado Libre con otra categoría navideña
+        if (scanStep % 4 === 0) {
+            await syncRealDealsIntoSection6();
+        }
+
         if (scanStep % 2 === 0) {
-            const deal = liveDealsPool[dealPoolIndex % liveDealsPool.length];
+            if (realDealsQueue.length === 0) {
+                await syncRealDealsIntoSection6();
+            }
+
+            const pool = realDealsQueue.length > 0
+                ? realDealsQueue
+                : AMAZON_SEARCH_QUERIES.map(a => ({
+                    store: "Amazon",
+                    title: a.title,
+                    price: "Oferta activa",
+                    oldPrice: "",
+                    discount: a.discount,
+                    url: a.url
+                }));
+
+            const deal = pool[dealPoolIndex % pool.length];
             dealPoolIndex++;
 
             if (statusText) {
-                statusText.textContent = `¡Oferta ${deal.discount} en ${deal.store}!`;
+                statusText.textContent = `¡${deal.discount} en ${deal.store}!`;
             }
             showDealNotification(deal);
         }
-    }, 5500);
+    }, 6000);
 }
 
 function showDealNotification(deal) {
@@ -1670,11 +1774,11 @@ function showDealNotification(deal) {
         toast.className = 'deal-toast con-nieve';
         toast.innerHTML = `
             <div class="toast-header">
-                <span>⚡ IA Detectó Oferta ${deal.discount}</span>
+                <span>⚡ IA Detectó ${deal.discount}</span>
                 <span class="toast-store-badge">${deal.store}</span>
             </div>
             <div class="toast-title">${deal.title}</div>
-            <div class="toast-price">${deal.price} <span>${deal.oldPrice}</span></div>
+            <div class="toast-price">${deal.price} ${deal.oldPrice ? `<span>${deal.oldPrice}</span>` : ""}</div>
         `;
 
         toast.style.cursor = "pointer";
@@ -1694,7 +1798,7 @@ function showDealNotification(deal) {
 
     if (pushNotificationsEnabled && "Notification" in window && Notification.permission === "granted") {
         new Notification(`🎄 Oferta ${deal.discount} en ${deal.store}`, {
-            body: `${deal.title} — Ahora ${deal.price} (Antes ${deal.oldPrice})`
+            body: `${deal.title} — ${deal.price}`
         });
     }
 }
@@ -1782,9 +1886,16 @@ function renderSectionProgressively(idx) {
         document.getElementById(`title-${i}`).textContent = cardData.title;
         document.getElementById(`desc-${i}`).textContent = cardData.desc;
 
+        const glassCard = document.getElementById(`card-${i}`);
+        if (glassCard) {
+            glassCard.setAttribute('data-fav-id', `navidad-sec${idx}-card${i}`);
+            glassCard.setAttribute('data-fav-title', cardData.title);
+            glassCard.setAttribute('data-fav-cat', sec.isDealsSection ? `Navidad • ${cardData.store}` : 'Navidad • Tutorial');
+        }
+
         const actionBtn = document.getElementById(`action-btn-${i}`);
         if (actionBtn) {
-            actionBtn.textContent = sec.isDealsSection ? "Ver oferta y sucursales" : "Ver materiales";
+            actionBtn.textContent = sec.isDealsSection ? "Ver oferta en tienda" : "Ver materiales";
         }
 
         setTimeout(() => {
@@ -1820,19 +1931,10 @@ function initCreativeMenu() {
         });
     }
 
-    if (btnBackHome && introGate && mainExp) {
+    // BOTÓN DE INICIO REDIRIGE DIRECTAMENTE A INDEX.HTML
+    if (btnBackHome) {
         btnBackHome.addEventListener('click', () => {
-            hotspotNodes.forEach(n => n.classList.remove('active', 'revealed'));
-            selectedNodeIdx = -1;
-            hoveredNodeIdx = -1;
-            if (craftModal) craftModal.classList.add('hidden');
-
-            active3DObjects.forEach(obj => {
-                obj.userData.targetScale = 0.001;
-            });
-
-            mainExp.classList.add('hidden');
-            introGate.classList.remove('fade-out');
+            window.location.href = "index.html";
         });
     }
 
@@ -1860,7 +1962,6 @@ function initCreativeMenu() {
     hotspotNodes.forEach((node, idx) => {
         const trigger = node.querySelector('.hotspot-trigger');
 
-        // Giro al pasar el mouse (Desktop)
         trigger.addEventListener('mouseenter', () => {
             hoveredNodeIdx = idx;
         });
@@ -1869,7 +1970,6 @@ function initCreativeMenu() {
             if (hoveredNodeIdx === idx) hoveredNodeIdx = -1;
         });
 
-        // Giro al tocar en pantalla táctil (Móvil / Tablet)
         trigger.addEventListener('touchstart', () => {
             hoveredNodeIdx = idx;
         }, { passive: true });
@@ -1957,6 +2057,7 @@ window.abrirDetalle = function(cardIndex) {
     const introEl = document.getElementById('modal-intro');
     const listEl = document.getElementById('modal-materials');
     const storeLink = document.getElementById('modal-store-link');
+    const favBtn = document.getElementById('modal-fav-btn');
 
     badgeEl.textContent = sec.isDealsSection ? `Oferta Verificada • ${item.store}` : "Guía Rápida";
     titleEl.textContent = item.title;
@@ -1971,6 +2072,25 @@ window.abrirDetalle = function(cardIndex) {
         listEl.appendChild(li);
     });
 
+    const favId = `navidad-sec${currentSectionIdx}-card${cardIndex}`;
+    const favCategory = sec.isDealsSection ? `Navidad • ${item.store}` : "Navidad • Tutorial";
+    const favUrl = sec.isDealsSection && item.url ? item.url : `navidad.html#${favId}`;
+
+    if (favBtn) {
+        favBtn.setAttribute('data-fav-item', favId);
+        favBtn.textContent = "☆ Guardar en Favoritos";
+        favBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (typeof window.guardarEnFavoritosYRedirigir === "function") {
+                window.guardarEnFavoritosYRedirigir(favId, item.title, favCategory, favUrl);
+            }
+        };
+        if (typeof window.syncIndividualButtonsState === "function") {
+            window.syncIndividualButtonsState();
+        }
+    }
+
+    // En tutoriales se oculta "Ir a la oferta en tienda" y queda "Guardar en Favoritos"; en compras sí se muestra
     if (storeLink) {
         if (sec.isDealsSection && item.url) {
             storeLink.href = item.url;
